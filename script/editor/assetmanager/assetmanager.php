@@ -1,6 +1,6 @@
 <?php
 /**
- * @version    $Id: $
+ * @version    $Id$
  * @package    MWG
  * @copyright  Copyright (C) 2010 Intellispire, LLC. All rights reserved.
  * @license    GNU/GPL v2.0, see LICENSE.txt
@@ -313,7 +313,7 @@ function writeFileSelections()
 <link href="style.css" rel="stylesheet" type="text/css">
 <?php
 /**
- * @version    $Id: $
+ * @version    $Id$
  * @package    MWG
  * @copyright  Copyright (C) 2010 Intellispire, LLC. All rights reserved.
  * @license    GNU/GPL v2.0, see LICENSE.txt

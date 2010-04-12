@@ -1,6 +1,6 @@
 <?php
 /**
- * @version    $Id: $
+ * @version    $Id$
  * @package    MWG
  * @copyright  Copyright (C) 2010 Intellispire, LLC. All rights reserved.
  * @license    GNU/GPL v2.0, see LICENSE.txt
@@ -20,7 +20,7 @@
  * Copyright (c) 1998-2000 NetUSE AG
  *                    Boris Erdmann, Kristian Koehntopp
  *
- * $Id: db_mysql.inc,v 1.11 2002/08/07 19:33:57 layne_weathers Exp $
+ * $Id$
  *
  */ 
 class DB_Sql {
