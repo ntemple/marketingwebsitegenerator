@@ -13,7 +13,7 @@ body {
 <body onLoad="parent.mainFrame.location.href='links.php?notemplate=1';">
 <table width="750" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
-    <td height="72"><h2><img src="../images/header-smaller.gif" width="356" height="72" align="absmiddle"><span class="style1">Congratulations! </span></h2></td>
+    <td height="72"><h2><span class="style1">Congratulations! </span></h2></td>
   </tr>
   <tr>
     <td height="54"><div align="center" class="style3">You are done with your site configuration. Below are some useful links for you : </div></td>

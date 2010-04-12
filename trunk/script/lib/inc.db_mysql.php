@@ -99,6 +99,8 @@ class DB_Sql {
   }
   /* public: perform a query */
   function query($Query_String) {
+    $Query_String = trim($Query_String);
+    $this->query = "$Query_String";
     /* No empty queries, please, since PHP4 chokes on them. */
     if ($Query_String == "")
       /* The empty query string is passed on from the constructor,
@@ -113,7 +115,7 @@ class DB_Sql {
     if ($this->Query_ID) {
       $this->free();
     }
-    if ($this->Debug)
+   if ($this->Debug)
       printf("Debug: query = %s<br>\n", $Query_String);
     $this->Query_ID = @mysql_query($Query_String,$this->Link_ID);
     $this->Row   = 0;
