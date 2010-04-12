@@ -1,0 +1,28 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td colspan="2"><form name="form1" method="post" action="do.change.cycle.php?cycle={cycle_name}">
+        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+          <tr>
+            <td>Campaign name:
+              <input name="cycle_name" type="text" id="cycle_name" value="{cycle_name}">
+              tag to use on pages {cycle_{cycle_name}} </td>
+            <td valign="top">{view_stats}</td>
+          </tr>
+          <td>The file for which the campaign is set:
+              <select name="file" id="file">
+                <option value="index.php" {index.php}>Index</option>
+                <option value="signup.php" {signup.php}>Signup</option>
+                <option value="oto.php" {oto.php}>Oto 1</option>
+                <option value="oto_bck.php" {oto_bck.php}>Oto Downsell</option>
+                <option value="oto2.php" {oto2.php}>Oto 2</option>
+                <option value="oto2_bck.php" {oto2_bck.php}>Oto 2 Downsell</option>
+                <option value="salespage.php" {salespage.php}>Salespage</option>
+              </select></td>
+            <td>{delete} </td>
+          </tr>
+          {values_tr}
+        </table>
+      </form></td>
+  </tr>
+  {manually}
+</table>

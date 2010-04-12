@@ -1,0 +1,100 @@
+<body onLoad="{chck_funtions} {physical_functions}">
+<h2><font color="#076C9F">Manage OTO Price/Buttons<br>
+  </font><span style="font-weight: 400"><font size="2">This section is used to 
+  manage price settings for your oto products. Products are really &quot;PAYMENT BUTTON&quot; 
+  data needed to add to your oto products. These payment buttons are used by PayPal 
+  on your site for people to pay you. After you are done here, you 
+  can go to &quot;<font color="#0000FF"><u>Commission Structure</u></font>&quot; on the admin 
+  menu to set up the affiliate program when payments are made.</font></span></h2>
+<p><b>Name:</b> is the name of the Product. You can change it to any custom name 
+  you like or leave it as is. Keep it similar to the membership name it relates to 
+  so that you do not get confused.</p>
+<p>
+<b><font size="4">Current&nbsp; Products</font>
+<form action="do.product.changes.php?oto=1" method="post">
+  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    {product_list}<br>
+  </table>
+  <p>
+    <input type="submit" name="Submit2" value="Do Changes">
+    <font size="1"> <a href="products.php">Cancel changes</a> <a name="add"></a></font></p>
+</form>
+<!--<hr color="#076C9F" size="1">&nbsp;<form name="form1" method="post" action="do.add.product.php">
+  <table width="500" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td colspan="2"><h2><font size="4">Add New Product </font> </h2></td>
+    </tr>
+    <tr>
+      <td colspan="2"><strong>Product name:</strong> This is the description to 
+        show in PayPal / StormPay Item Section when you or the customer logs in 
+        to get information about the purchase.<br>
+      <input name="display_name" type="text" id="display_name" size="70"></td>
+    </tr>
+    <tr>
+      <td width="141">&nbsp;</td>
+      <td valign="top" width="359">&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan="2"><strong>Unique ID: </strong>This is the ID Number sent to 
+        PayPal and it will also be the tag on your sales pages. Place 
+        it on your pages in { }'s.<strong> </strong>ie. {RUBY}<strong>- DO NOT 
+        Change for OTO1 and OTO2</strong><br>
+      <input name="nid" type="text" id="nid" size="70"></td>
+    </tr>
+    <tr>
+      <td colspan="2">&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan="2">Product Price: <br>
+      $
+        <input name="price" type="text" id="price" size="13"> USD</td>
+    </tr>
+    <tr>
+      <td colspan="2"><br>
+      <b>Choose:</b> This Product Price/Button is related to the following 
+      membership.<br>
+&nbsp;<select name="membership_id" id="membership_id">
+	  
+      
+      
+      
+      {membership_list}
+      </select><br>
+      If you do not see a membership you want to connect this Product 
+      Price/Button to, go to the menu or click on | <a href="membership.php">
+      Membership Editor</a> | to create the membership first.</td>
+    </tr>
+    <tr>
+      <td>This is a subscription: </td>
+      <td><input name="recurring" type="checkbox" id="recurring" value="1">
+(check this if you want a recurring charge)* </td>
+    </tr>
+   <tr>
+      <td align="right" valign="top"><div align="left">Charge Period:</div></td>
+      <td align="right"><div align="left">
+        Bill Each and Every
+        <input name="period" type="text" id="period" value="0" size="4" maxlength="7">
+        <select name="type" id="type">
+          <option value="D" selected>Days</option> 
+          <option value="M">Months</option>
+          <option value="Y">Years</option>
+        </select><br>
+        <br />
+(0 for regular non-recurring products) *</div></td>
+    </tr>
+   <tr>
+     <td align="right" valign="top"><div align="left">Recurring Times: </div></td>
+     <td align="right"><div align="left">
+       <input name="times" type="text" id="times" value="0" size="4" maxlength="7">
+     (0 for recurring until subscription cancelled) </div></td>
+   </tr>
+    <tr>
+      <td colspan="2">
+      <input type="submit" name="Submit" value="Add New Product Now"></td>
+    </tr>
+  </table>
+  <p><strong>Note:</strong> If you want to use either or both of the 2 OTO's (One Time Offers) feature of the script you have to 
+  first use this section to create the products. OTO1 and OTO2 those together with the the 
+  tier commission levels you setup will be used to create the One Time Offer pages. </p>
+</form>-->
+</body>

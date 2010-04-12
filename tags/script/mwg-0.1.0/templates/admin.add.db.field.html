@@ -1,0 +1,115 @@
+<p><font color="#076C9F" size="5"><strong>Custom fields added to database:</strong></font><strong><br>
+  <span style="font-weight: 400"><font style="font-size: 10pt">Use this section to </font></span> <font style="font-size: 10pt"><span style="font-weight: 400">add new fields to 
+  the database to be used on signup and other areas of the site. For instance, you 
+  may want to ask people what their Date of Birth is, favorite hobby, or type of 
+  gold club they use etc.</span></font></strong></p>
+<font color=red><strong>{error}</strong></font>
+<table width="661" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="187"><strong>Field Name </strong></td>
+    <td width="474"><strong>Action</strong></td>
+  </tr>
+  {field_list} <br>
+  &nbsp;
+</table>
+<br>
+<br>
+<table width="90%" border="0" cellpadding="0" cellspacing="3" align="center" style="border: 2px solid #000066;">
+  <tr>
+    <td><form name="form1" method="post" action="do.add.db.field.php">
+        <table width="704" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td colspan="3" width="704"><h3></h3></td>
+          </tr>
+          <tr>
+            <td width="114" valign="top" bgcolor="#E6F4FB">Field Name: </td>
+            <td width="148" valign="top" bgcolor="#E6F4FB"><input name="field_name" type="text" id="field_name" size="20"></td>
+            <td width="442" bgcolor="#E6F4FB"><p style="margin-left: 5">This is the name of the field that will be added 
+                to Database.<br>
+                Do not use spaces. Use underscore&nbsp; _&nbsp; (like bank_name)</td>
+          </tr>
+          <tr>
+            <td valign="top" width="114">&nbsp;</td>
+            <td valign="top" width="148">&nbsp;</td>
+            <td width="442">&nbsp;</td>
+          </tr>
+          <tr>
+            <td valign="top" bgcolor="#E6F4FB" width="114">Field Description:</td>
+            <td valign="top" bgcolor="#E6F4FB" width="148"><input name="field_desc" type="text" id="field_desc" size="20"></td>
+            <td bgcolor="#E6F4FB" width="442"><p style="margin-left: 5"><b>Description of field</b><br>
+                If field is used <b>at signup this will be the text displaying in front </b>of it. i.e. field name= first_name, field description= First Name</td>
+          </tr>
+          <tr>
+            <td valign="top" width="114">&nbsp;</td>
+            <td valign="top" width="148">&nbsp;</td>
+            <td width="442">&nbsp;</td>
+          </tr>
+          <tr>
+            <td valign="top" bgcolor="#E6F4FB" width="114">Field Default Value:</td>
+            <td valign="top" bgcolor="#E6F4FB" width="148"><input name="default" type="text" id="default" size="20"></td>
+            <td bgcolor="#E6F4FB" width="442"><p style="margin-left: 5">If a member doesn't put anything in the field at signup the field will be filled automatically with this value. </td>
+          </tr>
+          <tr>
+            <td valign="top" width="114">&nbsp;</td>
+            <td valign="top" width="148">&nbsp;</td>
+            <td width="442">&nbsp;</td>
+          </tr>
+          <tr>
+            <td valign="top" bgcolor="#E6F4FB" width="114">Field will contain: </td>
+            <td valign="top" bgcolor="#E6F4FB" width="148"><input name="fieldtype" type="radio" value="text" checked>
+              <br>
+              Text (and or Numbers)</td>
+            <td valign="top" bgcolor="#E6F4FB" width="442"><p style="margin-left: 5">
+                <input name="fieldtype" type="radio" value="int">
+                <br>
+                Number (Value, may be used in Calculations)</td>
+          </tr>
+          <tr>
+            <td valign="top" width="114">&nbsp;</td>
+            <td valign="top" width="148">&nbsp;</td>
+            <td width="442">&nbsp;</td>
+          </tr>
+          <tr>
+            <td valign="top" bgcolor="#E6F4FB" width="114">Field Length: </td>
+            <td valign="top" bgcolor="#E6F4FB" width="148"><input name="length" type="text" id="length" size="20"></td>
+            <td bgcolor="#E6F4FB" width="442"><p style="margin-left: 5"><b>Leave blank for default length</b><br>
+                (<b>255</b> characters for text fields, <b>11</b> for numbers.<br>
+                This is to control the size of text saved by members)</td>
+          </tr>
+          <tr>
+            <td width="114">&nbsp;</td>
+            <td width="148">&nbsp;</td>
+            <td width="442">&nbsp;</td>
+          </tr>
+          <tr>
+            <td valign="top" bgcolor="#E6F4FB" width="114">Tag for field:</td>
+            <td valign="top" bgcolor="#E6F4FB" width="148"><input name="tag" type="text" id="tag" size="20"></td>
+            <td bgcolor="#E6F4FB" width="442"><p style="margin-left: 5">Enter the TAG name you want to use in your pages and emails.<br>
+                (blank for no tag) i.e. <strong>favorite_color</strong> for field <strong>color.<br>
+                </strong>The { } or [[ ]] around the tags will later be shown on each page 
+                where you can use this tag. - Do <b>NOT</b> add the { } now.</td>
+          </tr>
+          <tr>
+            <td width="114">&nbsp;</td>
+            <td width="148">&nbsp;</td>
+            <td width="442">&nbsp;</td>
+          </tr>
+          <tr>
+            <td valign="top" bgcolor="#E6F4FB" width="114">Will this item be shown in profile directory?</td>
+            <td width="148" bgcolor="#E6F4FB"><input type="checkbox" name="show_membership" id="show_membership" value="1"/></td>
+            <td width="442" bgcolor="#E6F4FB">Check if yes</td>
+          </tr>
+          <tr>
+            <td width="114">&nbsp;</td>
+            <td width="148">&nbsp;</td>
+            <td width="442">&nbsp;</td>
+          </tr>
+          <tr>
+            <td colspan="3" width="704"><p>
+                <input type="submit" name="Submit" value="Add Field">
+              </p></td>
+          </tr>
+        </table>
+      </form></td>
+  </tr>
+</table>
