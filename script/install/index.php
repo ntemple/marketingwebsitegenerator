@@ -8,7 +8,6 @@ body, td, tr {
 .style1 {font-size: 10px}
 -->
 </style>
-<div align="center"><img src="../images/header.gif" width="639" height="137" border="1"></div>
 <h1 align="center">Marketing Website Generator (MWG) Installation Wizard </h1>
 <h2 align="center">Based on Butterfly Source</h2>
 <p align="center">This script will walk you through the installation process. </p>
