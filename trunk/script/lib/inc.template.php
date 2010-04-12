@@ -1,6 +1,6 @@
 <?php
 /**
- * @version    $Id: $
+ * @version    $Id$
  * @package    MWG
  * @copyright  Copyright (C) 2010 Intellispire, LLC. All rights reserved.
  * @license    GNU/GPL v2.0, see LICENSE.txt
@@ -20,7 +20,7 @@
  * (C) Copyright 1999-2000 NetUSE GmbH
  *                    Kristian Koehntopp
  *
- * $Id: template.inc,v 1.12 2002/07/11 22:29:51 richardarcher Exp $
+ * $Id$
  *
  */
 /*

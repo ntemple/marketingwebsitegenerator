@@ -13,7 +13,7 @@ body, td, tr {
 <h1 align="center">Check Database Settings </h1>
 <?php
 /**
- * @version    $Id: $
+ * @version    $Id$
  * @package    MWG
  * @copyright  Copyright (C) 2010 Intellispire, LLC. All rights reserved.
  * @license    GNU/GPL v2.0, see LICENSE.txt
@@ -66,7 +66,7 @@ if (!isset($_POST['username']) || !isset($_POST['host']) || !isset($_POST['dbnam
 <input type="submit" name="Submit" value="Check settings">
 <?php
 /**
- * @version    $Id: $
+ * @version    $Id$
  * @package    MWG
  * @copyright  Copyright (C) 2010 Intellispire, LLC. All rights reserved.
  * @license    GNU/GPL v2.0, see LICENSE.txt
@@ -115,7 +115,7 @@ VALUES ('', 'Pop Under', ' <SCRIPT LANGUAGE=\"JavaScript\"> <!--begin /* * Popup
 </center>
 <?php
 /**
- * @version    $Id: $
+ * @version    $Id$
  * @package    MWG
  * @copyright  Copyright (C) 2010 Intellispire, LLC. All rights reserved.
  * @license    GNU/GPL v2.0, see LICENSE.txt
@@ -168,7 +168,7 @@ VALUES ('', 'Pop Under', ' <SCRIPT LANGUAGE=\"JavaScript\"> <!--begin /* * Popup
 <input type="submit" name="Submit" value="ReCheck settings">
 <?php
 /**
- * @version    $Id: $
+ * @version    $Id$
  * @package    MWG
  * @copyright  Copyright (C) 2010 Intellispire, LLC. All rights reserved.
  * @license    GNU/GPL v2.0, see LICENSE.txt
