@@ -494,7 +494,7 @@ CREATE TABLE `settings` (
   `value` text NOT NULL,
   `box_type` enum('textbox','input','checkbox','hidden','select','radio') NOT NULL default 'textbox',
   `description` text NOT NULL,
-  `cat` enum('General Site Settings','Automatically Generated Emails on Sign Up and Lost Password','Sign Up','Payment','OTO (One Time Offer)','Security','Butterflymarketing Affiliate','3rd Party Autoresponder','Stats','Downline Settings','JV Partner','Activation Codes') NOT NULL default 'General Site Settings',
+  `cat` enum('General Site Settings','Automatically Generated Emails on Sign Up and Lost Password','Sign Up','Payment','OTO (One Time Offer)','Security','MWG Affiliate','3rd Party Autoresponder','Stats','Downline Settings','JV Partner','Activation Codes') NOT NULL default 'General Site Settings',
   `rank` int(11) NOT NULL default '0',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`),
@@ -517,9 +517,9 @@ INSERT INTO `settings` VALUES (20, 'txn_id', '', 'input', '<b><font color="#0033
 INSERT INTO `settings` VALUES (1, 'site_name', 'SiteWizard 1.5', 'input', 'Your Site Name', 'General Site Settings', 1);
 INSERT INTO `settings` VALUES (16, 'enable_oto_2', '', 'checkbox', 'Check this box if you want an one time offer upsell(2nd one time offer) after member paid for one time offer.', 'General Site Settings', 16);
 INSERT INTO `settings` VALUES (17, 'affiliate_variable', 'thankyou-page', 'input', 'This is the affiliate variable used by the site... For example: <b>http://yoursite.com/?<font color=red>affiliate</font>=id</b>', 'General Site Settings', 17);
-INSERT INTO `settings` VALUES (18, 'secret_string', 'butterfly', 'input', 'A unique string that you only know. It will be used to protect the session ID of all logged users. (Changing the default setting for this is very important!)', 'Security', 18);
-INSERT INTO `settings` VALUES (21, 'bm_aff_link', '', 'input', 'Your Butterflymarketing Affiliate link', 'Butterflymarketing Affiliate', 21);
-INSERT INTO `settings` VALUES (22, 'enable_bm_aff_link', '1', 'select', 'Enable your Butterflymarketing Affiliate Link at the bottom of your site. If you do not have a Butterflymarketing Affiliate Link please <a href="https://paydotcom.com/a.page.php?id=2340&u=signndrive" target=_blank>click here</a> to get one.', 'Butterflymarketing Affiliate', 22);
+INSERT INTO `settings` VALUES (18, 'secret_string', 'changeme', 'input', 'A unique string that you only know. It will be used to protect the session ID of all logged users. (Changing the default setting for this is very important!)', 'Security', 18);
+INSERT INTO `settings` VALUES (21, 'bm_aff_link', '', 'input', 'Your MWG Affiliate link', 'MWG Affiliate', 21);
+INSERT INTO `settings` VALUES (22, 'enable_bm_aff_link', '1', 'select', 'Enable your MWG Affiliate Link at the bottom of your site. If you do not have a MWG Affiliate Link please <a href="http://marketingwebsitegenerator.com/go/affiliate" target=_blank>click here</a> to get one.', 'MWG Affiliate', 22);
 INSERT INTO `settings` VALUES (31, 'enable_arp', '', 'hidden', 'Enable subscription to 3rd Party autoresponders for new members', '3rd Party Autoresponder', 31);
 INSERT INTO `settings` VALUES (32, 'arp_email', 'arp@arp.com', 'hidden', 'The Email Address of the 3rd Party Autoresponder', '3rd Party Autoresponder', 32);
 INSERT INTO `settings` VALUES (33, 'arp_message_subject', 'Subject for arp email', 'hidden', 'This is the subject of the mail that will be sent to the autoresponder for subscription', '3rd Party Autoresponder', 33);

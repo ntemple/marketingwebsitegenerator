@@ -16,7 +16,7 @@
 defined('_MWG') or die('Restricted access');
 ?>
 
--------------------- Joomla! 1.5 Credits ---------------------
+-------------------- Marketing Website Generator Credits ---------------------
 
 Code contributers:
 ------------------

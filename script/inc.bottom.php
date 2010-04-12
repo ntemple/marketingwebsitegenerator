@@ -71,11 +71,11 @@ if (isset($sess_id)) {
 }
 if (get_setting("enable_bm_aff_link") != 0) {
 	if (get_setting("enable_bm_aff_link") == 1)
-	$t->set_var("bm_aff_link", "Site powered by <a href='".get_setting("bm_aff_link")."' target=_blank>ButterFlyMarketing.com</a>");
+	$t->set_var("bm_aff_link", "Site powered by <a href='".get_setting("bm_aff_link")."' target=_blank>MarketingWebsiteGenerator.com</a>");
 	if (get_setting("enable_bm_aff_link") == 1 && $sess_id)
-	$t->set_var("bm_aff_link", "Site powered by <a href='".get_setting("bm_aff_link")."' target=_blank>ButterFlyMarketing.com</a>");
+	$t->set_var("bm_aff_link", "Site powered by <a href='".get_setting("bm_aff_link")."' target=_blank>MarketingWebsiteGenerator.com</a>");
 	if (get_setting("enable_bm_aff_link") == 1 && !$sess_id)
-	$t->set_var("bm_aff_link", "Site powered by <a href='".get_setting("bm_aff_link")."' target=_blank>ButterFlyMarketing.com</a>");
+	$t->set_var("bm_aff_link", "Site powered by <a href='".get_setting("bm_aff_link")."' target=_blank>MarketingWebsiteGenerator.com</a>");
 }else
 $t->set_var("bm_aff_link", "");
 $ocontent = $t->parse("page", "content");
