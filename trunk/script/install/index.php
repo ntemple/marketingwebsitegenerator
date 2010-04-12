@@ -9,8 +9,9 @@ body, td, tr {
 -->
 </style>
 <div align="center"><img src="../images/header.gif" width="639" height="137" border="1"></div>
-<h1 align="center">ButterFly Script Installation Wizard </h1>
-<p align="center">This script will walk you trough the butterfly installation process. </p>
+<h1 align="center">Marketing Website Generator (MWG) Installation Wizard </h1>
+<h2 align="center">Based on Butterfly Source</h2>
+<p align="center">This script will walk you through the installation process. </p>
 <p align="center">As you have already read in the readme.txt file, there are 4 steps that you have to do:</p>
 <table width="600" border="0" align="center" bgcolor="#FFFFFF">
   <tr>
