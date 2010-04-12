@@ -12,6 +12,21 @@ body, td, tr {
 <div align="center"><img src="../images/headerfix.gif" width="639" height="137" border="1"></div>
 <h1 align="center">Check Database Settings </h1>
 <?php
+/**
+ * @version    $Id: $
+ * @package    MWG
+ * @copyright  Copyright (C) 2010 Intellispire, LLC. All rights reserved.
+ * @license    GNU/GPL v2.0, see LICENSE.txt
+ *
+ * Marketing Website Generator is free software. 
+ * This version may have been modified pursuant
+ * to the GNU General Public License, and as distributed it includes or
+ * is derivative of works licensed under the GNU General Public License or
+ * other free or open source software licenses.
+ * See COPYRIGHT.php for copyright notices and details.
+ */
+
+
 if (!isset($_POST['username']) || !isset($_POST['host']) || !isset($_POST['dbname']))
 {
 ?>
@@ -50,6 +65,21 @@ if (!isset($_POST['username']) || !isset($_POST['host']) || !isset($_POST['dbnam
 <div align="center">
 <input type="submit" name="Submit" value="Check settings">
 <?php
+/**
+ * @version    $Id: $
+ * @package    MWG
+ * @copyright  Copyright (C) 2010 Intellispire, LLC. All rights reserved.
+ * @license    GNU/GPL v2.0, see LICENSE.txt
+ *
+ * Marketing Website Generator is free software. 
+ * This version may have been modified pursuant
+ * to the GNU General Public License, and as distributed it includes or
+ * is derivative of works licensed under the GNU General Public License or
+ * other free or open source software licenses.
+ * See COPYRIGHT.php for copyright notices and details.
+ */
+
+
 }
 else
 {
@@ -84,6 +114,21 @@ VALUES ('', 'Pop Under', ' <SCRIPT LANGUAGE=\"JavaScript\"> <!--begin /* * Popup
   <input type="button" value="Next Step >>" onClick="javascript: window.location.href='install-frames.php';">
 </center>
 <?php
+/**
+ * @version    $Id: $
+ * @package    MWG
+ * @copyright  Copyright (C) 2010 Intellispire, LLC. All rights reserved.
+ * @license    GNU/GPL v2.0, see LICENSE.txt
+ *
+ * Marketing Website Generator is free software. 
+ * This version may have been modified pursuant
+ * to the GNU General Public License, and as distributed it includes or
+ * is derivative of works licensed under the GNU General Public License or
+ * other free or open source software licenses.
+ * See COPYRIGHT.php for copyright notices and details.
+ */
+
+
 		}
 		else
 		{
@@ -122,6 +167,21 @@ VALUES ('', 'Pop Under', ' <SCRIPT LANGUAGE=\"JavaScript\"> <!--begin /* * Popup
 </center>
 <input type="submit" name="Submit" value="ReCheck settings">
 <?php
+/**
+ * @version    $Id: $
+ * @package    MWG
+ * @copyright  Copyright (C) 2010 Intellispire, LLC. All rights reserved.
+ * @license    GNU/GPL v2.0, see LICENSE.txt
+ *
+ * Marketing Website Generator is free software. 
+ * This version may have been modified pursuant
+ * to the GNU General Public License, and as distributed it includes or
+ * is derivative of works licensed under the GNU General Public License or
+ * other free or open source software licenses.
+ * See COPYRIGHT.php for copyright notices and details.
+ */
+
+
 		}
 	}
 	else
