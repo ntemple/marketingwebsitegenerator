@@ -1,0 +1,98 @@
+<script type="text/JavaScript">
+<!--
+function MM_jumpMenu(targ,selObj,restore){ //v3.0
+  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+  if (restore) selObj.selectedIndex=0;
+}
+    function makeRequest(url) {
+        var http_request = false;
+        if (window.XMLHttpRequest) { // Mozilla, Safari,...
+            http_request = new XMLHttpRequest();
+            if (http_request.overrideMimeType) {
+                http_request.overrideMimeType('text/xml');
+                // See note below about this line
+            }
+        } else if (window.ActiveXObject) { // IE
+            try {
+                http_request = new ActiveXObject("Msxml2.XMLHTTP");
+            } catch (e) {
+                try {
+                    http_request = new ActiveXObject("Microsoft.XMLHTTP");
+                } catch (e) {}
+            }
+        }
+        if (!http_request) {
+            alert('Giving up :( Cannot create an XMLHTTP instance');
+            return false;
+        }
+        http_request.onreadystatechange = function() { alertContents(http_request); };
+        http_request.open('GET', url, true);
+		http_request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        http_request.send(null);
+    }
+    function alertContents(http_request) {
+        if (http_request.readyState == 4) {
+            if (http_request.status == 200) {
+			//	confirm("bubu");
+               // alert(http_request.responseText);
+			   document.body.innerHTML = http_request.responseText;
+            } else {
+                alert('There was a problem with the request.');
+            }
+        }
+    }
+</script>
+<h2><font color="#076C9F">Promotion Tools<br>
+  </font><span style="font-weight: 400"><font size="2">Use this section to add or 
+  modify promotion tools for your members to use. Simple choose a tool from the 
+  category drop down menu and the you can customize from may pre set templates we 
+  have for you.</font></span></h2>
+<h2><font size="2"><a href="http://www.butterflymarketing.com/member.area.promo.tools.zip">Click here</a><span style="font-weight: 400"> to get a custom promo tools page made by Mike Filsaime. You need to save this on your computer, edit the file, and then upload (ftp) to your server. Don't forget to backup your original page.<a href="http://www.thecaterpillarforum.com/forum/viewtopic.php?t=3299" target="_blank"><strong>Click Here</strong></a> for more information.</span></font></h2>
+<h2><font size="2"><a target="_self" href="#CP">Click here</a><span style="font-weight: 400"> to view your current promotion tools.</span></font></h2>
+<h2><font size="4">Add new promo tools: </font></h2>
+<p><strong>Tags to be used in promo tools:</strong></p>
+<p>{tag_list} </p>
+<form method="post" action="do.add.promo.tool.php" id="Form1">
+  <table width="550" border="0">
+    <tr>
+      <td>Load a Template: </td>
+      <td><select name="menu1" onchange="MM_jumpMenu('parent',this,0)">
+          <option> </option>
+          
+		
+        {templates}
+    
+        </select></td>
+    </tr>
+    <tr>
+      <td>Category</td>
+      <td><input name="category" type="text" id="category" value="{category_template}" size="80" /></td>
+    </tr>
+    <tr>
+      <td><div align="right"> &nbsp;</div></td>
+      <td><input name="template" type="checkbox" id="template" value="1" />
+        <font size="1">(Add this as a 
+        new template category style)</font></td>
+    </tr>
+    <tr>
+      <td width="56" valign="top">Content</td>
+      <td><textarea id="contentb" name="contentb" rows=7 cols=60>{content_template}</textarea>
+        <script> //STEP 2: Replace the textarea (txtContent)
+		var oEdit0 = new InnovaEditor("oEdit0");
+		oEdit0.REPLACE("contentb");
+	</script></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td><input type="submit" value="Add to Current Promotion Tools Below" />
+        <font size="1"><a href="promo.tools.php">Cancel changes</a></font></td>
+    </tr>
+  </table>
+</form>
+<h2><font size="4"><a name="CP">C</a>urrent Promotion Tools You've Made : </font> </h2>
+<p>{promo_tools}<br>
+  <font size="1"><a href="promo.tools.php">Cancel changes</a></font></p>

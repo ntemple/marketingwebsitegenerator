@@ -1,0 +1,86 @@
+<?php 
+	include("inc.top.php");
+	get_logged_info();
+	$member_id=$q->f("id");
+	$member_membership_id=$q->f("membership_id");
+	$allowed=get_setting("view_stats_chk");
+	$allowedto=explode(",",$allowed);
+	$allow_found=false;
+	foreach($allowedto as $allow)
+	{
+		
+		if ($member_membership_id==$allow && get_setting("view_stats")==1)
+		{
+			$allow_found=true;
+			$q2=new Cdb;
+			$t->set_file("content", "member.area.stats.html");
+			$t->set_file("upgradeslist", "member.area.stats.upgrades.html");
+			$now=time();
+			$nowh=date("G");
+			$today=$now-($nowh*3600);
+			$query="select id from members where s_date > $today and s_date < $now and aff='$member_id'";
+			$q->query($query);
+			$q->next_record();
+			$t->set_var("new", $q->nf());
+			$yesterday=$today-(24*3600);
+			$query="select id from members where s_date > $yesterday and s_date < $today and aff='$member_id'";
+			$q->query($query);
+			$q->next_record();
+			$t->set_var("newy", $q->nf());
+			$query="select count(*) as member_count from members where aff='$member_id'";
+			$q->query($query);
+			$q->next_record();
+			$t->set_var("total_members", $q->f("member_count"));
+			$query="SELECT count(*) as a, membership_id FROM `members` where upgrade_date>$today and upgrade_date<$now and aff='$member_id' group by membership_id";
+			
+			$q->query($query);
+			$i=0;$membership_id='';
+			while ($q->next_record())
+			{
+				$query="select name from membership where id='".$q->f("membership_id")."'";
+				$q2->query($query);
+				$q2->next_record();
+				$t->set_var("membership", "Upgrades to ".$q2->f("name")." today:");
+				$t->set_var("no", $q->f("a"));
+				$t->parse("upgrade_list", "upgradeslist", true);
+				
+				
+			}
+			$query="SELECT count(*) as a, membership_id FROM `members` where upgrade_date>$yesterday and upgrade_date<$today and aff='$member_id' group by membership_id";
+			
+			$q->query($query);
+			$i=0;$membership_id='';
+			while ($q->next_record())
+			{
+				$query="select name from membership where id='".$q->f("membership_id")."'";
+				$q2->query($query);
+				$q2->next_record();
+				$t->set_var("membership", "Upgrades to ".$q2->f("name")." yesterday:");
+				$t->set_var("no", $q->f("a"));
+				$t->parse("upgrade_list", "upgradeslist", true);
+				
+				
+			}
+			
+			$t->set_var("membership", "&nbsp;");
+			$t->set_var("no", "&nbsp;");
+			$t->parse("upgrade_list", "upgradeslist", true);
+			
+			$query="select * from membership where active=1";
+			$q->query($query);
+			while ($q->next_record())
+			{
+				$query="select count(*) as a from members where membership_id='".$q->f("id")."' and aff='$member_id'";
+				$q2->query($query);
+				$q2->next_record();
+				$t->set_var("membership", "Total ".$q->f("name")." members:");
+				$t->set_var("no", $q2->f("a"));
+				$t->parse("upgrade_list", "upgradeslist", true);
+			}
+			break;		
+		}
+		else $allow_found=false;
+	}
+	if ($allow_found== false) $t->set_var("content","You are not allowed to view this page");
+	include ("inc.bottom.php");
+?>

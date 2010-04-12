@@ -1,0 +1,204 @@
+<link href="surfdoors.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+<!--
+.style1 {
+	font-size: 13px;
+	font-weight: bold;
+}
+-->
+</style>
+<script language="JavaScript">
+function dif_date(){
+	var one_day=1000*60*60*24;
+		start = new Date(document.form1.year_start.options[document.form1.year_start.selectedIndex].value, document.form1.month_start.options[document.form1.month_start.selectedIndex].value, document.form1.day_start.options[document.form1.day_start.selectedIndex].value);
+		end = new Date(document.form1.year_end.options[document.form1.year_end.selectedIndex].value, document.form1.month_end.options[document.form1.month_end.selectedIndex].value, document.form1.day_end.options[document.form1.day_end.selectedIndex].value);
+	return Math.ceil((end.getTime()-start.getTime())/(one_day));
+}
+function CheckAll()
+{
+        for (var i=0; i<document.form_members_list.elements.length; i++)
+        {
+                var elem = document.form_members_list.elements[i];
+                if ((elem.name.substring(0, 6) == 'check[') && (elem.type == 'checkbox')){//if (k==0)alert('a');k=1;
+	                elem.checked = document.form_members_list.checkbox.checked;}
+        }
+		if(document.form_members_list.checkbox.checked==false) document.form_members_list.select_all_pages.checked=document.form_members_list.checkbox.checked;
+}
+function expand(id,id_src){
+	var elem = document.getElementById(id);
+	var src = document.getElementById(id_src);
+	if (elem.style.display==''){
+		 elem.style.display='none';
+		 src.src='../images/plus.gif';
+	}else{
+		elem.style.display='';
+		src.src='../images/minus.gif';
+		
+	}
+}
+</script>
+<table width="739" border="0" align="center" cellpadding="6" cellspacing="0" class="box2">
+  <td align="left" valign="top"><p align="center"><span class="style1">{sitename} member transactions details:</span><br>
+      </p></td>
+  </tr>
+</table>
+<form>
+  Buyer ID:
+  <input type="text" name="search" id="search" value="{search}" />
+  <input type="hidden"  name="status" value="{status}"/>
+  <input type="submit" value="Search" />
+</form>
+<form>
+  Affiliate ID:
+  <input type="text" name="search2" id="search2" value="{search2}" />
+  <input type="hidden"  name="status" value="{status}"/>
+  <input type="submit" value="Search" />
+</form>
+<p align="center"><span class="style1"><a href="a.adm.main.php">BACK TO MAIN AFFILIATE PAGE</a></span></p>
+<p align="center"><span class="style1"><a href="a.aff.tr.php?status={status}">View All groups</a></span></p>
+<table width="327">
+  <tr>
+    <td><img id="plus" src="../images/plus.gif" onclick="expand('date_1','plus');"/></td>
+    <td>Click to select by time interval</td>
+  </tr>
+</table>
+<div id="date_1" name="date_1" align="center" style="display:none">
+  <form name="form1" id="form1" action="a.aff.tr.php">
+    <table width="80%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td>&nbsp;</td>
+        <td></td>
+        <td colspan="2">Commisions between</td>
+        <td><select name="month_start" id="month_start" onchange="document.getElementById('m_start').value=this.value;if (dif_date()<0)alert('the end date is prior to the start date by '+dif_date()+' days')">
+            
+        
+	
+      {month_start}
+      
+      
+          </select>
+          /&nbsp;
+          <select name="day_start" id="day_start" onChange="document.getElementById('d_start').value=this.value;if (dif_date()<0)alert('the end date is prior to the start date by '+dif_date()+' days')">
+            
+        
+        
+	  
+        {day_start}
+        
+      
+      
+          </select>
+          /
+          <select name="year_start" id="year_start" onchange="document.getElementById('y_start').value=this.value;if (dif_date()<0)alert('the end date is prior to the start date by '+dif_date()+' days')">
+            
+        
+	
+      {year_start}
+      
+      
+          </select></td>
+        <td>and</td>
+        <td colspan="2"><select name="month_end" id="month_end" onchange="document.getElementById('m_end').value=this.value;if (dif_date()<0)alert('the end date is prior to the start date by '+dif_date()+' days')">
+            
+        
+      {month_end}
+      
+      
+          </select>
+          /&nbsp;
+          <select name="day_end" id="select" onChange="document.getElementById('m_end').value=this.value;if (dif_date()<0)alert('the end date is prior to the start date by '+dif_date()+' days')">
+            
+        
+        
+        {day_end}
+        
+      
+      
+          </select>
+          /
+          <select name="year_end" id="year_end" onchange="document.getElementById('m_end').value=this.value;if (dif_date()<0)alert('the end date is prior to the start date by '+dif_date()+' days')">
+            
+        
+      {year_end}
+      
+      
+          </select></td>
+        <td><input type="hidden" name="status" value="{status}"/>
+          <input type="hidden" name="time_trigger" value="1"/>
+          <input type="submit" value="search"></td>
+      </tr>
+    </table>
+  </form>
+</div>
+<a href="a.aff.tr.php?status={status}">Restore to default</a>
+<table width="99%" align="center" cellpadding="6" class="box">
+  <tr>
+    <td ><form action="a.adm.do.php" method="post" name="form_members_list" id="form_members_list">
+        <table align="center">
+          <tr>
+            <td align="center">Check this to include transactions from all pages
+              <input type="checkbox" name="select_all_pages" value="1" onClick="  for (var i=0; i<document.form_members_list.elements.length; i++)
+        {
+                var elem = document.form_members_list.elements[i];
+                if ((elem.name.substring(0, 6) == 'check[') && (elem.type == 'checkbox')){
+	                elem.checked = document.form_members_list.select_all_pages.checked;}
+        }document.form_members_list.checkbox.checked=document.form_members_list.select_all_pages.checked"></td>
+          </tr>
+        </table>
+        <table width="95%" border="1" align="center" cellpadding="1" cellspacing="2">
+          <tr class="box2">
+            <td width="58" height="42"><div align="left"><strong>Tr ID:</strong></div></td>
+            <td width="35%" bgcolor="#FFFFCC" height="42"><div align="left"><strong>Aff ID <i>(click to search)</i> Name &amp; 
+                
+                Paypal&nbsp;Email</strong></div></td>
+            <td width="30" height="42"><div align="left"><strong>Amt ({currency}): </strong></div></td>
+            <td width="51" height="42"><i></i>
+              <div align="left"><strong>Status: </strong></div></td>
+            <td width="89" height="42"><div align="left"><strong>Date: </strong></div></td>
+            <td width="59" bgcolor="#FFFFCC" height="42"><div align="center"><b>Buyer ID</b></div></td>
+            <td width="205" height="42"><div align="center"><strong>Comments<br>
+                <i>(visible to Aff)</i></strong></div></td>
+            <td width="200" height="42"><div align="center"><strong>Admin <i>(only)</i> Note: </strong></div></td>
+            <td height="42">&nbsp;</td>
+            <td width="24" height="42"><div align="left"><strong>
+                <input type="checkbox" name="checkbox" value="checkbox" onClick="CheckAll();">
+                </strong></div></td>
+          </tr>
+          {rows}
+          <tr class="box2">
+            <td><div align="left"></div></td>
+            <td bgcolor="#FFFF66"><div align="right"><font size="+1"><strong>TOTAL:</strong></font></div></td>
+            <td bgcolor="#FFFF66"><div align="left"><font size="+1"><strong>${total}</strong></font></div></td>
+            <td><div align="left"></div></td>
+          </tr>
+          <tr class="box2" >
+            <td colspan=10 align=right><div align="right"><i>page {pagelist}</i></div></td>
+        </table>
+        <p align="center"> Action:
+          <select name="action" id="action">
+            <option selected>Choose Setting To Move</option>
+            <option value="0"> Set all SELECTED at Currently Earning</option>
+            <option value="1">MASS PAY Step 1: Set all SELECTED at To be Paid (Close Month)</option>
+            <option value="3">Cancel Commission for Selected</option>
+          </select>
+          <input name="m_start" id="m_start" type="hidden" value="{m_start}"/>
+          <input name="m_end" id="m_end" type="hidden" value="{m_end}"/>
+          <input name="y_start" id="y_start" type="hidden" value="{y_start}"/>
+          <input name="y_end" id="y_end" type="hidden" value="{y_end}"/>
+          <input name="d_start" id="d_start" type="hidden" value="{d_start}"/>
+          <input name="d_end" id="d_end" type="hidden" value="{d_end}"/>
+          <input type="submit" name="Submit" value="Do it" >
+          <input type="hidden" name="time_interval"  value="{time_interval}"/>
+          <input name="last" type="hidden" id="last" value="a.aff.tr.php?status={status}">
+          <br>
+          <br>
+          Add comment:
+          <textarea name="comment" cols="20" id="comment" rows="1"></textarea>
+          Add admin note:
+          <textarea name="admin_note" cols="20" id="admin_note" rows="1"></textarea>
+        </p>
+      </form></td>
+  </tr>
+</table>
+<p align="center"><span class="style1"><a href="a.adm.main.php">BACK TO MAIN AFFILIATE PAGE</a></span><br>
+</p>

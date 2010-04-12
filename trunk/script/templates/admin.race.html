@@ -1,0 +1,130 @@
+<p><font color="#076C9F"><font size="5"><b>Contest/Race</b></font></font><font size="2">&nbsp;&nbsp;&nbsp; <a target="_self" href="#stats">See Current Stats</a></font><font color="#076C9F"><br>
+  </font><font size="2">Use this section to activate a Contest (Race to xx number 
+  of referrals.) Simply put the date the contest starts, and the date the contest 
+  ends or the number of referrals the to reach by the winner and the Contest/Race 
+  will auto end. When you activate this feature it will become public to all 
+  members when logged in.</font></p>
+<p><font size="2">Use this as an incentive.<b> i.e.</b> <i>The First person to 
+  reach 250 gets $100 in cash. 2nd place gets $50, and 3rd place gets $25. Anyone 
+  one with 25 or more referrals when contest ends gets $10. </i>This is just an 
+  example, but it allows everyone an chance to feel they will win if they 
+  participate. Refer to your <b>Butterfly Marketing Manuscript</b> for strategies 
+  on how to use this feature. If you know your conversion metrics, your One Time 
+  Offer sales should have you making up 10 x to 100 x the cost of the prizes. 
+  These races are effective every 2-4 months but should not be over used.</font></p>
+<p><font size="2"><b>To do a Contest -</b> Set it to end at a certain date. Only 
+  concern is here, if it ends at the date but your top winner only has a low 
+  amount of referrals like 11 or 14, you still have to pay all prizes.<br>
+  <b>To do a Race -</b> Set it to end at a certain number of referrals. 
+  (Recommended. That way you are guaranteed xx referrals before you have to pay.)</font></p>
+<p><font size="2">You simply announce to your members via email about the 
+  details of dates and prizes and how to win and you are all set.</font></p>
+<form action="do.race.php" name="form1" method="post">
+  <script>
+function dif_date(){
+	var one_day=1000*60*60*24;
+		  	start = new Date(document.form1.year_start.options[document.form1.year_start.selectedIndex].value, document.form1.month_start.options[document.form1.month_start.selectedIndex].value, document.form1.day_start.options[document.form1.day_start.selectedIndex].value);
+		end = new Date(document.form1.year_end.options[document.form1.year_end.selectedIndex].value, document.form1.month_end.options[document.form1.month_end.selectedIndex].value, document.form1.day_end.options[document.form1.day_end.selectedIndex].value);
+	return Math.ceil((end.getTime()-start.getTime())/(one_day));
+}
+</script>
+  <table width="565" border="0">
+    <tr>
+      <td width="83" bgcolor="#E6F4FB">Race/Contest</td>
+      <td width="472" bgcolor="#E6F4FB"><input name="opt_race_start" id="opt_race_start" type="radio" value="date" checked="checked" />
+        Start
+        on
+        <select name="month_start" id="month_start" onchange="if (dif_date()<0)alert('the end date is prior to the start date by '+dif_date()+' days')">
+          
+	
+      {month_start}
+      
+        </select>
+        /
+        <select name="day_start" id="day_start" onchange="if (dif_date()<0)alert('the end date is prior to the start date by '+dif_date()+' days')">
+          
+	  
+        {day_start}
+        
+        </select>
+        &nbsp;
+        /
+        <select name="year_start" id="year_start" onchange="if (dif_date()<0)alert('the end date is prior to the start date by '+dif_date()+' days')">
+          
+	
+      {year_start}
+      
+        </select></td>
+    </tr>
+    <tr>
+      <td bgcolor="#E6F4FB">&nbsp;</td>
+      <td bgcolor="#E6F4FB"><input name="opt_race_start" id="opt_race_start" type="radio" value="now"/>
+        or Start now</td>
+    </tr>
+  </table>
+  <br />
+  <table width="565" border="0">
+    <tr>
+      <td width="83" bgcolor="#E6F4FB">Contest</td>
+      <td width="472" bgcolor="#E6F4FB"><input name="opt_race_end" id="opt_race_end" type="radio" value="1" {end_chck_1}/>
+        Ends
+        on
+        <select name="month_end" id="month_end" onchange="if (dif_date()<0)alert('the end date is prior to the start date by '+dif_date()+' days')">
+          
+      {month_end}
+      
+        </select>
+        /
+        <select name="day_end" id="day_end" onchange="if (dif_date()<0)alert('the end date is prior to the start date by '+dif_date()+' days')">
+          
+        {day_end}
+        
+        </select>
+        &nbsp;
+        /
+        <select name="year_end" id="year_end" onchange="if (dif_date()<0)alert('the end date is prior to the start date by '+dif_date()+' days')">
+          
+      {year_end}
+      
+        </select></td>
+    </tr>
+    <tr bgcolor="#E6F4FB">
+      <td>Race</td>
+      <td><input name="opt_race_end" id="opt_race_end" type="radio" value="2" {end_chck_2} />
+        Ends
+        when 1st place reaches
+        <input name="ref_num" id="ref_num" type="text" value="{ref_end}" size="6" />
+        referrals</td>
+    </tr>
+  </table>
+  <p>Race/Contest Status: {race_status}</p>
+  <p>{race_control_button}<a name="stats"></a></p>
+  <p>
+    <input type="checkbox" name="no_ref" id="no_ref" value="1" {chck_ref}  onclick="self.location.href='race.php?no_ref='+(document.form1.no_ref.checked ? 1 : 0)"/>
+    Show results for members with no referrals</p>
+  <p>Current Race Stats: </p>
+  <p>{next_prev}</p>
+  <table width="500" border="0">
+    <tr>
+      <td>#</td>
+      <td>Member ID </td>
+      <td>Personal Referrals (Level 1)</td>
+      <td>Email</td>
+    </tr>
+    {statistics}
+  </table>
+  <p>
+    <input type="submit" name="reset" value="Reset Stats" onClick="return confirm('Are you sure you want to reset all race stats ?')"/>
+  </p>
+</form>
+<h4>Past races</h4>
+<table width="500"  border="0" cellspacing="2" cellpadding="0">
+  <tr bgcolor="#E6F4FB">
+    <td width="70"><strong>Contest # </strong></td>
+    <td width="150"><strong>Race start / Race end </strong></td>
+    <td width="190"><strong>Won By </strong></td>
+    <td width="80">&nbsp;</td>
+  </tr>
+  {past_races}
+</table>
+<p>&nbsp;</p>
