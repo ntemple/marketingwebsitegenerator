@@ -1,4 +1,19 @@
 <?php
+/**
+ * @version    $Id: $
+ * @package    MWG
+ * @copyright  Copyright (C) 2010 Intellispire, LLC. All rights reserved.
+ * @license    GNU/GPL v2.0, see LICENSE.txt
+ *
+ * Marketing Website Generator is free software. 
+ * This version may have been modified pursuant
+ * to the GNU General Public License, and as distributed it includes or
+ * is derivative of works licensed under the GNU General Public License or
+ * other free or open source software licenses.
+ * See COPYRIGHT.php for copyright notices and details.
+ */
+
+
 include("settings.php");
 /*** Permission ***/
 $bReadOnly0=false;
@@ -297,6 +312,21 @@ function writeFileSelections()
 <meta http-equiv="Content-Type" content="text-html; charset=Windows-1252">
 <link href="style.css" rel="stylesheet" type="text/css">
 <?php
+/**
+ * @version    $Id: $
+ * @package    MWG
+ * @copyright  Copyright (C) 2010 Intellispire, LLC. All rights reserved.
+ * @license    GNU/GPL v2.0, see LICENSE.txt
+ *
+ * Marketing Website Generator is free software. 
+ * This version may have been modified pursuant
+ * to the GNU General Public License, and as distributed it includes or
+ * is derivative of works licensed under the GNU General Public License or
+ * other free or open source software licenses.
+ * See COPYRIGHT.php for copyright notices and details.
+ */
+
+
 $sLang="english";
 if(isset($_REQUEST["lang"]))
 	{
