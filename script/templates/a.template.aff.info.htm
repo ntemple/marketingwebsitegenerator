@@ -1,0 +1,98 @@
+<link href="surfdoors.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+<!--
+.style6 {
+	color: #000000
+}
+td {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+-->
+</style>
+<h3 class="box5">Your Commissions</h3>
+<div align="center">
+  <center>
+    <table width="600" border="0" cellpadding="2" cellspacing="0" class="box" style="border-collapse: collapse" bordercolor="#111111">
+      <tr>
+        <td height="17" align="left" valign="top"><p align="center"><b><span class="style6">Your affiliate URL:</span></b></td>
+      </tr>
+      <td align="left" valign="top"><form method="POST" action="../../../_derived/nortbots.htm" onSubmit="location.href='../../../_derived/nortbots.htm';return false;" webbot-onSubmit webbot-action="--WEBBOT-SELF--">
+            <!--webbot bot="SaveResults" u-file="_private/form_results.csv" s-format="TEXT/CSV" s-label-fields="TRUE" startspan -->
+            <input TYPE="hidden" NAME="VTI-GROUP" VALUE="0">
+            <!--webbot bot="SaveResults" endspan i-checksum="59785" -->
+            <div align="center"> &nbsp;
+              <input type="text" name="T1" size="80" value="{aff_link}" style="text-align: center">
+            </div>
+          </form></td>
+      </tr>
+    </table>
+  </center>
+</div>
+<div align="center">
+  <center>
+    <form name="form1" action="do.aff.save.info.php" method="post">
+      <table style="BORDER-COLLAPSE: collapse" borderColor="#111111" cellSpacing="0" cellPadding="5" width="600" border="0">
+        <tr style="font-family: Arial, Helvetica, sans-serif; font-size: 12px">
+          <td class="prof_list" width="598" bgColor="#ebebeb"><div align="right"> <span style="FONT-WEIGHT: bold"> PayPal Email:<br>
+              </span>So we can pay your<br>
+              Affiliate commission (Plus/Pro/Platinum only)</div></td>
+          <td class="prof_list" width="598" bgColor="#ebebeb"><font style="FONT-SIZE: 10pt" face="Arial">
+            <input name="paypal" id="paypal" value="{paypal}" size="20">
+            </font></td>
+        </tr>
+        <tr style="font-family: Arial, Helvetica, sans-serif; font-size: 12px">
+          <td width="598" bgColor="#ebebeb"><div align="right"> <span style="FONT-WEIGHT: bold; background-color:#FFFF00"> USA Members:
+              SSN or Tax ID No.:<br>
+              </span><span style="background-color: #FFFF00">We can not and </span> <u><b><span style="background-color: #FFFF00">WILL NOT</span></b></u><span style="background-color: #FFFF00"> pay you             ANY commissions unless you enter<br>
+              this information. 
+              It is required for<br>
+              tax reporting purposes</span>.</div></td>
+          <td width="598" bgColor="#ebebeb"><font style="FONT-SIZE: 10pt" face="Arial">
+            <input name="ssn" id="ssn" value="{ssn}" size="20">
+            </font></td>
+        </tr>
+        <tr style="font-family: Arial, Helvetica, sans-serif; font-size: 12px">
+          <td width="598" bgColor="#ebebeb">&nbsp;</td>
+          <td width="598" bgColor="#ebebeb"><input id="Save" type="submit" value="Submit" name="Save"></td>
+        </tr>
+      </table>
+    </form>
+  </center>
+</div>
+<br>
+<div align="center">
+  <center>
+    <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="600">
+      <tr>
+        <td width="100%"><strong> <span style="BACKGROUND-COLOR: #00ff00">Your Currently Earning Amount</span> Total: <a href="a.aff.tr.php?action=current">{total} {currency}</a>&nbsp;&nbsp; </strong> <a class="box" target="_blank" href="a.aff.tr.php?action=current">View 
+          Details</a><br>
+          These are commissions you are currently earning for your most recent 
+          sales.<br>
+          &nbsp;
+          <p><strong><span style="BACKGROUND-COLOR: #ffff00">Your 
+            To Be Paid Accoun</span>t Total: <a target="_blank" href="a.aff.tr.php?action=pending">{pending} {currency}</a>&nbsp; </strong> <a class="box" target="_blank" href="a.aff.tr.php?action=pending">View 
+            Details</a><br>
+            These are closed out commissions from a prior pay period that ended. You 
+            will be paid for these commissions usually by the 6th - 15th of this 
+            current month once they become pending. They are for last pay periods 
+            commissions earned on sales by you.<br>
+            &nbsp;</p>
+          <p><strong><span style="BACKGROUND-COLOR: #ccccff">Your 
+            Past Earnings </span>Total: <a target="_blank" href="a.aff.tr.php?action=past">{past} {currency}</a> </strong> <a class="box" target="_blank" href="a.aff.tr.php?action=past">View 
+            Details</a><br>
+            These are commissions we have already paid you to your PayPal account or 
+            StormPay or by check. 
+            You have already received these figures from past sales.<br>
+            &nbsp;</p>
+          <p><strong><span style="BACKGROUND-COLOR: #c0c0c0">Your 
+            Cancelled Transactions</span> Total: <a target="_blank" href="a.aff.tr.php?action=cancelled">{cancelled} {currency}</a>&nbsp; </strong> <a class="box" target="_blank" href="a.aff.tr.php?action=cancelled">View 
+            Details</a><br>
+            These commissions were not paid for reasons of cancellations or fraud or 
+            error</p></td>
+      </tr>
+    </table>
+  </center>
+</div>
+<p> <br>
+</p>

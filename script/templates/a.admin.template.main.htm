@@ -1,0 +1,192 @@
+<link href="../surfdoors.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+<!--
+.style1 {
+	font-size: 14px
+}
+.style3 {
+	font-size: 14px;
+	font-weight: bold;
+}
+-->
+</style>
+<h3><font color="#076C9F">Affiliate System Manager:</font></h3>
+<p><span class="style3"><span style="font-weight: 400">Use this section to check 
+  
+  stats for affiliates you owe. You can pay your affiliates using these functions <a target="_self" href="#how">Click here</a> for Mass Pay instructions.</span></span></p>
+<div id="date_1" name="date_1" align="center" style="display:">
+  <form name="form1" id="form1" action="a.adm.main.php">
+    <table width="99%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td colspan="2">Commisions stats between</td>
+        <td ><select name="month_start" id="month_start" onchange="document.getElementById('m_start').value=this.value;if (dif_date()<0)alert('the end date is prior to the start date by '+dif_date()+' days')">
+            {month_start}
+          </select>
+          /&nbsp;
+          <select name="day_start" id="day_start" onChange="document.getElementById('d_start').value=this.value;if (dif_date()<0)alert('the end date is prior to the start date by '+dif_date()+' days')">
+            {day_start}
+          </select>
+          /
+          <select name="year_start" id="year_start" onchange="document.getElementById('y_start').value=this.value;if (dif_date()<0)alert('the end date is prior to the start date by '+dif_date()+' days')">
+            {year_start}
+          </select></td>
+        <td ><div align="center">&nbsp;<b>and&nbsp;</b>&nbsp;&nbsp;</div></td>
+        <td><select name="month_end" id="month_end" onchange="document.getElementById('m_end').value=this.value;if (dif_date()<0)alert('the end date is prior to the start date by '+dif_date()+' days')">
+            {month_end}
+          </select>
+          /&nbsp;
+          <select name="day_end" id="select" onChange="document.getElementById('m_end').value=this.value;if (dif_date()<0)alert('the end date is prior to the start date by '+dif_date()+' days')">
+            {day_end}
+          </select>
+          /&nbsp;
+          <select name="year_end" id="year_end" onchange="document.getElementById('m_end').value=this.value;if (dif_date()<0)alert('the end date is prior to the start date by '+dif_date()+' days')">
+            
+{year_end}
+          </select></td>
+        <td width="27%"><input type="hidden" name="status" value="{status}"/>
+          <input type="hidden" name="time_trigger" value="1"/>
+          <input type="submit" value="search"></td>
+      </tr>
+    </table>
+  </form>
+</div>
+<div id="commission_stats" style="display:{display} " align="center">
+  <table cellpadding="5" cellspacing="1">
+    <tr bgcolor="#cccccc">
+      <td ><b>Status</b></td>
+      <td><b>Currently earning</b></td>
+      <td><b>To be Paid</b></td>
+      <td><b>Paid</b></td>
+    </tr>
+    <tr bgcolor="#cccccc">
+      <td ><b>Aff Amount</b></td>
+      <td><b>{amount0}</b></td>
+      <td><b>{amount1}</b></td>
+      <td><b>{amount2}</b></td>
+    <tr bgcolor="#cccccc">
+      <td ><b>Admin Amount</b></td>
+      <td><b>{amount3}</b></td>
+      <td><b>{amount4}</b></td>
+      <td><b>{amount5}</b></td>
+    </tr>
+  </table>
+</div>
+<div align="center">
+  <center>
+    <table width="548" border="1" cellpadding="5" cellspacing="5" style="border-collapse: collapse" bordercolor="#E6F4FB">
+      <tr>
+        <td colspan="2" class="box" width="490"><span class="style3">What you would like to do? </span></td>
+      </tr>
+      <tr>
+        <td width="476" class="box3" bgcolor="#E6F4FB"><span style="font-weight: 700; background-color: #00FF00">View Currently 
+          
+          Earning Transactions.</span>
+          <p><font size="1">These are commissions your 
+            
+            affiliates are currently earning for their most recent sales.</font></td>
+        <td width="53" class="box2 style1" bgcolor="#E6F4FB"><form name="form1" method="post" action="a.aff.tr.php?status=0">
+            <div align="left">
+              <input type="submit" name="Submit" value="GO">
+            </div>
+          </form></td>
+      </tr>
+      <tr>
+        <td class="box3" width="476"><font color="#FFFFFF"> <span style="font-weight: 700; background-color: #0000FF">Change Status of 
+          
+          commission.</span></font>
+          <p><font size="1">Here is where change the status 
+            
+            of your commissions from Pending to: To Be Paid, Canceled (Fraud or error), 
+            
+            or change back current for to be paid. Or even delete (Delete Not 
+            
+            Recommended unless it was for testing.)</font></td>
+        <td class="box2 style1" width="53"><form name="form2" method="post" action="a.aff.tr.php?status=1">
+            <div align="left">
+              <input type="submit" name="Submit2" value="GO">
+            </div>
+          </form></td>
+      </tr>
+      <tr>
+        <td class="box3" width="476" bgcolor="#E6F4FB"><span style="background-color: #FFFF00"><b>To Be Paid - View amounts to pay to members 
+          
+          and Get Mass Pay File</b></span>
+          <p><font size="1">These are closed out 
+            
+            commissions from a prior pay period that ended that your marked as<b> current.</b> You should for these commissions usually by the 6th - 15th of 
+            
+            this current month once they are marked to be paid. You should mark all 
+            
+            items to be paid on or around the 1st of every month. <b>Make sure to &quot;Mark 
+            
+            As Paid&quot; after you pay.</b></font></td>
+        <td class="box2 style1" width="53" bgcolor="#E6F4FB"><form name="form4" method="post" action="a.aff.members.php">
+            <div align="left">
+              <input type="submit" name="Submit4" value="GO">
+            </div>
+          </form></td>
+      </tr>
+      <tr>
+        <td class="box3" width="476"><span style="font-weight: 700; background-color: #C0C0C0">View past transactions</span>
+          <p> <font size="1">These are commissions you have already paid to your 
+            
+            affiliates PayPal or StormPay accounts. You have already paid these figures 
+            
+            from past sales made by your members</font>.</td>
+        <td class="box2 style1" width="53"><form name="form3" method="post" action="a.aff.tr.php?status=2">
+            <div align="left">
+              <input type="submit" name="Submit3" value="GO">
+            </div>
+          </form></td>
+      </tr>
+      <tr>
+        <td class="box3" width="476" bgcolor="#E6F4FB"><font color="#FFFFFF"> <span style="font-weight: 700; background-color: #FF0000">View cancelled transactions</span></font>
+          <p> <font size="1">These commissions were not paid for reasons of cancellations 
+            
+            or fraud or error that you marked as canceled.</font></td>
+        <td class="box2 style1" width="53" bgcolor="#E6F4FB"><form name="form7" method="post" action="a.aff.tr.php?status=3">
+            <div align="left">
+              <input type="submit" name="Submit7" value="GO">
+            </div>
+          </form></td>
+      </tr>
+    </table>
+  </center>
+</div>
+<p style="MARGIN-LEFT: 10px; MARGIN-RIGHT: 10px"><span class="style1"><b> <a name="how">H</a>ow do I do Mass Pay?</b></span></p>
+<p style="MARGIN-LEFT: 10px; MARGIN-RIGHT: 10px"><span class="style3"> <span style="font-weight: 400">Choose &quot;View amounts to pay to members&quot; to get 
+  
+  your PayPal Mass Pay File. make sure to Mark As Paid after you pay.</span></span><span class="style1"><b><br>
+  <br>
+  </b><u>For PayPal</u></span></p>
+<ul>
+  <li>
+    <p style="MARGIN-LEFT: 10px; MARGIN-RIGHT: 10px"> <font id="role_document" color="#000000">Step #1 - Download file</font>
+  </li>
+  <li>
+    <p style="MARGIN-LEFT: 10px; MARGIN-RIGHT: 10px"> <font id="role_document" color="#000000">Step #2 - Save to Desktop</font>
+  </li>
+  <li>
+    <p style="MARGIN-LEFT: 10px; MARGIN-RIGHT: 10px"> <font id="role_document" color="#000000">Step #3 - Login to PayPal</font>
+  </li>
+  <li>
+    <p style="MARGIN-LEFT: 10px; MARGIN-RIGHT: 10px"> <font id="role_document" color="#000000">Step #4 - Click on Mass Pay Link at 
+      
+      Button Navigation Links of PayPal</font>
+  </li>
+  <li>
+    <p style="MARGIN-LEFT: 10px; MARGIN-RIGHT: 10px"> <font id="role_document" color="#000000">Step #5 - Click on &quot;Make A Mass 
+      
+      Payment Now!&quot;</font>
+  </li>
+  <li>
+    <p style="MARGIN-LEFT: 10px; MARGIN-RIGHT: 10px"> <font id="role_document" color="#000000">Step #6 - Upload Saved File On your 
+      
+      Desktop</font>
+  </li>
+  <li>
+    <p style="MARGIN-LEFT: 10px; MARGIN-RIGHT: 10px"> <font id="role_document" color="#000000">Step #7 - Make the rest of the 
+      
+      payment as a normal PayPal payment</font>
+  </li>
+</ul>
