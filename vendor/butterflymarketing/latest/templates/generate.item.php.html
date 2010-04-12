@@ -1,0 +1,58 @@
+<?php
+############################################################
+##                        WARNING!                        ##
+##                                                        ##
+## This script is copyrighted to ButterFlyMarketing.com   ##
+## Duplication, selling, or transferring of this script   ##
+## is a violation of the copyright and purchase agreement.##
+## Alteration of this script in any way voids any         ##
+## responsibility ButterFlyMarketing.com has towards the  ##
+## functioning of the script. Altering the script in an   ##
+## attempt to unlock other functions of the program that  ##
+## have not been purchased is a violation of the purchase ##
+## agreement and forbidden by ButterFlyMarketing.com.     ##
+## By modifying/running this script you agree to the terms##
+## and conditions of ButterFlyMarketing.com located at    ##
+## http://www.butterflymarketing.com/terms.php            ##
+############################################################
+include("inc.top.php");
+$q=new Cdb;
+$t->set_file("content", "{filename}");
+{rem}$q2=new CDB;
+{rem}$query="SELECT menu_category FROM menus WHERE link='{filename_php}'";
+{rem}$q2->query($query);
+{rem}$toall=0;
+{rem}if ($q2->nf()<1) { $toall=1; }
+{rem}while ($q2->next_record()) {
+{rem}if ($q2->f('menu_category')=="main") {
+{rem}$toall=1;
+{rem}}
+{rem}}
+{rem}if ($toall==0) {
+	{rem}get_logged_info();
+	{rem}$q2=new CDB;
+	{rem}$query="SELECT id FROM menus WHERE link='{filename_php}'";
+	{rem}$q2->query($query);
+	{rem}$q2->next_record();
+	{rem}$query="SELECT membership_id FROM menu_permissions WHERE menu_item='".$q2->f("id")."'";
+	{rem}$q2->query($query);
+	{rem}while ($q2->next_record()) {
+		{rem}$permissions[]=$q2->f("membership_id");
+	{rem}}
+	{rem}if (count($permissions)>0) {
+		{rem}$error='<center><font color="red"><b>You do not have access to this area!<br><br>Upgrade your membership level!</b></font></center>';
+		{rem}foreach ($permissions as $value) {
+			{rem}if ($value==$q->f("membership_id")) {
+				{rem}$error='';
+				{rem}break;
+			{rem}}
+		{rem}}
+		{rem}if ($error!="") {
+			{rem}die("$error");
+		{rem}}
+	{rem}}
+{rem}}
+{rem}$member_id=$q->f("id");
+replace_tags_t($q->f("id"), $t);
+include("inc.bottom.php");
+?>
