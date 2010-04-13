@@ -48,12 +48,10 @@
 		$ocontent='<script language=JavaScript src="../editor/scripts/innovaeditor.js"></script>
 					<link href="../css/butterfly.css" rel="stylesheet" type="text/css">'.$ocontent;
 		
-		echo $ocontent;
 		$_SESSION["notemplate"] = $notemplate;
 	}
-	else
-	{
-		$t->set_var("content", $ocontent);
-		$t->pparse("out", "main");
-	}	
+
+// Takes care of outputting the content 
+// after hooking into system
+genstall_admin_end($t, $ocontent, $notemplate);	
 ?>

@@ -220,5 +220,8 @@ if (isset($sess_id) && get_setting("twitter"))
 	$twitter_html = "<div id='twitter' onclick='disableLinksByElement(this);send_tweet();' style='cursor:pointer;'>".get_setting("twitter_html")."</div>";
 	$t->set_var("aff_twitter_link", $twitter_array.$twitter_html);
 }
-$t->pparse("out", "main");
-?>
+
+// MWG
+// $t->pparse("out", "main");
+$mwg = MWG::getInstance();
+$mwg->end($t);
