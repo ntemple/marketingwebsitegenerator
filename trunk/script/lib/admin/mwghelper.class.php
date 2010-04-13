@@ -17,7 +17,7 @@ class BMGHelper {
   }
 
   static function url_retrieve($url, $query = '') {
-      require_once(BMGHelper::path(GENSTALL_BASEPATH . '/lib/curlemu/libcurlemu.inc.php'));
+      require_once('curlemu/libcurlemu.inc.php');
 
       if (is_array($query)) {
          $query= http_build_query();
@@ -46,15 +46,21 @@ class BMGHelper {
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
       curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
       $contents = curl_exec($ch);
+      if ($contents == false) $e = new Exception(curl_error($ch), curl_errno($ch));
       curl_close($ch);
+      if ($e) throw $e;
+      
       return $contents;
   }
-
+               
   static function unzip($file, $to) {
-    require_once(BMGHelper::path('includes/pclzip.php'));
+    require_once('includes/pclzip.php');
 
     $archive = new PclZip($file);
+    // Seems to return an array of files, or 0 or less on error.
     $return  = $archive->extract($to);
+    if (is_numeric($return) && $return < 1) throw new Exception('Could not extract files.', $return);
+    return $return;
   }
 
   function rmdir_recurse($path) {
@@ -75,7 +81,7 @@ class BMGHelper {
 
    static function safe_ini_get($string)
   {
-      $value = strtolower(ini_get($string));
+      $value = trim(strtolower(ini_get($string)));
 
       switch ($value)
       {
@@ -105,7 +111,7 @@ class BMGHelper {
     // and the files which fail to copy.  Example: 5,2,150000,\SOMEPATH\SOMEFILE.EXT|\SOMEPATH\SOMEOTHERFILE.EXT
     // If you feel adventurous, or have an error reporting system that can log the failed copy files, they can be
     // exploded using the | differentiable, after exploding the result string.
-    //
+    //                                          
     if(!isset($offset)) $offset=0;
     $num = 0;
     $fail = 0;
