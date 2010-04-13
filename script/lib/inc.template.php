@@ -941,4 +941,72 @@ $str = ob_get_clean();
     printf("<b>Template Error:</b> %s<br>\n", $msg);
   }
 }
-?>
+
+// @todo: merge with Template pending rewrite
+class TemplateEx extends Template {
+  /*
+   * Our implementation allows for a searchable path of
+   * template files
+   */
+
+  var $path = array();
+
+  function init(Template $t) {
+    foreach(get_object_vars($t) as $key => $val) {
+      $this->$key =  $val;
+    }
+    $this->addpath($this->root);
+  }
+
+  function addpath($path) {
+    array_unshift($this->path, $path);
+  }
+
+ /******************************************************************************
+  * When called with a relative pathname, this function will return the pathname
+  * with $this->root prepended. Absolute pathnames are returned unchanged.
+  *
+  * Returns: a string containing an absolute pathname.
+  *
+  * usage: filename(string $filename)
+  *
+  * @param     $filename    a string containing a filename
+  * @access    private
+  * @return    string
+  * @see       set_root
+  */
+  function filename($filename) {
+//    $this->debug = 4;
+    // absolute
+    if(file_exists($filename)) {
+       return $filename;
+    }
+
+    foreach ($this->path as $path) {
+      if (file_exists($path . DS . $filename)) {
+        return $path .DS . $filename;
+      }
+    }
+    print_r($this->path);
+    $this->halt("filename: file $filename does not exist.");
+  }
+
+
+
+
+
+  function set_file($varname, $filename = "") {
+     // print "Setfile: $varname $filename<br>\n";
+     parent::set_file($varname, $filename);
+  }
+
+  function set_var($varname, $value = "", $append = false) {
+    // print "set_var: $varname, $value, $append<br>\n";
+    parent::set_var($varname, $value, $append);
+  }
+
+}
+
+
+
+

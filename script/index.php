@@ -14,12 +14,13 @@
  */
 
 
-  
+/* 
     if (file_exists('install')) {
         header('location: install/index.php');
         print "You MUST REMOVE the INSTALL directory before continuing";
         die();
     }
+*/    
     include("inc.all.php");
     if (strpos($_SERVER['HTTP_HOST'], 'www.') === false) {
         if (strpos(get_setting('site_full_url'), 'www.')) {
@@ -171,4 +172,3 @@
     }
     //END CYCLER CODE
     include("inc.bottom.php");
-?>

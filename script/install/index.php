@@ -9,7 +9,7 @@ body, td, tr {
 -->
 </style>
 <h1 align="center">Marketing Website Generator (MWG) Installation Wizard </h1>
-<h2 align="center">Based on Butterfly Source</h2>
+<h2 align="center">Based on Butterfly Software</h2>
 <p align="center">This script will walk you through the installation process. </p>
 <p align="center">As you have already read in the readme.txt file, there are 4 steps that you have to do:</p>
 <table width="600" border="0" align="center" bgcolor="#FFFFFF">

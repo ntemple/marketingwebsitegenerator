@@ -29,4 +29,5 @@ if (isset($admin_sess_id))
 		die();
 	}
 }
-?>
+genstall_admin_start();
+
