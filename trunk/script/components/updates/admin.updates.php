@@ -36,16 +36,32 @@ class comUpdates {
   }
 
   function upgrade() {
-    $url = 'http://network.intellispire.com/mwg/mwg-latest-update.tgz';
-    $pkg = BMGHelper::url_retrieve($url);
-    $ppath = BMGHelper::path (GENSTALL_BASEPATH . "/tmp/upgrade/package.zip");
-    @mkdir($ppath, 0777, true);
-    file_put_contents($ppath, $pkg);
-    BMGHelper::unzip($ppath, GENSTALL_BASEPATH);
-    unlink($ppath);
-//    BMGHelper::setFlash('info', "Package Installed.");
-//    BMGHelper::setFlash('warn', "Package extracted, but no install file found.");
-    $this->view('info', 'Update Complete.');
+    $e = null;
+    $url = 'http://network.intellispire.com/mwg/latest-update.zip';
+    
+    try {
+      $path = GENSTALL_BASEPATH . "/tmp/upgrade";
+      $ppath = "$path/package.zip";
+      if (! is_dir($path)) {  
+        if (! @mkdir($path, 0777, true)) throw new Exception('Cannot create temporary directory. Please make sure all files are writeable by the webserver. Aborting');
+      }
+
+      if (file_exists($ppath)) {
+        if (! @unlink($ppath)) throw new Exception('Cannot create temporary file. Please make sure all files are writeable by the webserver. Aborting');
+      }
+
+      $pkg = BMGHelper::url_retrieve($url);
+
+      if (! file_put_contents($ppath, $pkg)) throw new Exception('Cannot store package file. Please make sure all files are writeable by the webserver. Aborting');
+      if ( BMGHelper::unzip($ppath, GENSTALL_BASEPATH . '/' < 1)) {
+        throw new Exception('Could not unpack package. Please make sure all files are writeable by the webserver. Aborting');
+      }
+      @unlink($ppath);
+      @rmdir($path);
+      return $this->view('info', 'Update Complete.');
+    } catch (Exception $e) {
+      return $this->view('alert', $e->getMessage());
+    }
   }
 }
 

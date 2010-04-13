@@ -51,7 +51,7 @@ class BMGHelper {
   }
 
   static function unzip($file, $to) {
-    require_once(BMGHelper::path(GENSTALL_BASEPATH . '/lib/pclzip.php'));
+    require_once(BMGHelper::path('includes/pclzip.php'));
 
     $archive = new PclZip($file);
     $return  = $archive->extract($to);
