@@ -5,8 +5,8 @@ The main MWG class.  Here to protect ourself from
 global variables pervasive throughout the script.
 requires PHP 5.
 */
-require_once('sbutil.class.php');
-require_once('mysqldb.class.php');
+require_once('includes/sbutil.class.php');
+require_once('includes/mysqldb.class.php');
 require_once('mwgregistry.class.php');
 require_once(MWG_BASE . '/components/themes/modelthemes.class.php');
 
