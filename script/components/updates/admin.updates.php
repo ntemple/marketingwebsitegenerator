@@ -38,7 +38,7 @@ class comUpdates {
   function upgrade() {
     $e = null;
     $url = 'http://network.intellispire.com/mwg/latest-update.zip';
-    
+
     try {
       $path = GENSTALL_BASEPATH . "/tmp/upgrade";
       $ppath = "$path/package.zip";
@@ -53,15 +53,18 @@ class comUpdates {
       $pkg = BMGHelper::url_retrieve($url);
 
       if (! file_put_contents($ppath, $pkg)) throw new Exception('Cannot store package file. Please make sure all files are writeable by the webserver. Aborting');
-      if ( BMGHelper::unzip($ppath, GENSTALL_BASEPATH . '/' < 1)) {
-        throw new Exception('Could not unpack package. Please make sure all files are writeable by the webserver. Aborting');
+      try {
+        $result = BMGHelper::unzip($ppath, GENSTALL_BASEPATH);
+      } catch (Exception $e) {
+        throw new LinkedException('Could not unpack package. Please make sure all files are writeable by the webserver. Aborting', $e->getCode(), $e);
       }
       @unlink($ppath);
       @rmdir($path);
+
       return $this->view('info', 'Update Complete.');
     } catch (Exception $e) {
       return $this->view('alert', $e->getMessage());
-    }
+    }    
   }
 }
 
