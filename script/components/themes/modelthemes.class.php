@@ -58,7 +58,6 @@ class modelThemes {
     
     $this->themes = array ('bfm' => 'bfm');
     $base = MWG_BASE . '/themes/';
-//    $mwg = MWG::getInstance();
     
     $dirs = $this->listDir($base);
     foreach ($dirs as $file) {
@@ -109,10 +108,10 @@ class modelThemes {
       case 'wordpress': $out = $this->processWordpress(); break;
       case 'joomla':    $out = $this->processJoomla(); break;
       default:          ob_start();
-                        $tpl->pparse("out", "main"); break;
+                        $tpl->pparse("out", "main"); 
                         $out = ob_get_clean();
     }    
-    
+   
     return $out;
     
   }
