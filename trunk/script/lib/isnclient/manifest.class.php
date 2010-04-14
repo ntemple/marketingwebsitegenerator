@@ -37,8 +37,8 @@ class Manifest {
   var $manifest;
   var $sect;
 
-  function __construct($section = 'joomla') {
-     $this->sect = $section;
+  function __construct($section = 'mwg') {
+     $this->sect = 'mwg'; # $section;
   }
 
 
@@ -91,7 +91,7 @@ class Manifest {
   }
 
   function countItems() {
-    $swl = $this-> getSoftwareList();
+    $swl = $this->getSoftwareList();
     return count($swl);
   }
 
@@ -140,23 +140,20 @@ class Manifest {
   }
 
   function getItem($package) {
-
     // TODO: Cache
-    $remote_data = @file_get_contents('http://www.intellispire.com/network/server5/details.php?package=' . $package);
-    $remote_data = Spyc::YAMLLoad($remote_data);
+    # $remote_data = @file_get_contents('http://www.intellispire.com/network/server5/details.php?package=' . $package);
+    # $remote_data = Spyc::YAMLLoad($remote_data);
 
     $swl = $this->getSoftwareList();
-
     $packagedata = $swl[$package];
+    # $packagedata = array_merge($packagedata, $remote_data);
 
-    $packagedata = array_merge($packagedata, $remote_data);
+    # $description = trim($packagedata['description']);
 
-    $description = trim($packagedata['description']);
-
-    if (strpos($description, 'http:') === 0) {
-      $page =  file_get_contents($description);
-      $packagedata['description'] = $page;
-    }
+    # if (strpos($description, 'http:') === 0) {
+    #   $page =  file_get_contents($description);
+    #   $packagedata['description'] = $page;
+    # }
 
     return  $packagedata;
   }
