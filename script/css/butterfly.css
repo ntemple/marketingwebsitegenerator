@@ -37,7 +37,7 @@ p.warn {
     border-bottom: 2px solid #FEABB9;
 }
 p.alert {
-    background: #FFF7C0 url(../images/exc.png)) center no-repeat;
+    background: #FFF7C0 url(../images/exc.png) center no-repeat;
     background-position: 15px 50%; /* x-pos y-pos */
     text-align: left;
     padding: 5px 20px 5px 45px;

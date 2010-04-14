@@ -53,7 +53,7 @@ class BMGenRegistry {
   function writeYML($file, $data) {
     $yml = Spyc::YAMLDump($data);
     $f = fopen($file, 'w+');
-    fwrite($f, "#<?php die(); ?>\n$yml");
+    fwrite($f, "#\n#<?php die(); ?>\n$yml");
     fclose($f);
   }
 

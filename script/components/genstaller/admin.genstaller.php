@@ -26,7 +26,7 @@ if (is_callable($func)) {
 class comGenstaller {
 
   function submenu() {
-   return 'submenu';
+    return 'submenu';
   }
 
   function view($class = '', $msg = '') {
@@ -57,9 +57,9 @@ class comGenstaller {
     $item = $manifest->getItem(BMGHelper::_req('id'));
 
     // $packagedata = $swl[$package];
-    print "<pre>\n";
-    print_r($item);
-    print "</pre>\n";
+//    print "<pre>\n";
+//    print_r($item);
+//    print "</pre>\n";
   }
 
   function upgrade() {
@@ -67,18 +67,66 @@ class comGenstaller {
   }
 
   function install() {
-    $model = new modelGenstaller;
-    $package = BMGHelper::_req('id');
+    $model = new modelGenstaller();
+    $manifest = $model->getManifest();    
+    
+    $ex = null;
+    try {
+      if (isset($_POST['id'])) {
+        $id = $_POST['id'];
+      } else {
+        throw new Exception("Need a package to install! (id is empty)");
+      }
 
-    // TODO: check ident is valid
-    # Get the URL for the download
-    $url = $model->retrievedownloadlink($package);
-    if (!$url) {
-      BMGHelper::setFlash('alert', "Could not retrieve download link for package.");
-      return $this->view();
+      // TODO: check ident is valid
+      # Get the URL for the download
+      $url = $model->retrievedownloadlink($id);      
+      if (!$url) {
+        throw new Exception("Could not retrieve download link for package $id.");
+      }
+      $pkgdata = $manifest->getItem($id);
+      if (! $pkgdata) {
+        throw new Exception("Sorry, I don't know anything about $id.");
+      }
+      
+      switch($pkgdata['type']) {
+#        case 'software':  
+#        case 'component':  list($section, $ident) = explode('.', $package);
+#                           $installpath = BMGHelper::path (GENSTALL_BASEPATH . "/components/$ident");
+#                           break;
+        case 'module':    $installpath = BMGHelper::path (GENSTALL_BASEPATH . "/modules/$subtype/"); break;
+        case 'plugin':    $subtype = 'shortcodes';
+                          $installpath = BMGHelper::path (GENSTALL_BASEPATH . "/plugins/$subtype/"); break;
+        case 'theme':     $installpath = BMGHelper::path (GENSTALL_BASEPATH . "/themes/"); break;
+        default: throw new Exception("Can't install $id of type {$pkgdata[type]} because I don't what it is");
+      }
+
+      if (! is_dir($installpath)) {
+         if (! @mkdir($installpath, 0755, true)) throw new Exception("Can't create install directory: $installpath");
+      }
+            
+      $pkg = BMGHelper::url_retrieve($url);
+      if (!$pkg) throw new Exception('Could not download package file');
+      $path =    GENSTALL_BASEPATH . "/tmp/installer/";
+      if (! @mkdir($path, 0755, true)) throw new Exception("Can't create install directory: $installpath");      
+      file_put_contents("$path/package.zip", $pkg);
+      try {
+        BMGHelper::unzip("$path/package.zip", $installpath);
+      } catch (Exception $e) {
+        // do nothing, just give us a chance to cleanup
+        $ex = $e;
+      }
+      unlink("$path/package.zip");
+      rmdir($path);
+      if ($ex) throw ($ex);
+    } catch (Exception $e) {
+        BMGHelper::setFlash('alert', $e->getMessage());
+        return $this->view();
     }
+    return $this->view('info', 'Package installed.');
+  }
 
-    /* This system can handle only zip files */
+  function install_software() {
     list($section, $ident) = explode('.', $package);
 
     $installpath = BMGHelper::path (GENSTALL_BASEPATH . "/components/$ident");
@@ -97,13 +145,16 @@ class comGenstaller {
       BMGHelper::setFlash('warn', "Package extracted, but no install file found.");
     }
     return;
+
+
+
   }
 
   function loadmanifest() {
     $model = new modelGenstaller;
 
     try {
-     $manifest = $model->retrieveManifest();
+      $manifest = $model->retrieveManifest();
     } catch(Exception $e) {
       BMGHelper::setFlash('alert', $e);
       $this->view();
