@@ -58,7 +58,10 @@ class BMGHelper {
 
     $archive = new PclZip($file);
     // Seems to return an array of files, or 0 or less on error.
-    $return  = $archive->extract($to);
+    $return = $archive->extract(PCLZIP_OPT_PATH, $to,
+                                PCLZIP_OPT_REPLACE_NEWER);
+
+
     if (is_numeric($return) && $return < 1) throw new Exception('Could not extract files.', $return);
     return $return;
   }
