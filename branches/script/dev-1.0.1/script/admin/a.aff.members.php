@@ -19,7 +19,7 @@
 	
 	$q3=new Cdb;
 	$cmember="";
-	FFileRead("../templates/a.admin.template.aff.members.htm",$cmember);
+	FFileRead("templates/a.admin.template.aff.members.htm",$cmember);
 	$sta=$status;
 	if (isset($_SESSION['month_end'])) $month_end=$_SESSION['month_end'];
 	else $month_end=date("n");
@@ -33,7 +33,7 @@
 	else $year_end=date("Y",mktime(0,0,0,$month_end-1,$day_start,$year_start));
 	if (isset($_SESSION['month_start'])) $month_start=$_SESSION['month_start'];
 	else $month_start=date("n",mktime(0,0,0,$month_end-1,$day_start,$year_start));
-	FFileRead("../templates/a.admin.template.aff.members.row.htm",$row);
+	FFileRead("templates/a.admin.template.aff.members.row.htm",$row);
 	
 if($time_trigger==1){
 		$time_interval=" and dt>='".date("Y-m-d",mktime(0,0,0,$month_start,$day_start,$year_start))."' and dt<'".date("Y-m-d",mktime(0,0,0,$month_end,$day_end+1,$year_end))."'";
@@ -130,8 +130,8 @@ IF ($q3->f("paypal_email") !='') {
 	$cmember=str_replace("{action}",$action,$cmember);
 	$cmember=str_replace("{sitename}",$sitename,$cmember);
 	$content=$cmember;
-	FFileRead("../templates/admin.main.".$_SESSION['menu'].".html",$main);
-	FFileRead("../config/version", $version);
+	FFileRead("templates/admin.main.".$_SESSION['menu'].".html",$main);
+	FFileRead("config/version", $version);
 	$query="select id from messages where member_id=1 and read_flag=0";
 	$q->query($query);
 	$q->next_record();

@@ -22,7 +22,7 @@
 	switch ($action)
 	{
 		case "aff":
-			FFileRead("../templates/a.admin.template.levels.htm",$content);
+			FFileRead("templates/a.admin.template.levels.htm",$content);
 			$query="select * from a_levels order by level";
 			$q->query($query);
 			while($q->next_record())
@@ -67,7 +67,7 @@
 	}
 	
 	
-	FFileRead("../templates/admin.main.html",$main);
+	FFileRead("templates/admin.main.html",$main);
 	$main=str_replace("{content}",$content,$main);
 	$main=str_replace("{status}",$sta,$main);
 	$main=str_replace("{title}",$title,$main);
