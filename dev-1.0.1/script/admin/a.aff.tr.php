@@ -19,9 +19,9 @@ session_start();
 	$q=new Cdb;
 	$q3=new Cdb;
 	$cmember="";
-	FFileRead("../templates/a.admin.template.aff.tr.htm",$cmember);
+	FFileRead("templates/a.admin.template.aff.tr.htm",$cmember);
 	$sta=$status;
-	FFileRead("../templates/a.admin.template.aff.tr.row.htm",$row);
+	FFileRead("templates/a.admin.template.aff.tr.row.htm",$row);
 	
 	if ($month_end==''){ 
 		if(isset($_SESSION['month_end'])) $month_end=$_SESSION['month_end'];
@@ -208,7 +208,7 @@ session_start();
 	$cmember=str_replace("{action}",$action,$cmember);
 	$cmember=str_replace("{sitename}",$sitename,$cmember);
 	$content=$cmember;
-	FFileRead("../templates/admin.main.".$_SESSION['menu'].".html",$main);
+	FFileRead("templates/admin.main.".$_SESSION['menu'].".html",$main);
 	FFileRead("../config/version", $version);
 	$query="select id from messages where member_id=1 and read_flag=0";
 	$q->query($query);

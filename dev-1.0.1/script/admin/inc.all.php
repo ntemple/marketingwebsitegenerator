@@ -57,7 +57,7 @@ class CDb extends DB_Sql
 		var $Password=DB_PASSWORD;
 		function haltmsg($msg)
 		{
-			$t = new Template("../templates", "keep");
+			$t = new Template("templates", "keep");
 			$t->set_file("error", "error.html");
 			if (DEBUG_TYPE=="browser" || DEBUG_TYPE=="be")
 			{
@@ -76,7 +76,7 @@ class CDb extends DB_Sql
 		}
 	}
 	
-	$t = new Template("../templates", "keep");
+	$t = new Template("templates", "keep");
 	require_once("../lib/inc.general.functions.php");
 	require_once("../config/constants.php");
 	define("SITENAME", get_setting("site_name")); // the name of the site as will be replaced in all {sitename} instances

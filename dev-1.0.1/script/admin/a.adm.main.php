@@ -17,7 +17,7 @@
 	include("inc.top.php");
 	
 	$q=new Cdb;
-	FFileRead("../templates/a.admin.template.main.htm",$content);
+	FFileRead("templates/a.admin.template.main.htm",$content);
 	
 	if ($_SESSION['menu'] == ""){
 		$_SESSION['menu'] = "settings";
@@ -107,7 +107,7 @@
 	$content=str_replace("{day_end}",$day_end_sel,$content);
 	$content=str_replace("{month_end}",$month_end_sel,$content);
 	$content=str_replace("{year_end}",$year_end_sel,$content);
-	FFileRead("../templates/admin.main.".$_SESSION['menu'].".html",$main);
+	FFileRead("templates/admin.main.".$_SESSION['menu'].".html",$main);
 	FFileRead("../config/version", $version);
 	$query="select id from messages where member_id=1 and read_flag=0";
 	$q->query($query);

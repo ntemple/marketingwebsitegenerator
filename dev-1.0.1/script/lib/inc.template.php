@@ -159,6 +159,17 @@ class Template
   * @see       halt
   */
   var $last_error     = "";
+
+  /**
+   * A list of potential paths to search
+   * 
+   * @var      string
+   * @access   public
+   * @see      addpath
+   */ 
+
+  var $path = array();
+
  /******************************************************************************
   * Class constructor. May be called with two optional parameters.
   * The first parameter sets the template directory the second parameter
@@ -180,6 +191,15 @@ class Template
     $this->set_root($root);
     $this->set_unknowns($unknowns);
   }
+
+  /**
+   * Add an additional path to the search
+   */
+
+  function addpath($path) {
+    array_unshift($this->path, $path);
+  }
+
  /******************************************************************************
   * Checks that $root is a valid directory and if so sets this directory as the
   * base directory from which templates are loaded by storing the value in
@@ -826,14 +846,34 @@ $str = ob_get_clean();
     if ($this->debug & 4) {
       echo "<p><b>filename:</b> filename = $filename</p>\n";
     }
-    if (substr($filename, 0, 1) != "/") {
+
+    // check absolute path
+    if (substr($filename, 0, 1) == "/") {
+      if (file_exists($filename)) {
+        return $filename; // Absolute
+      } else {
+        $this->halt("filename: file $filename does not exist.");
+      }
+    
       $filename = $this->root."/".$filename;
+    } 
+
+    // Root?
+    if (file_exists( $this->root."/".$filename)) {
+      return $this->root."/".$filename;;
+    } 
+   
+    // Else check path
+    foreach ($this->path as $path) {
+      if (file_exists("$path/$filename")) {
+        return "$path/$filename";
+      }
     }
-    if (!file_exists($filename)) {
-      $this->halt("filename: file $filename does not exist.");
-    }
-    return $filename;
+
+    // no luck
+    $this->halt("filename: file $filename does not exist.");
   }
+
  /******************************************************************************
   * This function will construct a regexp for a given variable name with any
   * special chars quoted.
@@ -921,7 +961,7 @@ $str = ob_get_clean();
       $this->haltmsg($msg);
     }
     if ($this->halt_on_error == "yes") {
-      die("<b>Halted.</b>");
+      throw new Exception($msg);
     }
     return false;
   }
@@ -941,72 +981,6 @@ $str = ob_get_clean();
     printf("<b>Template Error:</b> %s<br>\n", $msg);
   }
 }
-
-// @todo: merge with Template pending rewrite
-class TemplateEx extends Template {
-  /*
-   * Our implementation allows for a searchable path of
-   * template files
-   */
-
-  var $path = array();
-
-  function init(Template $t) {
-    foreach(get_object_vars($t) as $key => $val) {
-      $this->$key =  $val;
-    }
-    $this->addpath($this->root);
-  }
-
-  function addpath($path) {
-    array_unshift($this->path, $path);
-  }
-
- /******************************************************************************
-  * When called with a relative pathname, this function will return the pathname
-  * with $this->root prepended. Absolute pathnames are returned unchanged.
-  *
-  * Returns: a string containing an absolute pathname.
-  *
-  * usage: filename(string $filename)
-  *
-  * @param     $filename    a string containing a filename
-  * @access    private
-  * @return    string
-  * @see       set_root
-  */
-  function filename($filename) {
-//    $this->debug = 4;
-    // absolute
-    if(file_exists($filename)) {
-       return $filename;
-    }
-
-    foreach ($this->path as $path) {
-      if (file_exists($path . DS . $filename)) {
-        return $path .DS . $filename;
-      }
-    }
-    print_r($this->path);
-    $this->halt("filename: file $filename does not exist.");
-  }
-
-
-
-
-
-  function set_file($varname, $filename = "") {
-     // print "Setfile: $varname $filename<br>\n";
-     parent::set_file($varname, $filename);
-  }
-
-  function set_var($varname, $value = "", $append = false) {
-    // print "set_var: $varname, $value, $append<br>\n";
-    parent::set_var($varname, $value, $append);
-  }
-
-}
-
 
 
 
