@@ -1,0 +1,28 @@
+<form id="form1" name="form1" method="post" action="do.email.downline.php">
+  <table width="569" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td colspan="2" bgcolor="#efefef"><strong>Email Downline</strong></td>
+    </tr>
+    <tr>
+      <td>Tags to be used in messages: </td>
+      <td>{tag_list}</td>
+    </tr>
+    <tr>
+      <td width="250">From:</td>
+      <td width="319">{email}</td>
+    </tr>
+    <tr>
+      <td>Subject</td>
+      <td><input type="text" name="subject" /></td>
+    </tr>
+    <tr>
+      <td valign="top">Body</td>
+      <td><textarea name="body" cols="50" rows="7"></textarea></td>
+    </tr>
+    <tr>
+      <td valign="top"><input type="submit" name="Submit" value="Submit" /></td>
+      <td>&nbsp;</td>
+    </tr>
+  </table>
+  {allow_private_messages}
+</form>
