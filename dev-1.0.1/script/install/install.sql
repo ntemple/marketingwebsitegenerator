@@ -692,7 +692,6 @@ INSERT INTO `templates` VALUES (23, 'member.area.read.message.html', 'Member Are
 INSERT INTO `templates` VALUES (24, 'member.area.write.message.html', 'Member Area Write Message', 'The compose new message page.');
 INSERT INTO `templates` VALUES (25, 'oto1.html', 'Template Salespage for PRO1 - One Time Offer', 'One Time Offer Sales Page (1)');
 INSERT INTO `templates` VALUES (26, 'pay.paypal.html', 'Paypal Template', 'Paypal Template');
-INSERT INTO `templates` VALUES (27, 'pay.stormpay.html', 'Stormpay Template', 'Stormpay Template');
 INSERT INTO `templates` VALUES (28, 'signup.error.html', 'Sign Up Error Page', 'Sign Up Error Page');
 INSERT INTO `templates` VALUES (29, 'signup.html', 'Sign Up Page', 'Sign Up Page');
 INSERT INTO `templates` VALUES (30, 'signup.paid.html', 'Sign Up Template With Pay Option', 'Sign Up Template With Pay Option before sign up');
