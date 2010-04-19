@@ -1,0 +1,183 @@
+<SCRIPT>
+function selectAll(cbList,bSelect) {
+	for (var i=0; i<cbList.length; i++) 
+		cbList[i].selected = cbList[i].checked = bSelect
+}
+function reverseAll(cbList) {
+	for (var i=0; i<cbList.length; i++) {
+		cbList[i].checked = !(cbList[i].checked) 
+		cbList[i].selected = !(cbList[i].selected)
+	}
+}
+</SCRIPT>
+<style type="text/css">
+<!--
+.style1 {
+	font-weight: bold
+}
+-->
+</style>
+<form action="members.php?action=search" method="post" name="form1">
+  <p><strong> Member Search </strong></p>
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td colspan="6"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td colspan="5">Select fields to show when searching: </td>
+          </tr>
+          <tr>
+            <td><input name="selectfield[1]" type="checkbox" id="selectfield[1]" value="id">
+              id</td>
+            <td><input name="selectfield[2]" type="checkbox" id="selectfield[2]" value="password">
+              password</td>
+            <td><input name="selectfield[3]" type="checkbox" id="selectfield[3]" value="first_name">
+              first_name</td>
+            <td><input name="selectfield[4]" type="checkbox" id="selectfield[4]" value="last_name">
+              last_name</td>
+            <td><input name="selectfield[5]" type="checkbox" id="selectfield[5]" value="email">
+              email</td>
+          </tr>
+          <tr>
+            <td><input name="selectfield[6]" type="checkbox" id="selectfield[6]" value="paypal_email">
+              paypal_email</td>
+            <td><input name="selectfield[7]" type="checkbox" id="selectfield[7]" value="stormpay_email">
+              stormpay_email</td>
+            <td><input name="selectfield[8]" type="checkbox" class="style1" id="selectfield[8]" value="city">
+              city</td>
+            <td><input name="selectfield[]" type="checkbox" id="selectfield[]" value="state">
+              state</td>
+            <td><input name="selectfield[10]" type="checkbox" id="selectfield[10]" value="zip">
+              zip</td>
+          </tr>
+          <tr>
+            <td><input name="selectfield[11]" type="checkbox" id="selectfield[11]" value="address">
+              address</td>
+            <td><input name="selectfield[12]" type="checkbox" id="selectfield[12]" value="country">
+              country</td>
+            <td><input name="selectfield[13]" type="checkbox" id="selectfield[13]" value="home_phone">
+              home_phone</td>
+            <td><input name="selectfield[14]" type="checkbox" id="selectfield[14]" value="work_phone">
+              work_phone</td>
+            <td><input name="selectfield[15]" type="checkbox" id="selectfield[15]" value="cell_phone">
+              cell_phone</td>
+          </tr>
+          <tr>
+            <td><input name="selectfield[16]" type="checkbox" id="selectfield[16]" value="icq_id">
+              icq_id</td>
+            <td><input name="selectfield[17]" type="checkbox" id="selectfield[17]" value="msn_id">
+              msn_id</td>
+            <td><input name="selectfield[18]" type="checkbox" id="selectfield[18]" value="yahoo_id">
+              yahoo_id</td>
+            <td><input name="selectfield[19]" type="checkbox" id="selectfield[19]" value="ssn">
+              ssn</td>
+            <td><input name="selectfield[20]" type="checkbox" id="selectfield[20]" value="url1">
+              url1</td>
+          </tr>
+          <tr>
+            <td><input name="selectfield[21]" type="checkbox" id="selectfield[21]" value="url2">
+              url2</td>
+            <td><input name="selectfield[22]" type="checkbox" id="selectfield[22]" value="url3">
+              url3</td>
+            <td><input name="selectfield[23]" type="checkbox" id="selectfield[23]" value="aff">
+              aff</td>
+            <td><input name="selectfield[24]" type="checkbox" id="selectfield[24]" value="membership_id">
+              membership_id</td>
+            <td><input name="selectfield[25]" type="checkbox" id="selectfield[25]" value="public_profile">
+              public_profile</td>
+          </tr>
+        </table></td>
+    </tr>
+    <tr>
+      <td width="87" rowspan="2">&nbsp;</td>
+      <td width="10" rowspan="2">&nbsp;</td>
+      <td width="108" height="58" valign="bottom">Search criteria: </td>
+      <td width="144" valign="bottom"><select name="search" id="search">
+          <option value="id" selected>id</option>
+          <option value="username" selected>username</option>
+          <option value="password" selected>password</option>
+          <option value="first_name" selected>first_name</option>
+          <option value="last_name" selected>last_name</option>
+          <option value="email" selected>email</option>
+          <option value="paypal_email" selected>paypal_email</option>
+          <option value="stormpay_email" selected>stormpay_email</option>
+          <option value="password" selected>password</option>
+          <option value="city" selected>city</option>
+          <option value="state" selected>state</option>
+          <option value="zip" selected>zip</option>
+          <option value="address" selected>address</option>
+          <option value="country" selected>country</option>
+          <option value="home_phone" selected>home_phone</option>
+          <option value="work_phone" selected>work_phone</option>
+          <option value="cell_phone" selected>cell_phone</option>
+          <option value="icq_id" selected>icq_id</option>
+          <option value="msn_id" selected>msn_id</option>
+          <option value="yahoo_id" selected>yahoo_id</option>
+          <option value="ssn" selected>ssn</option>
+          <option value="url1" selected>url1</option>
+          <option value="url2" selected>url2</option>
+          <option value="url3" selected>url3</option>
+          <option value="aff" selected>aff</option>
+          <option value="membership_id" selected>membership_id</option>
+          <option value="public_profile" selected>public_profile</option>
+        </select></td>
+      <td width="59">&nbsp;</td>
+      <td width="145">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>Search string: </td>
+      <td><input name="criteria" type="text" id="criteria"></td>
+      <td>order by: </td>
+      <td><select name="select" id="select">
+          <option value="id" selected>id</option>
+          <option value="username" selected>username</option>
+          <option value="password" selected>password</option>
+          <option value="first_name" selected>first_name</option>
+          <option value="last_name" selected>last_name</option>
+          <option value="email" selected>email</option>
+          <option value="paypal_email" selected>paypal_email</option>
+          <option value="stormpay_email" selected>stormpay_email</option>
+          <option value="password" selected>password</option>
+          <option value="city" selected>city</option>
+          <option value="state" selected>state</option>
+          <option value="zip" selected>zip</option>
+          <option value="address" selected>address</option>
+          <option value="country" selected>country</option>
+          <option value="home_phone" selected>home_phone</option>
+          <option value="work_phone" selected>work_phone</option>
+          <option value="cell_phone" selected>cell_phone</option>
+          <option value="icq_id" selected>icq_id</option>
+          <option value="msn_id" selected>msn_id</option>
+          <option value="yahoo_id" selected>yahoo_id</option>
+          <option value="ssn" selected>ssn</option>
+          <option value="url1" selected>url1</option>
+          <option value="url2" selected>url2</option>
+          <option value="url3" selected>url3</option>
+          <option value="aff" selected>aff</option>
+          <option value="membership_id" selected>membership_id</option>
+          <option value="public_profile" selected>public_profile</option>
+        </select></td>
+    </tr>
+    <tr>
+      <td><input type="button" value="All" ONCLICK="selectAll(this.form.selectfield,true)">
+        <input type="button" value="Clear" ONCLICK="selectAll(this.form.selectfield,false)"></td>
+      <td>&nbsp;</td>
+      <td><input name="submit" type="submit" id="submit" value="Search"></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+  </table>
+</form>
+<div align="center">
+  <p><a href="add.member.php">Add new member </a></p>
+  <p>{next_prev} </p>
+</div>
+<form name="members" action="do.delete.members.php" method="post">
+  <table width="100%" border="1" cellpadding="0" cellspacing="0">
+    {members_rows}
+  </table>
+  <br />
+  <input name="delete" type="submit" id="delete" value="Delete All Selected" />
+  <input name="edit" type="submit" id="edit" value="Edit Selected">
+</form>
+<p align="center">{next_prev}</p>

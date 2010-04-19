@@ -1,0 +1,143 @@
+<script type="text/JavaScript">
+<!--
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+function MM_validateForm() { //v4.0
+  var i,p,q,nm,test,num,min,max,errors='',args=MM_validateForm.arguments;
+  for (i=0; i<(args.length-2); i+=3) { test=args[i+2]; val=MM_findObj(args[i]);
+    if (val) { nm=val.name; if ((val=val.value)!="") {
+      if (test.indexOf('isEmail')!=-1) { p=val.indexOf('@');
+        if (p<1 || p==(val.length-1)) errors+='- '+nm+' must contain an e-mail address.\n';
+      } else if (test!='R') { num = parseFloat(val);
+        if (isNaN(val)) errors+='- '+nm+' must contain a number.\n';
+        if (test.indexOf('inRange') != -1) { p=test.indexOf(':');
+          min=test.substring(8,p); max=test.substring(p+1);
+          if (num<min || max<num) errors+='- '+nm+' must contain a number between '+min+' and '+max+'.\n';
+    } } } else if (test.charAt(0) == 'R') errors += '- '+nm+' is required.\n'; }
+  } if (errors) alert('The following error(s) occurred:\n'+errors);
+  document.MM_returnValue = (errors == '');
+}
+//-->
+</script>
+<form id="form1" name="form1" method="post" action="do.edit.member.php?id={member_id}&page={membership_search_url}">
+  <table width="667" border="0">
+    <tr>
+      <td><div align="right">*First Name: </div></td>
+      <td width="332"><input name="first_name" type="text" id="first_name" value="{first_name}" size="50" /></td>
+    </tr>
+    <tr>
+      <td><div align="right">*Email:</div></td>
+      <td><input name="email" type="text" id="email" value="{email}" size="50" /></td>
+    </tr>
+    <tr>
+      <td><div align="right">*Password:</div></td>
+      <td><input name="password" type="password" id="password" value="{password}" size="50" /></td>
+    </tr>
+    <tr>
+      <td><div align="right"></div></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><div align="right">Last Name: </div></td>
+      <td><input name="last_name" type="text" id="last_name" value="{last_name}" size="50" /></td>
+    </tr>
+    <tr>
+      <td><div align="right">Address:</div></td>
+      <td><input name="address" type="text" id="address" value="{address}" size="50" /></td>
+    </tr>
+    <tr>
+      <td><div align="right">City:</div></td>
+      <td><input name="city" type="text" id="city" value="{city}" size="50" /></td>
+    </tr>
+    <tr>
+      <td><div align="right">State:</div></td>
+      <td><input name="state" type="text" id="state" value="{state}" size="50" /></td>
+    </tr>
+    <tr>
+      <td><div align="right">Zip Code: </div></td>
+      <td><input name="zip" type="text" id="zip" value="{zip}" size="50" /></td>
+    </tr>
+    <tr>
+      <td><div align="right">Country:</div></td>
+      <td><input name="country" type="text" id="country" value="{country}" size="50" /></td>
+    </tr>
+    <tr>
+      <td><div align="right"></div></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><div align="right">Home Phone: </div></td>
+      <td><input name="home_phone" type="text" id="home_phone" value="{home_phone}" size="50" /></td>
+    </tr>
+    <tr>
+      <td><div align="right">Work Phone: </div></td>
+      <td><input name="work_phone" type="text" id="work_phone" value="{work_phone}" size="50" /></td>
+    </tr>
+    <tr>
+      <td><div align="right">Cell Phone: </div></td>
+      <td><input name="cell_phone" type="text" id="cell_phone" value="{cell_phone}" size="50" /></td>
+    </tr>
+    <tr>
+      <td><div align="right"></div></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><div align="right">Yahoo ID: </div></td>
+      <td><input name="yahoo_id" type="text" id="yahoo_id" value="{yahoo_id}" size="50" /></td>
+    </tr>
+    <tr>
+      <td><div align="right">MSN ID: </div></td>
+      <td><input name="msn_id" type="text" id="msn_id" value="{msn_id}" size="50" /></td>
+    </tr>
+    <tr>
+      <td><div align="right">ICQ #: </div></td>
+      <td><input name="icq_id" type="text" id="icq_id" value="{icq_id}" size="50" /></td>
+    </tr>
+    <tr>
+      <td><div align="right"></div></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><div align="right">Social Security Number (US Only): </div></td>
+      <td><input name="ssn" type="text" id="ssn" value="{ssn}" size="50" /></td>
+    </tr>
+    <tr>
+      <td><div align="right"></div></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><div align="right">PayPal Email: </div></td>
+      <td><input name="paypal_email" type="text" id="paypal_email" value="{paypal_email}" size="50" /></td>
+    </tr>
+    <tr>
+      <td><div align="right">Stormpay Email: </div></td>
+      <td><input name="stormpay_email" type="text" id="stormpay_email" value="{stormpay_email}" size="50" /></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan="2"><div align="center"> </div></td>
+    </tr>
+    <tr>
+      <td><div align="right">Membership</div></td>
+      <td><select name="membership_id">
+          
+	  {membership_list}
+      
+        </select></td>
+    </tr>
+    <tr>
+      <td><div align="right">
+          <input name="Submit" type="submit" onclick="MM_validateForm('first_name','','R','email','','RisEmail','password','','R');return document.MM_returnValue" value="Submit" />
+        </div></td>
+      <td>&nbsp;</td>
+    </tr>
+  </table>
+</form>
