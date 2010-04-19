@@ -1,0 +1,24 @@
+<table width="550" border="0">
+  <tr>
+    <td><form action="do.edit.faq.php" method="post">
+        <p><strong><a name="{cat}_{no}" id="{cat}_{no}"></a>{no})</strong></p>
+        <p><strong>Q:
+          <textarea name="question" cols="80">{question}</textarea>
+          </strong></p>
+        <p>A:
+          <textarea name="answer" cols="80">{answer}</textarea>
+        </p>
+        <p>Category:
+          <input name="category" value="{category}" size="30" />
+          <br />
+          <br />
+          Position:
+          <input name="position" id="position" value="{position}" size="30" />
+        </p>
+        <input type="hidden" name="id" value="{id}" />
+        <input type="submit" name="Submit" value="Save Changes" />
+        <input type="button" name="Button" value="Delete Q/A" onclick="javascript: window.location.href='do.delete.faq.php?id={id}';"/>
+      </form></td>
+  </tr>
+</table>
+<hr />
