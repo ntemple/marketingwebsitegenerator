@@ -1,0 +1,67 @@
+<script>
+function disable(value){
+	if (value == "all"){
+		for (var i = 0; i < document.form1.elements.length; i++) {
+			if (document.form1.elements[i].name.substr(0,13) == "membership_id"){
+				document.form1.elements[i].disabled = true;
+			}
+		}
+	}else{
+		for (var i = 0; i < document.form1.elements.length; i++) {
+			if (document.form1.elements[i].name.substr(0,13) == "membership_id"){
+				document.form1.elements[i].disabled = false;
+			}
+		}
+	}
+}
+</script>
+<h2><font color="#076C9F">Site Overview</font></h2>
+<h4>Members Stats</h4>
+<table width="300" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>Total Active Members:</td>
+    <td>{total_members}</td>
+  </tr>
+  <tr>
+    <td>New Members Yesterday:</td>
+    <td>{newy}</td>
+  </tr>
+  <tr>
+    <td>New Members Today: : </td>
+    <td>{new}</td>
+  </tr>
+</table>
+<div align="center">
+  <center>
+    <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="300" align="left">
+      <tr>
+        <td><br>
+          <br>
+          <b>Paid Upgrades</b><br>
+          <span style="font-weight: 400">{upgrade_list} </span></td>
+      </tr>
+      <tr>
+        <td><form name="form1" action="do.siteoverview.php" method="post">
+            <br />
+            <br />
+            <strong>Allow viewing to:</strong><br />
+            <input name="view" id="view" value="all" {checked_all} type="radio" onclick="disable('all')">
+            All Members<br>
+            <input value="just" name="view" id="view" {checked_just} type="radio" onclick="disable('just')">
+            Just These<br>
+            <table width="100" border="0" cellspacing="0" cellpadding="0">
+              {membership_list}
+            </table>
+            <input type="submit" value="Change" />
+          </form></td>
+      </tr>
+    </table>
+  </center>
+</div>
+<h4><br>
+  &nbsp;</h4>
+<table width="300" border="0" cellspacing="0" cellpadding="0">
+  &nbsp;
+</table>
+<p>&nbsp;</p>
+<p></p>

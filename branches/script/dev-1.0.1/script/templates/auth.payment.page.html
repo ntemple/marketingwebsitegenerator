@@ -1,0 +1,104 @@
+<script type="text/JavaScript">
+function validate_form(){
+{validation_text}
+else{
+		return true;
+	}
+}
+var str_vars = '';
+function all_fields(){
+	str_vars = '';
+	el = document.form1;
+	for (var i = 0; i < el.elements.length; i++) {
+		if (el.elements[i].value != '')
+	  	str_vars += el.elements[i].name+'='+el.elements[i].value+'&';
+	}
+	str_vars = str_vars.substr(0,str_vars.length-15);;
+}
+</script>
+<div id="div_form" name="div_form">
+  <form id="form1" name="form1" method="{send_method}" action="{form_switch}">
+    <p>&nbsp;</p>
+    <table border="0" width="100%" style="border-collapse: collapse" bordercolor="#111111" cellpadding="0" cellspacing="0">
+      {error}
+      <input type="hidden" id="interval_length" name="interval_length" value="{interval_length}" />
+      <input type="hidden" id="startDate" name="startDate" value="{startDate}" />
+      <input type="hidden" id="totalOccurrences" name="totalOccurrences" value="{totalOccurrences}" />
+      <input type="hidden" id="trialOccurrences" name="trialOccurrences" value="{trialOccurrences}" />
+      <input type="hidden" id="trialAmount" name="trialAmount" value="{trialAmount}" />
+      <input type="hidden" id="amount" name="amount" value="{amount}" />
+      <input type="hidden" id="custom" name="custom" value="{custom}" />
+      <input type="hidden" id="interval_unit" name="interval_unit" value="{interval_unit}" />
+      {test}
+      <tr>
+        <td class="LabelColCC" align="right">Card Number: </td>
+        <td class="DataColCC" ><input size="27" type="text" id="cardNumber" name="cardNumber" value=""/>
+          *&nbsp;<span class="Comment">(enter number without spaces 
+          or dashes)</span></td>
+      </tr>
+      <tr>
+        <td class="LabelColCC" align="right">Expiration Date: </td>
+        <td class="DataColCC"><select name="month">
+            <option value="01">01</option>
+            <option value="02">02</option>
+            <option value="03">03</option>
+            <option value="04">04</option>
+            <option value="05">05</option>
+            <option value="06">06</option>
+            <option value="07">07</option>
+            <option value="08">08</option>
+            <option value="09">09</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+          </select>
+          <select name="year">
+            <option value=""></option>
+            
+          
+{year_options}
+                      
+          </select>
+          *&nbsp;<span class="Comment">(select month &amp; year)</span></td>
+      </tr>
+      {signup_list}
+      <tr>
+        <td align="right">{description_country} &nbsp;</td>
+        <td>{shiping_country_list}{required_country}</td>
+      </tr>
+      <tr>
+        <td align="right"> {promo}</td>
+      </tr>
+      {code_signup}
+      <tr>
+        <td colspan="2"><div align="center">
+            <input name="terms" id="terms" value="1" type="checkbox">
+            <label for="terms">I accept the <a href="terms.php" target="_blank">terms &amp; conditions</a></label>
+          </div></td>
+      </tr>
+      <tr>
+        <td colspan="2"><div align="center">
+          {captcha}</td>
+      </tr>
+      {arp_fields}
+      <tr>
+        <td><div align="right">*</div>
+          <br></td>
+        <td width="332">Denotes required</td>
+      </tr>
+      <tr>
+        <td><div align="right">
+            <input name="Submit" value="Submit" type="button" onclick="all_fields();{request}{request_email}{form2items}">
+          </div></td>
+        <td><br></td>
+      </tr>
+    </table>
+  </form>
+</div>
+<div align="center" id="div_wait" name="div_wait" style="display:none"> <strong>Please wait while your information is being processed ...</strong><br />
+  <br />
+  <br />
+  <img src="images/wait.gif" /><br />
+  <br />
+</div>
+{form2} 

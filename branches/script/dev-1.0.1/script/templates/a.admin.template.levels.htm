@@ -1,0 +1,52 @@
+<style type="text/css">
+<!--
+.style1 {
+	font-size: 13px;
+	font-weight: bold;
+}
+-->
+</style>
+<h4>Affiliates levels:</h4>
+<table width="739" border="0" align="center" cellpadding="6" cellspacing="0" class="box2">
+  <td align="left" valign="top"><p align="center"><span class="style1"><a href="a.adm.main.php">BACK TO MAIN AFFILIATE PAGE</a></span><br>
+      </p></td>
+  </tr>
+</table>
+<form name="form3" method="post" action="a.aff.levels.php?action=save_levels">
+  <table align="center" border="0" cellspacing="1" cellpadding="1">
+    <tr align="left" valign="middle" >
+      <td height="20" bgcolor="#CCCCCC"><h5>LEVEL</h5></td>
+      <td bgcolor="#CCCCCC"><h5>VALUE</h5></td>
+      <td bgcolor="#CCCCCC"><h5>TYPE</h5></td>
+    </tr>
+    {rows}
+  </table>
+  <div align="center"><br>
+    <input type="submit" name="Submit3" value="Save all modified">
+  </div>
+</form>
+<br>
+<table width="339" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="171" height="23"><form name="form1" method="post" action="a.aff.levels.php?action=add_aff">
+        <div align="center">
+          <input name="value" type="text" id="value">
+          <br>
+          <select name="type" id="type">
+            <option value="0" selected>Percent</option>
+            <option value="1">Flat Amount</option>
+          </select>
+          <br>
+          <input type="submit" name="Submit" value="Add level {add}">
+          <input name="add" type="hidden" id="add" value="{add}">
+        </div>
+      </form></td>
+    <td width="168"><form name="form2" method="post" action="a.aff.levels.php?action=delete_aff">
+        <div align="center">
+          <input name="delete" type="hidden" id="delete" value="{delete}">
+          <input type="submit" name="Submit2" value="Delete level {delete}">
+        </div>
+      </form></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
