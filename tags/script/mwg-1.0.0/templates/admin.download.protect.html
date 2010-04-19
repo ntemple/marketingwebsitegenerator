@@ -1,0 +1,72 @@
+<h2 style="color:#076C9F">Protect Your Downloads:</h2>
+<p>Warning: The php.ini usually allows to upload a file of 2 MegaBytes, so if you need to upload a bigger file please upload it manually using your ftp</p>
+<p>To protect your downloads from unwanted downloaders we can create a php files that downloads the file for the member while checking if he is logged in and has the proper membership. Another safety measure is that the filename that the member downloads can be made different then the real one. Please take care when inserting the filename for the member to have the same extension as the original file. When using this protection system the files will be uploaded to the folder <em>download</em> on your server. Because of this you have to chmod the folder <em>download</em> to 777. In case you cannot or your hosting is not allowing you to chmod the folder, upload the file manually and click on the &quot;Select file&quot; link in the add new protected download form, that will open a window which will show you a current list of files located in the <em>download</em> folder. Click on the file you want to protect and it's name will be filled in the right textbox automatically. For the php file that will download the file you must have the root folder of the script changed with chmod 777, if again you cannot do that simply check the checkbox that says file will be created manually and set everything else up. Once you add the new protected download you will get the code that needs to be inserted int o the php file and the name it must have. You can then create the file manually and upload it to the root folder of the script. After everything is done simply copy the code from the textbox that says: &quot;Add this html code to the page template where you want the member to click to download or get access to the product or service&quot; and paste it in your html file where you want your download link to appear.</p>
+<h3>Currently Protected Downloads </h3>
+<form id="form2" name="form2" method="post" action="">
+  {protected_list}
+</form>
+<p>&nbsp;</p>
+<h2>Add a new protected download</h2>
+<a name="add"></a>
+<form action="do.add.downloadprotect.php" method="post" enctype="multipart/form-data" name="form1" id="form1">
+  <table width="742" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="322">Protect File:</td>
+      <td width="420"><input type="file" name="file" /></td>
+    </tr>
+    <tr>
+      <td colspan="2">This is the file that will be uploaded to your server from your local computer. </td>
+    </tr>
+    <tr>
+      <td colspan="2">Or select a already uploaded file (the file needs to be in the download folder on your server) </td>
+    </tr>
+    <tr>
+      <td>Already Uploaded File </td>
+      <td><input name="serverfile" type="text" id="serverfile" />
+        <a href="#add" onClick="window.open('select.protect.file.php','','width=300, height=200, scrollbars=yes')"> Select file </a></td>
+    </tr>
+    <tr>
+      <td height="9" colspan="2"><hr height=1 /></td>
+    </tr>
+    <tr>
+      <td>Protect Link: </td>
+      <td><input name="link" type="text" id="link" /></td>
+    </tr>
+    <tr>
+      <td colspan="2">The name for the php file that will handle the download of the file. i.e. downloadgold (do not add the php, we will add it for you) </td>
+    </tr>
+    <tr>
+      <td>Create file manually </td>
+      <td><input name="createmanually" type="checkbox" id="createmanually" value="1" /></td>
+    </tr>
+    <tr>
+      <td colspan="2">If you select this checkbox you will have to manually create the file you inserted above. Once the protect link will be created you will be given the php code that needs to be inserted in the new file. The new file needs to be added to the root folder of your site. </td>
+    </tr>
+    <tr>
+      <td height="9" colspan="2"><hr height=1 /></td>
+    </tr>
+    <tr>
+      <td>File Name for User: </td>
+      <td><input name="memberfile" type="text" id="memberfile" /></td>
+    </tr>
+    <tr>
+      <td colspan="2">This is the filename the member will be promted to download. For example if the archieve of you product is softwareaabbcc.zip and you enter in the above box software1.11.zip the member will be prompted to download software1.11.zip. Please make sure you put the same extension for this file as the real file so if the download is .pdf the file for the user must be .pdf too. </td>
+    </tr>
+    <tr>
+      <td>Membership of the member:</td>
+      <td><select name="membership_id" id="membership_id">
+          
+	  {membership_list}
+      
+        </select></td>
+    </tr>
+    <tr>
+      <td colspan="2">This describes the membership a member must have in order to be able to download the file. </td>
+    </tr>
+    <tr>
+      <td colspan="2"><div align="center">
+          <input type="submit" name="Submit" value="Add new" />
+        </div></td>
+    </tr>
+  </table>
+</form>
