@@ -1,22 +1,27 @@
 <?php
-/*
-  @var t TemplateEx
-*/
-
-//  require_once('bmgenstaller.class.php');
-//  $gs = BMGenStaller::getInstance();
+/**
+ * @version    $Id$
+ * @package    MWG
+ * @copyright  Copyright (C) 2010 Intellispire, LLC. All rights reserved.
+ * @license    GNU/GPL v2.0, see LICENSE.txt
+ *
+ * Marketing Website Generator is free software.
+ * This version may have been modified pursuant
+ * to the GNU General Public License, and as distributed it includes or
+ * is derivative of works licensed under the GNU General Public License or
+ * other free or open source software licenses.
+ * See COPYRIGHT.php for copyright notices and details.
+ */
 
   define('_MWG', true);
   include('inc.all.php');
   include('inc.top.php');
 
   $gs = BMGenStaller::getInstance();
+  $t->set_root(GENSTALL_BASEPATH . '/admin/templates');  
 
-  # Extend internal classes
-  $tmpl = new TemplateEx();
-  $tmpl->init($t);
   // $tmpl->addpath(BMGHelper::path(GENSTALL_BASEPATH . '/templates'));
-  $t = $tmpl;
+  // $t = $tmpl;
 
   // Determine master template
   // in inc.bottom.php

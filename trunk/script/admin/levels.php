@@ -27,7 +27,7 @@
 	$t->set_file("secondpayment", "admin.tiers.secondpayment.html");
 	$t->set_file("masspayment", "admin.tiers.masspay.html");
 	$t->set_file("membership", "admin.tiers.membership.html");
-	FFileRead("../templates/admin.levels.item.split.html", $levels_split);
+	FFileRead("templates/admin.levels.item.split.html", $levels_split);
 	$t->set_var("currency", get_setting('paypal_currency'));
 	$query="select * from levels group by product_id";
 	$q->query($query);

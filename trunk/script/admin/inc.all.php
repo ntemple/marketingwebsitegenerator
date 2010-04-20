@@ -57,7 +57,7 @@ class CDb extends DB_Sql
 		var $Password=DB_PASSWORD;
 		function haltmsg($msg)
 		{
-			$t = new Template("../templates", "keep");
+			$t = new Template("templates", "keep");
 			$t->set_file("error", "error.html");
 			if (DEBUG_TYPE=="browser" || DEBUG_TYPE=="be")
 			{
@@ -67,7 +67,7 @@ class CDb extends DB_Sql
 			else
 			if (DEBUG_TYPE=="email" || DEBUG_TYPE=="be")
 			{
-				@mail(EM_SEND_DB_ERR, SITENAME." Mysql Error", "Database error: $msg<br><b>MySQL Error</b>:".$this->Errno." ".$this->Error, "From: ".SITENAME."<noreply@noreply.com>");
+				mwg_mail(EM_SEND_DB_ERR, SITENAME." Mysql Error", "Database error: $msg<br><b>MySQL Error</b>:".$this->Errno." ".$this->Error, "From: ".SITENAME."<noreply@noreply.com>");
 				$t->set_var("sitename", SITENAME);
 				
 			}
@@ -76,7 +76,7 @@ class CDb extends DB_Sql
 		}
 	}
 	
-	$t = new Template("../templates", "keep");
+	$t = new Template("templates", "keep");
 	require_once("../lib/inc.general.functions.php");
 	require_once("../config/constants.php");
 	define("SITENAME", get_setting("site_name")); // the name of the site as will be replaced in all {sitename} instances

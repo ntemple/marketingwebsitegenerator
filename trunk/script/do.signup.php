@@ -522,17 +522,17 @@ if ($aim_in_use && isset($cardNumber) && $cardNumber=='' && get_setting('free_si
 				//race end
 				//arp
 				if (get_setting('enable_arp') == 1 && get_setting('arp_in_use_type') == 2) {
-					@mail(get_setting("arp_email"), email_replace2(get_setting("arp_message_subject"), $member_id), email_replace2(get_setting("arp_message_body"), $member_id), "From: ".$first_name." <".$email.">");
+					mwg_mail(get_setting("arp_email"), email_replace2(get_setting("arp_message_subject"), $member_id), email_replace2(get_setting("arp_message_body"), $member_id), "From: ".$first_name." <".$email.">");
 				}
 				if (get_setting('send_welcome_emails') == 1 && get_setting("cut_signup") != 1) {
-					@mail($email, email_replace(get_setting("welcome_email_subject"), $email, $first_name, $last_name, $password), email_replace(get_setting("welcome_email_body"), $email, $first_name, $last_name, $password), "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">");
+					mwg_mail($email, email_replace(get_setting("welcome_email_subject"), $email, $first_name, $last_name, $password), email_replace(get_setting("welcome_email_body"), $email, $first_name, $last_name, $password), "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">");
 				}
 				if (get_setting('activation_email') == 1 && get_setting('activation_email_type') == 1) {
 					$emailsubject = get_setting("activation_email_subject");
 					$emailsubject = str_replace("{activation_link}", get_setting("site_full_url")."activate.php?code=".$activationcode, $emailsubject);
 					$emailbody = get_setting("activation_email_body");
 					$emailbody = str_replace("{activation_link}", get_setting("site_full_url")."activate.php?code=".$activationcode, $emailbody);
-					@mail($email, email_replace2($emailsubject, $member_id), email_replace2($emailbody, $member_id), "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">");
+					mwg_mail($email, email_replace2($emailsubject, $member_id), email_replace2($emailbody, $member_id), "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">");
 				}
 				if (get_setting("referral_email") == 1) {
 					if ($_COOKIE["aff"] != '') {
@@ -558,7 +558,7 @@ if ($aim_in_use && isset($cardNumber) && $cardNumber=='' && get_setting('free_si
 						}
 						$emailbody = str_replace("{member_details}", $member_details, $emailbody);
 						$emailbody = str_replace("[sitename]", get_setting("site_name"), $emailbody);
-						@mail($email, $emailsubject, $emailbody, "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">");
+						mwg_mail($email, $emailsubject, $emailbody, "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">");
 					}
 				}
 				

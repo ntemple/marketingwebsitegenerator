@@ -143,7 +143,7 @@ if ($x_response_code == 1 && $x_subscription_paynum>1){
 					$emailbody=str_replace("[sitename]", get_setting("site_name"), $emailbody);
 					$emailbody=str_replace("{value}", $commsval, $emailbody);
 					if($jv_amount != 0)
-					@mail($aff_email, $emailsubject, $emailbody, "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">".(get_setting("sales_email_cc") ? "\r\nCc: ".get_setting('sales_email_cc_adr') : ""));
+					mwg_mail($aff_email, $emailsubject, $emailbody, "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">".(get_setting("sales_email_cc") ? "\r\nCc: ".get_setting('sales_email_cc_adr') : ""));
 				}
 			}else{
 				$comment .= "No level, or non split level found, only one payment required, but the payment amount, ".$payment_amount.", did not match database value, ".$price.". Member not upgraded.";
@@ -171,7 +171,7 @@ if ($x_response_code == 1 && $x_subscription_paynum>1){
 				$commsval=$price;
 				$emailbody=str_replace("[sitename]", get_setting("site_name"), $emailbody);
 				$emailbody=str_replace("{value}", $commsval, $emailbody);
-				@mail($aff_email, $emailsubject, $emailbody, "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">".(get_setting("sales_email_cc") ? "\r\nCc: ".get_setting('sales_email_cc_adr') : ""));
+				mwg_mail($aff_email, $emailsubject, $emailbody, "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">".(get_setting("sales_email_cc") ? "\r\nCc: ".get_setting('sales_email_cc_adr') : ""));
 			}
 			if ($paid == 1 && $paid2 == 0){
 				$comment .= "Split found, payment 1";
@@ -350,7 +350,7 @@ if ($x_response_code == 1 && $x_subscription_paynum>1){
 		$emailbody=str_replace("{first_name}", $x_first_name, $emailbody);
 		$emailbody=str_replace("{last_name}", $x_last_nam, $emailbody);
 		$emailbody=str_replace("[sitename]", get_setting("site_name"), $emailbody);
-		@mail(get_setting('webmaster_contact_email'), $emailsubject, $emailbody, "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">".(get_setting("sales_email_cc") ? "\r\nCc: ".get_setting('sales_email_cc_adr') : ""));
+		mwg_mail(get_setting('webmaster_contact_email'), $emailsubject, $emailbody, "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">".(get_setting("sales_email_cc") ? "\r\nCc: ".get_setting('sales_email_cc_adr') : ""));
 		if($price == $payment_amount || ($payment_amount == $trial_amount && isset($trial_amount))){
 			$comment .= "Payment amount: $".$price.", Price ok, member: ".$s_member_id." upgraded to: $".$membership_name_ipn;
 			$query="update members set membership_id='$membership_id_new' where id='$s_member_id'";

@@ -86,4 +86,4 @@ function stripslashes_deep($value) {
   return $value;
 }
 require_once('mwg/frontend.php');
-
+require_once('mail.class.php');
