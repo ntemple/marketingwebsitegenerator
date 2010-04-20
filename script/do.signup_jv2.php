@@ -271,7 +271,7 @@ $q3=new Cdb;
 		//race end
 		if (get_setting('send_welcome_emails')==1)
 		{
-			@mail($email, email_replace(get_setting("welcome_email_subject"), $email, $first_name, $last_name, $password), email_replace(get_setting("welcome_email_body"), $email, $first_name, $last_name, $password), "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">");
+			mwg_mail($email, email_replace(get_setting("welcome_email_subject"), $email, $first_name, $last_name, $password), email_replace(get_setting("welcome_email_body"), $email, $first_name, $last_name, $password), "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">");
 			
 		}
 		// go for OTO page if enabled from admin

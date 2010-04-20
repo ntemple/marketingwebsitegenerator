@@ -32,6 +32,14 @@ packages. Please refer to the specific files and/or packages for more detailed i
 about the authors, copyright notices, and licenses.
 ---------------------------------------------------------------------------------------------
 
+PHPMailer
+--------
+Author: Andy Prevost (codeworxtech)
+Copyright: (c) 2004-2009, Andy Prevost. All Rights Reserved.               |
+Copyright: (c) 2001-2003, Brent R. Matzelle                     
+License: GNU/LGPL 2.1
+Link:  http://phpmailer.worxware.com/
+
 Butterfly Source
 -------
 Author:		Mike Filsaime, Inc

@@ -16,4 +16,4 @@ license: GPLv2
 credits: 0
 iversion: 1
 support: NONE
-menu: Addons
+menu: Extensions

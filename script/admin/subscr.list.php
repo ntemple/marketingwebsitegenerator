@@ -19,7 +19,7 @@
 	$q3=new CDB;
 	$q4=new CDB;
 	$t->set_file("content", "admin.subscr.list.html");
-	ffileread("../templates/admin.subscr.list.row.html",$row);
+	ffileread("templates/admin.subscr.list.row.html",$row);
 if($search>0){
 	$q2->query("SELECT member_id,product_id,subscriber_id,cancelated FROM session WHERE subscriber_id='$search'");
 	$q2->next_record();

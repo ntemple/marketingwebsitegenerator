@@ -14,18 +14,20 @@
  */
 
 
-// functions for settings table
-function get_setting($setting_name)
+function get_setting($setting_name, $default = null)
 {
 	$q=new Cdb;
+  
 	$query="select value from settings where name='$setting_name'";
 	$q->query($query);
-	if ($q->nf()==0) return -1; // cannot find the setting in table
-	
+	if ($q->nf()==0) return $default; // cannot find the setting in table
+
 	$q->next_record();
-	
-	return stripslashes($q->f("value")); // return setting value
+  
+  $value = stripslashes($q->f('value')); // Why is stripslashes needed?
+  return $value;
 }
+
 function get_signup_setting($setting_name)
 {
 	$q=new Cdb;
@@ -162,7 +164,7 @@ function error_halt($error_str, $t)
 			else
 			if (DEBUG_TYPE=="email" || DEBUG_TYPE=="be")
 			{
-				@mail(EM_SEND_DB_ERR, SITENAME." Mysql Error",  $error_str, "From: ".SITENAME."<noreply@noreply.com>");
+				mwg_mail(EM_SEND_DB_ERR, SITENAME." Mysql Error",  $error_str, "From: ".SITENAME."<noreply@noreply.com>");
 			}
 	die("<br>Script execution halted.");
 }
