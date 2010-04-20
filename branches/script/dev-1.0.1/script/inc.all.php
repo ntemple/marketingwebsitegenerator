@@ -89,7 +89,7 @@ class CDb extends DB_Sql
     else
       if (DEBUG_TYPE=="email" || DEBUG_TYPE=="be")
       {
-        @mail(EM_SEND_DB_ERR, SITENAME." Mysql Error", "Database error: $msg<br><b>MySQL Error</b>:".$this->Errno." ".$this->Error, "From: ".SITENAME."<noreply@noreply.com>");
+        mwg_mail(EM_SEND_DB_ERR, SITENAME." Mysql Error", "Database error: $msg<br><b>MySQL Error</b>:".$this->Errno." ".$this->Error, "From: ".SITENAME."<noreply@noreply.com>");
         $t->set_var("sitename", SITENAME);
 
       }

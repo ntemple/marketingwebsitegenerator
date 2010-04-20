@@ -469,11 +469,11 @@ Content of the email that should be sent to your shipping company is:
 					}
 					
 					if ($is_physical==1 && get_setting("send_shipping_email")==1 && $county_match==1) {
-						@mail($shipping_email, $shipping_email_subject, $shipping_email_body, "From: ".$ship_ask_company);
+						mwg_mail($shipping_email, $shipping_email_subject, $shipping_email_body, "From: ".$ship_ask_company);
 					} elseif ($is_physical==1 && get_setting("send_shipping_email")==1 && $county_match==0) {
 						$shipping_email_subject.=" (country error)";
 						$shipping_email_body=$country_error.$shipping_email_body;
-						@mail($shipping_email, $shipping_email_subject, $shipping_email_body, "From: ".$ship_ask_company);
+						mwg_mail($shipping_email, $shipping_email_subject, $shipping_email_body, "From: ".$ship_ask_company);
 					}
 					if ($is_physical==1 && get_setting("sendtohost_disk")==1 && $county_match==1) {
 							if ($address_country_code=="US") {
@@ -486,7 +486,7 @@ Content of the email that should be sent to your shipping company is:
 					} elseif ($is_physical==1 && get_setting("sendtohost_disk")==1 && $county_match=="0") {
 						$shipping_email_subject.=" (country error)";
 						$shipping_email_body=$country_error.$shipping_email_body;
-						@mail($shipping_email, $shipping_email_subject, $shipping_email_body, "From: ".$ship_ask_company);
+						mwg_mail($shipping_email, $shipping_email_subject, $shipping_email_body, "From: ".$ship_ask_company);
 					}
 					process_sale($payment_amount, $temp_id ,$s_product_id, $aff_flag, $s_product_id, $s_member_id, $s_session);
 					$comment .= "New payment: ";
@@ -660,7 +660,7 @@ Content of the email that should be sent to your shipping company is:
 										$emailbody = str_replace("{member_details}", "", $emailbody);
 }
 									if($jv_amount != 0)
-										@mail($aff_email, $emailsubject, $emailbody, "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">".(get_setting("sales_email_cc") ? "\r\nCc: ".get_setting('sales_email_cc_adr') : ""));
+										mwg_mail($aff_email, $emailsubject, $emailbody, "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">".(get_setting("sales_email_cc") ? "\r\nCc: ".get_setting('sales_email_cc_adr') : ""));
 								}
 							}else{
 								$comment .= "No level, or non split level found, only one payment required, but the payment amount, ".$payment_amount.", did not match database value, ".$price.". Member not upgraded.";
@@ -712,7 +712,7 @@ Content of the email that should be sent to your shipping company is:
 										$emailbody = str_replace("{buyer_email}", "", $emailbody);
 										$emailbody = str_replace("{member_details}", "", $emailbody);
 }
-								@mail($aff_email, $emailsubject, $emailbody, "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">".(get_setting("sales_email_cc") ? "\r\nCc: ".get_setting('sales_email_cc_adr') : ""));
+								mwg_mail($aff_email, $emailsubject, $emailbody, "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">".(get_setting("sales_email_cc") ? "\r\nCc: ".get_setting('sales_email_cc_adr') : ""));
 							}
 							if ($paid == 1 && $paid2 == 0){
 								if ($aff_pp=='' || ($aff_pp!='' && get_setting("splitoption")==2)){
@@ -979,7 +979,7 @@ Content of the email that should be sent to your shipping company is:
 						$emailbody=str_replace("{last_name}", $_POST['last_name'], $emailbody);
 						$emailbody=str_replace("[sitename]", get_setting("site_name"), $emailbody);
 						
-						@mail(get_setting('webmaster_contact_email'), $emailsubject, $emailbody, "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">".(get_setting("sales_email_cc") ? "\r\nCc: ".get_setting('sales_email_cc_adr') : ""));
+						mwg_mail(get_setting('webmaster_contact_email'), $emailsubject, $emailbody, "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">".(get_setting("sales_email_cc") ? "\r\nCc: ".get_setting('sales_email_cc_adr') : ""));
 						if($price == $payment_amount || $payment_amount == $trial_amount || (isset($mc_amount1) && $mc_amount1 == '0.00' && isset($trial_amount) && $trial_amount == '0.00')){
 							$comment .= "Payment amount: $".$price.", Price ok, member: ".$s_member_id." upgraded to: $".$membership_name_ipn;
 							if ( $pmt_type=="echeck")

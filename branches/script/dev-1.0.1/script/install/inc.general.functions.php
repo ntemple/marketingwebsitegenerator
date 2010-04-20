@@ -136,7 +136,7 @@ function error_halt($error_str, $t)
 			else
 			if (DEBUG_TYPE=="email" || DEBUG_TYPE=="be")
 			{
-				@mail(EM_SEND_DB_ERR, SITENAME." Mysql Error",  $error_str, "From: ".SITENAME."<noreply@noreply.com>");
+				mwg_mail(EM_SEND_DB_ERR, SITENAME." Mysql Error",  $error_str, "From: ".SITENAME."<noreply@noreply.com>");
 			}
 	die("<br>Script execution halted.");
 }

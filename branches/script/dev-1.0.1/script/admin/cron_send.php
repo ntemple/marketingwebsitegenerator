@@ -38,7 +38,7 @@
 		$date_del=time()+(24*60*60*3);
 		$query="DELETE FROM pending WHERE subject='already sent' AND body>'$date_del'";
 		$q2->query($query);
-		@mail($to_email, $subject, $body, "From: ".$header);
+		mwg_mail($to_email, $subject, $body, "From: ".$header);
 		
 	}
 ?>
