@@ -157,16 +157,18 @@ class MWG {
   // inc.functions.php in order to preserve the integrity of
   // the system. 
   function getMenu($type = 'list') {
-    global $sess_id;
+    global $sess_id, $membership_id;
 
     $db = $this->getDb();
 
     if (isset($sess_id)) {
-      $category = 'members';
+      $items = generate_main_menu_list('members', $membership_id);      
     } else {
-      $category = 'main';
+      $items = generate_main_menu_list('main');      
     }
-
+    
+    $list = _render_menu_list($items);
+/*
     $mitems = $db->get_results('select * from menus where menu_category=? and active=1
     order by position asc, id asc', $category, 1);
     #    print_r($mitems);
@@ -177,7 +179,7 @@ class MWG {
       $array[] = $link;
     }
     $list = "<ul>\n$list</ul>\n";
-
+*/
     switch ($type) {
       case 'list': print $list; break;
       default: return $array;
