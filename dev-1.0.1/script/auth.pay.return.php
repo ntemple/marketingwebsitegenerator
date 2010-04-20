@@ -155,7 +155,7 @@ if ($product_id){
 					$emailbody=str_replace("{value}", $commsval, $emailbody);
 					
 					if($jv_amount != 0)
-						@mail($aff_email, $emailsubject, $emailbody, "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">".(get_setting("sales_email_cc") ? "\r\nCc: ".get_setting('sales_email_cc_adr') : ""));
+						mwg_mail($aff_email, $emailsubject, $emailbody, "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">".(get_setting("sales_email_cc") ? "\r\nCc: ".get_setting('sales_email_cc_adr') : ""));
 					
 				}
 				if (get_setting("enable_oto_paid_signup") == 1 && get_setting("enable_oto_1")){
@@ -270,7 +270,7 @@ if ($product_id){
 					$emailbody=str_replace("[sitename]", get_setting("site_name"), $emailbody);
 					$emailbody=str_replace("{value}", $commsval, $emailbody);
 					if($jv_amount != 0){
-						@mail($aff_email, $emailsubject, $emailbody, "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">".(get_setting("sales_email_cc") ? "\r\nCc: ".get_setting('sales_email_cc_adr') : ""));
+						mwg_mail($aff_email, $emailsubject, $emailbody, "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">".(get_setting("sales_email_cc") ? "\r\nCc: ".get_setting('sales_email_cc_adr') : ""));
 					}
 				}
 			die ("<a href='".get_setting('site_full_url')."continue.php'>Continue to the site</a>");

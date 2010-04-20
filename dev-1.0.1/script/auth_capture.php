@@ -256,7 +256,7 @@ if ($auth_check_result){
 			$emailbody=str_replace("[sitename]", get_setting("site_name"), $emailbody);
 			$emailbody=str_replace("{value}", $commsval, $emailbody);
 			if($jv_amount != 0){
-				@mail($aff_email, $emailsubject, $emailbody, "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">".(get_setting("sales_email_cc") ? "\r\nCc: ".get_setting('sales_email_cc_adr') : ""));
+				mwg_mail($aff_email, $emailsubject, $emailbody, "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">".(get_setting("sales_email_cc") ? "\r\nCc: ".get_setting('sales_email_cc_adr') : ""));
 			}
 		}
 		if ($product_nid == "OTO2" || $product_nid == "OTO2_BCK") $extra ="?no=3";
@@ -360,7 +360,7 @@ if ($auth_check_result){
 			$emailbody=str_replace("[sitename]", get_setting("site_name"), $emailbody);
 			$emailbody=str_replace("{value}", $commsval, $emailbody);
 			if($jv_amount != 0){
-				@mail($aff_email, $emailsubject, $emailbody, "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">".(get_setting("sales_email_cc") ? "\r\nCc: ".get_setting('sales_email_cc_adr') : ""));
+				mwg_mail($aff_email, $emailsubject, $emailbody, "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">".(get_setting("sales_email_cc") ? "\r\nCc: ".get_setting('sales_email_cc_adr') : ""));
 			}
 		}
 		header("location: continue.php");

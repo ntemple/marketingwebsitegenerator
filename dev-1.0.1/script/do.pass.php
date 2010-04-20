@@ -35,7 +35,7 @@ if (get_setting("cut_signup")==1)
 			if (get_setting('send_welcome_emails')==1 )
 				{
 				$q->query("SELECT * FROM members WHERE id='$member_id'");
-				@mail($q->f("email"), email_replace(get_setting("welcome_email_subject"), $q->f("email"), $q->f("first_name"), $q->f("last_name"), $pass), email_replace(get_setting("welcome_email_body"), $q->f("email"), $q->f("first_name"), $q->f("last_name"), $pass), "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">");
+				mwg_mail($q->f("email"), email_replace(get_setting("welcome_email_subject"), $q->f("email"), $q->f("first_name"), $q->f("last_name"), $pass), email_replace(get_setting("welcome_email_body"), $q->f("email"), $q->f("first_name"), $q->f("last_name"), $pass), "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">");
 				}
 			header("location:member.area.in.php");
 			die();

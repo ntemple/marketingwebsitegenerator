@@ -59,7 +59,7 @@ switch($validate)
 					$body=$value2;
 					$subject=str_replace("[FIRSTNAME]", $namex1, $subject);
 					$body=str_replace("[FIRSTNAME]", $namex1, $body);
-					@mail($emailx1, stripslashes($subject), stripslashes($body), "From: $name<$email>");
+					mwg_mail($emailx1, stripslashes($subject), stripslashes($body), "From: $name<$email>");
 					
 				}
 				if ($namex2!="" && $emailx2!="")
@@ -68,7 +68,7 @@ switch($validate)
 					$body=$value2;
 					$subject=str_replace("[FIRSTNAME]", $namex2, $subject);
 					$body=str_replace("[FIRSTNAME]", $namex2, $body);
-					@mail($emailx2, stripslashes($subject), stripslashes($body), "From: $name<$email>");
+					mwg_mail($emailx2, stripslashes($subject), stripslashes($body), "From: $name<$email>");
 				}
 				if ($namex3!="" && $emailx3!="")
 				{
@@ -76,7 +76,7 @@ switch($validate)
 					$body=$value2;
 					$subject=str_replace("[FIRSTNAME]", $namex3, $subject);
 					$body=str_replace("[FIRSTNAME]", $namex3, $body);
-					@mail($emailx3, stripslashes($subject), stripslashes($body), "From: $name<$email>");
+					mwg_mail($emailx3, stripslashes($subject), stripslashes($body), "From: $name<$email>");
 				}
 				if ($namex4!="" && $emailx4!="")
 				{
@@ -84,7 +84,7 @@ switch($validate)
 					$body=$value2;
 					$subject=str_replace("[FIRSTNAME]", $namex4, $subject);
 					$body=str_replace("[FIRSTNAME]", $namex4, $body);
-					@mail($emailx4, stripslashes($subject), stripslashes($body), "From: $name<$email>");
+					mwg_mail($emailx4, stripslashes($subject), stripslashes($body), "From: $name<$email>");
 				}
 				if ($namex5!="" && $emailx5!="")
 				{
@@ -92,7 +92,7 @@ switch($validate)
 					$body=$value2;
 					$subject=str_replace("[FIRSTNAME]", $namex5, $subject);
 					$body=str_replace("[FIRSTNAME]", $namex5, $body);
-					@mail($emailx5, stripslashes($subject), stripslashes($body), "From: $name<$email>");
+					mwg_mail($emailx5, stripslashes($subject), stripslashes($body), "From: $name<$email>");
 				}
 				header("location: member.area.promo.tools.php");
 	break;
