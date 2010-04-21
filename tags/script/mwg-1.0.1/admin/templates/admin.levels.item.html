@@ -1,0 +1,36 @@
+<tr>
+  <td><table width="100%" cellspacing="0" cellpadding="0" style="border:thin; border-style:solid; border-color:#000066">
+      <tr>
+        <td width="200" colspan="5" bgcolor=#ECFFFF>Level: <strong>{level} </strong>for product: <strong>{product_name_l}</strong></td>
+      </tr>
+      <tr>
+        <td width="200" colspan="5" bgcolor=#ECFFFF>This is the way <strong>{membership_name}</strong> members are paid:</td>
+      </tr>
+      <tr>
+        <td width="200" colspan="5"  bgcolor="#ECFFFF"><strong>First payment</strong></td>
+      </tr>
+      <tr>
+        <td width="200">Value {currency} or %:</td>
+        <td width="100"><input name="value[{level_id}]" type=text value="{level_value}" size="5">
+          <strong>{paytype}</strong></td>
+        <td width="200">Pay Affiliates:</td>
+        <td colspan="2"><strong>{paymode}</strong></td>
+      </tr>
+      <tr>
+        <td width="200">JV1 Amount/Percentage:</td>
+        <td width="100"><input name="jv1[{level_id}]" type=text value="{level_jv1}" size="5">
+          {paytype}</td>
+        <td width="200">JV2 Amount/Percentage:</td>
+        <td width="100"><input name="jv2[{level_id}]" type=text value="{level_jv2}" size="5">
+          {paytype}</td>
+        <td><a href="do.delete.level.php?id={level_id}">Delete</a></td>
+      </tr>
+      <tr>
+        <td colspan="5">{highcoms}</td>
+      </tr>
+      {levels_split}
+    </table></td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+</tr>
