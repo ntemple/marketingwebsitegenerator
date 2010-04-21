@@ -119,7 +119,7 @@
     foreach ($items as $item) {
       $menu .= "<li>" ._render_link($item) . "</li>\n";
     }
-    $menu = "<ul>\n$menu</li>\n"; 
+    $menu = "<ul>\n$menu</ul>\n"; 
     return $menu;
   }
   
