@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<mosinstall type="template" version="1.0.0">
+  <name>siteground109</name>
+  <creationDate>11/2008</creationDate>
+  <author>SiteGround.com</author>
+  <copyright>SG TOS</copyright>
+  <authorEmail>templates@siteground.com</authorEmail>
+  <authorUrl>www.siteground.com</authorUrl>
+  <version>1.0</version>
+  <description>
+This Mambo Template is designed by SiteGround.com and can be used free of charge. The template is suitable for personal and business Mambo sites. It can be used with many popular modules and components for Mambo. At www.siteground.com you can find more great looking free Mambo templates.
+  </description>
+	<files>
+		<filename>index.php</filename>
+		<filename>template_thumbnail.png</filename>
+		<filename>templates.php</filename>
+		<filename>menu.php</filename>
+	</files>
+	<images>
+		<filename>images/arrow.png</filename>
+		<filename>images/bg.png</filename>
+		<filename>images/bg_bottom.png</filename>
+		<filename>images/but_hover.gif</filename>
+		<filename>images/content_bottom.gif</filename>
+		<filename>images/content_gradient.png</filename>
+		<filename>images/content_middle.gif</filename>
+		<filename>images/emailButton.png</filename>
+		<filename>images/footer_bg.gif</filename>
+		<filename>images/h3_bullet.gif</filename>
+		<filename>images/h3_newsflash.png</filename>
+		<filename>images/header.jpg</filename>
+		<filename>images/header_img.jpg</filename>
+		<filename>images/indent1.png</filename>
+		<filename>images/menu_arrow.gif</filename>
+		<filename>images/newsflash.png</filename>
+		<filename>images/pdf_button.png</filename>
+		<filename>images/printButton.png</filename>
+		<filename>images/top_left.png</filename>
+		<filename>images/top_right.png</filename>
+		</images>
+	<css>
+		<filename>css/template_css.css</filename>
+		<filename>css/ie6.css</filename>
+	</css>
+</mosinstall>

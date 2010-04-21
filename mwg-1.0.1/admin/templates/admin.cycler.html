@@ -1,0 +1,44 @@
+<body onLoad="{chck_funtions}">
+<h2 style="color:#076C9F">Multi variable split tester </h2>
+<p>You can add here text that will be cycled on your pages. You have to define what you will cycle on your pages and you will receive a tag to place on them. If you want good statistic with the factors that were in place at the time the make sure you place them on your sales page or your landing page where the members arrive and are sent to signup. </p>
+<form name="form11" method="post" action="activate_cycler.php">
+  Activate the campaign
+  <input type="checkbox" name="activate_cycler" value="1" onClick="document.form11.submit();" {activ_chck}>
+</form>
+{cycle_list}
+<h3>Define new campaign </h3>
+<form name="form2" method="post" action="do.add.new.cycler.php">
+  <table width="500" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>Campaign Name: </td>
+      <td><input name="cycle" type="text" id="cycle"></td>
+    </tr>
+    <tr>
+      <td>The file for wich the campaign is set: </td>
+      <td><select name="file" id="file">
+          <option value="index.php">Index</option>
+          <option value="signup.php">Signup</option>
+          <option value="oto.php">Oto 1</option>
+          <option value="oto_bck.php">Oto Downsell</option>
+          <option value="oto2.php">Oto 2</option>
+          <option value="oto2_bck.php">Oto 2 Downsell</option>
+          <option value="salespage.php">Salespage</option>
+        </select></td>
+    </tr>
+    <tr>
+      <td colspan="2">This defines the campaign name and the tag that you will use in the templates </td>
+    </tr>
+    <tr>
+      <td valign="top">Value:</td>
+      <td><textarea name="text" cols="40" rows="5" id="text"></textarea></td>
+    </tr>
+    <tr>
+      <td colspan="2">This is one of the values the campaign will take. After you add this one you will be able to add more. </td>
+    </tr>
+    <tr>
+      <td colspan="2"><input type="submit" name="Submit1" value="Add new campaign"></td>
+    </tr>
+  </table>
+</form>
+<p>&nbsp;</p>
+</body>
