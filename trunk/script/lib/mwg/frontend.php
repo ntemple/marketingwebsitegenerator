@@ -152,10 +152,13 @@ class MWG {
     return ob_get_clean();
   }
 
-  // MWG NLT TODO:
-  // IMPORTANT: This must be rebuilt based on the functions in
-  // inc.functions.php in order to preserve the integrity of
-  // the system. 
+  /**
+  * Return a list of menu items as raw links 
+  * or unordered list
+  * 
+  * @param mixed $type
+  */
+  
   function getMenu($type = 'list') {
     global $sess_id, $membership_id;
 
@@ -167,22 +170,12 @@ class MWG {
       $items = generate_main_menu_list('main');      
     }
     
-    $list = _render_menu_list($items);
-/*
-    $mitems = $db->get_results('select * from menus where menu_category=? and active=1
-    order by position asc, id asc', $category, 1);
-    #    print_r($mitems);
-    $out = '';
-    foreach ($mitems as $item) {
-      $link = "<a href='{$item[link]}'>{$item[name]}</a>";
-      $list .= "  <li>$link</li>\n";
-      $array[] = $link;
-    }
-    $list = "<ul>\n$list</ul>\n";
-*/
     switch ($type) {
-      case 'list': print $list; break;
-      default: return $array;
+      case 'list':  return _render_menu_list($items); break;
+      default:      foreach ($items as $item) {
+                      $array[] = _render_link($item);
+                    }
+                    return $array;
     }
   }
 
@@ -251,5 +244,14 @@ function plugin_basename($file) {
   $file = preg_replace('#^' . preg_quote($plugin_dir, '#') . '/|^' . preg_quote($mu_plugin_dir, '#') . '/#','',$file); // get relative path from plugins dir
   $file = trim($file, '/');
   return $file;
+}
+
+
+function mwg_check_admin_login() {
+@session_start();
+if (! $_SESSION['admin_sess_id']) {
+  die ("Restricted Access");
+}
+return true;
 }
 
