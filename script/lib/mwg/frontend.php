@@ -21,7 +21,7 @@ requires PHP 5.
 */
 require_once('includes/sbutil.class.php');
 require_once('includes/mysqldb.class.php');
-require_once('mwgregistry.class.php');
+require_once('mwgDataRegistry.class.php');
 require_once('mwgDocument.class.php');
 require_once(MWG_BASE . '/components/themes/modelthemes.class.php');
 
