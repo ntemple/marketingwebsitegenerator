@@ -4,7 +4,7 @@ defined('_MWG') or die ('Restricted Access');
 
 define('UPDATER_SERVER',  'http://www.intellispire.com/network/server51/soap.php');
 define('UPDATER_VERSION', 22);
-define('UPDATER_MANIFEST', BMGHelper::path(GENSTALL_BASEPATH . '/config/manifest.yml.php'));
+define('UPDATER_MANIFEST', MWGHelper::path(GENSTALL_BASEPATH . '/config/manifest.yml.php'));
 
 require_once ('isnclient/utils.inc.php');
 require_once ('isnclient/intellispireNetworkClient.class.php');
@@ -17,7 +17,7 @@ class modelGenstaller {
 
   function getClient() {
 
-    $registry = BMGenRegistry::getInstance();
+    $registry = mwgDataRegistry::getInstance();
 
     if ($this->client) return $client;
 
@@ -38,7 +38,7 @@ class modelGenstaller {
   }
 
   function getInstalledVersion($package) {
-    $registry = BMGenRegistry::getInstance();
+    $registry = mwgDataRegistry::getInstance();
     $extensions =  $registry->findExtensions();
     if (isset($extensions[$package])) {
       $serial = $extensions[$package]['serial'];

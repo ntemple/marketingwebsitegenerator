@@ -4,17 +4,17 @@ defined('_MWG') or die ('Restricted Access');
 
 define('UPDATER_SERVER',  'http://www.intellispire.com/network/server51/soap.php');
 define('UPDATER_VERSION', 22);
-define('UPDATER_MANIFEST', BMGHelper::path(GENSTALL_BASEPATH . '/config/manifest.yml.php'));
+define('UPDATER_MANIFEST', MWGHelper::path(GENSTALL_BASEPATH . '/config/manifest.yml.php'));
 
-require_once (BMGHelper::path(GENSTALL_BASEPATH . '/lib/isnclient/utils.inc.php'));
-require_once (BMGHelper::path(GENSTALL_BASEPATH . '/lib/isnclient/intellispireNetworkClient.class.php'));
-require_once (BMGHelper::path(GENSTALL_BASEPATH . '/lib/isnclient/manifest.class.php'));
+require_once (MWGHelper::path(GENSTALL_BASEPATH . '/lib/isnclient/utils.inc.php'));
+require_once (MWGHelper::path(GENSTALL_BASEPATH . '/lib/isnclient/intellispireNetworkClient.class.php'));
+require_once (MWGHelper::path(GENSTALL_BASEPATH . '/lib/isnclient/manifest.class.php'));
 require_once ('modelgenstaller.class.php');
 
 $c     = new comGenstaller;
 $t->set_var('submenu', $c->submenu);
 
-$task = BMGHelper::_req('t', 'view');
+$task = MWGHelper::_req('t', 'view');
 $func = array($c, $task);
 if (is_callable($func)) {
   call_user_func($func);
@@ -31,7 +31,7 @@ class comGenstaller {
 
   function view($class = '', $msg = '') {
     if ($msg) {
-      BMGHelper::setFlash($class, $msg);
+      MWGHelper::setFlash($class, $msg);
     }
 
     $model = new modelGenstaller();
@@ -39,13 +39,13 @@ class comGenstaller {
     try {
       $manifest = $model->getManifest();
       $items = $manifest->getItems();
-      $registry = BMGenRegistry::getInstance();
+      $registry = mwgDataRegistry::getInstance();
       $extensions =  $registry->findExtensions();
 
       include('admin.genstaller.view.php');
 
     } catch(Exception $e) {
-      BMGHelper::setFlash('alert', $e);
+      MWGHelper::setFlash('alert', $e);
       print "Please try again.";
     }
 
@@ -54,12 +54,7 @@ class comGenstaller {
   function details() {
     $model = new modelGenstaller;
     $manifest = $model->getManifest();
-    $item = $manifest->getItem(BMGHelper::_req('id'));
-
-    // $packagedata = $swl[$package];
-//    print "<pre>\n";
-//    print_r($item);
-//    print "</pre>\n";
+    $item = $manifest->getItem(MWHelper::_req('id'));
   }
 
   function upgrade() {

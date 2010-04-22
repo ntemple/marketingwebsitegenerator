@@ -17,11 +17,11 @@ defined('_MWG') or die( 'Restricted access' );
 
 require_once('isnclient/spyc.php');
 require_once('admin/mwghelper.class.php');
-require_once('mwg/mwgregistry.class.php');
+require_once('mwg/mwgDataRegistry.class.php');
 
 class BMGenStaller {
 
-  /** @var BMGenRegistry */
+  /** @var mwgDataRegistry */
   var $registry = null;
 
   static function getInstance() {
@@ -34,7 +34,7 @@ class BMGenStaller {
   }
 
   private function __construct() {
-    $this->registry = BMGenRegistry::getInstance();
+    $this->registry = mwgRegistry::getInstance();
   }
 
   function getMainMenuItems($selected) {
@@ -86,7 +86,7 @@ function genstall_admin_end($t, $ocontent, $notemplate) {
       $msg = "<div class='warn'>Update found! New Version $latest You are running $current.<br /> <a href='controller.php?c=updates'>Please upgrade now!</a></div>";
     }
   } catch(Exception $e) {
-    BMGHelper::setFlash('alert', "Could not reach update server. Please try again.<br> $e");      
+    MWGHelper::setFlash('alert', "Could not reach update server. Please try again.<br> $e");      
   }
 
 
@@ -111,7 +111,7 @@ function genstall_admin_end($t, $ocontent, $notemplate) {
   $orig_menu = '<a href="logout.php" class="a">Logout</a>';
   $out = str_replace($orig_menu, $orig_menu . "<br>\n" . $new_menu, $out);
 
-  $r = BMGenRegistry::getInstance();
+  $r = mwgDataRegistry::getInstance();
   if ($msg) print "<center><font size='+2'><b>$msg</b></font></center>\n";
   print $out;
 }

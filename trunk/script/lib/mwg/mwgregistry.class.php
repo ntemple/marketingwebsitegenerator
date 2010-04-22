@@ -2,7 +2,7 @@
 defined('_MWG') or die( 'Restricted access' );
 require_once('isnclient/spyc.php');
 
-class BMGenRegistry {
+class mwgDataRegistry {
 
   var $data = null;
   var $path = null;
