@@ -92,7 +92,7 @@
   function generate_main_menu()
   {
     $items = generate_main_menu_list('main');
-    return _render_menu($menu_links);
+    return _render_menu($items);
   }
 
   /**
