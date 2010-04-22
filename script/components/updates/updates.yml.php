@@ -1,19 +1,17 @@
 #<?php die(); ?>
-section: mwg
-identity: mwg.updates
-name: Intellispire Software Installer for Butterfly Marketing
-title: Intellispire Software Installer for Butterfly Marketing
-updatecheck: updates
-serial: 1
-version: 1.0.0
-stability:
-  support: NONE
-  level: Testing
+identity: mwg.component.updates
+name:  MWG Core Updater
+title: MWG Core Updater
+version: 1.0.2
+api:     1.0.2
+iscore:  1.0.2
 compatibility:
-  - bfm
+  - mwg
   - php5
-license: GPLv2
-credits: 0
-iversion: 1
-support: NONE
 menu: Check For Updates
+type: component
+folder: updates
+meta:
+  description: Core Updater for MWG
+  copyright:    (c)2010 Intellispire, LLC
+  license: GPLv2

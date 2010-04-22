@@ -218,7 +218,8 @@ class MWG {
   */
   
   function getHead() {
-    return $this->document->getHead();
+    return '';
+//    return $this->document->getHead();
   }
   /**
   * Get the document title
