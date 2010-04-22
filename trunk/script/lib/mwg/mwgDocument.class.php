@@ -54,7 +54,7 @@ class mwgDocument {
   }
   
   function addJs($path) {
-    $this->head[] = "<script language='Javascript' src='$path' type='text/javascript'></script>";
+    $this->head[] = "<script src='$path' type='text/javascript'></script>";
   }
   
   function addCSS($path) {
@@ -98,6 +98,10 @@ class mwgDocument {
     
     $newbody = implode("\n", $this->before_body_end ) . "</body>";
     $content = str_ireplace('</body>', $newbody, $this->content);
+    
+    $head = $this->getHead();
+    $content = str_ireplace('</head>', "$head</head>", $content);
+
     return $content;
   }
   

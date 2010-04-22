@@ -116,7 +116,7 @@ class modelThemes {
     $mwg = MWG::getInstance();
     
     $tpl->set_var('document_title', $document->getTitle());
-    $tpl->set_var('document_head',  $document->getHead());
+//    $tpl->set_var('document_head',  $document->getHead());
     
     ob_start();
     $tpl->pparse("out", "main"); 
