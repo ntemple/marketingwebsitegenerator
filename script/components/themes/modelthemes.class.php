@@ -107,13 +107,21 @@ class modelThemes {
     switch($theme_type) {
       case 'wordpress': $out = $this->processWordpress(); break;
       case 'joomla':    $out = $this->processJoomla(); break;
-      default:          ob_start();
-                        $tpl->pparse("out", "main"); 
-                        $out = ob_get_clean();
+      default:          $out = $this->processDefault($tpl, MWG::getInstance()->document); break;
     }    
-   
     return $out;
+  }
+  
+  function processDefault(Template $tpl, mwgDocument $document) {
+    $mwg = MWG::getInstance();
     
+    $tpl->set_var('document_title', $document->getTitle());
+    $tpl->set_var('document_head',  $document->getHead());
+    
+    ob_start();
+    $tpl->pparse("out", "main"); 
+    $out = ob_get_clean();
+    return $out;    
   }
 
   function processWordpress() {    

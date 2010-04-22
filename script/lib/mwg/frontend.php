@@ -1,4 +1,18 @@
 <?php
+/**
+* @version    $Id$
+* @package    MWG
+* @copyright  Copyright (C) 2010 Intellispire, LLC. All rights reserved.
+* @license    GNU/GPL v2.0, see LICENSE.txt
+*
+* Marketing Website Generator is free software.
+* This version may have been modified pursuant
+* to the GNU General Public License, and as distributed it includes or
+* is derivative of works licensed under the GNU General Public License or
+* other free or open source software licenses.
+* See COPYRIGHT.php for copyright notices and details.
+*/
+
 // MWG frontend library hooks
 /**
 The main MWG class.  Here to protect ourself from
@@ -8,14 +22,11 @@ requires PHP 5.
 require_once('includes/sbutil.class.php');
 require_once('includes/mysqldb.class.php');
 require_once('mwgregistry.class.php');
+require_once('mwgDocument.class.php');
 require_once(MWG_BASE . '/components/themes/modelthemes.class.php');
 
 // Plugins - we need a plugin manager
 require_once('shortcodes.php');
-$plugins = array(
-'utech-spinning-earth/spinning-earth.php',
-'mwg-shortcodes/mwg-shortcodes.php'
-);
 
 sbutil::$LOG = false;
 sbutil::initLogging(MWG_BASE . '/tmp/app.log');
@@ -24,6 +35,9 @@ sbutil::$print_trace = false;
 
 class MWG {
 
+  /** @var mwgDocument */
+  var $document;
+  
   /** @var Template */
   var $template;  // BFM's template system
 
@@ -48,6 +62,8 @@ class MWG {
 
     $this->theme = new modelThemes($default_theme);
 
+    $this->document = new mwgDocument();
+    
     /* Switcher needs to be in a plugin */
     if (isset($_GET['theme'])) {
       $this->theme->switchThemes($_GET['theme']);      
@@ -131,15 +147,22 @@ class MWG {
   }
 
   function end(Template $tpl) {
-
-    $this->template = $tpl;
     if (defined('SITENAME')) $this->site_name = SITENAME;
 
+    $this->template = $tpl;
+    $this->document->setDefaultDescription($this->tplGet('description'));
+    $this->document->setDefaultKeywords($this->tplGet('keywords'));
+    $this->document->setDefaultTitle(trim($this->tplGet('keywords_title')));
+    $this->document->setDefaultTitle($this->site_name);
+    
     $content = $this->theme->process($tpl);
 
     // Apply shortcode filter
     $content = do_shortcode($content); 
-    print $content;
+
+    // Set the code in the document, and render
+    $this->document->setContent($content);
+    print $this->document->renderDocument();
   }
 
 
@@ -179,35 +202,35 @@ class MWG {
     }
   }
 
+  function tplGet($var) {
+    return $this->template->varvals[$var];
+  }
+
 
   /**
   This should be changed to be page specific. Right now, BFM
   has one title / description / keywords for all pages
   */ 
+  /**
+  * Get the extra head strings from the document
+  * @deprecated 1.1
+  * 
+  */
+  
   function getHead() {
-    $description = $this->tplGet('description');
-    $keywords    = $this->tplGet('keywords');
-
-    $out = "
-    <meta name='description' content='{$description}' />
-    <meta name='keywords' content='{$keywords}' />
-    <xlink href='css/butterfly.css' rel='stylesheet' type='text/css' />
-    <script language='JavaScript' src='js/functions.js'></script>
-    ";
-    return $out;
-
+    return $this->document->getHead();
   }
-
+  /**
+  * Get the document title
+  * @deprecated 1.1
+  * 
+  */
+  
   function getTitle() {
-    $title =  trim($this->tplGet('keywords_title'));
-    if (! $title) $title = $this->site_name;
-    return $title;
-  }
+    return $this->document->getTitle();
+  }         
 
 
-  function tplGet($var) {
-    return $this->template->varvals[$var];
-  }
 
 }
 /*
@@ -247,9 +270,13 @@ function plugin_basename($file) {
 }
 
 
-function mwg_check_admin_login() {
+function mwg_check_admin_login($redirect = false) {
 @session_start();
 if (! $_SESSION['admin_sess_id']) {
+  if ($redirect) 
+  {
+     header("Location: " . MWG_BASEHREF . '/admin/');
+  } 
   die ("Restricted Access");
 }
 return true;

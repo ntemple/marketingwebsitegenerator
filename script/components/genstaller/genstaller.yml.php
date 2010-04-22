@@ -1,19 +1,17 @@
 #<?php die(); ?>
-section: bfm
-identity: bfm.genstaller
-name: Intellispire Software Installer for Butterfly Marketing
-title: Intellispire Software Installer for Butterfly Marketing
-updatecheck: genstaller
-serial: 1
-version: 1.0.0
-stability:
-  support: NONE
-  level: Testing
+identity: mwg.component.genstaller
+name:  MWG Core Installer
+title: MWG Core Installer
+version: 1.0.2
+api:     1.0.2
+iscore:  1.0.2
 compatibility:
-  - bfm
+  - mwg
   - php5
-license: GPLv2
-credits: 0
-iversion: 1
-support: NONE
 menu: Extensions
+type: component
+folder: genstaller
+meta:
+  description: Core Installer for MWG
+  copyright:    (c)2010 Intellispire, LLC
+  license: GPLv2

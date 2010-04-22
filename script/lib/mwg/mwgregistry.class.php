@@ -59,16 +59,19 @@ class BMGenRegistry {
 
   function getMenu($selected = null) {
     $menu = array();
-/*
-    if (@isset ($this->data['menu']) ) {
-      $menu = $this->data['menu'];
-    }
-*/
 
     $ext = $this->findExtensions();
     foreach ($ext as $ident => $e) {
       if (isset($e['menu'])) {
-        $menu[$e['updatecheck']] = $e['menu'];
+        if (isset($e['updatecheck'])) {
+          $folder = $e['updatecheck'];  // @deprecated 1.1
+        } else if (isset($e['folder'])) {
+          $folder = $e['folder'];
+        } else {
+          $folder = ''; 
+        }
+        if ($folder)  
+          $menu[$folder] = $e['menu'];
       }
     }
     return $menu;
