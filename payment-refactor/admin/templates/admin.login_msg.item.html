@@ -1,0 +1,42 @@
+<table width="902" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td colspan="3">Show this message after
+      <input type="text" name="count_{msg}" id="count_{msg}" value="{count}" size="2"/>
+      &nbsp;
+      Login but no sooner than
+      <input type="text" name="nr_days_{msg}" id="nr_days_{msg}" value="{nr_days}" size="2"/>
+      Days * </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top" width="187"><p align="right"><b>Show to: </b><br>
+        &nbsp;</td>
+    <td width="513" colspan="2" align="left" valign="top"><input name="msg_membership_{msg}" value="all" {checked_all} type="radio" onclick="document.getElementById('membership_td_{msg}').checked ? document.getElementById('membership_td_{msg}').style.display='' : document.getElementById('membership_td_{msg}').style.display='none'">
+      All Members<br>
+      <input value="just" name="msg_membership_{msg}" {checked_just} type="radio" onclick="document.getElementById('membership_td_{msg}').checked ? document.getElementById('membership_td_{msg}').style.display='none' : document.getElementById('membership_td_{msg}').style.display=''">
+      Just These<br>
+      <table id="membership_td_{msg}" width="100" border="0" cellspacing="0" cellpadding="0" style="display:none">
+        {membership_list}
+      </table></td>
+  </tr>
+  <tr>
+    <td colspan="3">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="3">* Leave blank if days or login is not important</td>
+  </tr>
+  <tr>
+    <td colspan="3">Set message as active
+      <input type="checkbox" value="1" name="active_{msg}" id="active_{msg}" {active_chck}/></td>
+  </tr>
+  <tr>
+    <td colspan="3">&nbsp;</td>
+  </tr>
+  <tr>
+    <td><a href="#" onclick="window.open('edit_login_msg.php?id={msg}','','width=580,height=410, toolbars=no')">Edit Message</a></td>
+    <td><a href="do.delete_login_msg.php?id={msg}">Delete Message</a></td>
+    <td><a href="do.reset_login_msg.php?id={msg}">Reset Message Status</a></td>
+  </tr>
+  <tr>
+    <td colspan="3"><hr /></td>
+  </tr>
+</table>

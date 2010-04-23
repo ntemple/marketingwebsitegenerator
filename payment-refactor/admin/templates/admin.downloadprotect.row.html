@@ -1,0 +1,37 @@
+<style type="text/css">
+<!--
+.style1 {
+	color: #FFFFFF
+}
+-->
+</style>
+<body onLoad="{chck_funtions}">
+<table width="500" border="0" cellspacing="2" cellpadding="2">
+  <tr bgcolor="#076C9F">
+    <td width="248"><span class="style1">Download File: </span></td>
+    <td width="252"><span class="style1">{filename}</span></td>
+  </tr>
+  <tr bgcolor="#076C9F">
+    <td><span class="style1">Download Link </span></td>
+    <td><span class="style1">{link}</span></td>
+  </tr>
+  <tr bgcolor="#076C9F">
+    <td><span class="style1">Filename for user: </span></td>
+    <td><span class="style1">{memberfile}</span></td>
+  </tr>
+  <tr bgcolor="#076C9F">
+    <td><span class="style1">Membership:</span></td>
+    <td><span class="style1">{membership_id}</span></td>
+  </tr>
+  <tr bgcolor="#076C9F">
+    <td colspan="2"><div align="center" class="style1">Add this html code to the page template where yo want the member to click to download or get access to the product or service:</div></td>
+  </tr>
+  <tr bgcolor="#076C9F">
+    <td colspan="2"><div align="center">
+        <textarea name="textarea" cols="90" rows="3">{link_for_page}</textarea>
+      </div></td>
+  </tr>
+  {manually}
+</table>
+<br>
+</body>
