@@ -1,0 +1,47 @@
+<h3><font color="#076C9F" size="5">Add/Edit Site and Email Tags.</font></h3>
+<p>Here is where you manage tags to be used on your web pages and emails. i.e. 
+  If you wanted a persons name to read like <b><font face="Courier New">&quot;Hi 
+  Michael&quot; </font></b>you would add on your webpage <font face="Courier New">&quot;Hi {first_name}&quot;</font>. 
+  Now when they come to the site and login, it will have their name where ever you 
+  want. You have pre set fields already and can make new ones from any field in 
+  the database.</p>
+<table width="329" border="1" cellpadding="0" cellspacing="0" bordercolor="#7F9DB9">
+  <tr>
+    <td width="118"><h5>Tag Title</h5></td>
+    <td width="151"><h5>Database Field </h5></td>
+    <td width="60"><h5>Action</h5></td>
+  </tr>
+  {tag_list}
+</table>
+<p>When you use these tags in templates or in messages that you s&nbsp;&nbsp;&nbsp; end from 
+  your mail utilities they will be replaced with the info each member provided (info found in the 
+  Database Field). </p>
+<p><b>ON WEB PAGES:</b> To use in web pages and html for your site use <b>Braces</b> around the tag <b>{ }</b>.<br>
+  i.e. <font face="Courier New">{first_name}</font></p>
+<p><b>IN EMAIL:</b> To use in your emails use <b>Double Brackets</b> around the 
+  tag [[ ]].<br>
+  i.e.<font face="Courier New"> [[first_name]] or [[email]]</font></p>
+<p>&nbsp;</p>
+<form name="form2" method="post" action="do.add.tag.php">
+  <table width="253"  border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td colspan="2"><h3>Add new tag </h3></td>
+    </tr>
+    <tr>
+      <td width="109">Tag Title:</td>
+      <td width="144"><input name="title" type="text" id="title" size="20"></td>
+    </tr>
+    <tr>
+      <td height="24">Database field:</td>
+      <td><select name="field" id="field">
+          
+	  {fields_list}
+      
+        </select></td>
+    </tr>
+    <tr>
+      <td colspan="2"><input type="submit" name="Submit2" value="Add tag"></td>
+    </tr>
+  </table>
+</form>
+<div align="center">{back}</div>
