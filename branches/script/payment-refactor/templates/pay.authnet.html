@@ -1,0 +1,28 @@
+<!-- replace test. with secure. for live site and live site testing. -->
+<form name="authnet_form" action="https://secure.authorize.net/gateway/transact.dll" method="post" target=_top>
+  <input type="hidden" name="x_header_html_payment_form" value=''>
+  <input type="hidden" name="x_footer_html_payment_form" value=''>
+  <input type="hidden" name="x_header_html_receipt" value=''>
+  <input type="hidden" name="x_footer_html_receipt" value=''>
+  <input type="hidden" name="x_background_url" value="">
+  <input type="hidden" name="x_relay_url" value="{url}auth.pay.return.php">
+  <input type="hidden" name="x_fp_sequence" value="{anet_sequence}">
+  <input type="hidden" name="x_fp_timestamp" value="{anet_tstamp}">
+  <input type="hidden" name="x_fp_hash" value="{anet_fingerprint}">
+  <input type="hidden" name="x_description" value="{name}">
+  <input type="hidden" name="x_cust_id" value="{member_id}">
+  <input type="hidden" name="x_first_name" value="{first_name}">
+  <input type="hidden" name="x_last_name" value="{last_name}">
+  <input type="hidden" name="x_email" value="{anet_x_email}">
+  <input type="hidden" name="x_email_customer" value="TRUE">
+  <input type="hidden" name="x_amount" value="{price}">
+  <input type="hidden" name="x_merchant_email" value="{anet_x_merchemail}">
+  <input type="hidden" name="x_login" value="{anet_login}">
+  {anet_amount}
+  <input type="hidden" name="x_show_form" value="PAYMENT_FORM">
+  {test}
+  <input type="image" src="{auth_button}" />
+  <input id="seed" type=hidden value="{seed}" name='seed'>
+  <input id=custom type=hidden value="{custom}" name='custom'>
+  <input type="hidden" name="ip" value="{ip}">
+</form>

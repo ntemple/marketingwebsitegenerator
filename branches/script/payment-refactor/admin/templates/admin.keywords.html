@@ -1,0 +1,30 @@
+<p><font color="#076C9F"><b><font size="5">Create/Edit Custom Keywords</font></b><br>
+  </font><font size="2">Please enter your keywords here. The keywords are your 
+  services and your products which you sell or promote inside the text from this 
+  page (it can be a single word but is preferable to be composed of 2 or 3 words 
+  as this is how search engine visitors usually search). It is recommended that 
+  you build first your keywords list (search engines makes difference between 
+  singular and plural forms) and then make your page text and include them as 
+  natural as possible and repeat each keyword several times inside the text. Build 
+  your text from the site having in mind your possible clients and not search 
+  engines, make them take the action you want. </font>
+<p><font size="2">Please insert them here in order of their importance. Insert 
+  first the most important keyword and so on, because your browser title will be automatically generated from the first 3-4 keywords, depending on how many words they contain (because it is recommended not to have more than 9 words in the browser title).</font>
+<p><font size="2"><span style="font-weight: 700; background-color: #FFFF00">The &lt;meta name=&quot;robots&quot; content=&quot;index,follow&quot;&gt; and &lt;meta name=&quot;MSSmartTagsPreventParsing&quot; content=&quot;TRUE&quot;&gt; are in the templates main.html and main.vertical.html and will be generated automatically for each of your members area pages. </span> </font>
+<form name="form1" method="post" action="do.keywords.changes.php" onsubmit="if (document.form1.description.value.length > 255){ (alert('The description has more than 255 characters')); return false;}">
+  <p><b><font size="4">Your Title Tags Keywords</font></b></p>
+  <p>Insert Your Keywords separated with a comma like:<br>
+    <font face="Courier New">Dogs, dog food, cats, cat food, animal food<br>
+    </font>This will show in your Title Bar on your site and it is import to the search engines.</p>
+  <textarea name="keywords" id="keywords" rows="8" cols="30">{keywords}</textarea>
+  <br>
+  <input name="Do Changes1" type="submit" id="Do Changes0" value="Do changes">
+  <p><b><font size="4">Current Meta-Description</font><br>
+    Enter here a short description of your page. The description should have less than 250 characters.</b></p>
+  <textarea name="description" id="description" rows="7" cols="72">{description}</textarea>
+  <br />
+  <input type="checkbox" name="from_html" id="from_html" value="1">
+  If you want the description to be created from the first 250 characters from your home page text <br />
+  <br />
+  <input name="Do Changes" type="submit" id="Do Changes" value="Do changes">
+</form>

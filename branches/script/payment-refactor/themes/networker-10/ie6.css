@@ -1,0 +1,9 @@
+/*---:[ ie6.css for the NetWorker Theme ]:---*/
+/*---:[ ------------------------------------------- ]:---*/
+/*---:[ by Anthony Baggett of antbag.com        ]:---*/
+
+#content, #sidebar { overflow: hidden; }
+
+.sidebar{ width: 170px; }
+
+.leftbar{ width: 180px; }
