@@ -31,48 +31,32 @@ class mwgDocument {
     $this->addJs(MWG_BASEHREF . '/js/functions.js');
   }
 
-  function setDefaultDescription($description) {
-    if (!$this->meta_descripton) {
-      $this->meta_descripton = $description;
-    }        
-  }
-  
-  function setDefaultTitle($title) {
-    if (! $this->title) {
-      $this->title = $title;
-    }
-  }
-  
-  function setDefaultKeywords($keywords) {
-    if (!$this->meta_keywords) {
-      $this->meta_keywords = $keywords;
-    }
-  }
-  
   function addToHead($string) {
     $this->head[] = $string;
   }
-  
+
   function addJs($path) {
     $this->head[] = "<script src='$path' type='text/javascript'></script>";
   }
-  
+
   function addCSS($path) {
     $this->head[] = "<link rel='stylesheet' href='$path' type='text/css' />";    
   }
-  
+
   function addBeforeBodyEnd($string) {
     $this->before_body_end[] = $string;
   }
-  
+
   /**
   This should be changed to be page specific. Right now, BFM
   has one title / description / keywords for all pages
   */ 
   function getHead() {
-    if ($this->keywords)    array_unshift($this->head, "<meta name='keywords' content='{$this->description}' />");
-    if ($this->description) array_unshift($this->head, "<meta name='description' content='{$this->description}' />");
-    $out .= "";
+
+    $out = "";
+
+    if ($this->meta_keywords)    array_push($this->head, "<meta name='keywords' content='{$this->meta_keywords}' />");
+    if ($this->meta_description) array_push($this->head, "<meta name='description' content='{$this->meta_description}' />");
 
     foreach ($this->head as $string) {
       $out .= "    $string\n";
@@ -80,14 +64,44 @@ class mwgDocument {
     return "\n$out\n";
   }
 
+  function setDescription($description, $default = false) {
+    if ($default && $this->meta_description) return;
+    $this->meta_description = $description;
+  }
+
+  function setKeywords($keywords, $default = false) {
+    if ($default && $this->meta_keywords) return;
+    $this->meta_keywords = $keywords;
+  }
+
+
+  /**
+  * Set the document title
+  * 
+  * @param mixed $title   new title
+  * @param mixed $append  a string to use a seperator, if you want to append to the current title
+  * @param mixed $default don't overwrite
+  */
+  function setTitle($title, $append = false, $default = false) {
+
+    if ($default && $this->title) return;
+
+    if ($append) {
+      $title = $this->title . $append . $title;
+    }
+    $this->title = $title;
+  }
+
   function getTitle() {
     return $this->title;
   }
-  
+
+
   function setContent($content) {
     $this->content = $content;
   }
-  
+
+
   /**
   * Last function to be called.
   * Completes regex replacement, 
@@ -95,15 +109,30 @@ class mwgDocument {
   * 
   */
   function renderDocument() {
-    
+    $content = $this->content;
+
     $newbody = implode("\n", $this->before_body_end ) . "</body>";
-    $content = str_ireplace('</body>', $newbody, $this->content);
-    
+    $content = str_ireplace('</body>', $newbody, $content);
+
     $head = $this->getHead();
     $content = str_ireplace('</head>', "$head</head>", $content);
-
+    $content = preg_replace("|<title>(.*?)</title>|i", "<title>" . $this->getTitle() . "</title>", $content);
+    
     return $content;
   }
-  
+
 }
 
+  function do_reg($regex, $text)
+  {
+    preg_match_all("|$regex|", $text, $result, PREG_SET_ORDER );
+    print_r($result);
+
+
+    for ($matchi = 0; $matchi < count($result); $matchi++) {
+      for ($backrefi = 0; $backrefi < count($result[$matchi]); $backrefi++) {
+        $result[$matchi][$backrefi];
+      } 
+    }
+    print_r($result);
+  }

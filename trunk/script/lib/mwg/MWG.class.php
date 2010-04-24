@@ -21,14 +21,17 @@ class MWG {
   /** @var Template */
   var $template;  // BFM's template system
 
-  /** @var msyqldb **/
-  var $db;  // Our connection to the database
-
   /** @var modleTheme */
   var $theme;
 
   /** @var WMGDataRegistry */
   var $registry;
+  
+  /** mwgRequest */
+  var $request;
+  
+  /** mwgResponse */
+  var $response;
 
   // $this->BASEHREF =  MWG_BASEHREF;
 
@@ -37,7 +40,10 @@ class MWG {
   var $site_name  = 'Marketing Website Generator';
 
   private function __construct() {
-    $this->registry = wmgDataRegistry::getInstance();
+    $this->request  = new mwgRequest();
+    $this->response = new mwgResponse();
+    
+    $this->registry = mwgDataRegistry::getInstance();    
     $default_theme = $this->registry->get('theme.default', 'bfm', true);
 
     $this->theme = new modelThemes($default_theme);
@@ -50,14 +56,8 @@ class MWG {
     }  else  {
       if (isset($_COOKIE['theme'])) $this->theme->switchThemes($_COOKIE['theme']);
     }
-
-    // Load ALL the plugins.  
-    // @todo make this more efficient
-    $plugins[] = array();    
-    $plugin_dirs = $this->listDir(MWG_BASE . '/plugins/');
-    foreach($plugin_dirs as $ptypes) {
-      $this->loadPluginGroup($ptypes);
-    }  
+    
+    $this->loadPlugins();
   }
 
   static function getInstance() {
@@ -68,7 +68,16 @@ class MWG {
     $instance = new MWG();
     return $instance;
   }
-
+  
+  function loadPlugins() {
+    // Load ALL the plugins.  
+    // @todo make this more efficient
+    $plugin_dirs = $this->listDir(MWG_BASE . '/plugins/');
+    foreach($plugin_dirs as $ptypes) {
+      $this->loadPluginGroup($ptypes);
+    }          
+  }
+  
   function loadPluginGroup($ptype) {
     $plugins = $this->listDir(MWG_BASE . '/plugins/' . $ptype);
     foreach ($plugins as $plugin) {
@@ -81,14 +90,19 @@ class MWG {
     }
   }
 
+  /**
+  * put your comment there...
+  * @returns mysqldb $db
+  */
   function getDb() {
     static $db;
-    global $q;
 
     if ($db) return $db;
 
-    $db = new  mysqldb();
-    $db->setDBH($q->link_id()); 
+    $db = new mysqldb();
+    $db->connect(DB_HOST, DB_NAME, DB_USER, DB_PASSWORD);
+    $db->connect();
+
     return $db;
   }
 
@@ -120,8 +134,19 @@ class MWG {
     }
     return $dirs;
   }
-
-
+  
+  function runEvent($method, $args) {
+    if (!class_exists('modelGizmo')) require_once(MWG_BASE . '/components/gizmo/modelgizmo.class.php');
+    $model = new modelGizmo();
+    $gizmos = $model->getActiveGizmos();
+    
+    foreach ($gizmos as $gizmo) {
+      $func = array($gizmo, $method);
+      if (is_callable($func)) {
+        call_user_func_array($func, $args);
+      }
+    }    
+  }
 
   function start() {
   }
@@ -130,19 +155,24 @@ class MWG {
     if (defined('SITENAME')) $this->site_name = SITENAME;
 
     $this->template = $tpl;
-    $this->document->setDefaultDescription($this->tplGet('description'));
-    $this->document->setDefaultKeywords($this->tplGet('keywords'));
-    $this->document->setDefaultTitle(trim($this->tplGet('keywords_title')));
-    $this->document->setDefaultTitle($this->site_name);
+    $this->document->setDescription($this->tplGet('description'), true);
+    $this->document->setKeywords($this->tplGet('keywords'), true);
+    $this->document->setTitle(trim($this->tplGet('keywords_title')), false, true);
+    $this->document->setTitle($this->site_name, false, true);
     
     $content = $this->theme->process($tpl);
+
+    $this->runEvent('beforeDoShortcode', array($this->document, $content));
 
     // Apply shortcode filter
     $content = do_shortcode($content); 
 
+    $this->runEvent('beforeDocumentRender', array($this->document, $content));
     // Set the code in the document, and render
     $this->document->setContent($content);
-    print $this->document->renderDocument();
+    $page = $this->document->renderDocument();
+    $this->runEvent('afterDocumentRender', array($page));
+    print $page;
   }
 
 
@@ -213,3 +243,19 @@ class MWG {
 
 }
 
+function mwg_shortcode_gizmo($atts) {
+  $id = $atts['id'];
+  if (!$id) return;
+  
+  if (!class_exists('modelGizmo')) require_once(MWG_BASE . '/components/gizmo/modelgizmo.class.php');
+  $model = new modelGizmo();
+  $gizmos = $model->getActiveGizmos();
+  if (!isset($gizmos[$id])) return;
+  
+  $gizmo = $gizmos[$id];
+  
+  if ($gizmo) {
+    return $gizmo->render($atts);
+  }
+}
+add_shortcode('gizmo', 'mwg_shortcode_gizmo');

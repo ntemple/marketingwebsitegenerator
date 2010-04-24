@@ -28,7 +28,7 @@
   // $t->set_file("main", "admin.main.".$_SESSION['menu'].".html");
   $_SESSION['menu'] = 'genstaller';
 
-  $component = $_GET['c'];
+  $component = $_REQUEST['c'];
   $component = preg_replace('/[^a-zA-Z0-9\_\-]/', '', $component);
 
   $component_file = BMGHelper::path(GENSTALL_BASEPATH . "/components/$component/admin.$component.php");

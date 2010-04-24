@@ -85,5 +85,29 @@ function stripslashes_deep($value) {
   $value = is_array($value) ? array_map("stripslashes_deep", $value) : stripslashes($value);
   return $value;
 }
-require_once('mwg/frontend.php');
-require_once('mail.class.php');
+require_once('mwg/frontend.php');     // Provide MWG singleton
+require_once('mail.class.php');       // Provide Mail
+require_once('isnclient/spyc.php');   // Provide core YML parsing
+
+/**
+* We really need to get the register globals taken care of 
+*/
+function unregister_globals()
+{
+  $register_globals = @ini_get('register_globals');
+  if ($register_globals === "" || $register_globals === "0" || strtolower($register_globals) === "off"){return;}
+
+  if (isset($_REQUEST['GLOBALS']) || isset($_FILES['GLOBALS'])) die(); // {die() /* exit('It\'s not going to be so easy hacker!!'); */}
+  $no_unset = array('GLOBALS', '_GET', '_POST', '_COOKIE', '_REQUEST', '_SERVER', '_ENV', '_FILES');
+
+  $input = array_merge($_GET, $_POST, $_COOKIE, $_SERVER, $_ENV, $_FILES, isset($_SESSION) && is_array($_SESSION) ? $_SESSION : array());
+  foreach ($input as $k => $v)
+  {
+    if (!in_array($k, $no_unset) && isset($GLOBALS[$k]))
+    {
+      unset($GLOBALS[$k]);
+      unset($GLOBALS[$k]);    // Double unset to circumvent the zend_hash_del_key_or_index hole in PHP <4.4.3 and <5.1.4
+    }
+  }
+}
+

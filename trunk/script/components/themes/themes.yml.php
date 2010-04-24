@@ -1,6 +1,5 @@
 #<?php die(); ?>
-section: mwg
-identity: mwg.themes
+identity: mwg.components.themes
 name: Intellispire Software Installer for Butterfly Marketing
 title: Intellispire Software Installer for Butterfly Marketing
 updatecheck: themes 
