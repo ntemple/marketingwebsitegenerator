@@ -32,6 +32,20 @@ packages. Please refer to the specific files and/or packages for more detailed i
 about the authors, copyright notices, and licenses.
 ---------------------------------------------------------------------------------------------
 
+Spyc
+----------
+/**
+   * Spyc -- A Simple PHP YAML Class
+   * @version 0.4.5
+   * @author Vlad Andersen <vlad.andersen@gmail.com>
+   * @author Chris Wanstrath <chris@ozmm.org>
+   * @link http://code.google.com/p/spyc/
+   * @copyright Copyright 2005-2006 Chris Wanstrath, 2006-2009 Vlad Andersen
+   * @license http://www.opensource.org/licenses/mit-license.php MIT License
+   * @package Spyc
+   */
+
+
 PHPMailer
 --------
 Author: Andy Prevost (codeworxtech)

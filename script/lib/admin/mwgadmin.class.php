@@ -34,7 +34,7 @@ class BMGenStaller {
   }
 
   private function __construct() {
-    $this->registry = mwgRegistry::getInstance();
+    $this->registry = mwgDataRegistry::getInstance();
   }
 
   function getMainMenuItems($selected) {

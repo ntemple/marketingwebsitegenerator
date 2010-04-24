@@ -23,6 +23,9 @@ require_once('includes/sbutil.class.php');
 require_once('includes/mysqldb.class.php');
 require_once('mwgDataRegistry.class.php');
 require_once('mwgDocument.class.php');
+require_once('mwgRequest.class.php');
+require_once('mwgResponse.class.php');
+require_once('mwgBaseGizmo.class.php');
 require_once(MWG_BASE . '/components/themes/modelthemes.class.php');
 
 // Plugins - we need a plugin manager

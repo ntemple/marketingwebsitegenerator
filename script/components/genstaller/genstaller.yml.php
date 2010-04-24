@@ -1,5 +1,5 @@
 #<?php die(); ?>
-identity: mwg.component.genstaller
+identity: mwg.components.genstaller
 name:  MWG Core Installer
 title: MWG Core Installer
 version: 1.0.2
