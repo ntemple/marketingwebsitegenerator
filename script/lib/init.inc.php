@@ -87,6 +87,10 @@ function stripslashes_deep($value) {
 }
 
 require_once(MWG_BASE . '/config/constants.php');
+if (!defined('DB_HOST')) {
+  header("Location: "  . MWG_BASEHREF . '/install/index.php');
+  exit();
+}
 require_once('mwg/frontend.php');     // Provide MWG singleton
 require_once('mail.class.php');       // Provide Mail
 require_once('isnclient/spyc.php');   // Provide core YML parsing

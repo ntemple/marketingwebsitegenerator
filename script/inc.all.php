@@ -21,7 +21,6 @@ if (!in_array($_SERVER['PHP_SELF'],$valid_sess_ref)) {
 require_once("lib/inc.db_mysql.php");
 require_once("lib/inc.template.php");
 require_once("lib/inc.payment.functions.php");
-require_once('lib/mwg/frontend.php');  // MWG 
 $mwg = MWG::getInstance(); // MWG
 
 
