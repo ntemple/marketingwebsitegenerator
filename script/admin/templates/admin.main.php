@@ -6,29 +6,24 @@
     <script language=JavaScript src='../editor/scripts/innovaeditor.js'></script>
     <script src="../js/functions.js" language="javascript" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="../css/reset-fonts-grids.css">
-    <link href="../css/butterfly.css" rel="stylesheet" type="text/css">
     <link href="media/css/admin.css" rel="stylesheet" type="text/css">
     <?php echo $head ?>
-
     <style type="text/css">
       <!--
       body {    
-        /*background-color: #E5E5E5; */
         background-color: #ffffff;
-
       }
-      .header, .footer { 
-        background-color: #076C9F;
-        background-color: #07A23A;
+
+      table {border-collapse: collapse;}
+      
+      .header, .footer, .header a, .footer a { 
         background-color: #008000;        
         color: #fff;
       }
-      .menu {
+      .menu, .menu a {
         border-bottom: 1px solid; 
         border-color: #808080;
         padding: 1px 4px;
-        background-color: #000080;        
-        background-color: #008000;        
         background-color: #07A23A;
         color: #fff;
       }
@@ -40,11 +35,8 @@
         padding-top: 1; 
         padding-bottom: 1;
         border-color: #808080;
-        background-color: #E6F4FB;
         background-color: #E5FBEC;        
       }
-
-      table {border-collapse: collapse;}
       .bold { font-weight: bold; }
       .toptitle { font-size: 212%; }
 
@@ -63,6 +55,7 @@
           <td width="100%">
             <div align="center">
               <center>
+
                 <table width="970" border="0" cellpadding="5" cellspacing="0" bordercolor="#000000" bgcolor="#FFFFFF">
                   <tr class="header bold">
                     <td align="left" valign="top">
@@ -85,8 +78,8 @@
                   </tr>
                   <tr>
                     <td colspan="2" width="100%">
-                    <?php echo $message ?>
-                    <?php echo $content; ?>
+                      <?php echo $message ?>
+                      <?php echo $content; ?>
                     </td>
                   </tr>
                   <tr class="footer bold">
@@ -94,10 +87,12 @@
                       <p>&copy;2010 - powered by <a href="http://marketingwebsitegenerator.com" target="mwg" class="a">MarketingWebsiteGenerator.com</a><p>
                     </td>
                     <td align='right'>
-                      <p><a href="http://www.intellispire.com/forum" class="a">Community Forum</a></p>
+                      <p><a href="http://www.intellispire.com/forum" target="mwg" class="a">Community Forum</a></p>
                     </td>
                   </tr>
                 </table>
+                
+                
               </center>
             </div>
           </td>

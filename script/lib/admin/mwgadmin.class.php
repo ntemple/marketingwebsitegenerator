@@ -174,7 +174,7 @@ function genstall_admin_end($t, $ocontent, $notemplate) {
   $msg = '';
   try {
     if (needsUpdate($current, $latest)) {
-      $msg = "<div class='warn'>Update found! New Version $latest You are running $current.<br /> <a href='controller.php?c=updates'>Please upgrade now!</a></div>";
+      $msg = "<p class='warn'>Update found! New Version $latest You are running $current.<br /> <a href='controller.php?c=updates'>Please upgrade now!</a></p>";
     }
   } catch(Exception $e) {
     MWGHelper::setFlash('alert', "Could not reach update server. Please try again.<br> $e");      
@@ -194,11 +194,16 @@ function mwg_admin_decorate($content, $submenu, $message, $head) {
   else 
     $component = '';  
 
+  if (isset($_GET['menu'])) {
+    $_SESSION['menu'] = $_GET['menu'];
+  }
+  
+  $select_menu = $_SESSION['menu'];
 
   $component_menu = $gs->getComponentMenuItems($component);
   $menu = $gs->getStandardMenuItems($select_menu);
 
-  $select_menu = $_SESSION['menu'];
+
   if (!$submenu) {
     $path = MWG_BASE . '/admin/templates/submenu/admin.main.'. $select_menu . ".html";
     if (file_exists($path)) $submenu = file_get_contents($path);
@@ -208,8 +213,8 @@ function mwg_admin_decorate($content, $submenu, $message, $head) {
   $sitename = SITENAME;     
   $version = trim(file_get_contents(MWG_BASE .'/config/version'));
 
-  
-  // content, menu, component_menu. message, head
+
+  // content, menu, component_menu, message, head
   ob_start();
   include('templates/admin.main.php');
   $page = ob_get_clean();

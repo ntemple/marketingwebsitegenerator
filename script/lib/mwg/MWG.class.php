@@ -27,11 +27,14 @@ class MWG {
   /** @var WMGDataRegistry */
   var $registry;
   
-  /** mwgRequest */
+  /** @var mwgRequest */
   var $request;
   
-  /** mwgResponse */
+  /** @var mwgResponse */
   var $response;
+  
+  /** @var mwgSettings */
+  var $settings;
 
   // $this->BASEHREF =  MWG_BASEHREF;
 
@@ -49,6 +52,8 @@ class MWG {
     $this->theme = new modelThemes($default_theme);
 
     $this->document = new mwgDocument();
+    
+//    $this->settings = new mwgSettings();
     
     /* Switcher needs to be in a plugin */
     if (isset($_GET['theme'])) {
