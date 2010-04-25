@@ -85,9 +85,12 @@ function stripslashes_deep($value) {
   $value = is_array($value) ? array_map("stripslashes_deep", $value) : stripslashes($value);
   return $value;
 }
+
+require_once(MWG_BASE . '/config/constants.php');
 require_once('mwg/frontend.php');     // Provide MWG singleton
 require_once('mail.class.php');       // Provide Mail
 require_once('isnclient/spyc.php');   // Provide core YML parsing
+require_once('upgrade/upgrade.php');
 
 /**
 * We really need to get the register globals taken care of 

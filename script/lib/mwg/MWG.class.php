@@ -61,7 +61,7 @@ class MWG {
     }  else  {
       if (isset($_COOKIE['theme'])) $this->theme->switchThemes($_COOKIE['theme']);
     }
-    
+        
     $this->loadPlugins();
   }
 
