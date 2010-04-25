@@ -28,7 +28,7 @@ function upgrade(mysqldb $db) {
     $db_version = '1.0';
   }
   if ($db_version == '1.0') {
-    $queries = @file(MWG_BASE . '/lib/upgrade-1.0.txt');
+    $queries = @file(MWG_BASE . '/lib/upgrade/upgrade-1.0.txt');
     foreach ($queries as $q) {
       if ($q) $db->query($q);
     }
