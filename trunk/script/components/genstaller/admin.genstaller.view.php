@@ -5,6 +5,22 @@
  <input type="submit" value="Refresh Software List">
 </form>
 
+    <form method="post">
+      <input type="hidden" name="c" value="genstaller">
+      <input type="hidden" name="t" value="install">
+      Url to Package: <input type="text" name="url" size="60"> 
+      <input type="submit" value="Install">
+    </form>
+
+    <form method="post" enctype="multipart/form-data">
+      <input type="hidden" name="c" value="genstaller">
+      <input type="hidden" name="t" value="install">
+      Upload Package: <input type="file" name="package" size="60"> 
+      <input type="submit" value="Install">
+    </form>
+
+
+
 <table width="100%">
 <tr>
   <td><b>Name</b></td>
@@ -56,7 +72,4 @@ print "</pre>\n";
 </tr>
 <?php } ?>
 </table>
-<center>
-<a href="http://www.intellispire.com/"><img src="http://www.intellispire.com/images/logo.png" border="0" align="center"></a>
-</center>
 

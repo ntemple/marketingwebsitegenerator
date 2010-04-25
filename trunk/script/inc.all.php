@@ -25,6 +25,24 @@ require_once('lib/mwg/frontend.php');  // MWG
 $mwg = MWG::getInstance(); // MWG
 
 
+// security fix for file uploads
+  $allowedExtensions = array("txt","csv","htm","html","xml",
+    "css","doc","xls","rtf","ppt","pdf","swf","flv","avi",
+    "wmv","mov","jpg","jpeg","gif","png", "zip");
+
+  foreach ($_FILES as $file) {
+    if ($file['tmp_name'] > '') {
+      if (!in_array(end(explode(".",
+            strtolower($file['name']))),
+            $allowedExtensions)) {
+       die($file['name'].' is an invalid file type!<br/>'.
+        '<a href="javascript:history.go(-1);">'.
+        '&lt;&lt Go Back</a>');
+      }
+    }
+  } 
+
+
 if (!in_array($_SERVER['PHP_SELF'],$valid_sess_ref)) {
   foreach($_SESSION as $key_ses_1=>$value_ses_1){
     $var_ses_1 = $key_ses_1;

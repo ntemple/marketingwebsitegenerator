@@ -1,33 +1,66 @@
 <?php
+  /**
+  * @version    $Id$
+  * @package    MWG
+  * @copyright  Copyright (C) 2010 Intellispire, LLC. All rights reserved.
+  * @license    GNU/GPL v2.0, see LICENSE.txt
+  *
+  * Marketing Website Generator is free software.
+  * This version may have been modified pursuant
+  * to the GNU General Public License, and as distributed it includes or
+  * is derivative of works licensed under the GNU General Public License or
+  * other free or open source software licenses.
+  * See COPYRIGHT.php for copyright notices and details.
+  */
 
-defined('_MWG') or die ('Restricted Access');
 
-define('UPDATER_SERVER',  'http://www.intellispire.com/network/server51/soap.php');
-define('UPDATER_VERSION', 22);
-define('UPDATER_MANIFEST', MWGHelper::path(GENSTALL_BASEPATH . '/config/manifest.yml.php'));
+  defined('_MWG') or die ('Restricted Access');
 
-require_once (MWGHelper::path(GENSTALL_BASEPATH . '/lib/isnclient/utils.inc.php'));
-require_once (MWGHelper::path(GENSTALL_BASEPATH . '/lib/isnclient/intellispireNetworkClient.class.php'));
-require_once (MWGHelper::path(GENSTALL_BASEPATH . '/lib/isnclient/manifest.class.php'));
-require_once ('modelgenstaller.class.php');
+  define('UPDATER_SERVER',  'http://www.intellispire.com/network/server51/soap.php');
+  define('UPDATER_VERSION', 22);
+  define('UPDATER_MANIFEST', MWGHelper::path(GENSTALL_BASEPATH . '/config/manifest.yml.php'));
 
-$c     = new comGenstaller;
-$t->set_var('submenu', $c->submenu);
+  require_once (MWGHelper::path(GENSTALL_BASEPATH . '/lib/isnclient/utils.inc.php'));
+  require_once (MWGHelper::path(GENSTALL_BASEPATH . '/lib/isnclient/intellispireNetworkClient.class.php'));
+  require_once (MWGHelper::path(GENSTALL_BASEPATH . '/lib/isnclient/manifest.class.php'));
+  require_once ('modelgenstaller.class.php');
 
-$task = MWGHelper::_req('t', 'view');
-$func = array($c, $task);
-if (is_callable($func)) {
-  call_user_func($func);
-} else {
-  print $task;
-  $c->view();
-}
+  $c     = new comGenstaller($_GET['c']);
+  $t->set_var('submenu', $c->submenu());
 
-class comGenstaller {
-
-  function submenu() {
-    return 'submenu';
+  $task = MWGHelper::_req('t', 'view');
+  $func = array($c, $task);
+  if (is_callable($func)) {
+    call_user_func($func);
+  } else {
+    print $task;
+    $c->view();
   }
+
+  class comGenstaller {
+
+    function __construct($controller_name) {
+      $this->controller_name = $controller_name;
+      $this->model = new modelGenstaller();
+    }
+
+
+    function submenu() {
+      return '';
+
+/*      $tasks = array(
+      'Add Software' => 'view',
+      'Install'     => 'showinstall'
+      );
+
+      $items = array();
+      foreach ($tasks as $disp => $task) {
+        $items[] = "<a href='?c={$this->controller_name}&t=$task'>$disp</a>";
+      }
+      return implode(' | ', $items);
+*/      
+    }
+
 
   function view($class = '', $msg = '') {
     if ($msg) {
@@ -61,65 +94,167 @@ class comGenstaller {
     return $this->install();
   }
 
-  function install() {
-    $model = new modelGenstaller();
-    $manifest = $model->getManifest();    
-    
-    $ex = null;
-    try {
-      if (isset($_POST['id'])) {
-        $id = $_POST['id'];
-      } else {
-        throw new Exception("Need a package to install! (id is empty)");
-      }
+  /**
+  * A manifest must exist either:
+  * -- at the top level
+  * -- if there is exactly 1 directory, then in that directory
+  * 
+  * A manifest is a .yml.php file with an identity tag that 
+  * 
+  * @param mixed $dir
+  */
+  function findManifest($base, $recurse = true) {
+    $dir = null;
+    $files[] = array();
+    $result = array();
 
-      // TODO: check ident is valid
-      # Get the URL for the download
-      $url = $model->retrievedownloadlink($id);      
-      if (!$url) {
-        throw new Exception("Could not retrieve download link for package $id.");
+    if ($handle = opendir($base)) {
+      while (false !== ($file = readdir($handle))) {
+        if ($file != "." && $file != ".." && $file != '.svn') {  
+          if (is_dir("$base/$file")) {
+            $dir = "$base/$file";
+          } else {
+            if (strpos($file, '.yml.php') > 1) {
+              $files[] = "$base/$file";
+            }              
+          }
+        }
       }
-      $pkgdata = $manifest->getItem($id);
-      if (! $pkgdata) {
-        throw new Exception("Sorry, I don't know anything about $id.");
-      }
-      
-      switch($pkgdata['type']) {
-#        case 'software':  
-#        case 'component':  list($section, $ident) = explode('.', $package);
-#                           $installpath = BMGHelper::path (GENSTALL_BASEPATH . "/components/$ident");
-#                           break;
-        case 'module':    $installpath = BMGHelper::path (GENSTALL_BASEPATH . "/modules/$subtype/"); break;
-        case 'plugin':    $subtype = 'shortcodes';
-                          $installpath = BMGHelper::path (GENSTALL_BASEPATH . "/plugins/$subtype/"); break;
-        case 'theme':     $installpath = BMGHelper::path (GENSTALL_BASEPATH . "/themes/"); break;
-        default: throw new Exception("Can't install $id of type {$pkgdata[type]} because I don't what it is");
-      }
-
-      if (! is_dir($installpath)) {
-         if (! @mkdir($installpath, 0755, true)) throw new Exception("Can't create install directory: $installpath");
-      }
-            
-      $pkg = BMGHelper::url_retrieve($url);
-      if (!$pkg) throw new Exception('Could not download package file');
-      $path =    GENSTALL_BASEPATH . "/tmp/installer/";
-      if (! @mkdir($path, 0755, true)) throw new Exception("Can't create install directory: $installpath");      
-      file_put_contents("$path/package.zip", $pkg);
-      try {
-        BMGHelper::unzip("$path/package.zip", $installpath);
-      } catch (Exception $e) {
-        // do nothing, just give us a chance to cleanup
-        $ex = $e;
-      }
-      unlink("$path/package.zip");
-      rmdir($path);
-      if ($ex) throw ($ex);
-    } catch (Exception $e) {
-        BMGHelper::setFlash('alert', $e->getMessage());
-        return $this->view();
+      closedir($handle);
     }
-    return $this->view('info', 'Package installed.');
+
+    foreach ($files as $file) {
+      $mf = Spyc::YAMLLoad($file);
+      if (isset($mf['identity'])) {
+        $result['base'] = $base;
+        $result['file'] = $file;
+        $result['mf']   = $mf;
+        return $result;            
+      }
+    }
+    // Still haven't found it? Try one level down ....
+    if ($dir && $recurse) {
+      return $this->findManifest($dir, false);
+    }
+    return false;
+
   }
+
+  function package_install($package) {
+    if (! file_exists($package)) {
+      throw new Exception("Can't open package: $package");
+    }
+
+
+    $uid = substr(md5(time() . serialize($GLOBALS)), 1,8);
+    $package_tmp_path = MWG_BASE . "/tmp/$uid";
+
+    if (! @mkdir($package_tmp_path, 0755, true)) {
+      unlink($package);
+      throw new Exception("Can't create install directory: $package_tmp_path"); 
+    }
+
+    try {
+      BMGHelper::unzip($package, $package_tmp_path);
+    } catch (Exception $e) {
+      MWGHelper::rmdir_recurse($package_tmp_path);
+      throw($e);
+    }
+
+    // At this point we have the package unzipped in $package_tmp_path
+    $result = $this->findManifest($package_tmp_path);
+    if (!$result) {
+      MWGHelper::rmdir_recurse($package_tmp_path);
+      throw new Exception("Invalid Package file, missing manifest");
+    } 
+    $mf = $result['mf'];
+    $srcdir = $result['base'];
+    $file = $result['$file'];
+
+    $identity = strtolower($mf['identity']);
+    $ident = explode('.', $identity);    
+    $sw   = $ident[0];
+    $type = $ident[1];
+    $name = $ident[2];
+
+    $error = false;
+    if ($sw != 'mwg') $error = true;
+    if (!$type ) $error = true;
+    if (!$name ) $error = true;
+    if ($error) throw new Exception("Invalid Identity: $identity");
+
+    switch($type) {
+      case 'package':    break;
+      case 'components': $installpath = MWG_BASE . "$type/$name/"; break;      
+      case 'themes':     $installpath = MWG_BASE . "$type/$name/"; break;      
+      case 'gizmos':     $installpath = MWG_BASE . "$type/"; break;
+      case 'plugins':    $subtype = $ident[2];
+        $name    = $ident[3];
+        $installpath = MWG_BASE . "/$type/$subtype/$name"; break;
+      default: throw new Exception('Unknown package type:' . $type);
+    }
+
+    if ($type == 'package') {
+      $packages = $mf['packages'];
+      foreach ($packages as $package_name) {
+        $package = $srcdir . "/$package_name";
+        if ( (strpos($package, '.zip') > 1) && file_exists($package)) {
+          try {
+            $this->package_install($package);
+          } catch (Exception $e) {
+            $exceptions[] = $e;
+          }        
+        }
+      } // packages
+    }
+
+    if (!is_dir($installpath)) {
+      if (! @mkdir($installpath, 0755, true)) throw new Exception("Can't create install directory: $installpath");      
+    }
+    MWGHelper::dir_copy($srcdir, $installpath);
+    MWGHelper::rmdir_recurse($package_tmp_path);
+    return true;
+  }
+
+  function install() {
+    try {
+      $model = new modelGenstaller();
+      $manifest = $model->getManifest();    
+      $request = MWG::getInstance()->request;
+
+      // Find the  package URL
+      $url = $request->get('url');
+      $id = $request->get('id');
+      if ($id) {
+        $url = $model->retrievedownloadlink($id);  
+      }
+      $uid = substr(md5(time() . serialize($GLOBALS)), 1,8);
+      $package =  MWG_BASE . "/tmp/$uid.zip";
+      $package_tmp_path = MWG_BASE . "/tmp/$uid";
+      if ($url) {
+        $pkgdata = MWGHelper::url_retrieve($url);
+        file_put_contents($package, $pkgdata);
+      } else {
+        if (isset($_FILES['package']['tmp_name']))
+          move_uploaded_file($_FILES['package']['tmp_name'], $package);
+      }
+      if (! file_exists($package)) {
+        throw new Exception("Can't write temporary path: $package");
+      }
+
+      try {
+        $this->package_install($package);
+      } catch(Exception $e) {
+        @unlink($package);
+        throw $e;
+      }
+
+      return $this->view('info', "Package $identity installed.");
+    } catch (Exception $e) {
+      return $this->view('warn', $e->getMessage());
+    }
+  }
+
 
   function install_software() {
     list($section, $ident) = explode('.', $package);
@@ -140,9 +275,6 @@ class comGenstaller {
       BMGHelper::setFlash('warn', "Package extracted, but no install file found.");
     }
     return;
-
-
-
   }
 
   function loadmanifest() {
@@ -159,8 +291,4 @@ class comGenstaller {
     $this->view();
   }
 }
-
-
-
-
 

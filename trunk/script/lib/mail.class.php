@@ -111,7 +111,7 @@ function mwg_mailer() {
     get_setting("emailing_from_name")
     );
 
-    $mailer_type = get_setting('mail_type', 'mail'); 
+    $mailer_type = get_setting('email_mailer', 'mail'); 
     if ($mailer_type == 'smtp') {
       $mailer->IsSMTP();
       $mailer->Host    = get_setting('mail_host', 'localhost');     

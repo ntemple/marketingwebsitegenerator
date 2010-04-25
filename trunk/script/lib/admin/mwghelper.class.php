@@ -89,7 +89,7 @@ class MWGHelper {
         if($file != "." and $file != ".." ) {
             $fullpath= $path.$file;
             if( is_dir($fullpath) ) {
-                rmdir_recurse($fullpath);
+                self::rmdir_recurse($fullpath);
             } else {
                 unlink($fullpath);
             }
@@ -144,27 +144,28 @@ class MWGHelper {
 //                $dstfile = $dstdir . '\\' . $file;    # deleted by marajax
                 $srcfile = $srcdir . '/' . $file;    # added by marajax
                 $dstfile = $dstdir . '/' . $file;    # added by marajax
-                if(is_file($srcfile)) {
+                if(is_file($srcfile)) {                    
                     if(is_file($dstfile)) $ow = filemtime($srcfile) - filemtime($dstfile); else $ow = 1;
+                    $ow = 1; // nlt always allow overwrite
                     if($ow > 0) {
                         if($verbose) echo "Copying '$srcfile' to '$dstfile'...<br />";
-                        if(copy($srcfile, $dstfile)) {
-                            touch($dstfile, filemtime($srcfile)); $num++;
-                            chmod($dstfile, 0777);    # added by marajax
+                        if(@copy($srcfile, $dstfile)) {
+                            @touch($dstfile, filemtime($srcfile)); $num++;
+                            @chmod($dstfile, 0644);    # added by marajax fixed ny nlt
                             $sizetotal = ($sizetotal + filesize($dstfile));
                             if($verbose) echo "OK\n";
                         }
                         else {
-                            echo "Error: File '$srcfile' could not be copied!<br />\n";
+                            if ($verbose)  echo "Error: File '$srcfile' could not be copied!<br />\n";
                             $fail++;
-                            $fifail = $fifail.$srcfile.'|';
+                            $fifail[] = $srcfile;
                         }
                     }
                 }
                 else if(is_dir($srcfile)) {
                     $res = explode(',',$ret);
 //                    $ret = dircopy($srcfile, $dstfile, $verbose); # deleted by patrick
-                    $ret = dir_copy($srcfile, $dstfile, $verbose); # added by patrick
+                    $ret = self::dir_copy($srcfile, $dstfile, $verbose); # added by patrick
                     $mod = explode(',',$ret);
                     $imp = array($res[0] + $mod[0],$mod[1] + $res[1],$mod[2] + $res[2],$mod[3].$res[3]);
                     $ret = implode(',',$imp);
