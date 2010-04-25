@@ -30,7 +30,6 @@
 		$selectfield[2]="first_name";
 		$selectfield[3]="last_name";
 		$selectfield[4]="paypal_email";
-		$selectfield[5]="stormpay_email";
 		$selectfield[6]="s_date";
 		$selectfield[7]="aff";
 		$selectfield[8]="jv";

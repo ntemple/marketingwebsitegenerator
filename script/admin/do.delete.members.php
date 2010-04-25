@@ -130,7 +130,6 @@
 			$t->set_var("icq_id", $q->f("icq_id"));
 			$t->set_var("ssn", $q->f("ssn"));
 			$t->set_var("paypal_email", $q->f("paypal_email"));
-			$t->set_var("stormpay_email", $q->f("stormpay_email"));
 			$t->set_var("url1", $q->f("url1"));
 			$t->set_var("url2", $q->f("url2"));
 			$t->set_var("url3", $q->f("url3"));
@@ -154,7 +153,6 @@
 			do_check("p_icq_id");
 			do_check("p_ssn");
 			do_check("p_paypal_email");
-			do_check("p_stormpay_email");
 			do_check("p_url1");
 			do_check("p_url2");
 			do_check("p_url3");
