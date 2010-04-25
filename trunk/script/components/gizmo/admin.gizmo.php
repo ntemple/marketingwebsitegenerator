@@ -94,7 +94,12 @@
         $edit = "?c={$this->controller_name}&t=details&id=" . $gizmo['id'];
         $delete = "?c={$this->controller_name}&t=details&id=" . $gizmo['id'];
         $activate = "?c={$this->controller_name}&t=details&id=" . $gizmo['id'];
-        print "$gizmo[id]\t$gizmo[name]\t[gizmo id='$gizmo[id]']\t<a href='$edit'>edit</a>\t<a href='$delete'>delete</a>\t<a href='$activate'>activate</a><br/>\n";
+//        print "$gizmo[id]\t$gizmo[name]\t[gizmo id='$gizmo[id]']\t<a href='$edit'>edit</a>\t<a href='$delete'>delete</a>\t<a href='$activate'>activate</a><br/>\n";
+        if ($gizmo['active']) 
+          $active = "<font color='green'>Active</font>";
+        else 
+          $active = "<font color='red'>Inactive</font>";          
+        print "$gizmo[id]\t$gizmo[name]\t$active\t[gizmo id='$gizmo[id]']\t<a href='$edit'>edit</a><br/>\n";        
       }
     }
 

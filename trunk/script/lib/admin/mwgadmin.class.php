@@ -37,7 +37,7 @@ class BMGenStaller {
     $this->registry = mwgDataRegistry::getInstance();
   }
 
-  function getMainMenuItems($selected) {
+  function getComponentMenuItems($selected) {
     $fullmenu = $this->registry->getMenu();
     $menu = '';
 
@@ -56,6 +56,29 @@ class BMGenStaller {
     //return $items;
     return $menu;
   }
+  
+  function getStandardMenuItems($selected) {
+    $items = array(
+      'settings'   => '<a href="index.php?menu=settings" class="a">Settings</a>',
+      'members'    => '<a href="members.php?menu=members" class="a">Members</a>',
+      'design'     => '<a href="promo.tools.php?menu=design" class="a">Site Design</a>',
+      'membership' => '<a href="membership.php?menu=membership" class="a">Membership Configuration</a>',
+      'help'       => '<a href="helpdesk.php?menu=help" class="a">Help Desk({newmessages})</a>',
+   );
+   
+   $menu = '';
+   foreach ($items as $item => $link) {
+      if ($item == $selected) {
+        $link = str_replace('class="a"', 'class="a_selected"', $link);
+      }
+      $menu .= "$link | ";     
+   }
+  
+   $menu .= '<a href="logout.php" class="a">Logout</a>';
+   return $menu;
+    
+  }
+  
 
   function getVersion() {
     static $version;
@@ -78,7 +101,7 @@ function genstall_admin_start() {
   ob_start();
 }
 
-function genstall_admin_end($t, $ocontent, $notemplate) {
+function Ogenstall_admin_end($t, $ocontent, $notemplate) {
 
   $msg = '';
   try {
@@ -99,21 +122,99 @@ function genstall_admin_end($t, $ocontent, $notemplate) {
     $t->pparse("out", "main");
   }
 
-
-
   $out = ob_get_clean();
+  $content = $out;
+  
   /** @var BMGenStaller */
   $gs = BMGenStaller::getInstance();
   // $items = $gs->getMainMenuItems();
   $component = $_GET['c'];
-  $new_menu = $gs->getMainMenuItems($component);
+  $new_menu = $gs->getComponentMenuItems($component);
 
   $orig_menu = '<a href="logout.php" class="a">Logout</a>';
   $out = str_replace($orig_menu, $orig_menu . "<br>\n" . $new_menu, $out);
 
   $r = mwgDataRegistry::getInstance();
   if ($msg) print "<center><font size='+2'><b>$msg</b></font></center>\n";
-  print $out;
+  
+  $select_menu = $_SESSION['menu'];
+  
+  $component_menu = $new_menu;
+  $menu = $gs->getStandardMenuItems($select_menu);
+  
+  $newmessages = MWG::getDb()->get_value('select count(*) from messages where member_id=1 and read_flag=0');
+  $submenu = $t->get_var('submenu');
+  $path = MWG_BASE . '/admin/templates/submenu/admin.main.'. $select_menu . ".html";
+  if (file_exists($path)) $submenu = file_get_contents($path);
+  
+  $head    = '';
+  $sitename = SITENAME;     
+  $version = file_get_contents(MWG_BASE .'/config/version');
+  trim($version);
+  trim($version);
+  
+  ob_start();
+  include('templates/admin.main.php');
+  $page = ob_get_clean();
+  $page = str_replace('{newmessages}', $newmessages, $page);
+
+  print $page;
+}
+
+function genstall_admin_end($t, $ocontent, $notemplate) {
+
+  if ($notemplate) {
+    echo $ocontent;
+  } else {
+    $t->set_var("content", $ocontent);
+    $t->pparse("out", "main");
+  }
+  $content = ob_get_clean();
+
+  $msg = '';
+  try {
+    if (needsUpdate($current, $latest)) {
+      $msg = "<div class='warn'>Update found! New Version $latest You are running $current.<br /> <a href='controller.php?c=updates'>Please upgrade now!</a></div>";
+    }
+  } catch(Exception $e) {
+    MWGHelper::setFlash('alert', "Could not reach update server. Please try again.<br> $e");      
+  }
+  $head = ''; 
+  $submenu = $t->get_var('submenu');
+  
+  $page = mwg_admin_decorate($content, $submenu, $msg, $head);
+  print $page;
+}
+
+
+function mwg_admin_decorate($content, $submenu, $message, $head) {
+  $gs = BMGenStaller::getInstance();
+  if (isset($_GET['c']))  
+    $component = $_GET['c'];
+  else 
+    $component = '';  
+
+
+  $component_menu = $gs->getComponentMenuItems($component);
+  $menu = $gs->getStandardMenuItems($select_menu);
+
+  $select_menu = $_SESSION['menu'];
+  if (!$submenu) {
+    $path = MWG_BASE . '/admin/templates/submenu/admin.main.'. $select_menu . ".html";
+    if (file_exists($path)) $submenu = file_get_contents($path);
+  }
+
+  $newmessages = MWG::getDb()->get_value('select count(*) from messages where member_id=1 and read_flag=0');  
+  $sitename = SITENAME;     
+  $version = trim(file_get_contents(MWG_BASE .'/config/version'));
+
+  
+  // content, menu, component_menu. message, head
+  ob_start();
+  include('templates/admin.main.php');
+  $page = ob_get_clean();
+  $page = str_replace('{newmessages}', $newmessages, $page);
+  return $page;  
 }
 
 

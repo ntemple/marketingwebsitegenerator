@@ -18,20 +18,7 @@
 	
 	$q=new Cdb;
 	FFileRead("templates/a.admin.template.main.htm",$content);
-	
-	if ($_SESSION['menu'] == ""){
-		$_SESSION['menu'] = "settings";
-	}elseif ($menu == "members"){
-			$_SESSION['menu'] = "members";
-	}elseif ($_GET['menu'] == "design"){
-			$_SESSION['menu'] = "design";
-	}elseif ($_GET['menu'] == "membership"){
-			$_SESSION['menu'] = "membership";
-	}elseif ($_GET['menu'] == "help"){
-			$_SESSION['menu'] = "help";
-	}elseif ($_GET['menu'] == "updates"){
-			$_SESSION['menu'] = "updates";
-	}
+
 	if($time_trigger!=1){
 		if($month_start=='') $month_start=date("n")-1;
 		if($month_end=='') $month_end=date("n");
@@ -107,17 +94,29 @@
 	$content=str_replace("{day_end}",$day_end_sel,$content);
 	$content=str_replace("{month_end}",$month_end_sel,$content);
 	$content=str_replace("{year_end}",$year_end_sel,$content);
-	FFileRead("templates/admin.main.".$_SESSION['menu'].".html",$main);
-	FFileRead("../config/version", $version);
-	$query="select id from messages where member_id=1 and read_flag=0";
-	$q->query($query);
-	$q->next_record();
-	$main=str_replace("{version}", $version, $main);
-	$main=str_replace("{content}",$content,$main);
-	$main=str_replace("{newmessages}",$q->nf(),$main);
-	$main=str_replace("{title}",$title,$main);
-	$main=str_replace("{sitename}",$sitename,$main);
-	$main=str_replace("{webmasteremail}",$webmasteremail,$main);
-	$main=str_replace("{year}", date("Y"),$main);
-	echo $main;
+	
+  //@todo: fix Completely different implementation
+//  
+//  FFileRead("templates/admin.main.".$_SESSION['menu'].".html",$main);
+//	FFileRead("../config/version", $version);
+//	$query="select id from messages where member_id=1 and read_flag=0";
+//	$q->query($query);
+//	$q->next_record();
+//	$main=str_replace("{version}", $version, $main);
+//	$main=str_replace("{content}",$content,$main);
+//	$main=str_replace("{newmessages}",$q->nf(),$main);
+//	$main=str_replace("{title}",$title,$main);
+//	$main=str_replace("{sitename}",$sitename,$main);
+//	$main=str_replace("{webmasteremail}",$webmasteremail,$main);
+//	$main=str_replace("{year}", date("Y"),$main);
+  // echo $main;
+  
+  ///////////////////////
+  include("skin.php");
+ //  print "a.adm.main..php";
+
+//  print $content;
+  genstall_admin_end($t, $content, false);  
+
+ 
 ?>

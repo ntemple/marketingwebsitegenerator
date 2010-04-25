@@ -13,6 +13,12 @@
  * See COPYRIGHT.php for copyright notices and details.
  */
 
+ /**
+ * This doesn't use the standard inc.bottom.php for some reason
+ * prime canidtate for refactoring
+ * @tdodo refactor templates.php
+ * @todo TEST: Site Design | Site Templates
+ */
  
 	include("inc.top.php");
 	$t->set_file("content", "admin.templates.html");
@@ -99,23 +105,10 @@
 	}
 	else
 	$t->set_var("back", "");
-	if ($_SESSION['menu'] == ""){
-		$_SESSION['menu'] = "settings";
-	}elseif ($menu == "members"){
-			$_SESSION['menu'] = "members";
-	}elseif ($_GET['menu'] == "design"){
-			$_SESSION['menu'] = "design";
-	}elseif ($_GET['menu'] == "membership"){
-			$_SESSION['menu'] = "membership";
-	}elseif ($_GET['menu'] == "help"){
-			$_SESSION['menu'] = "help";
-	}elseif ($_GET['menu'] == "updates"){
-			$_SESSION['menu'] = "updates";
-	}
-	$t->set_file("main", "admin.main.".$_SESSION['menu'].".html");
-	$t->set_var("sitename", SITENAME);
-	$ocontent=$t->parse("page", "content");
-	$t->set_var("content", $ocontent);
+
+
+  ///////////////////////////
+  include("skin.php");
 	$final=$t->pparse2("out", "main");
 	
 	if ($notemplate)
@@ -151,6 +144,6 @@
 	FFileRead("../config/version", $version);
 	$final=str_replace("{version}", $version, $final);
 	$final=str_replace("[[content_template]]", htmlspecialchars(stripslashes($file_c)), $final);
-	echo $final;
-	
-?>
+  
+  genstall_admin_end($t, $final, $notemplate);  
+

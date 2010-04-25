@@ -711,30 +711,34 @@ if ($page) { $t->set_var("page", $page); } else { $t->set_var("page", "1"); }
 	$t->set_var("month_end",$month_end_sel);
 	$t->set_var("year_end",$year_end_sel);
 	
-	if ($_GET['menu'] == "settings"){
-		$_SESSION['menu'] = "settings";
-	}elseif ($_GET['menu'] == "members"){
-			$_SESSION['menu'] = "members";
-	}elseif ($_GET['menu'] == "design"){
-			$_SESSION['menu'] = "design";
-	}elseif ($_GET['menu'] == "membership"){
-			$_SESSION['menu'] = "membership";
-	}elseif ($_GET['menu'] == "help"){
-			$_SESSION['menu'] = "help";
-	}elseif ($_GET['menu'] == "updates"){
-			$_SESSION['menu'] = "updates";
-	}
-	$t->set_file("main", "admin.main.".$_SESSION['menu'].".html");
-	
-	$query="select id from messages where member_id=1 and read_flag=0";
-	$q->query($query);
-	$q->next_record();
-	FFileRead("../config/version", $version);
-	$t->set_var("version", $version);
-	$t->set_var("newmessages", $q->nf());
-	$t->set_var("sitename", SITENAME);
-	
-	$ocontent=$t->parse("page", "content");
+  /////////////////
+  include("skin.php");
+  print "members.new.php";
+
+//	if ($_GET['menu'] == "settings"){
+//		$_SESSION['menu'] = "settings";
+//	}elseif ($_GET['menu'] == "members"){
+//			$_SESSION['menu'] = "members";
+//	}elseif ($_GET['menu'] == "design"){
+//			$_SESSION['menu'] = "design";
+//	}elseif ($_GET['menu'] == "membership"){
+//			$_SESSION['menu'] = "membership";
+//	}elseif ($_GET['menu'] == "help"){
+//			$_SESSION['menu'] = "help";
+//	}elseif ($_GET['menu'] == "updates"){
+//			$_SESSION['menu'] = "updates";
+//	}
+//	$t->set_file("main", "admin.main.".$_SESSION['menu'].".html");
+//	
+//	$query="select id from messages where member_id=1 and read_flag=0";
+//	$q->query($query);
+//	$q->next_record();
+//	FFileRead("../config/version", $version);
+//	$t->set_var("version", $version);
+//	$t->set_var("newmessages", $q->nf());
+//	$t->set_var("sitename", SITENAME);
+//	
+//	$ocontent=$t->parse("page", "content");
 	echo '<div id="members_content_hide" name="members_content_hide">'.$ocontent.'</div>';
 	
 	die("<script> parent.document.getElementById('members_content').innerHTML=document.getElementById('members_content_hide').innerHTML;document.getElementById('members_content_hide').innerHTML=''; </script>");
