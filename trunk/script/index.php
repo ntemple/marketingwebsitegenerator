@@ -12,10 +12,8 @@
  * other free or open source software licenses.
  * See COPYRIGHT.php for copyright notices and details.
  */
-
-
-    if (file_exists('install') && !is_dir('.svn')) {
-        header('location: install/index.php');
+    if (file_exists('install')) {
+        header('Location: install/index.php');
         exit();
     }
 
