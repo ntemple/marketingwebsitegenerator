@@ -25,6 +25,7 @@ if (get_setting("activation_email")==1)
   $emailsubject=str_replace("{activation_link}", get_setting("site_full_url")."activate.php?code=".$q->f("code"), $emailsubject);
   $emailbody=get_setting("activation_email_body");
   $emailbody=str_replace("{activation_link}", get_setting("site_full_url")."activate.php?code=".$q->f("code"), $emailbody);
-  mwg_mail($email, email_replace2($emailsubject,$member_id), email_replace2($emailbody), "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">");
+  mwg_mail($email, email_replace2($emailsubject,$member_id), email_replace2($emailbody, $member_id), 
+           "From: ".get_setting("emailing_from_name")." <".get_setting("emailing_from_email").">");
 }
 include ("inc.bottom.php");
