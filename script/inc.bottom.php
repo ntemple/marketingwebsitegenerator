@@ -51,7 +51,8 @@ if (isset($sess_id)) {
 	$membership_id = $q2->f("membership_id");
 	$t->set_var("menu", stripslashes(generate_members_menu($membership_id)));
 	get_logged_info();
-	$t->set_var("inbox", get_unread_inbox($q->f("id")));
+        $unread_inbox = get_unread_inbox($q->f("id"));
+	$t->set_var("inbox", $unread_inbox);
 	$user_id = $q->f("id");
 	$member_id = $q->f("id");
 } else {

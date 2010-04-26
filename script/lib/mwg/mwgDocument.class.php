@@ -109,6 +109,7 @@ class mwgDocument {
   * 
   */
   function renderDocument() {
+    global $unread_inbox; // @todo make this a gizmo
     $content = $this->content;
 
     $newbody = implode("\n", $this->before_body_end ) . "</body>";
@@ -117,22 +118,10 @@ class mwgDocument {
     $head = $this->getHead();
     $content = str_ireplace('</head>', "$head</head>", $content);
     $content = preg_replace("|<title>(.*?)</title>|i", "<title>" . $this->getTitle() . "</title>", $content);
-    
+    $content = str_replace('{inbox}',  $unread_inbox, $content);
+
     return $content;
   }
 
 }
 
-  function do_reg($regex, $text)
-  {
-    preg_match_all("|$regex|", $text, $result, PREG_SET_ORDER );
-    print_r($result);
-
-
-    for ($matchi = 0; $matchi < count($result); $matchi++) {
-      for ($backrefi = 0; $backrefi < count($result[$matchi]); $backrefi++) {
-        $result[$matchi][$backrefi];
-      } 
-    }
-    print_r($result);
-  }
