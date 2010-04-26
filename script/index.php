@@ -13,8 +13,10 @@
  * See COPYRIGHT.php for copyright notices and details.
  */
     if (file_exists('install')) {
+      if (!file_exists('install/.svn')) {
         header('Location: install/index.php');
         exit();
+      }
     }
 
     include("inc.all.php");
