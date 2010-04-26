@@ -248,6 +248,8 @@
         @unlink($package);
         throw $e;
       }
+      @unlink($package);
+
 
       return $this->view('info', "Package $identity installed.");
     } catch (Exception $e) {
