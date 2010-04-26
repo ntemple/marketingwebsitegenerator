@@ -167,9 +167,10 @@
       MWGHelper::rmdir_recurse($package_tmp_path);
       throw new Exception("Invalid Package file, missing manifest");
     } 
+
     $mf = $result['mf'];
     $srcdir = $result['base'];
-    $file = $result['$file'];
+    $file = $result['file'];
 
     $identity = strtolower($mf['identity']);
     $ident = explode('.', $identity);    
@@ -185,9 +186,9 @@
 
     switch($type) {
       case 'package':    break;
-      case 'components': $installpath = MWG_BASE . "$type/$name/"; break;      
-      case 'themes':     $installpath = MWG_BASE . "$type/$name/"; break;      
-      case 'gizmos':     $installpath = MWG_BASE . "$type/"; break;
+      case 'components': $installpath = MWG_BASE . "/$type/$name/"; break;      
+      case 'themes':     $installpath = MWG_BASE . "/$type/$name/"; break;      
+      case 'gizmos':     $installpath = MWG_BASE . "/$type/"; break;
       case 'plugins':    $subtype = $ident[2];
         $name    = $ident[3];
         $installpath = MWG_BASE . "/$type/$subtype/$name"; break;
