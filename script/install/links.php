@@ -14,10 +14,12 @@
  */
 
  
-	session_start();
-	session_destroy();
+session_start();
+session_destroy();
 	
 ?>
+<html>
+<head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"><style type="text/css">
 <!--
 body {
@@ -30,6 +32,11 @@ body {
 .style3 {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; }
 -->
 </style>
+</head>
 <body>
+<center>
+<iframe src="http://marketingwebsitegenerator.com/confirm/register.php" width="610" height="400" frameborder="0"></iframe>
+</center>
 <p align="center">Cick here to go to your <a href="../admin/" target="_parent">admin area</a>. </p>
 </body>
+</html>
