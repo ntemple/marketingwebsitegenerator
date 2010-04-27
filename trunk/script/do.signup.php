@@ -366,6 +366,7 @@ if ($aim_in_use && isset($cardNumber) && $cardNumber=='' && get_setting('free_si
 				)";
 				$q->query($query);
 				$member_id = mysql_insert_id($q->link_id());
+        MWG::getInstance()->runEvent('afterSignup', $member_id, $pasword); // NLT Event
 				// create the session for this new member
 				$sess_id = md5(get_setting("secret_string").$member_id);
 				$query = "update members set mdid='".md5(get_setting("secret_string").$member_id)."' where id='$member_id'";

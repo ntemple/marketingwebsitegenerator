@@ -12,5 +12,5 @@ meta:
   description: Example Gizmo for Marketing Website Generator
   copyright:   (c)2010 Intellispire, LLC
   license: GPLv2
-documentation: This ia an example Gizmo. Read the code to see how to write one
+documentation: This is an example Gizmo. Read the code to see how to write one.
   
