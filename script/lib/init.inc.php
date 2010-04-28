@@ -16,6 +16,10 @@
 define('_MWG', true);
 define('_SB_VALID_', true);
 
+// Session timeout 1 hour. 
+// This should be a setting or in constants
+ini_set('session.gc_maxlifetime', 60*60);
+
 define('MWG_BASE',   dirname(dirname(__FILE__)));
 define('MWG_ADMIN',  MWG_BASE . '/admin');
 define('MWG_LIB',    MWG_BASE . '/lib');

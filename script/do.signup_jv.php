@@ -235,7 +235,7 @@ if (get_setting("cut_signup")!=1){
 		$q->query($query);
 		
 		$member_id=mysql_insert_id($q->link_id());
-    MWG::getInstance()->runEvent('afterSignup', $member_id, $pasword); // NLT Event
+    MWG::getInstance()->runEvent('afterSignup', array($member_id, $password)); // NLT Event
 		
 		updateHistory($member_id, $membership_id, true);
 		

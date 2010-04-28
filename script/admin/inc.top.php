@@ -29,5 +29,11 @@ if (isset($admin_sess_id))
 		die();
 	}
 }
+
+// Some scripts are calling this from the
+// front-end without proper initialization
+// do.admin.login, specifically.
+if (function_exists('genstall_admin_start')) {
 genstall_admin_start();
+}
 
