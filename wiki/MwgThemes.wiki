@@ -50,16 +50,17 @@ meta:
  * MWG creates the "inner" content using the existing template system, and "buffers" the output. This becomes the "post" (wordpres) or "content" (joomla)
 
  * if a theme is activated, it then loads a basic "compatibility" set of functions and "runs" the theme (wordpress or Joomla! - index.php in the theme)
-- the output is buffered, and the the entire page is parsed by MWG, and fixups are added (shortcodes, like headers and titles)
+
+ * the output is buffered, and the the entire page is parsed by MWG, and fixups are added (shortcodes, like headers and titles)
 
 
 To make the theme work "correctly": install it, then view the site, see what breaks, and go in and fix it - preferably in the core, rather than the theme - and send in a patch.
+
+Each iteration gives us better core compatibility.
 
 The files you want are:
 code.google.com/p/marketingwebsitegenera...pt/components/themes
 
 I'd like to move those to /lib/compat at some point, so we can have somewhat complete compatibility subsystems, and not tie those into the core.
-
-I'm especially interested in getting Artisteer themes working since they seem to use consistent functions.
 
 
