@@ -1,0 +1,77 @@
+<script>
+function checkedAll_old (checked, id) {
+	var el = document.getElementById(id);
+	for (var i = 0; i < el.elements.length; i++) {
+		if (document.getElementById("joined") != el.elements[i])
+	  		el.elements[i].checked = checked;
+	}
+}
+	</script>
+<style type="text/css">
+<!--
+.style4 {
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+-->
+</style>
+<form action="activity.php" method="get" name="form1" id="form1">
+  <p><font color="#076C9F" size="5"><strong> Member Search </strong></font></p>
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>Who Logged in
+        <input type="radio" value="1" id="show" name="show" onclick="document.form1.days.options[0].selected=true;document.form1.days.options[0].value=1;document.form1.submit();" {chck_interval_1}/></td>
+      <td> Who did not login
+        <input type="radio" value="2" id="show" name="show" onclick="document.form1.days.options[0].selected=true;document.form1.days.options[0].value=14;document.form1.submit();" {selected_interval_2}/></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td> Choose interval</td>
+      <td><select name="days" onchange="document.form1.submit();">
+          
+      	{days}
+      	
+        </select></td>
+    </tr>
+    <tr>
+      <td colspan="4" align="center"><p><a href="export.as.csv_activity.php?{filter}&type=2">Export Current Search Filter as COMMA 
+          Delimited CSV - MS Excel Compatible</a></p></td>
+    </tr>
+    <tr>
+      <td colspan="4" align="center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan="4" align="center">{next_prev}</td>
+    </tr>
+  </table>
+</form>
+<form name="members" id="members" action="do.delete.members.php" method="post">
+  <table width="90%" border="0" cellpadding="0" cellspacing="3" align="center">
+    <tr>
+      <td><table width="90%" border="0" cellpadding="0" cellspacing="3" align="center" style="border: 2px solid #000066;">
+          <tr>
+            <td><table width="90%" border="0" cellpadding="0" cellspacing="2" align="center">
+                <tr bgcolor="#E6F4FB">
+                  <td><b>Membership</b></td>
+                  <td><b>Action</b></td>
+                  <td><b>id</b></td>
+                  <td><b>email</b></td>
+                  <td><b>first_name</b></td>
+                  <td><b>last_name</b></td>
+                  <td><b>paypal_email</b></td>
+                  <td><b>s_date</b></td>
+                  <td><b>aff</b></td>
+                  <td><b>jv</b></td>
+                  <td><b>Last Login</b></td>
+                </tr>
+                {activity_rows}
+              </table></td>
+          </tr>
+        </table></td>
+    </tr>
+  </table>
+  <p align="center">&nbsp; </p>
+</form>

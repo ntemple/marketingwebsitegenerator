@@ -1,0 +1,34 @@
+<p><font color="#076C9F"><b><font size="5">Create/Edit Custom Keywords</font></b><br></font>
+<p>This page controls the default meta description and meta geywords for your site, and is under revision.</p>
+<p>For true SEO capability, and the ability to control the individual title, meta description and keywords for each page, please install the MWG "meta" gizmo.</p>
+<p>For the record, search engines ignore the keywords field.  The first 150 characters of the meta description is very important as that is the text that will show up 
+in search engines like Google. Write it to read like a relevant, mini-advertisement for the page.</p>
+<p>Enter your keywords here. The keywords are your 
+  services and your products which you sell or promote inside the text from this 
+  page (it can be a single word but is preferable to be composed of 2 or 3 words 
+  as this is how search engine visitors usually search). It is recommended that 
+  you build first your keywords list (search engines makes difference between 
+  singular and plural forms) and then make your page text and include them as 
+  natural as possible and repeat each keyword several times inside the text. Build 
+  your text from the site having in mind your possible clients and not search 
+  engines, make them take the action you want. </font>
+<p>Please insert them here in order of their importance. Insert 
+  first the most important keyword and so on, because your browser title will be automatically generated from the first 3-4 keywords, depending on how many words they contain (because it is recommended not to have more than 9 words in the browser title).</font>
+<form name="form1" method="post" action="do.keywords.changes.php" onsubmit="if (document.form1.description.value.length > 255){ (alert('The description has more than 255 characters')); return false;}">
+  <p><b><font size="4">Your Title Tags Keywords</font></b></p>
+  <p>Insert Your Keywords separated with a comma like:<br>
+    <font face="Courier New">Dogs, dog food, cats, cat food, animal food<br>
+    </font>This will show in your Title Bar on your site and it is import to the search engines.</p>
+  <textarea name="keywords" id="keywords" rows="4" cols="72">{keywords}</textarea>
+  <br>
+  <input name="Do Changes1" type="submit" id="Do Changes0" value="Do changes">
+  <p><b><font size="4">Current Meta-Description</font><br>
+    Enter here a short description of your page. The description should have less than 250 characters.</b></p>
+  <textarea name="description" id="description" rows="2" cols="72">{description}</textarea>
+  <br />
+  <input type="checkbox" name="from_html" id="from_html" value="1">
+  If you want the description to be created from the first 250 characters from your home page text <br />
+  <br />
+  <input name="Do Changes" type="submit" id="Do Changes" value="Do changes">
+</form>
+
