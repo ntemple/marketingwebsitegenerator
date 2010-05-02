@@ -1,0 +1,29 @@
+<form action="import.csv.step2.php" method="post" enctype="multipart/form-data" name="form1">
+  <p><font color="#076C9F"><b><font size="5">Import Data From CSV - Comma delimited</font></b><br>
+    </font><span style="font-weight: 400"><strong style="font-weight: 400"> <span style="font-size: 10pt">If you would like to import members (or any list 
+    of names and email data and more), simply upload the file from your computer 
+    in the section below. After step #1 is added, you will be prompted to assign 
+    each column in your spread sheet to a field in the database for the members 
+    profile. Make sure your data is saved in CSV (Comma Delimited) format. You can 
+    save any files with MS Excel as &quot;Save As&quot; CSV</span></strong></span></p>
+  <div align="center">
+    <center>
+      <table width="632" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse" bordercolor="#111111">
+        <tr bgcolor="#efefef">
+          <td colspan="2" width="632"><h4>Step #1 - Select File </h4></td>
+        </tr>
+        <tr>
+          <td colspan="2" style="color:red" width="632"><strong>{error}</strong></td>
+        </tr>
+        <tr>
+          <td width="99">File:</td>
+          <td width="533"><input name="file1" type="file" id="file1" size="20"></td>
+        </tr>
+        <tr>
+          <td width="99"><input type="submit" value="Import File"></td>
+          <td width="533">&nbsp;</td>
+        </tr>
+      </table>
+    </center>
+  </div>
+</form>
