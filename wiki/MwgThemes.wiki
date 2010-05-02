@@ -1,0 +1,20 @@
+#introduction to themes in MWG
+
+= Themes =
+
+Themes control the look and feel (decoration) of your website.  Sometimes themes are also  called "templates", however to avoid confusion with other parts of the system, "themes" is the preferred term.
+
+With MWG, you can handle themes in one of 4 different ways:
+  * The legacy theme is controlled by the template [http://code.google.com/p/marketingwebsitegenerator/source/browse/trunk/script/templates/main.html templates/homepage] The default theme is changed by editing this page.
+  * The Wordpress Theme Subsystem runs some Wordpress themes
+  * The Joomla! Theme Subsystem runs some legacy joomla 1.0 themes
+  * (upcoming in 1.1.2) Native MWG themes are to be available in 1.1.2 via the Smarty templating engine.
+  
+
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
