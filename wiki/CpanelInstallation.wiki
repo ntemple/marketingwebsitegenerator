@@ -39,8 +39,7 @@
   # Enter DB host, and 99% of the time indicate “localhost”.
   # Enter DB name: in our example its “identifier_mwg”
   # When all boxes filled, click next
-  # On this page an instruction to delete the "install" folder in your server.
-  * Go to your cPanel, click file manager > directory where your MWG files reside (eg. /public_html/mwg ), then check "install" folder and delete that.
+  # On this page an instruction to delete the "install" folder in your server. Go to your cPanel, click file manager > directory where your MWG files reside (eg. /public_html/mwg ), then check "install" folder and delete that.
   # You can now log-in at the administrator page (page on item# 13), and you should see the backend of your new MWG website.
   # Do some post install/Crons set-up for your site. On cPanel/File manager, CHMOD tempates & verify folder set from 777 to 644 for security purpose. There is a key icon on top to do just that.
   # Set Cron jobs. What cron jobs will do is to automate some of your email & autoresponder settings within the MWG.
