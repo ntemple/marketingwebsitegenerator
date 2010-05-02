@@ -59,8 +59,6 @@ meta:
 documentation: This is an example Gizmo. Read the code to see how to write one.
 }}}
 
-== Additionl files ==
+== Additional files ==
 
 If the gizmo requires additional implementation files, they should be stored in the directory *gizmoname* (example, in this case), which will be copied (along with the rest of the files) to the /gizmos/ directory upon installation.
-
-
