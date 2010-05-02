@@ -13,13 +13,14 @@ With MWG, you can handle themes in one of 4 different ways:
 
 == Packaging a Theme ==
 A Joomla, Wordpress or MWG theme must be a zip file with a single subdirectory that contains the name of the theme, and are loaded to the themes directory,
-
+{{{
 / MWG ROOT
 /themes/
 /themes/nameoftheme/
 /themes/nameoftheme/index.php <- main theme file
 /themes/nameoftheme/nameoftheme.yml.php <- MWG Manifest
-/themes/nameoftheme/(additional) Additional files needed to run the theme. 
+/themes/nameoftheme/(additional) Additional files a directories needed to run the theme. 
+}}}
 
 For the most part, Joomla and Wordpress themes can be installed as is, just add an appropriate manifest so that the system knows where to install it:
 
@@ -60,7 +61,5 @@ code.google.com/p/marketingwebsitegenera...pt/components/themes
 I'd like to move those to /lib/compat at some point, so we can have somewhat complete compatibility subsystems, and not tie those into the core.
 
 I'm especially interested in getting Artisteer themes working since they seem to use consistent functions.
-
-
 
 
