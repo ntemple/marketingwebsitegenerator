@@ -303,7 +303,7 @@ CREATE TABLE `members` (
   KEY `aff` (`aff`),
   KEY `membership_id` (`membership_id`)
 ) TYPE=MyISAM AUTO_INCREMENT={autoincrementstartfrom};
-INSERT INTO `members` VALUES (1, 'HelpDesk', 'Support', 'support@sitename.com', NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 10, 1138665223, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, '', 0, '0000-00-00', 0, 0, '', 0, '0000-00-00 00:00:00', '', 0, 0, '');
+INSERT INTO `members` VALUES (1, 'HelpDesk', 'Support', 'support@example.com', NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 10, 1138665223, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, '', 0, '0000-00-00', 0, 0, '', 0, '0000-00-00 00:00:00', '', 0, 0, '');
 CREATE TABLE `membership` (
   `id` int(3) NOT NULL auto_increment,
   `name` varchar(255) NOT NULL default '',
@@ -501,10 +501,10 @@ CREATE TABLE `settings` (
   KEY `cat` (`cat`)
 ) TYPE=MyISAM COMMENT='Settings table' AUTO_INCREMENT=3329 ;
 INSERT INTO `settings` VALUES (15, 'enable_oto_1', '', 'checkbox', 'Enable one time offer after sign up ? If you leave this checked the new members will get the one time offer page after they sign up. If you uncheck it then they will be driven directly to members area.', 'General Site Settings', 15);
-INSERT INTO `settings` VALUES (13, 'paypal_email', 'paypal@sitename.com', 'input', '<b><font color="#003366">PAYPAL: </font></b> Enter your paypal address where you would like to receive payments', 'Payment', 14);
+INSERT INTO `settings` VALUES (13, 'paypal_email', 'paypalexample.com', 'input', '<b><font color="#003366">PAYPAL: </font></b> Enter your paypal address where you would like to receive payments', 'Payment', 14);
 INSERT INTO `settings` VALUES (10, 'free_signup', '1', 'checkbox', 'Check this box if you want members to sign up for free at the site. Uncheck this box if you want people to pay to become a member. (NOTE: The new One-Click OTO upsell function using Authorize.net requires that this box NOT be checked so the user must make a purchase to get into the site.)', 'Sign Up', 10);
 INSERT INTO `settings` VALUES (14, 'accept_paypal', '', 'checkbox', '<b><font color="#003366">PAYPAL: </font> Accept payments via paypal ?</b>', 'Payment', 13);
-INSERT INTO `settings` VALUES (9, 'emailing_from_email', 'owner@sitename.com', 'input', 'The Email Address that will appear in the From: field of the emails sent (welcome emails, lost password emails, ...)', 'Automatically Generated Emails on Sign Up and Lost Password', 9);
+INSERT INTO `settings` VALUES (9, 'emailing_from_email', 'owner@example.com', 'input', 'The Email Address that will appear in the From: field of the emails sent (welcome emails, lost password emails, ...)', 'Automatically Generated Emails on Sign Up and Lost Password', 9);
 INSERT INTO `settings` VALUES (8, 'emailing_from_name', 'Site Owner', 'input', 'The Name that will appear in the From: field of the emails sent (welcome emails, lost password emails, ...)', 'Automatically Generated Emails on Sign Up and Lost Password', 8);
 INSERT INTO `settings` VALUES (7, 'send_welcome_emails', '1', 'checkbox', 'Send welcome emails to new members ?', 'Automatically Generated Emails on Sign Up and Lost Password', 3);
 INSERT INTO `settings` VALUES (6, 'lostpass_email_body', 'Hi [firstname],\r\n\r\nyour password: [password]\r\n\r\nThank you,\r\n\r\n[sitename]\r\nAdmin.', 'textbox', 'Lost password email body', 'Automatically Generated Emails on Sign Up and Lost Password', 6);
@@ -512,7 +512,7 @@ INSERT INTO `settings` VALUES (5, 'lostpass_email_subject', '[firstname], your p
 INSERT INTO `settings` VALUES (4, 'welcome_email_body', 'Hi [firstname],\r\n\r\nwelcome to [sitename], \r\n\r\nyour login info is:\r\n\r\nemail: [email]\r\npassword: [password]\r\n\r\nThank you,\r\n\r\n[sitename]\r\nAdmin.', 'textbox', 'New member welcome email body.', 'Automatically Generated Emails on Sign Up and Lost Password', 4);
 INSERT INTO `settings` VALUES (3, 'welcome_email_subject', '[firstname], welcome to [sitename] !', 'input', 'New member welcome email subject.', 'Automatically Generated Emails on Sign Up and Lost Password', 3);
 INSERT INTO `settings` VALUES (19, 'site_full_url', '', 'input', 'The full URL to your site including folder if necessary(Example: <b>http://www.minigolf.com/</b> or <b>http://www.minigolf.com/ball/</b>)', 'General Site Settings', 19);
-INSERT INTO `settings` VALUES (2, 'webmaster_contact_email', 'email@email.com', 'input', 'Email address where the contact form should send the messages', 'General Site Settings', 2);
+INSERT INTO `settings` VALUES (2, 'webmaster_contact_email', 'email@example.com', 'input', 'Email address where the contact form should send the messages', 'General Site Settings', 2);
 INSERT INTO `settings` VALUES (20, 'txn_id', '', 'input', '<b><font color="#003366">PAYPAL: </font></b> Paypal TXN_ID setting, this is used for paypal instant payment notification and it''s a temporary payment session ID, do not modify', 'Payment', 20);
 INSERT INTO `settings` VALUES (1, 'site_name', 'Generator 1.0', 'input', 'Your Site Name', 'General Site Settings', 1);
 INSERT INTO `settings` VALUES (16, 'enable_oto_2', '', 'checkbox', 'Check this box if you want an one time offer upsell(2nd one time offer) after member paid for one time offer.', 'General Site Settings', 16);
@@ -521,7 +521,7 @@ INSERT INTO `settings` VALUES (18, 'secret_string', 'changeme', 'input', 'A uniq
 INSERT INTO `settings` VALUES (21, 'bm_aff_link', '', 'input', 'Your MWG Affiliate link', 'MWG Affiliate', 21);
 INSERT INTO `settings` VALUES (22, 'enable_bm_aff_link', '1', 'select', 'Enable your MWG Affiliate Link at the bottom of your site. If you do not have a MWG Affiliate Link please <a href="http://marketingwebsitegenerator.com/go/affiliate" target=_blank>click here</a> to get one.', 'MWG Affiliate', 22);
 INSERT INTO `settings` VALUES (31, 'enable_arp', '', 'hidden', 'Enable subscription to 3rd Party autoresponders for new members', '3rd Party Autoresponder', 31);
-INSERT INTO `settings` VALUES (32, 'arp_email', 'arp@arp.com', 'hidden', 'The Email Address of the 3rd Party Autoresponder', '3rd Party Autoresponder', 32);
+INSERT INTO `settings` VALUES (32, 'arp_email', 'arp@example.com', 'hidden', 'The Email Address of the 3rd Party Autoresponder', '3rd Party Autoresponder', 32);
 INSERT INTO `settings` VALUES (33, 'arp_message_subject', 'Subject for arp email', 'hidden', 'This is the subject of the mail that will be sent to the autoresponder for subscription', '3rd Party Autoresponder', 33);
 INSERT INTO `settings` VALUES (34, 'arp_message_body', 'Body of email', 'hidden', 'This is the body of the mail that will be sent to the autoresponder for subscription', '3rd Party Autoresponder', 34);
 INSERT INTO `settings` VALUES (35, 'enable_profile_directory', '1', 'hidden', 'Enable profile directory in members area ?', 'General Site Settings', 35);
