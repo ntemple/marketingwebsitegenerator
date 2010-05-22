@@ -188,6 +188,7 @@ class Template
     if ($this->debug & 4) {
       echo "<p><b>Template:</b> root = $root, unknowns = $unknowns</p>\n";
     }
+    $this->path = MWG::getInstance()->getTemplatePath();
     $this->set_root($root);
     $this->set_unknowns($unknowns);
   }
@@ -843,6 +844,7 @@ $str = ob_get_clean();
   * @see       set_root
   */
   function filename($filename) {
+
     if ($this->debug & 4) {
       echo "<p><b>filename:</b> filename = $filename</p>\n";
     }
@@ -854,20 +856,16 @@ $str = ob_get_clean();
       } else {
         $this->halt("filename: file $filename does not exist.");
       }
-    
-      $filename = $this->root."/".$filename;
-    } 
-
-    // Root?
-    if (file_exists( $this->root."/".$filename)) {
-      return $this->root."/".$filename;;
+      $this->halt("filename 2: file $filename does not exist.");
     } 
    
+    $searchpath = $this->path;
+    array_push($searchpath, $this->root);
+
     // Else check path
-    foreach ($this->path as $path) {
-      if (file_exists("$path/$filename")) {
-        return "$path/$filename";
-      }
+    foreach ($searchpath as $path) {
+      $filepath = realpath("$path/$filename");
+      if ($filepath) return $filepath;
     }
 
     // no luck
@@ -928,7 +926,9 @@ $str = ob_get_clean();
       }
       return true;
     }
+
     $filename = $this->file[$varname];
+
     /* use @file here to avoid leaking filesystem information if there is an error */
     $str = implode("", @file($filename));
     if (empty($str)) {
