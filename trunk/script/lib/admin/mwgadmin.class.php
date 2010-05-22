@@ -64,6 +64,7 @@ class BMGenStaller {
       'design'     => '<a href="promo.tools.php?menu=design" class="a">Site Design</a>',
       'membership' => '<a href="membership.php?menu=membership" class="a">Membership Configuration</a>',
       'help'       => '<a href="helpdesk.php?menu=help" class="a">Help Desk({newmessages})</a>',
+      'reports'    => '<a href="siteoverview.php?menu=reports" class="a">Reports</a>',
    );
    
    $menu = '';
@@ -73,8 +74,10 @@ class BMGenStaller {
       }
       $menu .= "$link | ";     
    }
+   trim($menu);
+   trim($menu, '|');
   
-   $menu .= '<a href="logout.php" class="a">Logout</a>';
+#   $menu .= '<a href="siteoverview.php?menu=settings" class="a">Reports</a>';
    return $menu;
     
   }

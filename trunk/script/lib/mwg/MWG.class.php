@@ -153,7 +153,16 @@ class MWG {
     }    
   }
 
+  /**
+   * @todo: return the search path for the active theme
+   */
+  function getTemplatePath() {
+//    return array('/var/www/html/mwg/script/themes/mwg-default');
+    return array();
+  }
+
   function start() {
+    $this->runEvent('afterStart', array($this->request, $this->response));
   }
 
   function end(Template $tpl) {

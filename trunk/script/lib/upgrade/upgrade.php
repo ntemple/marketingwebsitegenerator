@@ -27,6 +27,9 @@ function upgrade(mysqldb $db) {
   } else {
     $db_version = '1.0';
   }
+
+  $queries = array();
+
   if ($db_version == '1.0') {
     $queries = @file(MWG_BASE . '/lib/upgrade/upgrade-1.0.txt');
     foreach ($queries as $q) {
@@ -34,7 +37,16 @@ function upgrade(mysqldb $db) {
     }
     $db_version = $db->get_value('select value from mwg_setting where name=?', 'site_dbversion');
   }
-  
+
+  # We may need to upgrade again
+  if ($db_version == '1.1') {
+    $queries = @file(MWG_BASE . '/lib/upgrade/upgrade-1.1.txt');
+    foreach ($queries as $q) {
+      if ($q) $db->query($q);
+    }
+    $db_version = $db->get_value('select value from mwg_setting where name=?', 'site_dbversion');
+  }
+
   return $db_version;
 }
 
