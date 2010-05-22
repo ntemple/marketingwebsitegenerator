@@ -62,7 +62,8 @@ class modelThemes {
     $dirs = $this->listDir($base);
     foreach ($dirs as $file) {
       if (file_exists("$base/$file/templateDetails.xml")) $this->themes[$file] = 'joomla';
-      if (file_exists("$base/$file/screenshot.png"))      $this->themes[$file] ='wordpress';      
+      if (file_exists("$base/$file/screenshot.png"))      $this->themes[$file] = 'wordpress';      
+      if (file_exists("$base/$file/main.html"))           $this->themes[$file] = 'mwg';
     }
     
     return $this->themes;    
@@ -107,6 +108,7 @@ class modelThemes {
     switch($theme_type) {
       case 'wordpress': $out = $this->processWordpress(); break;
       case 'joomla':    $out = $this->processJoomla(); break;
+      case 'mwg':       $out = $this->processMWG($tpl, MWG::getInstance()->document); break;
       default:          $out = $this->processDefault($tpl, MWG::getInstance()->document); break;
     }    
     return $out;
@@ -147,6 +149,20 @@ class modelThemes {
     $out = ob_get_clean();
     return str_replace('/templates/', '/themes/', $out);
   }
+
+  function processMWG(Template $tpl, mwgDocument $document) {
+    $mwg = MWG::getInstance();
+// Too late to do this
+//    $tpl->addpath($this->themedir . '/templates');  
+    $tpl->set_var('document_title', $document->getTitle());
+
+    ob_start();
+    $tpl->pparse("out", "main");
+    $out = ob_get_clean();
+    return $out;
+
+  }
+
 
 }
 

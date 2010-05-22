@@ -15,6 +15,9 @@
 
  
 include("inc.all.php");
+
+MWG::getInstance()->runEvent('beforeSignup', array());
+
 $q2 = new Cdb;
 $q3 = new Cdb;
 foreach ($_REQUEST as $key=>$value){

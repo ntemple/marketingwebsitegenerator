@@ -37,7 +37,7 @@ else
 	$sess_id=md5(get_setting("secret_string").$q->f("id"));		
 	$_SESSION["sess_id"] = $sess_id;    
 	setcookie("emailx",$q->f("email"),time()+99999);		  
-  MWG::getInstance()->runEvent('afterActivate', $member_id, $pasword); // NLT Event
+        MWG::getInstance()->runEvent('afterActivate', array($member_id, $pasword)); // NLT Event
 	header("Location: member.area.in.php");
 	die();
 }
