@@ -1,0 +1,51 @@
+EDITOR
+<script type="text/JavaScript">
+<!--
+function MM_jumpMenu(targ,selObj,restore){ //v3.0
+  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+  if (restore) selObj.selectedIndex=0;
+}
+//-->
+</script>
+<h2><font color="#076C9F">Site TemplateEditor</font><br>
+<span style="font-weight: 400"><strong style="font-weight: 400"> <font size="2">Here is where you manage every page on your site for what people 
+  see. Use the drop down box below to load a template. You will get the HTML code. 
+  CUT the code and PASTE it into your favorite WYSIWYG editor like MS FrontPage or 
+  Dreamweaver. Then edit the page as you like and the COPY the HTML and PASTE it 
+  back in the box and click SAVE CHANGES.&nbsp; </font></strong></span></h2>
+<p><strong>Tags to be used in templates: </strong></p>
+<p>{tag_list}</p>
+<p><strong>Load a template: | </strong> <a target="_self" href="#paybut">Click Here</a> to 
+  get payment buttons for this web page offer.</p>
+<form name="form1" id="form1">
+  <table width="90%"  border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>Site Templates:
+        <select name="select" onChange="MM_jumpMenu('parent',this,0)">
+          <option selected> </option>
+		  {templates}
+        </select></td>
+    </tr>
+  </table>
+</form>
+<form id="form2" name="form2" method="post" action="editor.php?menu=design">
+<input type="hidden" name="id" value="{id}">
+  <table width="550" border="0">
+    <tr>
+      <td>Template filename: </td>
+      <td><strong>{filename}</strong></td>
+    </tr>
+    <tr>
+      <td>Content:</td>
+      <td><input name="filename" type="hidden" id="filename" value="{filename}" /></td>
+    </tr>
+    <tr>
+      <td colspan="2"><textarea id="contentb" name="contentb" rows=17 cols=84>[[content_template]]</textarea></td>
+    </tr>
+    <tr>
+      <td><input type="submit" name="Submit" value="Save Changes" /></td>
+      <td><a href="templates.php"><font size="1">C</font></a><font size="1"><a href="templates.php">ancel 
+        changes</a></font></td>
+    </tr>
+  </table>
+</form>
