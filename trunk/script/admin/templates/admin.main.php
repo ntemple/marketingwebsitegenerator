@@ -61,7 +61,7 @@
                     <td align="left" valign="top">
                       <h2 class="toptitle"><?php echo $sitename ?> Administrator</h2>
                     </td>
-                    <td align="right" valign="top">MWG Version:&nbsp;<?php echo $version?>&nbsp; <a href="<?php echo MWG_BASEHREF ?>" target="_blank" class="a">Preview</a></td>
+                    <td align="right" valign="top">MWG Version:&nbsp;<?php echo $version?>&nbsp;<a href="logout.php">Logout</a> | <a href="<?php echo MWG_BASEHREF ?>" target="_blank" class="a">Preview</a></td>
                   </tr>
                   <tr>
                     <td class="menu" width="80%" colspan="2" elign="center">
@@ -91,8 +91,6 @@
                     </td>
                   </tr>
                 </table>
-                
-                
               </center>
             </div>
           </td>

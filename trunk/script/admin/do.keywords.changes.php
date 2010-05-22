@@ -13,19 +13,19 @@
  * See COPYRIGHT.php for copyright notices and details.
  */
 
- 
+/* @todo The butterfly people don't know the difference between title and keywords. This has to be
+   fixed in multiple places */ 
 	
 	include("inc.top.php");
-	if ($from_html){
-		$q->query("UPDATE settings SET description='from html' WHERE name='meta-description'");
-	}else{
-		$q->query("UPDATE settings SET value='$description', description='' WHERE name='meta-description'");
-	}
+	$q->query("UPDATE settings SET value='$description', description='' WHERE name='meta-description'");
+        $q->query("UPDATE settings SET value='$keywords' WHERE name='keywords'");
+/*
 	$what = array ("/,\s+/","/\n*?/","/\s+,/");
 	$with = array (",","",",");
 	$keywords = preg_replace($what,$with,$keywords);
 	$keywords = trim($keywords);
 	$q->query("UPDATE settings SET value='$keywords' WHERE name='keywords'");
-	
+        $q->query("UPDATE settings SET value='$title' WHERE name='title'");
+*/	
 	header("location:keywords.php");
 ?>

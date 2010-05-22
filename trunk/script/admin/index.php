@@ -405,7 +405,7 @@
     if ($q->f("box_type")=="select" && $q->f("name") == "enable_bm_aff_link")
     {
       $set = '<select name="'.$q->f("name").'" >';
-      $set .= '<option value="0" {sel0}> Do Not Display Affilaite Link</option>
+      $set .= '<option value="0" {sel0}> Do Not Display Affiliate Link</option>
       <option value="1" {sel1}>Show Affiliate Link on all pages</option>
       <option value="2" {sel2}>Show Affiliate Link Only on logged out pages</option>
       <option value="3" {sel3}>Show Affiliate Link Only in Members area</option>';
