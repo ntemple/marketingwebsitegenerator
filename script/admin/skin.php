@@ -16,28 +16,8 @@
 if (isset($_GET['menu'])) {
   $_SESSION['menu'] = $_GET['menu'];
 }
-/*
-if ($_SESSION['menu'] == "settings"){
-  $_SESSION['menu'] = "settings";
-}elseif ($menu == "members"){
-  $_SESSION['menu'] = "members";
-}elseif ($_GET['menu'] == "design"){
-  $_SESSION['menu'] = "design";                                                           
-}elseif ($_GET['menu'] == "membership"){
-  $_SESSION['menu'] = "membership";
-}elseif ($_GET['menu'] == "help"){
-  $_SESSION['menu'] = "help";
-}elseif ($_GET['menu'] == "updates"){
-  $_SESSION['menu'] = "updates";
-}
-*/
-$t->set_file("main", "admin.main.".$_SESSION['menu'].".html");
 $t->set_file("main", "content.html");
 
-//$newmessages = MWG::getDb()->get_value('select count(*) from messages where member_id=1 and read_flag=0');
-//$t->set_var("newmessages", $newmessages);
-
-//$t->set_var("version", file_get_contents('../config/version'));
 $t->set_var("sitename", SITENAME);
 $t->set_var("year", date("Y"));
 $ocontent=$t->parse("page", "content");
@@ -55,7 +35,4 @@ if ($notemplate)
 }
 
 
-
-
- 
  
