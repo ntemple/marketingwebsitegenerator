@@ -12,6 +12,59 @@
  * other free or open source software licenses.
  * See COPYRIGHT.php for copyright notices and details.
  */
+
+  function execute_sql($filename, $autoincrementvalue)
+  {
+    $q=new Cdb;
+    FFileRead($filename, $content);
+    $a=explode(";", $content);
+    $k=0;
+    while ($a[$k]!="")
+    {
+      $query=$a[$k];
+      $query=str_replace("{autoincrementstartfrom}",$autoincrementvalue, $query);
+      $q->query($query);
+      $k++;
+    }
+  }
+
+        function FFileRead($name/*filename*/, &$contents/*returned contents of file*/)
+        {
+                $fd = fopen ($name, "r");
+                $contents = fread ($fd, filesize ($name));
+                fclose ($fd);
+        }
+        function FFileWrite($name, $content, $w="w+")
+        {
+                $filename = $name;
+                $somecontent = $content;
+
+                // Let's make sure the file exists and is writable first.
+                if (is_writable($filename)) {
+
+                   // In our example we're opening $filename in append mode.
+                   // The file pointer is at the bottom of the file hence
+                   // that's where $somecontent will go when we fwrite() it.
+                   if (!$handle = fopen($filename, $w)) {
+                                 echo "Cannot open file ($filename)";
+                                 exit;
+                   }
+
+                   // Write $somecontent to our opened file.
+                   if (fwrite($handle, $somecontent) === FALSE) {
+                           echo "Cannot write to file ($filename) please make sure that you chmod 777 templates folder";
+                           exit;
+                   }
+
+
+                   fclose($handle);
+
+                } else {
+                   echo "The file $filename is not writable please make sure that you chmod 777 templates folder";
+                }
+        }
+
+
 ?>
 <html>
 <head>
@@ -79,8 +132,7 @@ else
 		$dbres=@mysql_select_db (  $_POST['dbname'] );
 		if ($dbres)
 		{
-			include ("../lib/inc.general.functions.php");
-			FFileRead("../templates/constants.php.html", $content);
+			FFileRead("constants.php.html", $content);
 			$content=str_replace("{host}", $_POST['host'], $content);
 			$content=str_replace("{db_name}", $_POST['dbname'], $content);
 			$content=str_replace("{user}", $_POST['username'], $content);
@@ -191,3 +243,5 @@ VALUES ('', 'Pop Under', ' <SCRIPT LANGUAGE=\"JavaScript\"> <!--begin /* * Popup
 </form>
 </body>
 </html>
+
+
