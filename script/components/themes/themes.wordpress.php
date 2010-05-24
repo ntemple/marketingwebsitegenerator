@@ -1,6 +1,37 @@
 <?php
 /* Wordpress Compatible Functions */
 
+if (! function_exists('add_filter')) {
+function add_filter() {
+  sbutil::trace();
+}}
+
+if (! function_exists('add_action')) {
+function add_action() {
+  sbutil::trace();
+}}
+
+if (! function_exists('remove_action')) {
+function remove_action() {
+  sbutil::trace();
+}}
+
+function single_post_title() {
+  sbutil::trace();
+}
+
+function load_theme_textdomain() {
+  sbutil::trace();
+}
+
+function the_search_query() {
+  sbutil::trace();
+}
+
+function current_user_can() {
+  sbutil::trace();
+}
+
 function dynamic_sidebar($which = 1) {
   sbutil::trace();
   if ($which == 1) return true;
@@ -39,7 +70,11 @@ function get_option() {
 }
 
 
-function bloginfo($var) {
+function bloginfo($var = 'name') {
+  print get_bloginfo($var);
+}
+
+function get_bloginfo($var = 'name') {
   global $wp_info;
 
   $mwg = MWG::getInstance();
@@ -55,25 +90,31 @@ function bloginfo($var) {
   }
 
   // Offer up some default content
+  // @todo implement all: http://codex.wordpress.org/Function_Reference/get_bloginfo
+
   switch($var) {
     case 'html_type':            $out = ''; break;
     case 'charset':              $out = ''; break;
     case 'body_class':           $out = 'blog'; break;
     case 'name':                 $out = $mwg->site_name; break;
-    case 'description':          $out = 'Just Another Marketing Website Generator Site'; break;
+    case 'description':          $out = ''; break; // Just Another Marketing Website Generator Site'; break;
     case 'stylesheet_url':       $out = "$assets/style.css"; break;
     case 'stylesheet_directory': $out = $assets; break;
-    case 'pingback_url':         break;
-    case 'home':                 $out = MWG_BASEHREF; 
-    case 'url';                  break;
+
+    case 'url':
+    case 'siteurl':
+    case 'home':                 $out = MWG_BASEHREF; break;
+    case 'template_url':         $out = $assets; break;
+   
+    case 'pingback_url': 
     case 'rss2_url': 
     case 'comments_rss2_url': 
     default: $out = '';
   }
   
   $wp_info[$var] = $out;
-  if ($out) print $out;
-#  else print "-$var-";
+  
+  return $out;
 }
 
 function wp_title() {

@@ -51,7 +51,6 @@ class modelThemes {
     return $dirs;
   }
 
-  
     
   function listThemes() {
     if ($this->themes) return $this->themes;
@@ -132,6 +131,9 @@ class modelThemes {
     
     // handle the theme
     require_once("themes.wordpress.php");
+    if (file_exists("{$this->themedir}/functions.php")) {
+      include("{$this->themedir}/functions.php");
+    }
     if (file_exists("{$this->themedir}/page.php"))
       include("{$this->themedir}/page.php");
     else 
