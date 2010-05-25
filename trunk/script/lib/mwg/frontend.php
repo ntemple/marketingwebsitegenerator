@@ -25,6 +25,7 @@ require_once('mwgDataRegistry.class.php');
 require_once('mwgDocument.class.php');
 require_once('mwgRequest.class.php');
 require_once('mwgResponse.class.php');
+require_once('mwgActions.class.php');
 require_once('mwgBaseGizmo.class.php');
 require_once(MWG_BASE . '/components/themes/modelthemes.class.php');
 

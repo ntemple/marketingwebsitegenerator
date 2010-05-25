@@ -18,32 +18,39 @@ defined('_MWG') or die ('Restricted Access');
 class mwgRequest {
   
   var $req;
+  var $get;
+  var $post = false;
   
   function __construct($req = null) {
     $this->req = $req;
-    if (! $this->req) {
-      $this->req = $_REQUEST;
+    if ($this->req) {
+      $this->req = $req;
+    } else {
+      $this->req = array_merge($_GET, $_POST);
     }    
-/*    
-    print "<pre>\n";
-    print_r($_GET);
-    print_r($_POST);
-    print_r($_REQUEST);
-    print "</pre>\n";
-*/    
-    
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $this->post = true;
+    }
+    $this->get = $_GET; // Save so we can parse later
   }
 
-//  function isPost() { return true; }
-// function isGet()  { return true; }
+  function isPost() { return $this->post; }
+  function isGet()  { return !$this->post; }
   
-  function get($name, $default = null) {
-    if (isset($this->req[$name])) return $this->req[$name];
+  function get($name, $default = '') {
+    if (isset($this->req[$name])) return stripslashes($this->req[$name]);
     return $default;
+  }
+
+  function safeGet($name, $default = '') {
+    $value = $this->get($name, $default);
+    return preg_replace("/[^a-zA-Z0-9\s]/", "", $value);
+  }
+
+  function persist(&$response) {
+     $response->setdata($this->req);
   }
   
 }
-
-
 
 

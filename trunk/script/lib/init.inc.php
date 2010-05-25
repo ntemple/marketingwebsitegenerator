@@ -35,11 +35,11 @@ $parts = split('/', $_SERVER['SCRIPT_NAME']);
 $self = array_pop($parts);
 $admin = array_pop($parts);
 if ($admin == 'admin') {
-  define('GENSTALL_BE', true);
-  define('GENSTALL_FE', false);  
+  define('MWG_BE', true);
+  define('MWG_FE', false);  
 } else {
-  define('GENSTALL_BE', false);
-  define('GENSTALL_FE', true);
+  define('MWG_BE', false);
+  define('MWG_FE', true);
   array_push($parts, $admin);     
 }
 
@@ -70,7 +70,7 @@ define('IS', $incsep);
 */
 
 $path  = ini_get('include_path');
-$path  = $path . IS . MWG_LIB; 
+$path  = $path . IS . MWG_LIB . IS . MWG_LIB . "/PEAR"; 
 ini_set('include_path', $path);
 
 /*
@@ -99,6 +99,8 @@ require_once('mwg/frontend.php');     // Provide MWG singleton
 require_once('mail.class.php');       // Provide Mail
 require_once('isnclient/spyc.php');   // Provide core YML parsing
 require_once('upgrade/upgrade.php');
+
+MWG::getInstance();
 
 /**
 * We really need to get the register globals taken care of 

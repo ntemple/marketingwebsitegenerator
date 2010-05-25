@@ -1,0 +1,22 @@
+<h1>Template Editor</h1>
+<form name="form1" id="form1">
+  <table width="90%"  border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>Site Templates:
+        <select name="select" id="select" onChange="MM_jumpMenu('parent',this,0)"></select>
+       </td>
+    </tr>
+  </table>
+</form>
+<form id="form2" name="form2" method="post" action="servlet.php?m=editor&menu=design">
+<input name="filename" type="hidden" id="filename"/>
+  <table width="550" border="0">
+    <tr>
+      <td colspan="2"><textarea id="filecontent" name="filecontent" rows=20 cols=140></textarea></td>
+    </tr>
+    <tr>
+      <td><input type="submit" name="_cmd_save" value="Save" /></td>
+      <td><input type="submit" value="Store" /></td>
+    </tr>
+  </table>
+</form>

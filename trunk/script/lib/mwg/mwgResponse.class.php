@@ -16,11 +16,76 @@
 
 defined('_MWG') or die ('Restricted Access');
 
-class mwgResponse {
-  
+require_once('context.class.php');
+
+class mwgResponse extends Context {
+
+  var $_head;
+  var $_success = null;
+ 
+  function __construct() {
+     parent::__construct(MWG_ADMIN . '/themes/default/', MWG_BASE . '/tmp/tcache/');
+
+    // Necessary constants
+    $this->MWG_BASEHREF = MWG_BASEHREF;
+  }
+
+  function includeHeaderFile($file) {
+   $this->_head .= $this->getOutput($file);
+  }
+
+  function addHeader($text) {
+    $this->_head .= "\n$text\n";
+  }
+
+  function newContext() {
+     return clone($this);
+  }
+
+  function setFlash($message, $type = 'info') {
+    $_SESSION['flash'] = array( 
+      'message' => $message,
+      'level'   => $type
+    );
+  }
+
+  function getFlash() {
+     if (isset($_SESSION['flash'])) {
+       $this->message = $_SESSION['flash']['message'];
+       $this->level   = $_SESSION['flash']['level'];
+       unset($_SESSION['flash']);
+     }
+  }
+    
+  function route($module, $action='default', $data= '') {
+      $location = "servlet.php?m=$module&a=$action&$data";
+      $this->redirect($location);
+  }
+
+  function redirect($path, $message = '', $type = info) {
+    if ($message) {
+      $this->setFlash($message, $type);
+    }
+
+    header("Location: $path");
+    exit(0);
+  }
+
+
+  function marshall() {
+       require_once('includes/IXR_Library.inc.php');
+
+       $result = clone($this);
+       unset($result->opt);
+       unset($result->_head);
+       unset($result->_template);
+       unset($result->elements);
+      // TODO: unset all _ (private) vars;
+      $r = new IXR_Value($result);
+      return $r->getXml();
+  }
 
 }
-
 
 
 
