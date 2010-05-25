@@ -1,17 +1,17 @@
 <?php
 /**
- * @version    $Id$
- * @package    MWG
- * @copyright  Copyright (C) 2010 Intellispire, LLC. All rights reserved.
- * @license    GNU/GPL v2.0, see LICENSE.txt
- *
- * Marketing Website Generator is free software.
- * This version may have been modified pursuant
- * to the GNU General Public License, and as distributed it includes or
- * is derivative of works licensed under the GNU General Public License or
- * other free or open source software licenses.
- * See COPYRIGHT.php for copyright notices and details.
- */
+* @version    $Id$
+* @package    MWG
+* @copyright  Copyright (C) 2010 Intellispire, LLC. All rights reserved.
+* @license    GNU/GPL v2.0, see LICENSE.txt
+*
+* Marketing Website Generator is free software.
+* This version may have been modified pursuant
+* to the GNU General Public License, and as distributed it includes or
+* is derivative of works licensed under the GNU General Public License or
+* other free or open source software licenses.
+* See COPYRIGHT.php for copyright notices and details.
+*/
 
 defined('_MWG') or die( 'Restricted access' );
 
@@ -56,32 +56,53 @@ class BMGenStaller {
     //return $items;
     return $menu;
   }
-  
+
+
+  function getMainMenu($selected) {
+    $items = array(
+    'settings'   => '<a href="index.php?menu=settings">Settings</a>',
+    'members'    => '<a href="members.php?menu=members">Members</a>',
+    'design'     => '<a href="servlet.php?m=editor&menu=design">Site Design</a>',
+    'membership' => '<a href="membership.php?menu=membership">Membership Levels</a>',
+    'reports'    => '<a href="siteoverview.php?menu=reports">Reports</a>',
+    );
+
+    $menu = '';
+    foreach ($items as $item => $link) {
+      if ($item == $selected) {
+        $link = str_replace("$selected\"", "$selected\" class='gt-active'", $link);
+      }
+      $menu .= "<li>$link</li>";     
+    }
+    return $menu;    
+  }
+
+
   function getStandardMenuItems($selected) {
     $items = array(
-      'settings'   => '<a href="index.php?menu=settings" class="a">Settings</a>',
-      'members'    => '<a href="members.php?menu=members" class="a">Members</a>',
-      'design'     => '<a href="promo.tools.php?menu=design" class="a">Site Design</a>',
-      'membership' => '<a href="membership.php?menu=membership" class="a">Membership Configuration</a>',
-      'help'       => '<a href="helpdesk.php?menu=help" class="a">Help Desk({newmessages})</a>',
-      'reports'    => '<a href="siteoverview.php?menu=reports" class="a">Reports</a>',
-   );
-   
-   $menu = '';
-   foreach ($items as $item => $link) {
+    'settings'   => '<a href="index.php?menu=settings" class="a">Settings</a>',
+    'members'    => '<a href="members.php?menu=members" class="a">Members</a>',
+    'design'     => '<a href="promo.tools.php?menu=design" class="a">Site Design</a>',
+    'membership' => '<a href="membership.php?menu=membership" class="a">Membership Configuration</a>',
+    'help'       => '<a href="helpdesk.php?menu=help" class="a">Help Desk({newmessages})</a>',
+    'reports'    => '<a href="siteoverview.php?menu=reports" class="a">Reports</a>',
+    );
+
+    $menu = '';
+    foreach ($items as $item => $link) {
       if ($item == $selected) {
         $link = str_replace('class="a"', 'class="a_selected"', $link);
       }
       $menu .= "$link | ";     
-   }
-   trim($menu);
-   trim($menu, '|');
-  
-#   $menu .= '<a href="siteoverview.php?menu=settings" class="a">Reports</a>';
-   return $menu;
-    
+    }
+    trim($menu);
+    trim($menu, '|');
+
+    #   $menu .= '<a href="siteoverview.php?menu=settings" class="a">Reports</a>';
+    return $menu;
+
   }
-  
+
 
   function getVersion() {
     static $version;
@@ -124,7 +145,7 @@ function genstall_admin_end($t, $ocontent, $notemplate) {
   }
   $head = ''; 
   $submenu = $t->get_var('submenu');
-  
+
   $page = mwg_admin_decorate($content, $submenu, $msg, $head);
   print $page;
 }
@@ -140,7 +161,7 @@ function mwg_admin_decorate($content, $submenu, $message, $head) {
   if (isset($_GET['menu'])) {
     $_SESSION['menu'] = $_GET['menu'];
   }
-  
+
   $select_menu = $_SESSION['menu'];
 
   $component_menu = $gs->getComponentMenuItems($component);

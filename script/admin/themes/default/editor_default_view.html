@@ -1,22 +1,25 @@
-<h1>Template Editor</h1>
-<form name="form1" id="form1">
-  <table width="90%"  border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td>Site Templates:
-        <select name="select" id="select" onChange="MM_jumpMenu('parent',this,0)"></select>
-       </td>
-    </tr>
-  </table>
-</form>
-<form id="form2" name="form2" method="post" action="servlet.php?m=editor&menu=design">
-<input name="filename" type="hidden" id="filename"/>
-  <table width="550" border="0">
-    <tr>
-      <td colspan="2"><textarea id="filecontent" name="filecontent" rows=20 cols=140></textarea></td>
-    </tr>
-    <tr>
-      <td><input type="submit" name="_cmd_save" value="Save" /></td>
-      <td><input type="submit" value="Store" /></td>
-    </tr>
-  </table>
-</form>
+<h2 class="gt-form-head">Edit Templates</h2>
+<div class="gt-form gt-content-box">
+  <form id="form2" name="form2" method="post" action="servlet.php?m=editor&menu=design">
+    <!-- form row -->
+    <div class="gt-form-row gt-width-66 clearfix">
+      <label>Select File</label>
+      <select name="filename" id="filename" onChange="MM_jumpMenu('parent',this,0)"></select>   
+    </div><!-- /form row -->
+
+    <!-- form row -->
+    <div class="gt-form-row gt-width-100">
+      <label>Content</label>
+      <textarea id="filecontent" name="filecontent" cols="60" rows="20" class="gt-form-textarea tinymce"></textarea>
+      <br>
+      <a href="javascript:toggleEditor('filecontent');">Toggle Editor</a>
+    </div><!-- /form row -->
+
+    <!-- form row -->
+    <div class="gt-form-row">
+      <input type="submit" name="_cmd_default" value="Save" class="gt-btn-green-medium" />
+    </div>
+
+    <!-- /form row -->
+  </form>
+</div>
