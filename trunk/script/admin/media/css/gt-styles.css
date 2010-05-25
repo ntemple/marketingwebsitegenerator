@@ -255,7 +255,7 @@ body {
 .gt-table-edit a {
 	display: block;
 	padding: 1px 0 1px 22px;
-	background: url(../images/famfamfam/icons/pencil.png) no-repeat 0 50%;
+	background: url(../images/icons/pencil.png) no-repeat 0 50%;
 }
 .gt-table-edit a:link, .gt-table-edit a:visited {
 	color: #877b6d;
