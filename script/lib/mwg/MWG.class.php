@@ -255,6 +255,29 @@ class MWG {
     return $this->document->getTitle();
   }         
 
+  function get_setting($name, $default = null) {
+    $setting = $this->getDb()->get_value("select value from settings where name=?", $name);
+    if ($setting) 
+      return stripslashes($setting);
+    else
+      return $default;
+  }
+/*
+  function get_setting($setting_name, $default = null)
+  {
+    $q=new Cdb;
+
+    $query="select value from settings where name='$setting_name'";
+    $q->query($query);
+    if ($q->nf()==0) return $default; // cannot find the setting in table
+
+    $q->next_record();
+
+    $value = stripslashes($q->f('value')); // Why is stripslashes needed?
+    return $value;
+  }
+*/
+
 }
 
 function mwg_shortcode_gizmo($atts) {
