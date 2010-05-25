@@ -82,6 +82,7 @@ function dispatch($request, $response) {
 function decorate($response) {
   $response->content = $response->getOutput(); // Parse the content
   $response->head    = $response->_head;
+  
 
   $response->getFlash();
 
@@ -112,6 +113,7 @@ function decorate($response) {
 
   $response->component_menu = $gs->getComponentMenuItems($component);
   $response->menu = $gs->getStandardMenuItems($select_menu);
+  $response->li_menu = $gs->getMainMenu($select_menu);
 
 
   if (!$submenu) {
@@ -120,7 +122,7 @@ function decorate($response) {
   }
 
   $response->newmessages = MWG::getDb()->get_value('select count(*) from messages where member_id=1 and read_flag=0');
-  $response->sitename = SITENAME;
+  $response->sitename = MWG::getInstance()->get_setting("site_name");
   $response->version = trim(file_get_contents(MWG_BASE .'/config/version'));
 
 

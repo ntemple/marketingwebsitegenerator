@@ -4,27 +4,35 @@ class editorActions extends mwgActions {
 
   function doDefaultView(mwgRequest $request, mwgResponse $response) {
 
-    $response->includeHeaderFile('editor_view.1.js.html');
-    $response->includeHeaderFile('editor_view.2.js.html');
+    
+    $response->includeHeaderFile('editor_default_view.js');
+/*    
+    $response->editor = 'editarea';
+    $response->includeHeaderFile('editor_editarea.js');      
+*/    
 
+    $response->editor = 'tinymce';
+    $response->includeHeaderFile('editor_tinymce.js');  
+    
     $mwg = MWG::getInstance();
     $files = $mwg->listFiles(MWG_BASE . '/templates');
     sort($files);
 
-    $filelist = array();
+    $filelist = array(
+     '' => 'Select a File'
+    );
     foreach($files as $file) {
      $filelist[$file] = $file;
     }
 
-    $response->setSelect('select', $filelist);
+    $response->setSelect('filename', $filelist);
     $response->files = $files; 
-    $response->filecontent = '';  
+    $response->filecontent = '';      
  
     $filename = $request->get('filename'); 
     if ($filename) {
       $response->set('filecontent', file_get_contents(MWG_BASE . '/templates/' . $filename));
       $response->set('filename', $filename);
-      $response->set('select', $filename);
     }
   }
 

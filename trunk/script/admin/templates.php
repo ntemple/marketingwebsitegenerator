@@ -133,7 +133,7 @@
 		$q->query($query);
 		$q->next_record();
 		$t->set_var("newmessages", $q->nf());
-		$t->set_file("main", "admin.main.html");
+#		$t->set_file("main", "admin.main.html");
 		$t->set_var("sitename", SITENAME);
 		$ocontent=$t->parse("page", "content");
 		$t->set_var("content", $ocontent);

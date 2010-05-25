@@ -144,3 +144,92 @@ p.info {
   border-top: 2px solid #B5D4FE;
   border-bottom: 2px solid #B5D4FE;
 }
+
+/* @group Forms */
+/* Default Form */
+.gt-form {
+
+}
+.gt-form.gt-content-box {
+  padding: 15px 15px 5px 15px;
+  margin-bottom: 40px;
+}
+.gt-form .gt-form-text, .gt-form .gt-form-textarea {
+  border: 1px solid #ccc;
+  background-color: #fafcef;
+  padding: 5px 2px;
+  font-size: 108%;
+  width: 99%;
+}
+.gt-form .gt-form-text:focus, .gt-form .gt-form-textarea:focus {
+  background-color: #fff;
+}
+.gt-form label {
+  font-size: 100%;
+  color: #654926;
+  display: block;
+  margin-bottom: 3px;
+  font-weight: bold;
+}
+.gt-form option {
+  font-size: 108%;
+}
+.gt-form .gt-form-row {
+  margin-bottom: 10px;
+}
+
+/* Auto clear the form row */
+.gt-form .gt-form-row:after {
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+
+.gt-form-row {display: inline-block;}
+
+/* Hides from IE-mac \*/
+* html .gt-form-row {height: 1%;}
+.gt-form-row {display: block;}
+/* End hide from IE-mac */
+/* End auto clearing the form row */
+
+.gt-form .gt-form-row-inline {
+  clear: left;
+}
+.gt-form .gt-form-row-inline label {
+  width: 30%;
+  margin-right: 4%;
+  padding: 1% 0;
+  float: left;
+  display: inline;
+}
+.gt-form .gt-form-element-label {
+  font-size: 93%;
+  margin-bottom: 5px;
+  padding-left: 3px;
+  font-weight: normal;
+  color: #666666;
+}
+.gt-form .gt-form-note {
+  font-size: 93%;
+  margin: 0 0 5px 0;
+  font-style: italic;
+  color: #666666;
+}
+.gt-form .gt-form-row-inline .gt-form-text {
+  width: 63%;
+}
+.gt-form .gt-form-radio, .gt-form .gt-form-checkbox {
+  margin-right: 3px;
+}
+.gt-form .gt-submit-btn {
+  margin: 0 10px 0 0;
+  float: left;
+  display: inline;
+}
+.gt-form .gt-cancel {
+  line-height: 37px;
+  margin-bottom: 0;
+}
