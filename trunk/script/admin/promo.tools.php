@@ -15,6 +15,7 @@
 
  
 	include("inc.top.php");
+  MWG::getInstance()->response->initEditor();
 	
 	$t->set_file("content", "admin.promo.tools.html");
 	$t->set_file("row_file", "admin.promo.tools.row.html");

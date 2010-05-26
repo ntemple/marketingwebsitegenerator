@@ -203,7 +203,7 @@ class MWGHelper {
     $class = $_flash['class'];
     $msg = $_flash['msg'];
 
-    print "<p class='$class'>$msg</p>\n\n";
+    print "<div class='gt-notice-box'>$msg</div>\n\n";
   }
 
 }

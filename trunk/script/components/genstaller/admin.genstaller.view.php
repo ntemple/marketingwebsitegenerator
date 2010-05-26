@@ -1,75 +1,126 @@
 <!-- admin.genstaller.view.php -->
-<form method="post">
- <input type="hidden" name="c" value="genstaller">
- <input type="hidden" name="t" value="loadmanifest">
- <input type="submit" value="Refresh Software List">
-</form>
-
-    <form method="post">
-      <input type="hidden" name="c" value="genstaller">
-      <input type="hidden" name="t" value="install">
-      Url to Package: <input type="text" name="url" size="60"> 
-      <input type="submit" value="Install">
-    </form>
-
-    <form method="post" enctype="multipart/form-data">
-      <input type="hidden" name="c" value="genstaller">
-      <input type="hidden" name="t" value="install">
-      Upload Package: <input type="file" name="package" size="60"> 
-      <input type="submit" value="Install">
-    </form>
-
-
-
-<table width="100%">
-<tr>
-  <td><b>Name</b></td>
-  <td><b>Type</b></td>
-  <td><b>Description</b></td>
-  <td><b>Version</b></td>
-  <td><b>Action</b></td>
-</tr>
-<?php foreach($items as $id => $item) { ?>
-<tr>
-  <td><Xa href="?c=genstaller&t=details&id=<?php echo $id ?>"><?php echo $item['name'] ?></Xa></td>
-  <td><?php echo $item['type']?></td>
-  <td><?php echo $item['title']?></td>
-  <td><?php echo $item['version']; ?></td>
-  <td>
 <?php
-  $task   = 'install';
-  $submit = 'install';
-
-  if (isset($extensions[$id])) {
-    $installed_ext = &$extensions[$id];
-    // This has already been installed
-/*
-print "<pre>\n";
-print_r($extensions[$id]);
-print_r($item);
-print "</pre>\n";
-*/
-    if ($installed_ext['serial'] >= $item['serial']) {
-      print "installed</td></tr>\n";
-      continue;
-    } else {
-      if (isset($item['updates']) && in_array($installed_ext['serial'], $item['updates'])) {
-        // We can be updated
-        $upgrades = $item['upgrades']; // an array
-        $task   = "upgrade";
-        $submit = "Upgrade";
-      }
-    }
-  }
+  //  MWG::getInstance()->response->contentbox('Extension Manager');
+  ob_start();
 ?>
-<form method="post">
- <input type="hidden" name="c" value="genstaller">
- <input type="hidden" name="t" value="<?= $task ?>">
- <input type="hidden" name="id" value="<?= $id ?>">
- <input type="submit" value="<?= $submit ?>">
+
+<!-- Sidebar Navigation -->
+<div class="gt-sidebar-nav gt-sidebar-nav-brown">
+  <h3>Quick Links</h3>
+  <ul>
+    <li><a href="controller.php?c=genstaller&t=loadmanifest">Refresh Software List</a></li>
+    <li><a href="controller.php?c=updates">Check for Updates</a></li>
+  </ul>
+</div><!-- /Sidebar Navigation -->
+
+
+
+<form method="post" enctype="multipart/form-data">
+  <input type="hidden" name="c" value="genstaller">
+  <input type="hidden" name="t" value="install">
+  <h3 class="gt-form-head">Upload a Package File</h3>       
+  <div class="gt-form gt-content-box">
+    <div class="gt-form-row gt-width-100">
+      <label>Package File:<img src="media/images/icons/help.png" title="Select a .zip package containing an MWG extension from your harddrive."></label>
+      <input class="gt-form-file-upload" type="file" name="package">  
+      <input type="submit" class="gt-btn-brown-medium" value="Upload &amp; Install" />
+    </div>                    
+  </div>        
 </form>
-  </td>
-</tr>
-<?php } ?>
-</table>
+
+<form method="post">
+  <input type="hidden" name="c" value="genstaller">
+  <input type="hidden" name="t" value="install">
+  <h3 class="gt-form-head">Install Package from URL</h3>       
+  <div class="gt-form gt-content-box">
+    <div class="gt-form-row gt-width-100">
+      <label>Url to Package:<img src="media/images/icons/help.png" title="Enter the web address of a .zip package containing a MWG extension."></label>
+      <input class="gt-form-text" type="text" name="package">  
+      <input type="submit" class="gt-btn-brown-medium" value="Install" />
+    </div>                    
+  </div>        
+</form>
+
+<form method="post">
+  <input type="hidden" name="c" value="genstaller">
+  <input type="hidden" name="t" value="activate">
+  <h3 class="gt-form-head">Activate Network Id</h3>       
+  <div class="gt-form gt-content-box">
+    <div class="gt-form-row gt-width-100">
+      <label>Network ID:<img src="media/images/icons/help.png" title="Enter your Intellispire Network Id (ISNID)"></label>
+      <input class="gt-form-text" type="text" name="package">  
+      <input type="submit" class="gt-btn-brown-medium" value="Activate" />
+    </div>                    
+  </div>        
+</form>
+
+
+<?php
+  $sidebar = ob_get_clean();
+  MWG::getInstance()->response->activateSidebar($sidebar);
+?>
+<h1>Extension Manager</h1>
+<h2 class="gt-table-head">Available Extensions</h2>
+<!-- content box -->
+<div class="gt-content-box">
+  <table class="gt-table" border="0">
+    <thead>
+      <tr>
+        <th class="gt-table-col-checkbox"><a href=""><img src="media/images/famfamfam/icons/tick.png" alt="check"></a></th>
+        <th>Name</th>
+        <th>Type</th>
+<!--        <th>Description</th> -->
+        <th>Version</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+  <?php foreach($items as $id => $item) { ?>
+    <tr>
+      <td><input  type="checkbox"></td>
+      <td><Xa href="?c=genstaller&t=details&id=<?php echo $id ?>"><?php echo $item['name'] ?></Xa></td>
+      <td><?php echo $item['type']?></td>
+<!--      <td><?php echo $item['title']?></td> -->
+      <td><?php echo $item['version']; ?></td>
+      <td>
+        <?php
+          $task   = 'install';
+          $submit = 'install';
+
+          if (isset($extensions[$id])) {
+            $installed_ext = &$extensions[$id];
+            // This has already been installed
+            /*
+            print "<pre>\n";
+            print_r($extensions[$id]);
+            print_r($item);
+            print "</pre>\n";
+            */
+            if ($installed_ext['serial'] >= $item['serial']) {
+              print "installed</td></tr>\n";
+              continue;
+            } else {
+              if (isset($item['updates']) && in_array($installed_ext['serial'], $item['updates'])) {
+                // We can be updated
+                $upgrades = $item['upgrades']; // an array
+                $task   = "upgrade";
+                $submit = "Upgrade";
+              }
+            }
+          }
+        ?>
+        <form method="post">
+          <input type="hidden" name="c" value="genstaller">
+          <input type="hidden" name="t" value="<?= $task ?>">
+          <input type="hidden" name="id" value="<?= $id ?>">
+          <input type="submit" value="<?= $submit ?>" Xclass="gt-btn-brown-small">
+        </form>
+      </td>
+    </tr>
+    </tbody>
+    </table>
+    <?php } ?>
+</div><!-- /content box -->
+
+
 

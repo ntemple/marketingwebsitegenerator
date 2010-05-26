@@ -59,6 +59,7 @@ class modelThemes {
     $base = MWG_BASE . '/themes/';
     
     $dirs = $this->listDir($base);
+    sort($dirs);
     foreach ($dirs as $file) {
       if (file_exists("$base/$file/templateDetails.xml")) $this->themes[$file] = 'joomla';
       if (file_exists("$base/$file/screenshot.png"))      $this->themes[$file] = 'wordpress';      

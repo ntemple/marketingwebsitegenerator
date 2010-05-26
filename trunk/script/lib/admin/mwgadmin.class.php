@@ -151,7 +151,7 @@ function genstall_admin_end($t, $ocontent, $notemplate) {
 }
 
 
-function mwg_admin_decorate($content, $submenu, $message, $head) {
+function Xmwg_admin_decorate($content, $submenu, $message, $head) {
   $gs = BMGenStaller::getInstance();
   if (isset($_GET['c']))  
     $component = $_GET['c'];
@@ -184,6 +184,58 @@ function mwg_admin_decorate($content, $submenu, $message, $head) {
   $page = ob_get_clean();
   $page = str_replace('{newmessages}', $newmessages, $page);
   return $page;  
+}
+
+function mwg_admin_decorate($content, $submenu, $message, $head) {
+  $response = MWG::getInstance()->response;
+  
+  $response->content = $content;
+  if ($head)  
+    $response->head    = $head;
+  $response->head .= $response->_head;
+  
+  $response->getFlash();
+
+  if (! $response->message) {
+  try {  
+    if (needsUpdate($current, $latest)) {
+      $response->setFlash("Update found! New Version $latest You are running $current.
+                           <a href='controller.php?c=updates'>Please upgrade now!</a>", 'warn');
+    }
+  } catch(Exception $e) {
+    $response->setFlash("Could not reach update server. Please try again.<br> $e", 'alert');
+  }
+  $response->getFlash();
+  }
+  // $submenu = $t->get_var('submenu');
+
+  $gs = BMGenStaller::getInstance();
+  if (isset($_GET['c']))
+    $component = $_GET['c'];
+  else
+    $component = '';
+
+  if (isset($_GET['menu'])) {
+    $_SESSION['menu'] = $_GET['menu'];
+  }
+
+  $select_menu = $_SESSION['menu'];
+
+  $response->component_menu = $gs->getComponentMenuItems($component);
+  $response->menu = $gs->getStandardMenuItems($select_menu);
+  $response->li_menu = $gs->getMainMenu($select_menu);
+
+  if (!$submenu) {
+    $path = MWG_BASE . '/admin/templates/submenu/admin.main.'. $select_menu . ".html";
+    if (file_exists($path)) $response->submenu = file_get_contents($path);
+  }
+
+  $response->newmessages = MWG::getDb()->get_value('select count(*) from messages where member_id=1 and read_flag=0');
+  $response->sitename = MWG::getInstance()->get_setting("site_name");
+  $response->version = trim(file_get_contents(MWG_BASE .'/config/version'));
+
+  // content, menu, component_menu, message, head
+  $response->output('layout.html');
 }
 
 

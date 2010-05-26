@@ -64,7 +64,7 @@
 
   function view($class = '', $msg = '') {
     if ($msg) {
-      MWGHelper::setFlash($class, $msg);
+      MWGHelper::setFlash('gt-notice', $msg);
     }
 
     $model = new modelGenstaller();

@@ -5,11 +5,8 @@
       <input type="hidden" value="{k}" name="k" />
       <input type="hidden" value="{id}" name="id" />
       <td width="484">Use this editor to modify the promo tool format. <br />
-        <textarea id="content{k}" name="content{k}" rows=7 cols=60>{contentx}</textarea>
-        <script> //STEP 2: Replace the textarea (txtContent)
-		var oEdit{k} = new InnovaEditor("oEdit{k}");
-		oEdit{k}.REPLACE("content{k}");
-	</script></td>
+        <textarea id="content{k}" name="content{k}" rows=7 cols=60 class="tinymce">{contentx}</textarea>
+      </td>
     </tr>
     <tr>
       <td>Category</td>

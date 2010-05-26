@@ -3,7 +3,6 @@
   <head>
     <title>Marketing Webite Generator</title>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-    <script language=JavaScript src='../editor/scripts/innovaeditor.js'></script>
     <script src="../js/functions.js" language="javascript" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="../css/reset-fonts-grids.css">
     <link href="media/css/admin.css" rel="stylesheet" type="text/css">

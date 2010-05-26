@@ -19,9 +19,10 @@ class mwgActions {
   var $_template = null;
 
   function doView(mwgRequest $request, mwgResponse $response) {
-  }
-
+  }  
 }
+
+
 
 
 class basicClass /* extends Object */ {
@@ -172,5 +173,3 @@ class defaultClass extends basicClass {
   }
 
 }
-
-?>

@@ -11,11 +11,9 @@
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  * See COPYRIGHT.php for copyright notices and details.
- */
-
- 
-	
+ */	
 	include("inc.top.php");
+  
 	$t->set_file("content", "admin.edit_login_msg.html");
 	$query="select message from after_login WHERE id='$id'";
 	$q->query($query);	
@@ -24,11 +22,7 @@
 	$t->set_var("id",$id);
 	
 	$t->set_file("main", "admin.main.empty.html");
-	
-	
 	$ocontent=$t->parse("page", "content");
-			$ocontent='<script language=JavaScript src="../editor/scripts/innovaeditor.js"></script>
-					<link href="../css/butterfly.css" rel="stylesheet" type="text/css">'.$ocontent;
 	$t->set_var("content", $ocontent);
 	$t->pparse("out", "main"); 
-?>
+  MWG::getInstance()->response->initEditor();

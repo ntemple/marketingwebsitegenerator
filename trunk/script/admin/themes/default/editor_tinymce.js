@@ -19,8 +19,7 @@
                         theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,formatselect,fontselect,fontsizeselect,|visualaid,removeformat,cleanup,code,|,fullscreen,preview,help",
                         theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,link,unlink,anchor,image,|,forecolor,backcolor",
                         theme_advanced_buttons3 : "",
-                        theme_advanced_buttons4 : "",
-                                               
+                        theme_advanced_buttons4 : "",                                               
                 });
         });
 
@@ -30,4 +29,5 @@ function toggleEditor(id) {
 	else
 		tinyMCE.execCommand('mceRemoveControl', false, id);
 }
-</script>
+</script>  
+
