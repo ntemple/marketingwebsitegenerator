@@ -61,7 +61,7 @@
       foreach ($tasks as $disp => $task) {
         $items[] = "<a href='?c={$this->controller_name}&t=$task'>$disp</a>";
       }
-      return implode(' | ', $items);
+      return $items;
     }
 
     function link_to($id, $task, $controller=null) {
@@ -69,39 +69,23 @@
     }
 
     function shownew(mwgRequest $request, mwgResponse $response) {
-      // , $msg = '', $class = 'info'
       if ($msg) {
         MWGHelper::setFlash($class, $msg);
       }
       $gizmos_mf = $this->model->listGizmos();    
-
-      $count = 0;
-      foreach ($gizmos_mf as $identity => $item) {      
-        $count++;
-        $link = "?c={$this->controller_name}&t=details&identity=$identity";
-        print "$count\t$item[title]\t<a href='$link'>New</a><br />\n";
-      }
+      
+      require_once('admin.gizmo.shownew.php');
     }
 
     function view(mwgRequest $request, mwgResponse $response) {
       if ($msg) {
         MWGHelper::setFlash($class, $msg);
       }
-
       $db = MWG::getInstance()->getDb();
       $gizmos = $db->get_results('select * from mwg_gizmo');
-      foreach ($gizmos as $gizmo) {      
-        $edit = "?c={$this->controller_name}&t=details&id=" . $gizmo['id'];
-        $delete = "?c={$this->controller_name}&t=details&id=" . $gizmo['id'];
-        $activate = "?c={$this->controller_name}&t=details&id=" . $gizmo['id'];
-//        print "$gizmo[id]\t$gizmo[name]\t[gizmo id='$gizmo[id]']\t<a href='$edit'>edit</a>\t<a href='$delete'>delete</a>\t<a href='$activate'>activate</a><br/>\n";
-        if ($gizmo['active']) 
-          $active = "<font color='green'>Active</font>";
-        else 
-          $active = "<font color='red'>Inactive</font>";          
-        print "$gizmo[id]\t$gizmo[name]\t$active\t[gizmo id='$gizmo[id]']\t<a href='$edit'>edit</a><br/>\n";        
-      }
-    }
+      
+      require_once('admin.gizmo.view.php');      
+   }
 
        
     function details(mwgRequest $request, mwgResponse $response)  {
@@ -126,36 +110,9 @@
       } else {
         $check_active_0 = 'checked';
       }
-    ?>
-    <h2>Setup Your Gizmo</h2>
-    <p>The name is a friendly name so you know what this Gizmo is, it is not displayed. The title may be displayed by some Gizmos, for example, as a heading.</p>
-    <form method="post" action="controller.php?">
-      <input type="hidden" name="c" value="<?php echo $this->controller_name ?>">
-      <input type="hidden" name="t" value="gizmo_store">
-      <input type="hidden" name="identity" value="<?php echo $gizmo->identity ?>">
-      <input type="hidden" name="id" value="<?php echo $gizmo->id ?>">
-      <label for="name" style="line-height:35px;display:block;">Gizmo Name: <input type="text" id="name" name="name" value="<?php echo $gizmo->name ?>" /></label>
-      <label for="title" style="line-height:35px;display:block;">Gizmo Title: <input type="text" id="title" name="title" value="<?php echo $gizmo->title; ?>" /></label>
-
-      <br>
-      <input type="radio" name="active" value="1" <?php echo $check_active_1 ?>> Active
-      <input type="radio" name="active" value="0" <?php echo $check_active_0 ?>> Inactive
-      <br>
-      <hr>
-      <?php echo $gizmo->getAdminForm($gizmo->params) ?>
-      <input type="submit" name= "cmd_save" value="Save">
-      <input type="submit" name= "cmd_apply" value="Apply">
-    </form>
-    <!-- <?php print_r($gizmo) ?> -->
-    <p>&nbsp;</p>
-<?php if ($gizmo->id) { ?>
-    <h2>Usage:</h2>
-    <p>If this Gizmo is active, simply use the code [gizmo id="<?php echo $gizmo->id ?>"] on any page to display it.</p>
-<?php } ?>    
-    <h2>Documentation</h2>
-    <p><?php echo $gizmo->getDocumentation(); ?></p>
-    
-    <?php      
+      $select_position = array( $gizmo->position => 'selected');
+      
+      include('admin.gizmo.details.php');
   }
 
   function gizmo_store(mwgRequest $request, mwgResponse $response) {
@@ -170,6 +127,10 @@
     $gizmo->name     = $request->get('name');
     $gizmo->title    = $request->get('title');
     $gizmo->active   = $request->get('active', 0);
+    $gizmo->position = $request->get('position', 'Invocation');
+    $gizmo->ordre    = $request->get('ordre', 0);
+
+        
     if ($id) $gizmo->id = $id;
     
     $gizmo->store();

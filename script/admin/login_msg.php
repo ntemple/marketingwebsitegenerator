@@ -16,6 +16,7 @@
  
 	
 	include("inc.top.php");
+  MWG::getInstance()->response->initEditor();
 	$q2 = new CDb();
 	$t->set_file("content", "admin.login_msg.html");
 	$t->set_file("messagelist", "admin.login_msg.item.html");
