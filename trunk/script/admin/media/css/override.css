@@ -6,3 +6,41 @@ You can then use !important to override the style.
 
 If you add styles to this template, be sure to include it in your template files.
 */
+
+/* Main Navigation */
+.gt-nav {
+  margin: 0 0 0 14px;
+  width: 100%;
+  float: left;
+  display: inline;
+}
+.gt-nav ul {
+  margin: 0;
+  padding: 0;
+  float: left;
+  display: inline;
+}
+.gt-nav ul li {
+  margin: 0;
+  padding: 0;
+  float: left;
+  display: inline;
+}
+.gt-nav ul li a {
+  display: block;
+  padding: 0 1.5em;
+  font-weight: bold;
+  line-height: 42px;
+  Xfont-size: 116%;
+  font-size: 100%;
+  float: left;
+  display: inline;
+}
+.gt-nav a:link, .gt-nav a:visited {
+  color: #d1db9d;
+  text-decoration: none;
+}
+.gt-nav a:hover, .gt-nav a.gt-active:link, .gt-nav a.gt-active:visited, .gt-nav .gt-active a:link, .gt-nav .gt-active a:visited {
+  color: #fff;
+  text-decoration: none;
+}
