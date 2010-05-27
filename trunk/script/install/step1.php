@@ -90,6 +90,7 @@ else
 			$content=str_replace("{admin_password}", $_POST['admin_password'], $content);
 			FFileWrite("../config/constants.php", $content);
 			include("inc.all.php");
+                        $member_increment = $_POST['member_increment'];
 			if ($member_increment<2) $member_increment=2;
 			execute_sql("install.sql", $member_increment);
 			?>
