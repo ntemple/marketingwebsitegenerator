@@ -13,8 +13,6 @@
 * See COPYRIGHT.php for copyright notices and details.
 */
 
-include('inc.db_mysql.php');
-
 // functions for install wizard
 $perm_file="-rwxrwxrwx";
 $perm_folder="drwxrwxrwx";
