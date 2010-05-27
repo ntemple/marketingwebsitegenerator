@@ -253,6 +253,7 @@
     $member_membership_id_gt=$q->f("membership_id");
     updateHistory($member_id_gt, $member_membership_id_gt, true);
     updateHistory($member_id_gt, get_setting("default_free"), true);	
+
   }
   //end of functions for member area
   // function to determine how many unread messages are in the inbox

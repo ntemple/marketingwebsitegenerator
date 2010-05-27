@@ -16,7 +16,7 @@
 require_once('lib/init.inc.php');      // MWG
 $valid_sess_ref = array("/index.php");
 if (!in_array($_SERVER['PHP_SELF'],$valid_sess_ref)) {
-  @session_start();
+   @session_start();
 }
 require_once("lib/inc.db_mysql.php");
 require_once("lib/inc.template.php");
