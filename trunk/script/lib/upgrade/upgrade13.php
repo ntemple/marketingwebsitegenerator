@@ -58,12 +58,7 @@ function upgrade13($db, $db_version) {
   $db->query("INSERT INTO `mwg_setting` (`id` ,`category` ,`group` ,`name` ,`value` ,`default_value` ,`input_type` ,`label` ,`help_text` ,`options` ,`rank`)VALUES (NULL , 'Global Site Settings', NULL , 'theme_subtitle', 'Just Another Marketing Website Generator Site', '', 'input', 'Site Subtitle', 'Some themes (wordpress) have the option to use a subtitle. Enter that here.', '', '0')");
 
 
-
-  $db->query("ALTER TABLE `mwg_gizmo` ADD `position` VARCHAR( 255 ) NOT NULL 
-              AFTER `title` , ADD `ordre` INT NOT NULL AFTER `position`");
-
-
-  #other upgrades here
+  $db_version = run_upgrade($db, MWG_BASE . '/lib/upgrade/upgrade-1.2.txt');
 
   $db->query("UPDATE mwg_setting SET value='1.3' WHERE name = 'site_dbversion'");
   $db_version = $db->get_value('select value from mwg_setting where name=?', 'site_dbversion'); 
