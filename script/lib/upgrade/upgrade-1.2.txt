@@ -1,4 +1,0 @@
-UPDATE `mwg_setting` SET `value` = '1.3',`default_value` = '1.2' WHERE `mwg_setting`.`name` = 'site_dbversion' LIMIT 1 ;
-ALTER TABLE `mwg_gizmo` ADD `position` VARCHAR( 255 ) NOT NULL AFTER `title` , ADD `ordre` INT NOT NULL AFTER `position` ;
-ALTER TABLE `members` ADD `admin` CHAR( 1 ) NOT NULL DEFAULT '0' AFTER `jv` ;
-ALTER TABLE `promo_tools` CHANGE `content` `content` BLOB NOT NULL ;
