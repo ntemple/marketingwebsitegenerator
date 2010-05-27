@@ -32,7 +32,6 @@ function execute_sql($filename, $autoincrementvalue)
   }
 
   $q->query('ALTER TABLE members AUTO_INCREMENT=' . $autoincrementvalue);  
-
 }
 
 function FFileRead($name/*filename*/, &$contents/*returned contents of file*/)
