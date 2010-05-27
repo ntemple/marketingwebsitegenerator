@@ -64,9 +64,8 @@ class modelGizmo {
     if (self::$gizmos) return self::$gizmos;
     self::$gizmos = array();
     
-    $model = new modelGizmo();
-    
     $db = MWG::getInstance()->getDb();
+    $model = new modelGizmo();
     
     $gizmo_ids = $db->get_column('select id from mwg_gizmo where active=1');
     foreach ($gizmo_ids as $id) {
@@ -76,7 +75,18 @@ class modelGizmo {
     return self::$gizmos;
   }
 
-
+  function getGizmosFor($position) {
+    $db = MWG::getInstance()->getDb();
+    $gizmos = array();
+    
+    $gizmo_ids = $db->get_column('select id from mwg_gizmo where active=1 and position=? order by ordre', $position);
+    foreach ($gizmo_ids as $id) {
+      $gizmos[$id] = $this->instantiate($id);
+    }    
+    return $gizmos;
+  }
+  
+  
   /**
   * A Gizmo constists of at least two files:
   * - the [name]Gizmo.class.php and the 

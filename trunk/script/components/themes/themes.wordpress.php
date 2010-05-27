@@ -4,9 +4,11 @@
 class mwgWP {
   
   var $callbacks;
+  var $template_positions;
   
   private function __construct() {
     $this->callbacks = array();
+    $this->template_positions = array();
     
   }
   
@@ -35,6 +37,10 @@ class mwgWP {
       $out = $callback->execute($out);
     }
     return $out;
+  }
+  
+  function register_template_position($which, $args) {
+    $this->template_positions[$which] = $args;
   }
   
    
@@ -88,11 +94,84 @@ if (function_exists('register_sidebars')) {
 }
 */
 
+/**
+* http://codex.wordpress.org/Function_Reference/dynamic_sidebar
+* 
+* @param mixed $which
+*/
+
 function dynamic_sidebar($which = 1) {
   sbutil::trace();
-  if ($which == 1) return true;
-  else return false;
+  $name = 'Sidebar' . $which;
+  
+  $model = new modelGizmo();
+  $gizmos = $model->getGizmosFor($name);
+  if (count($gizmos) == 0) return false;
+  
+  $args = mwgWP::getInstance()->template_positions['Sidebar'.$which];
+  
+  foreach ($gizmos as $gizmo) {
+    print $gizmo->render_as_widget($args);
+  }
+  return true;
 }
+
+
+/** sidebars, menu positions */
+
+/**
+* http://codex.wordpress.org/Function_Reference/register_sidebars
+* 
+* @param mixed $number
+* @param mixed $args
+*/
+
+function register_sidebars($number, $args) {
+  
+$defaults = array(
+  'name'          => sprintf(__('Sidebar %d'), $i ),
+  'id'            => 'sidebar-$i',
+  'before_widget' => '<li id="%1$s" class="widget %2$s">',
+  'after_widget'  => '</li>',
+  'before_title'  => '<h2 class="widgettitle">',
+  'after_title'   => '</h2>' 
+  ); 
+  
+  $params = array_merge($defaults, $args);
+    
+  for ($i = 0; $i < $number; $i++) {
+    mwgWP::getInstance()->register_template_position("Sidebar$i", $params);        
+  }
+  
+}
+
+/**
+* http://codex.wordpress.org/Function_Reference/register_sidebar
+* 
+* @param mixed $params
+*/
+/*
+function register_sidebar($args) {
+  
+  $defaults = array(
+  'name'          => sprintf(__('Sidebar %d'), $i ),
+  'id'            => 'sidebar-$i',
+  'description'   => '',
+  'before_widget' => '<li id="%1$s" class="widget %2$s">',
+  'after_widget'  => '</li>',
+  'before_title'  => '<h2 class="widgettitle">',
+  'after_title'   => '</h2>' ); 
+  
+  $params = array_merge($defaults, $args);
+  
+  mwgWP::getInstance()->register_template_position($params['name'], $params);  
+}
+*/
+
+  
+
+
+
 
 
 function single_post_title() {
@@ -138,8 +217,15 @@ function wp_enqueue_script() {
   sbutil::trace();
 }
 
-function get_option() {
+function get_option($name) {  
   sbutil::trace();
+  
+  if ($name == 'home') {  
+    $homelink = null;
+    $menu = MWG::getInstance()->getMenu('items');
+    $home = array_shift($menu);
+    return $home['link'];
+  }
 }
 
 

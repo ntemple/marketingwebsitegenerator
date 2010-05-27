@@ -72,6 +72,26 @@ class mwgBaseGizmo {
   */
 
   function render($atts) {  }
+  
+  /*
+  $defaults = array(
+  'name'          => sprintf(__('Sidebar %d'), $i ),
+  'id'            => 'sidebar-$i',
+  'before_widget' => '<li id="%1$s" class="widget %2$s">',
+  'after_widget'  => '</li>',
+  'before_title'  => '<h2 class="widgettitle">',
+  'after_title'   => '</h2>' 
+  ); 
+ */
+  
+  function render_as_widget($atts) {
+    if (isset($atts['before_title'])) echo $atts['before_title'];
+    echo $this->title;
+    if (isset($atts['after_title'])) echo $atts['after_title'];
+    if (isset($atts['before_widget'])) echo $atts['before_widget'];
+    echo $this->render($atts);
+    if (isset($atts['after_widget'])) echo $atts['after_widget'];
+  }
 
   
   // Events to overide
