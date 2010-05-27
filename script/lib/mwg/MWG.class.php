@@ -218,10 +218,11 @@ class MWG {
       $items = generate_main_menu_list('main');      
     }
     
-    if ($wp) {
-      array_shift($items); // Remove home link for wordpress
+    if ($type == 'items') {
+      return $items;      
     }
-
+    
+    
     foreach ($items as $item) {
       $array[] = _render_link($item);
     }
@@ -267,30 +268,29 @@ class MWG {
   function getTitle() {
     return $this->document->getTitle();
   }         
-
-  function get_setting($name, $default = null) {
-    $setting = $this->getDb()->get_value("select value from settings where name=?", $name);
-    if ($setting) 
-      return stripslashes($setting);
-    else
-      return $default;
-  }
-  /*
-  function get_setting($setting_name, $default = null)
-  {
-  $q=new Cdb;
-
-  $query="select value from settings where name='$setting_name'";
-  $q->query($query);
-  if ($q->nf()==0) return $default; // cannot find the setting in table
-
-  $q->next_record();
-
-  $value = stripslashes($q->f('value')); // Why is stripslashes needed?
-  return $value;
-  }
+  /**
+  * Optimized by loading all settings, once
+  * 
+  * @param mixed $name
+  * @param mixed $default
+  * @return string
   */
+  function get_setting($name, $default = null) {
+    static $settings = null;
+    
+    if (! $settings) {
+      $settings = $this->getDb()->get_select('select name, value from settings');
+//      $out = print_r($settings, true);
+//      print $out;
+//      print strlen($out);
+    }
 
+    if (isset($setting[$name])) {
+      return $settings[$name];
+    } else {
+      return $default;
+    }  
+  }
 }
 
 function mwg_shortcode_gizmo($atts) {
