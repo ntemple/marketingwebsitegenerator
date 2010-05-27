@@ -6,13 +6,20 @@
       <label>Select File</label>
       <select name="filename" id="filename" onChange="MM_jumpMenu('parent',this,0)"></select>   
     </div><!-- /form row -->
+{if:description}
+    <div class="gt-form-row gt-width-66 clearfix">
+      <label>Description</label>
+      <p>{description}</p>
+    </div><!-- /form row -->
+{end:}    
 
+    
     <!-- form row -->
     <div class="gt-form-row gt-width-100">
       <label>Content</label>
-      <textarea id="filecontent" name="filecontent" cols="60" rows="20" class="gt-form-textarea tinymce"></textarea>
+      <textarea id="filecontent" name="filecontent" cols="66" rows="20" class="gt-form-textarea tinymce"></textarea>
       <br>
-      <a href="javascript:toggleEditor('filecontent');">Toggle Editor</a>
+{if:false}      <a href="javascript:toggleEditor('filecontent');">Toggle Editor</a> {end:}
     </div><!-- /form row -->
 
     <!-- form row -->

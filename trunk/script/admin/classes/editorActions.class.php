@@ -1,4 +1,17 @@
 <?php
+/**
+ * @version    $Id$
+ * @package    MWG
+ * @copyright  Copyright (C) 2010 Intellispire, LLC. All rights reserved.
+ * @license    GNU/GPL v2.0, see LICENSE.txt
+ *
+ * Marketing Website Generator is free software. 
+ * This version may have been modified pursuant
+ * to the GNU General Public License, and as distributed it includes or
+ * is derivative of works licensed under the GNU General Public License or
+ * other free or open source software licenses.
+ * See COPYRIGHT.php for copyright notices and details.
+ */
 
 class editorActions extends mwgActions {
 
@@ -6,10 +19,9 @@ class editorActions extends mwgActions {
 
     
     $response->includeHeaderFile('editor_default_view.js');
-/*    
-    $response->editor = 'editarea';
-    $response->includeHeaderFile('editor_editarea.js');      
-*/    
+
+//    $response->editor = 'editarea';
+//    $response->includeHeaderFile('editor_editarea.js');      
 
     $response->editor = 'tinymce';
     $response->includeHeaderFile('editor_tinymce.js');  
@@ -21,8 +33,18 @@ class editorActions extends mwgActions {
     $filelist = array(
      '' => 'Select a File'
     );
+    
+    $db = MWG::getDb();
+    $data = $db->get_results('select * from templates', $file);
+    
     foreach($files as $file) {
-     $filelist[$file] = $file;
+      $r = $db->get_row('select name from templates where filename=?', $file);
+      if ($r) {
+        $dfile = "$file ($r[name])";
+      } else {
+        $dfile = $file;
+      }
+     $filelist[$file] = $dfile;     
     }
 
     $response->setSelect('filename', $filelist);
@@ -33,6 +55,9 @@ class editorActions extends mwgActions {
     if ($filename) {
       $response->set('filecontent', file_get_contents(MWG_BASE . '/templates/' . $filename));
       $response->set('filename', $filename);
+      $description = $db->get_value('select description from templates where filename=?', $filename);
+      if (! $description) $description = 'None Available';
+      $response->set('description',  $description);
     }
   }
 
