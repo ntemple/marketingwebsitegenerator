@@ -275,21 +275,34 @@ class MWG {
   * @param mixed $default
   * @return string
   */
-  function get_setting($name, $default = null) {
-    static $settings = null;
+  function Xget_setting($name, $default = null) {
+     static $settings = null;
     
     if (! $settings) {
       $settings = $this->getDb()->get_select('select name, value from settings');
-//      $out = print_r($settings, true);
-//      print $out;
-//      print strlen($out);
+     $out = print_r($settings, true);
+      print $out;
+      print strlen($out);
     }
 
     if (isset($setting[$name])) {
-      return $settings[$name];
+      return stripslashes($settings[$name]);
     } else {
       return $default;
     }  
+  }
+
+
+  function get_setting($setting_name, $default = null)
+  {
+    $value = $this->getDb()->get_value('select value from settings');  
+    if ($value) {
+      return stripslashes($value);      
+    }    
+    if ($default) {
+      return $default;
+    }    
+    return $value;
   }
 }
 
