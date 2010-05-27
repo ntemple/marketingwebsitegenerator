@@ -47,7 +47,11 @@ class MWG {
     $this->response = new mwgResponse();
 
     $this->registry = mwgDataRegistry::getInstance();    
+    
     $default_theme = $this->registry->get('theme.default', 'bfm', true);
+    if (self::is_logged_in()) {
+      $default_theme = $this->registry->get('theme.defaultbe', $default_theme);
+    } 
 
     $this->theme = new modelThemes($default_theme);
 
@@ -304,6 +308,16 @@ class MWG {
     }    
     return $value;
   }
+  
+  static function is_logged_in() {
+    if (isset($_SESSION['sess_id'])) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+  
 }
 
 function mwg_shortcode_gizmo($atts) {

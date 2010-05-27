@@ -22,7 +22,7 @@
             <input type="hidden" name="t" value="activate">
             <input type="hidden" name="id" value="<?= $item->id ?>">
             <input type="submit" name= "_cmd_activate_fe" value="Activate Frontend">
-            <input type="submit" name= "_cmd_activate_be" value="Activate Backend"> @todo
+            <input type="submit" name= "_cmd_activate_be" value="Activate Backend">
           </form>        
           </p>
         </td>
@@ -58,7 +58,7 @@
 enable your users to switch themes.</p>
 <ul>
 <li>[themeswitcher]: Display drop-down list to select a global theme.</li>
-<li>[themeswitcher id="example"]: Force that page to theme with the name "example"</li> @todo
+<!-- <li>[themeswitcher id="example"]: Force that page to theme with the name "example"</li>  -->
 </ul>
 </div>
 

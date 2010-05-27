@@ -46,7 +46,11 @@ class comThemes {
   
   function activate() {    
     $mwg = MWG::getInstance();
-    $mwg->registry->set('theme.default', BMGHelper::_req('id'));
+    if (isset($_POST['_cmd_activate_be'])) {
+        $mwg->registry->set('theme.defaultbe', BMGHelper::_req('id'));      
+    }  else {
+       $mwg->registry->set('theme.default', BMGHelper::_req('id'));
+    }
     $mwg->theme->switchThemes('');
     $this->view('info', "New Theme activated.");       
     
