@@ -1,3 +1,4 @@
+<pre>
 <?php
 /**
 * @version    $Id$
@@ -17,43 +18,56 @@
 * Check the database and peform an upgrade if necessary
 * Needs to be very fast as it will be run on every call
 */
+
 $db = MWG::getDb();
+ob_start();
 upgrade($db);
+$debug = ob_get_clean();
+print "<pre>\n$debug\n"; print_r($db); exit();
+
 
 function upgrade(mysqldb $db) {
-  $cols = $db->get_results('show columns from mwg_setting');
-  if (count($cols) > 0) {
+
+  $tables = $db->get_results("show tables like 'mwg%'");
+  if (count($tables) > 0) {
     $db_version = $db->get_value('select value from mwg_setting where name=?', 'site_dbversion');
-  } else {
+  } 
+  if (! $db_version) {
     $db_version = '1.0';
   }
 
-  $queries = array();
+  if ($db_version < 1.3) {
+    $lock = $db->get_value('select value from settings where name=?', 'lock');
+    if ($lock > 1) return $db_version;
 
-  if ($db_version == '1.0') {
-    $db_version = run_upgrade($db, MWG_BASE . '/lib/upgrade/upgrade-1.0.txt');
+    if ($lock == 1) {
+      $db->query('update settings set value=2 where name=?', 'lock');
+    } else {
+      $db->query("insert into settings (box_type, name, value) values ('hidden', 'lock', 2)");
+    }
+
+    include('upgrade13.php');
+    upgrade13($db, $db_version);
+
+    $db->query('update settings set value=1 where name=?', 'lock');
   }
 
-  if ($db_version == '1.1') {
-    $db_version = run_upgrade($db, MWG_BASE . '/lib/upgrade/upgrade-1.1.txt');
-  }
-
-  if ($db_version == '1.2') {
-    $db_version = run_upgrade($db, MWG_BASE . '/lib/upgrade/upgrade-1.2.txt');
-  }
   return $db_version;
+
 }
 
 function run_upgrade($db, $file) {
   $txt = file_get_contents($file);
-  $queries = explode(";", $txt);
+  $queries = explode(";\n", $txt);
   foreach ($queries as $q) {
-    if ($q) $db->query($q);
+    $q = trim($q);
+    if ($q) {
+      print ".$q.\n";
+      $db->query($q);
+      print $db->_error;
+    }
   }
-  $db_version = $db->get_value('select value from mwg_setting where name=?', 'site_dbversion');
-  return $db_version;
+
+  return $db->get_value('select value from mwg_setting where name=?', 'site_dbversion');
 }
-
-
-
 
