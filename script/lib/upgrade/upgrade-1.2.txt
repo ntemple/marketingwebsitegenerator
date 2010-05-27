@@ -1,0 +1,5 @@
+ALTER TABLE `mwg_gizmo` ADD `position` VARCHAR( 255 ) NOT NULL AFTER `title` , ADD `ordre` INT NOT NULL AFTER `position`;
+ALTER TABLE `mwg_setting` ADD UNIQUE ( `name`);
+ALTER TABLE `products` CHANGE `price` `price` DECIMAL( 8, 2 ) NOT NULL DEFAULT '0.00', CHANGE `trial_amount` `trial_amount` DECIMAL( 6, 2 ) NOT NULL DEFAULT '0.00', CHANGE `trial_auth_amount` `trial_auth_amount` DECIMAL( 8, 2 ) NOT NULL;
+ALTER TABLE `a_tr` CHANGE `amount` `amount` DECIMAL( 10, 4 ) NOT NULL DEFAULT '0.0000';
+ALTER TABLE `levels` CHANGE `value` `value` DECIMAL( 8, 2 ) NOT NULL DEFAULT '0.00', CHANGE `jv1` `jv1` DECIMAL( 8, 2 ) NOT NULL DEFAULT '0.00', CHANGE `jv2` `jv2` DECIMAL( 8, 2 ) NOT NULL DEFAULT '0.00';
