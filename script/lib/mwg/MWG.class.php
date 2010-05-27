@@ -17,7 +17,7 @@ class MWG {
 
   /** @var mwgDocument */
   var $document;
-  
+
   /** @var Template */
   var $template;  // BFM's template system
 
@@ -26,13 +26,13 @@ class MWG {
 
   /** @var WMGDataRegistry */
   var $registry;
-  
+
   /** @var mwgRequest */
   var $request;
-  
+
   /** @var mwgResponse */
   var $response;
-  
+
   /** @var mwgSettings */
   var $settings;
 
@@ -45,23 +45,23 @@ class MWG {
   private function __construct() {
     $this->request  = new mwgRequest();
     $this->response = new mwgResponse();
-    
+
     $this->registry = mwgDataRegistry::getInstance();    
     $default_theme = $this->registry->get('theme.default', 'bfm', true);
 
     $this->theme = new modelThemes($default_theme);
 
     $this->document = new mwgDocument();
-    
-//    $this->settings = new mwgSettings();
-    
+
+    //    $this->settings = new mwgSettings();
+
     /* Switcher needs to be in a plugin */
     if (isset($_GET['theme'])) {
       $this->theme->switchThemes($_GET['theme']);      
     }  else  {
       if (isset($_COOKIE['theme'])) $this->theme->switchThemes($_COOKIE['theme']);
     }
-        
+
     $this->loadPlugins();
   }
 
@@ -73,7 +73,7 @@ class MWG {
     $instance = new MWG();
     return $instance;
   }
-  
+
   function loadPlugins() {
     // Load ALL the plugins.  
     // @todo make this more efficient
@@ -82,7 +82,7 @@ class MWG {
       $this->loadPluginGroup($ptypes);
     }          
   }
-  
+
   function loadPluginGroup($ptype) {
     $plugins = $this->listDir(MWG_BASE . '/plugins/' . $ptype);
     foreach ($plugins as $plugin) {
@@ -139,12 +139,12 @@ class MWG {
     }
     return $dirs;
   }
-  
+
   function runEvent($method, $args) {
     if (!class_exists('modelGizmo')) require_once(MWG_BASE . '/components/gizmo/modelgizmo.class.php');
     $model = new modelGizmo();
     $gizmos = $model->getActiveGizmos();
-    
+
     foreach ($gizmos as $gizmo) {
       $func = array($gizmo, $method);
       if (is_callable($func)) {
@@ -154,10 +154,10 @@ class MWG {
   }
 
   /**
-   * @todo: return the search path for the active theme
-   */
+  * @todo: return the search path for the active theme
+  */
   function getTemplatePath() {
-//    return array('/var/www/html/mwg/script/themes/mwg-default');
+    //    return array('/var/www/html/mwg/script/themes/mwg-default');
     return array();
   }
 
@@ -173,7 +173,7 @@ class MWG {
     $this->document->setKeywords($this->tplGet('keywords'), true);
     $this->document->setTitle(trim($this->tplGet('keywords_title')), false, true);
     $this->document->setTitle($this->site_name, false, true);
-    
+
     $content = $this->theme->process($tpl);
 
     $this->runEvent('beforeDoShortcode', array($this->document, $content));
@@ -205,11 +205,12 @@ class MWG {
   * 
   * @param mixed $type
   */
-  
+
   function getMenu($type = 'list') {
     global $sess_id, $membership_id;
 
     $db = $this->getDb();
+    $array = array();
 
     if (isset($sess_id)) {
       $items = generate_main_menu_list('members', $membership_id);      
@@ -217,13 +218,25 @@ class MWG {
       $items = generate_main_menu_list('main');      
     }
     
-    switch ($type) {
-      case 'list':  return _render_menu_list($items); break;
-      default:      foreach ($items as $item) {
-                      $array[] = _render_link($item);
-                    }
-                    return $array;
+    if ($wp) {
+      array_shift($items); // Remove home link for wordpress
     }
+
+    foreach ($items as $item) {
+      $array[] = _render_link($item);
+    }
+    
+    if ($type == 'list') {
+      $menu = '';
+      foreach ($array as $item) {
+        $menu .= "<li>$item</li>\n";
+      }  
+      $menu ="<ul>\n$menu</li>\n";
+    } else {
+      $menu = $array;
+    }
+
+    return $menu;
   }
 
   function tplGet($var) {
@@ -240,17 +253,17 @@ class MWG {
   * @deprecated 1.1
   * 
   */
-  
+
   function getHead() {
     return '';
-//    return $this->document->getHead();
+    //    return $this->document->getHead();
   }
   /**
   * Get the document title
   * @deprecated 1.1
   * 
   */
-  
+
   function getTitle() {
     return $this->document->getTitle();
   }         
@@ -262,35 +275,35 @@ class MWG {
     else
       return $default;
   }
-/*
+  /*
   function get_setting($setting_name, $default = null)
   {
-    $q=new Cdb;
+  $q=new Cdb;
 
-    $query="select value from settings where name='$setting_name'";
-    $q->query($query);
-    if ($q->nf()==0) return $default; // cannot find the setting in table
+  $query="select value from settings where name='$setting_name'";
+  $q->query($query);
+  if ($q->nf()==0) return $default; // cannot find the setting in table
 
-    $q->next_record();
+  $q->next_record();
 
-    $value = stripslashes($q->f('value')); // Why is stripslashes needed?
-    return $value;
+  $value = stripslashes($q->f('value')); // Why is stripslashes needed?
+  return $value;
   }
-*/
+  */
 
 }
 
 function mwg_shortcode_gizmo($atts) {
   $id = $atts['id'];
   if (!$id) return;
-  
+
   if (!class_exists('modelGizmo')) require_once(MWG_BASE . '/components/gizmo/modelgizmo.class.php');
   $model = new modelGizmo();
   $gizmos = $model->getActiveGizmos();
   if (!isset($gizmos[$id])) return;
-  
+
   $gizmo = $gizmos[$id];
-  
+
   if ($gizmo) {
     return $gizmo->render($atts);
   }

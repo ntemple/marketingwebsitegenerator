@@ -106,22 +106,6 @@
     $items = generate_main_menu_list('members', $membership_id);
     return _render_menu($items);
   }
-
-  /**
-  * render the menu as an unordered list, 
-  * suitable for CSS based templates
-  * 
-  * @param mixed $items
-  * @return string
-  */
-  function _render_menu_list($items) {
-    $menu = '';
-    foreach ($items as $item) {
-      $menu .= "<li>" ._render_link($item) . "</li>\n";
-    }
-    $menu = "<ul>\n$menu</ul>\n"; 
-    return $menu;
-  }
   
   /**
   * Defaut rendering for the standard template
