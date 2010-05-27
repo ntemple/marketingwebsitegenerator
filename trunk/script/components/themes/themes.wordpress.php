@@ -1,20 +1,99 @@
 <?php
 /* Wordpress Compatible Functions */
 
-if (! function_exists('add_filter')) {
-function add_filter() {
-  sbutil::trace();
-}}
+class mwgWP {
+  
+  var $callbacks;
+  
+  private function __construct() {
+    $this->callbacks = array();
+    
+  }
+  
+  static function getInstance() {
+    static $self = null;
+    
+    if (!$self) 
+      $self = new mwgWP();
+    return $self;
+  }
+  
+  function add_callback(wpCallback $cb) {
+    $class = get_class($cb);
+    
+    if (!isset($this->callbacks[$class])) $this->callbacks[$class] = array();
+    if (!isset($this->callbacks[$class][$cb->hook_name])) $this->callbacks[$class][$cb->hook_name] = array();      
+    
+    $this->callbacks[$class][$cb->hook_name][] = $cb;
+  }
+  
+  function runCallback($class, $name, $out) {
+    // 'wpAction', 'wp_list_pages', $menu
+    $events = $this->callbacks[$class][$name];
+    //@todo sort by priority
+    foreach ($events as $callback){
+      $out = $callback->execute($out);
+    }
+    return $out;
+  }
+  
+   
+}
 
-if (! function_exists('add_action')) {
-function add_action() {
+class wpCallback {
+  var $hook_name;
+  var $callable;
+  var $priority;
+  var $args;
+  
+  function __construct($hook_name, $callable, $priority, $args) {
+    $this->hook_name = $hook_name;
+    $this->callable  = $callable;
+    $this->priority  = $priority;
+    $this->args      = $args;
+  }  
+  
+  function  execute($params) {
+    return call_user_func($this->callable, $params);    
+  }
+}
+
+class wpFilter extends wpCallback {}
+class wpAction extends wpCallback {}
+
+
+function add_filter($hook_name, $callable, $priority = 10, $args = null) {
   sbutil::trace();
-}}
+  mwgWP::getInstance()->add_callback(new wpFilter($hook_name, $callable, $priority, $args));
+}
+
+function add_action($hook_name, $callable, $priority = 10, $args = null) {
+  sbutil::trace();
+  mwgWP::getInstance()->add_callback(new wpAction($hook_name, $callable, $priority, $args));
+}
 
 if (! function_exists('remove_action')) {
 function remove_action() {
   sbutil::trace();
 }}
+
+/*
+if (function_exists('register_sidebars')) {
+  register_sidebars(3, array(
+    'before_widget' => '<!--- BEGIN Widget --->',
+    'before_title' => '<!--- BEGIN WidgetTitle --->',
+    'after_title' => '<!--- END WidgetTitle --->',
+    'after_widget' => '<!--- END Widget --->'
+  ));
+}
+*/
+
+function dynamic_sidebar($which = 1) {
+  sbutil::trace();
+  if ($which == 1) return true;
+  else return false;
+}
+
 
 function single_post_title() {
   sbutil::trace();
@@ -30,12 +109,6 @@ function the_search_query() {
 
 function current_user_can() {
   sbutil::trace();
-}
-
-function dynamic_sidebar($which = 1) {
-  sbutil::trace();
-  if ($which == 1) return true;
-  else return false;
 }
 
 function get_calendar() {
@@ -349,10 +422,35 @@ function comments_template() {
   sbutil::trace();
 }
 
-function wp_list_pages() {
+function wp_list_pages($args) {
   sbutil::trace();
+  
+  $default =  array(
+    'depth'        => 0,
+    'show_date'    => '',
+    'date_format'  => get_option('date_format'),
+    'child_of'     => 0,
+    'exclude'      => '',
+    'include'      => '',
+    'title_li'     => '', //__('Pages'),
+    'echo'         => 1,
+    'authors'      => '',
+    'sort_column'  => 'menu_order, post_title',
+    'link_before'  => '',
+    'link_after'   => '',
+    'exclude_tree' => '',);
+  
+  
   $mwg = MWG::getInstance();
-  print $mwg->getMenu('list');
+  $items = $mwg->getMenu('array'); // Forces removal of wp link
+  array_shift($items); // Remove 'Home' link
+
+  $menu = '';
+  foreach ($items as $item) {
+    $menu .= "<li>$item</li>\n";
+  }  
+  $menu = mwgWP::getInstance()->runCallback('wpAction', 'wp_list_pages', $menu);  
+  print $menu;
 }
 
 function wp_list_bookmarks() {

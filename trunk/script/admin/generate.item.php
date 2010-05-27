@@ -16,7 +16,6 @@
 
 include("inc.top.php");
 MWG::getInstance()->response->initEditor();
-MWG::getInstance()->response->activateSidebar('test');    
 
 $t->set_file("content", "admin.generate.item.html");
 GetPayButtonsList($t);
