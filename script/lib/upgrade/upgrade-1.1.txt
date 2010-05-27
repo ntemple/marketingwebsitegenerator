@@ -1,8 +1,8 @@
-UPDATE `mwg_script`.`mwg_setting` SET `value` = '1.2',`default_value` = '1.2' WHERE `mwg_setting`.`id` =10 LIMIT 1 ;
+UPDATE `mwg_setting` SET `value` = '1.2',`default_value` = '1.2' WHERE `mwg_setting`.`name` = 'site_dbversion' LIMIT 1 ;
 delete from settings where id = 134 limit 1;
 ALTER TABLE `settings` CHANGE `cat` `cat` ENUM( 'General Site Settings', 'Email Address', 'Sign Up', 'Payment', 'OTO (One Time Offer)', 'Security', 'MWG Affiliate', '3rd Party Autoresponder', 'Stats', 'Downline Settings', 'JV Partner' ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'General Site Settings' 
-UPDATE `mwg_script`.`settings` SET `cat` = 'OTO (One Time Offer)' WHERE `settings`.`id` in(15,16,114,120) LIMIT 1 ;
-UPDATE `mwg_script`.`settings` SET `cat` = 'Email Address' WHERE `settings`.`id` =8 LIMIT 1 ;
-UPDATE `mwg_script`.`settings` SET `cat` = 'Email Address' WHERE `settings`.`id` =9 LIMIT 1 ;
-INSERT INTO `mwg_script`.`mwg_setting` (`id` ,`category` ,`group` ,`name` ,`value` ,`default_value` ,`input_type` ,`label` ,`help_text` ,`options` ,`rank`)VALUES (NULL , 'Global Site Settings', NULL , 'theme_subtitle', 'Just Another Marketing Website Generator Site', '', 'input', 'Site Subtitle', 'Some themes (wordpress) have the option to use a subtitle. Enter that here.', '', '0');
+UPDATE `settings` SET `cat` = 'OTO (One Time Offer)' WHERE `settings`.`id` in(15,16,114,120) LIMIT 1 ;
+UPDATE `settings` SET `cat` = 'Email Address' WHERE `settings`.`id` =8 LIMIT 1 ;
+UPDATE `settings` SET `cat` = 'Email Address' WHERE `settings`.`id` =9 LIMIT 1 ;
+INSERT INTO `mwg_setting` (`id` ,`category` ,`group` ,`name` ,`value` ,`default_value` ,`input_type` ,`label` ,`help_text` ,`options` ,`rank`)VALUES (NULL , 'Global Site Settings', NULL , 'theme_subtitle', 'Just Another Marketing Website Generator Site', '', 'input', 'Site Subtitle', 'Some themes (wordpress) have the option to use a subtitle. Enter that here.', '', '0');
 
