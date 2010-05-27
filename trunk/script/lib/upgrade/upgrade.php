@@ -23,7 +23,7 @@ $db = MWG::getDb();
 ob_start();
 upgrade($db);
 $debug = ob_get_clean();
-print "<pre>\n$debug\n"; print_r($db); exit();
+// print "<pre>\n$debug\n"; print_r($db); exit();
 
 
 function upgrade(mysqldb $db) {
