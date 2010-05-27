@@ -31,22 +31,22 @@ function upgrade(mysqldb $db) {
   $queries = array();
 
   if ($db_version == '1.0') {
-    $db_version = run_upgrade(MWG_BASE . '/lib/upgrade/upgrade-1.0.txt');
+    $db_version = run_upgrade($db, MWG_BASE . '/lib/upgrade/upgrade-1.0.txt');
   }
 
   if ($db_version == '1.1') {
-    $db_version = run_upgrade(MWG_BASE . '/lib/upgrade/upgrade-1.1.txt');
+    $db_version = run_upgrade($db, MWG_BASE . '/lib/upgrade/upgrade-1.1.txt');
   }
 
   if ($db_version == '1.2') {
-    $db_version = run_upgrade(MWG_BASE . '/lib/upgrade/upgrade-1.0.txt');
+    $db_version = run_upgrade($db, MWG_BASE . '/lib/upgrade/upgrade-1.2.txt');
   }
   return $db_version;
 }
 
-function run_upgrade($file) {
+function run_upgrade($db, $file) {
   $txt = file_get_contents($file);
-  $queries = explode(";\n", $txt);
+  $queries = explode(";", $txt);
   foreach ($queries as $q) {
     if ($q) $db->query($q);
   }
