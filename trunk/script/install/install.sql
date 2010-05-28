@@ -445,8 +445,8 @@ CREATE TABLE `filters` (
   `name` text NOT NULL,
   `filter` text NOT NULL,
   KEY `id` (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-INSERT INTO `filters` VALUES (0,'last','');
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+INSERT INTO `filters` VALUES (2,'last','');
 CREATE TABLE `last_cc_digits` (
   `id` int(11) NOT NULL auto_increment,
   `cc` varchar(4) NOT NULL,
@@ -664,7 +664,7 @@ CREATE TABLE `mwg_setting` (
   `options` text NOT NULL,
   `rank` int(11) NOT NULL default '0',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 INSERT INTO `mwg_setting` VALUES (1,'Email Settings',NULL,'email_mailer',NULL,'phpmail','select','Choose a mailing function.','','a:3:{s:7:\"phpmail\";s:17:\"PHP Mail Function\";s:4:\"smtp\";s:4:\"SMTP\";s:8:\"sendmail\";s:8:\"Sendmail\";}',0);
 INSERT INTO `mwg_setting` VALUES (2,'Email Settings',NULL,'email_from_name',NULL,'','input','From Name','','',0);
 INSERT INTO `mwg_setting` VALUES (3,'Email Settings',NULL,'email_from_address',NULL,'','input','From Address','','',0);
@@ -675,9 +675,9 @@ INSERT INTO `mwg_setting` VALUES (7,'Email Settings',NULL,'email_smtp_port',NULL
 INSERT INTO `mwg_setting` VALUES (8,'Email Settings',NULL,'email_smtp_username',NULL,'','input','SMTP Username','','',0);
 INSERT INTO `mwg_setting` VALUES (9,'Email Settings',NULL,'email_smtp_password',NULL,'','input','SMTP Password','','',0);
 INSERT INTO `mwg_setting` VALUES (10,'Global Site Settings',NULL,'site_dbversion','1.3','1.1','hidden','','','',0);
-INSERT INTO `mwg_setting` (`id`, `category`, `group`, `name`, `value`, `default_value`, `input_type`, `label`, `help_text`, `options`, `rank`) VALUES (11, 'Global Site Settings', NULL, 'theme_subtitle', 'Just Another Marketing Website Generator Site', '', 'input', 'Site Subtitle', 'Some themes (wordpress) have the option to use a subtitle. Enter that here.', '', 2);
-INSERT INTO `mwg_setting` (`id`, `category`, `group`, `name`, `value`, `default_value`, `input_type`, `label`, `help_text`, `options`, `rank`) VALUES (12, 'Global Site Settings', NULL, 'site_title', 'Online Marketing', '', 'input', 'Site Title', 'The title of your site. Appears on most themes and is the default title of all your pages.', '', 1);
-INSERT INTO `mwg_setting` (`id`, `category`, `group`, `name`, `value`, `default_value`, `input_type`, `label`, `help_text`, `options`, `rank`) VALUES (13, 'Global Site Settings', NULL, 'site_description', 'Visit our website to find out exactly what you need for online marketing.', '', 'input', 'Site Description', 'This is the text of your site-wide meta description tag. It should be 160 characters or less, and appears in search results.', '', 3);
+INSERT INTO `mwg_setting` VALUES (11,'Global Site Settings',NULL,'theme_subtitle','Just Another Marketing Website Generator Site','','input','Site Subtitle','Some themes (wordpress) have the option to use a subtitle. Enter that here.','',2);
+INSERT INTO `mwg_setting` VALUES (12,'Global Site Settings',NULL,'site_title','Online Marketing','','input','Site Title','The title of your site. Appears on most themes and is the default title of all your pages.','',1);
+INSERT INTO `mwg_setting` VALUES (13,'Global Site Settings',NULL,'site_description','Visit our website to find out exactly what you need for online marketing.','','input','Site Description','This is the text of your site-wide meta description tag. It should be 160 characters or less, and appears in search results.','',3);
 CREATE TABLE `payment_log` (
   `id` int(11) NOT NULL auto_increment,
   `process_type` varchar(30) NOT NULL default '',
@@ -856,7 +856,7 @@ INSERT INTO `settings` VALUES (20,'txn_id','','input','<b><font color=\"#003366\
 INSERT INTO `settings` VALUES (1,'site_name','Generator 1.0','input','Your Site Name','General Site Settings',1);
 INSERT INTO `settings` VALUES (16,'enable_oto_2','','checkbox','Check this box if you want an one time offer upsell(2nd one time offer) after member paid for one time offer.','OTO (One Time Offer)',16);
 INSERT INTO `settings` VALUES (17,'affiliate_variable','thankyou-page','input','This is the affiliate variable used by the site... For example: <b>http://yoursite.com/?<font color=red>affiliate</font>=id</b>','General Site Settings',17);
-INSERT INTO `settings` VALUES (18,'secret_string','changeme','hidden','A unique string that you only know. It will be used to protect the session ID of all logged users. (Changing the default setting for this is very important!)','Security',18);
+INSERT INTO `settings` VALUES (18,'secret_string','c82f98d71095aac45897cdd0a6f9','hidden','A unique string that you only know. It will be used to protect the session ID of all logged users. (Changing the default setting for this is very important!)','Security',18);
 INSERT INTO `settings` VALUES (21,'bm_aff_link','','input','Your MWG Affiliate link','MWG Affiliate',21);
 INSERT INTO `settings` VALUES (22,'enable_bm_aff_link','1','select','Enable your MWG Affiliate Link at the bottom of your site. If you do not have your MWG Affiliate link please <a href=\"http://marketingwebsitegenerator.com/\" target=_blank>click here</a> to get one.','MWG Affiliate',22);
 INSERT INTO `settings` VALUES (31,'enable_arp','','hidden','Enable subscription to 3rd Party autoresponders for new members','3rd Party Autoresponder',31);
@@ -986,26 +986,26 @@ CREATE TABLE `signup_settings` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 INSERT INTO `signup_settings` VALUES (1,'first_name',1,1,1,'First Name',1,0);
-INSERT INTO `signup_settings` VALUES (2,'last_name',1,1,1,'Last Name',2,0);
+INSERT INTO `signup_settings` VALUES (2,'last_name',0,0,1,'Last Name',2,0);
 INSERT INTO `signup_settings` VALUES (3,'email',1,1,1,'Email Address',3,0);
-INSERT INTO `signup_settings` VALUES (4,'paypal_email',1,1,1,'PayPal Email',4,0);
+INSERT INTO `signup_settings` VALUES (4,'paypal_email',0,0,1,'PayPal Email',4,0);
 INSERT INTO `signup_settings` VALUES (6,'password',1,1,1,'Password',6,0);
-INSERT INTO `signup_settings` VALUES (7,'address',1,0,1,'Address',7,0);
-INSERT INTO `signup_settings` VALUES (8,'city',1,0,1,'City',8,0);
-INSERT INTO `signup_settings` VALUES (9,'state',1,0,1,'State',9,0);
-INSERT INTO `signup_settings` VALUES (10,'zip',1,0,1,'Zip Code',10,0);
-INSERT INTO `signup_settings` VALUES (11,'country',1,0,1,'Country',11,0);
-INSERT INTO `signup_settings` VALUES (12,'home_phone',1,0,1,'Home Phone',12,0);
-INSERT INTO `signup_settings` VALUES (13,'work_phone',1,0,1,'Work Phone',13,0);
-INSERT INTO `signup_settings` VALUES (14,'cell_phone',1,0,1,'Cell Phone',14,0);
-INSERT INTO `signup_settings` VALUES (15,'icq_id',1,0,1,'Icq Id',15,0);
-INSERT INTO `signup_settings` VALUES (16,'msn_id',1,0,1,'Msn Id',16,0);
-INSERT INTO `signup_settings` VALUES (17,'yahoo_id',1,0,1,'Yahoo Id',17,0);
-INSERT INTO `signup_settings` VALUES (18,'ssn',1,0,1,'Social Security Number (ssn)',18,0);
-INSERT INTO `signup_settings` VALUES (19,'url1',1,0,1,'Your Website - 1',19,0);
-INSERT INTO `signup_settings` VALUES (20,'url2',1,0,1,'Your Website - 2',20,0);
-INSERT INTO `signup_settings` VALUES (21,'url3',1,0,1,'Your Website - 3',21,0);
-INSERT INTO `signup_settings` VALUES (22,'clickbank_id',1,0,1,'ClickBank Vendor ID',22,1);
+INSERT INTO `signup_settings` VALUES (7,'address',0,0,1,'Address',7,0);
+INSERT INTO `signup_settings` VALUES (8,'city',0,0,1,'City',8,0);
+INSERT INTO `signup_settings` VALUES (9,'state',0,0,1,'State',9,0);
+INSERT INTO `signup_settings` VALUES (10,'zip',0,0,1,'Zip Code',10,0);
+INSERT INTO `signup_settings` VALUES (11,'country',0,0,1,'Country',11,0);
+INSERT INTO `signup_settings` VALUES (12,'home_phone',0,0,1,'Home Phone',12,0);
+INSERT INTO `signup_settings` VALUES (13,'work_phone',0,0,1,'Work Phone',13,0);
+INSERT INTO `signup_settings` VALUES (14,'cell_phone',0,0,1,'Cell Phone',14,0);
+INSERT INTO `signup_settings` VALUES (15,'icq_id',0,0,1,'Icq Id',15,0);
+INSERT INTO `signup_settings` VALUES (16,'msn_id',0,0,1,'Msn Id',16,0);
+INSERT INTO `signup_settings` VALUES (17,'yahoo_id',0,0,1,'Yahoo Id',17,0);
+INSERT INTO `signup_settings` VALUES (18,'ssn',0,0,0,'Social Security Number (ssn)',18,0);
+INSERT INTO `signup_settings` VALUES (19,'url1',0,0,1,'Your Website - 1',19,0);
+INSERT INTO `signup_settings` VALUES (20,'url2',0,0,1,'Your Website - 2',20,0);
+INSERT INTO `signup_settings` VALUES (21,'url3',0,0,1,'Your Website - 3',21,0);
+INSERT INTO `signup_settings` VALUES (22,'clickbank_id',0,0,1,'ClickBank Vendor ID',22,1);
 INSERT INTO `signup_settings` VALUES (23,'jv_customdownload',0,0,1,'Your Custom Download HTML',40,0);
 INSERT INTO `signup_settings` VALUES (24,'jv_customsales',0,0,1,'Your Custom Sales HTML',41,0);
 CREATE TABLE `tags` (
