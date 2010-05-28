@@ -663,8 +663,9 @@ CREATE TABLE `mwg_setting` (
   `help_text` text NOT NULL,
   `options` text NOT NULL,
   `rank` int(11) NOT NULL default '0',
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 INSERT INTO `mwg_setting` VALUES (1,'Email Settings',NULL,'email_mailer',NULL,'phpmail','select','Choose a mailing function.','','a:3:{s:7:\"phpmail\";s:17:\"PHP Mail Function\";s:4:\"smtp\";s:4:\"SMTP\";s:8:\"sendmail\";s:8:\"Sendmail\";}',0);
 INSERT INTO `mwg_setting` VALUES (2,'Email Settings',NULL,'email_from_name',NULL,'','input','From Name','','',0);
 INSERT INTO `mwg_setting` VALUES (3,'Email Settings',NULL,'email_from_address',NULL,'','input','From Address','','',0);
@@ -678,6 +679,7 @@ INSERT INTO `mwg_setting` VALUES (10,'Global Site Settings',NULL,'site_dbversion
 INSERT INTO `mwg_setting` VALUES (11,'Global Site Settings',NULL,'theme_subtitle','Just Another Marketing Website Generator Site','','input','Site Subtitle','Some themes (wordpress) have the option to use a subtitle. Enter that here.','',2);
 INSERT INTO `mwg_setting` VALUES (12,'Global Site Settings',NULL,'site_title','Online Marketing','','input','Site Title','The title of your site. Appears on most themes and is the default title of all your pages.','',1);
 INSERT INTO `mwg_setting` VALUES (13,'Global Site Settings',NULL,'site_description','Visit our website to find out exactly what you need for online marketing.','','input','Site Description','This is the text of your site-wide meta description tag. It should be 160 characters or less, and appears in search results.','',3);
+INSERT INTO `mwg_setting` VALUES (14,'Email Settings',NULL,'email_limit','100','100','input','Send Limit','The maximum number of emails to send every cron run. The default of 100 stays under most ISPs limits if you set the cron_send to run every 10-15 minutes.','',0);
 CREATE TABLE `payment_log` (
   `id` int(11) NOT NULL auto_increment,
   `process_type` varchar(30) NOT NULL default '',
@@ -719,7 +721,8 @@ CREATE TABLE `pending` (
   `subject` varchar(100) NOT NULL default '',
   `body` text NOT NULL,
   `from_email` varchar(50) NOT NULL default '',
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY  (`id`),
+  KEY `subject` (`subject`)
 ) ENGINE=MyISAM AUTO_INCREMENT=119 DEFAULT CHARSET=latin1;
 CREATE TABLE `products` (
   `id` int(10) NOT NULL auto_increment,
@@ -850,7 +853,7 @@ INSERT INTO `settings` VALUES (6,'lostpass_email_body','Hi [firstname],\r\n\r\ny
 INSERT INTO `settings` VALUES (5,'lostpass_email_subject','[firstname], your password for [sitename]!','input','Lost password email subject.','',5);
 INSERT INTO `settings` VALUES (4,'welcome_email_body','Hi [firstname],\r\n\r\nwelcome to [sitename], \r\n\r\nyour login info is:\r\n\r\nemail: [email]\r\npassword: [password]\r\n\r\nThank you,\r\n\r\n[sitename]\r\nAdmin.','textbox','New member welcome email body.','',4);
 INSERT INTO `settings` VALUES (3,'welcome_email_subject','[firstname], welcome to [sitename] !','input','New member welcome email subject.','',3);
-INSERT INTO `settings` VALUES (19,'site_full_url','','input','The full URL to your site including folder if necessary(Example: <b>http://www.minigolf.com/</b> or <b>http://www.minigolf.com/ball/</b>)','General Site Settings',19);
+INSERT INTO `settings` VALUES (19,'site_full_url','http://www.intelliforge.net/mwg/script/','input','The full URL to your site including folder if necessary(Example: <b>http://www.minigolf.com/</b> or <b>http://www.minigolf.com/ball/</b>)','General Site Settings',19);
 INSERT INTO `settings` VALUES (2,'webmaster_contact_email','email@example.com','input','Email address where the contact form should send the messages','General Site Settings',2);
 INSERT INTO `settings` VALUES (20,'txn_id','','input','<b><font color=\"#003366\">PAYPAL: </font></b> Paypal TXN_ID setting, this is used for paypal instant payment notification and it\'s a temporary payment session ID, do not modify','Payment',20);
 INSERT INTO `settings` VALUES (1,'site_name','Generator 1.0','input','Your Site Name','General Site Settings',1);
