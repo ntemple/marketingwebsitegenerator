@@ -74,45 +74,47 @@
         <th class="gt-table-col-checkbox"><a href=""><img src="media/images/famfamfam/icons/tick.png" alt="check"></a></th>
         <th>Name</th>
         <th>Type</th>
-<!--        <th>Description</th> -->
         <th>Version</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
-  <?php foreach($items as $id => $item) { ?>
+  <?php 
+//  print_r($items);
+//  die();
+//  
+  foreach($items as $id => $item) { ?>
     <tr>
       <td><input  type="checkbox"></td>
-      <td><Xa href="?c=genstaller&t=details&id=<?php echo $id ?>"><?php echo $item['name'] ?></Xa></td>
+      <td><?php echo $item['name'] ?></td>
       <td><?php echo $item['type']?></td>
-<!--      <td><?php echo $item['title']?></td> -->
       <td><?php echo $item['version']; ?></td>
       <td>
         <?php
+//          if (isset($extensions[$id])) {
+//            $installed_ext = &$extensions[$id];
+            // This has already been installed
+//            /*
+//            print "<pre>\n";
+//            print_r($extensions[$id]);
+//            print_r($item);
+//            print "</pre>\n";
+//            */
+//            if ($installed_ext['serial'] >= $item['serial']) {
+//              print "installed</td></tr>\n";
+//              continue;
+//            } else {
+//              if (isset($item['updates']) && in_array($installed_ext['serial'], $item['updates'])) {
+                // We can be updated
+//                $upgrades = $item['upgrades']; // an array
+//                $task   = "upgrade";
+//                $submit = "Upgrade";
+//              }
+//            }
+//          }
+  
           $task   = 'install';
           $submit = 'install';
-
-          if (isset($extensions[$id])) {
-            $installed_ext = &$extensions[$id];
-            // This has already been installed
-            /*
-            print "<pre>\n";
-            print_r($extensions[$id]);
-            print_r($item);
-            print "</pre>\n";
-            */
-            if ($installed_ext['serial'] >= $item['serial']) {
-              print "installed</td></tr>\n";
-              continue;
-            } else {
-              if (isset($item['updates']) && in_array($installed_ext['serial'], $item['updates'])) {
-                // We can be updated
-                $upgrades = $item['upgrades']; // an array
-                $task   = "upgrade";
-                $submit = "Upgrade";
-              }
-            }
-          }
         ?>
         <form method="post">
           <input type="hidden" name="c" value="genstaller">
@@ -122,10 +124,10 @@
         </form>
       </td>
     </tr>
-    </tbody>
-    </table>
     <?php } ?>
-</div><!-- /content box -->
+        </tbody>
+    </table>
+    </div><!-- /content box -->
 
 
 
