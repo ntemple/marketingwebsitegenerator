@@ -47,7 +47,7 @@ class MWG {
     $this->response = new mwgResponse();
 
     $this->registry = mwgDataRegistry::getInstance();    
-    
+
     $default_theme = $this->registry->get('theme.default', 'bfm', true);
     if (self::is_logged_in()) {
       $default_theme = $this->registry->get('theme.defaultbe', $default_theme);
@@ -221,16 +221,16 @@ class MWG {
     } else {
       $items = generate_main_menu_list('main');      
     }
-    
+
     if ($type == 'items') {
       return $items;      
     }
-    
-    
+
+
     foreach ($items as $item) {
       $array[] = _render_link($item);
     }
-    
+
     if ($type == 'list') {
       $menu = '';
       foreach ($array as $item) {
@@ -273,33 +273,18 @@ class MWG {
     return $this->document->getTitle();
   }         
   /**
-  * Optimized by loading all settings, once
+  * @todo Optimize by loading all settings, once
   * 
-  * @param mixed $name
+  * @param mixed $setting_name
   * @param mixed $default
-  * @return string
   */
-  function Xget_setting($name, $default = null) {
-     static $settings = null;
-    
-    if (! $settings) {
-      $settings = $this->getDb()->get_select('select name, value from settings');
-     $out = print_r($settings, true);
-      print $out;
-      print strlen($out);
-    }
-
-    if (isset($setting[$name])) {
-      return stripslashes($settings[$name]);
-    } else {
-      return $default;
-    }  
-  }
-
-
   function get_setting($setting_name, $default = null)
   {
-    $value = $this->getDb()->get_value('select value from settings');  
+    /* check MWG settings, first */
+    $value = $this->getDb()->get_value('select value from mwg_setting where name=?', $setting_name);  
+    if ($value) return $value;
+
+    $value = $this->getDb()->get_value('select value from settings where name=?', $setting_name);  
     if ($value) {
       return stripslashes($value);      
     }    
@@ -308,16 +293,28 @@ class MWG {
     }    
     return $value;
   }
-  
+
   static function is_logged_in() {
+/*
+    $admin_logged_in = false;
+    if (isset($_SESSION['admin_sess_id']) && $_SESSION['admin_sess_id'] == md5($mwg->get_setting("secret_string")."-".ADMIN_PASSWORD))
+    {
+      $admin_logged_in = true;
+    } else {
+      session_destroy();
+      header("location:login.php");
+      die();
+    }
+    return $admin_logged_in();
+*/    
+
     if (isset($_SESSION['sess_id'])) {
       return true;
     } else {
       return false;
     }
   }
-  
-  
+
 }
 
 function mwg_shortcode_gizmo($atts) {

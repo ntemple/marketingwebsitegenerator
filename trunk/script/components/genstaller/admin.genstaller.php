@@ -1,79 +1,66 @@
 <?php
-  /**
-  * @version    $Id$
-  * @package    MWG
-  * @copyright  Copyright (C) 2010 Intellispire, LLC. All rights reserved.
-  * @license    GNU/GPL v2.0, see LICENSE.txt
-  *
-  * Marketing Website Generator is free software.
-  * This version may have been modified pursuant
-  * to the GNU General Public License, and as distributed it includes or
-  * is derivative of works licensed under the GNU General Public License or
-  * other free or open source software licenses.
-  * See COPYRIGHT.php for copyright notices and details.
-  */
+/**
+* @version    $Id$
+* @package    MWG
+* @copyright  Copyright (C) 2010 Intellispire, LLC. All rights reserved.
+* @license    GNU/GPL v2.0, see LICENSE.txt
+*
+* Marketing Website Generator is free software.
+* This version may have been modified pursuant
+* to the GNU General Public License, and as distributed it includes or
+* is derivative of works licensed under the GNU General Public License or
+* other free or open source software licenses.
+* See COPYRIGHT.php for copyright notices and details.
+*/
 
 
-  defined('_MWG') or die ('Restricted Access');
+defined('_MWG') or die ('Restricted Access');
 
-  define('UPDATER_SERVER',  'http://www.intellispire.com/network/server51/soap.php');
-  define('UPDATER_VERSION', 22);
-  define('UPDATER_MANIFEST', MWGHelper::path(GENSTALL_BASEPATH . '/config/manifest.yml.php'));
+define('UPDATER_SERVER',  'http://www.intellispire.com/network/server51/soap.php');
+define('UPDATER_VERSION', 22);
+define('UPDATER_MANIFEST', MWGHelper::path(GENSTALL_BASEPATH . '/config/manifest.yml.php'));
 
-  require_once (MWGHelper::path(GENSTALL_BASEPATH . '/lib/isnclient/utils.inc.php'));
-  require_once (MWGHelper::path(GENSTALL_BASEPATH . '/lib/isnclient/intellispireNetworkClient.class.php'));
-  require_once (MWGHelper::path(GENSTALL_BASEPATH . '/lib/isnclient/manifest.class.php'));
-  require_once ('modelgenstaller.class.php');
+require_once (MWGHelper::path(GENSTALL_BASEPATH . '/lib/isnclient/utils.inc.php'));
+require_once (MWGHelper::path(GENSTALL_BASEPATH . '/lib/isnclient/intellispireNetworkClient.class.php'));
+require_once (MWGHelper::path(GENSTALL_BASEPATH . '/lib/isnclient/manifest.class.php'));
+require_once ('modelgenstaller.class.php');
 
-  $c     = new comGenstaller($_GET['c']);
-  $t->set_var('submenu', $c->submenu());
+$c     = new comGenstaller($_GET['c']);
+$t->set_var('submenu', $c->submenu());
 
-  $task = MWGHelper::_req('t', 'view');
-  $func = array($c, $task);
-  if (is_callable($func)) {
-    call_user_func($func);
-  } else {
-    print $task;
-    $c->view();
+$task = MWGHelper::_req('t', 'view');
+$func = array($c, $task);
+if (is_callable($func)) {
+  call_user_func($func);
+} else {
+  print $task;
+  $c->view();
+}
+
+class comGenstaller {
+
+  function __construct($controller_name) {
+    $this->controller_name = $controller_name;
+    $this->model = new modelGenstaller();
   }
 
-  class comGenstaller {
-
-    function __construct($controller_name) {
-      $this->controller_name = $controller_name;
-      $this->model = new modelGenstaller();
-    }
-
-
-    function submenu() {
-      return '';
-
-/*      $tasks = array(
-      'Add Software' => 'view',
-      'Install'     => 'showinstall'
-      );
-
-      $items = array();
-      foreach ($tasks as $disp => $task) {
-        $items[] = "<a href='?c={$this->controller_name}&t=$task'>$disp</a>";
-      }
-      return implode(' | ', $items);
-*/      
-    }
+  function submenu() {
+    return '';
+  }
 
 
   function view($class = '', $msg = '') {
     if ($msg) {
       MWGHelper::setFlash('gt-notice', $msg);
     }
-
     $model = new modelGenstaller();
-
     try {
       $manifest = $model->getManifest();
       $items = $manifest->getItems();
       $registry = mwgDataRegistry::getInstance();
       $extensions =  $registry->findExtensions();
+      $username = $registry->get('username');
+
 
       include('admin.genstaller.view.php');
 
@@ -229,6 +216,7 @@
       if ($id) {
         $url = $model->retrievedownloadlink($id);  
       }
+                 
       $uid = substr(md5(time() . serialize($GLOBALS)), 1,8);
       $package =  MWG_BASE . "/tmp/$uid.zip";
       $package_tmp_path = MWG_BASE . "/tmp/$uid";
@@ -287,11 +275,35 @@
       $manifest = $model->retrieveManifest();
     } catch(Exception $e) {
       BMGHelper::setFlash('alert', $e);
-      $this->view();
+      return $this->view();
     }
 
     BMGHelper::setFlash('info', 'Manifest downloaded Ok.');
     $this->view();
   }
+
+  function activate() {
+    $registry = mwgDataRegistry::getInstance();
+    $request = MWG::getInstance()->request;
+    $u = urlencode($_POST['username']);
+    $p = urlencode(md5($_POST['password']));
+    
+    $model = new modelGenstaller;
+
+    try {
+      $status = $model->checkAuth($_POST['username'], md5($_POST['password']));
+    } catch(Exception $e) {
+      BMGHelper::setFlash('alert', $e);
+      return $this->view();    
+    }
+
+    if ($status) {
+      $registry->set('username', $_POST['username']);
+      $registry->set('password', md5($_POST['password']));
+      return $this->view('info', "MWG Registered");        
+    } else {
+      return $this->view('warn', "MWG Not Registered - check username and password.");
+    }    
+  }  
 }
 

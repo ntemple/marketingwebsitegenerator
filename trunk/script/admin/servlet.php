@@ -6,17 +6,6 @@ $mwg = MWG::getInstance();
 
 @session_start();
 mwg_check_admin_login(true);
-/*
-$admin_logged_in = false;
-if (isset($_SESSION['admin_sess_id']) && $_SESSION['admin_sess_id'] == md5($mwg->get_setting("secret_string")."-".ADMIN_PASSWORD))
-{
-  $admin_logged_in = true;
-} else {
-   session_destroy();
-   header("location:login.php");
-   die();
-}
-*/
 
 $request  = $mwg->request;
 $response = $mwg->response; 

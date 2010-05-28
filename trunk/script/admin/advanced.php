@@ -27,14 +27,15 @@
         $db->query('update mwg_setting set value=? where name=?', $value, $name);
         
         switch($name) {
-          case 'site_title':          $db->query('update settings set value=? where name=?', 'keywords', $value); break;
-          case 'site_description':    $db->query('update settings set value=? where name=?', 'description', $value); break;
-          case 'email_from_name':     $db->query('update settings set value=? where name=?', 'emailing_from_name', $value); break;
-          case 'email_from_address':  $db->query('update settings set value=? where name=?', 'emailing_from_email', $value); break;
+          case 'site_title':          $db->query('update settings set value=? where name=?', $value, 'keywords'); break;
+          case 'site_description':    $db->query('update settings set value=? where name=?', $value, 'description'); break;
+          case 'email_from_name':     $db->query('update settings set value=? where name=?', $value, 'emailing_from_name'); break;
+          case 'email_from_address':  $db->query('update settings set value=? where name=?', $value, 'emailing_from_email'); break;
         }
-        
+//        print "<pre>" . print_r($db, true) . "</pre>";
       }
     }
+//    exit();
     $response->setFlash('Settings Stored');
     $response->redirect('advanced.php?menu=settings', 'Settings Saved');
     exit();    

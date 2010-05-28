@@ -34,7 +34,7 @@ function execute_sql($filename, $autoincrementvalue)
   $secret = substr(md5(uniqid(rand(), true)), 0, 28);
 
   $q->query('ALTER TABLE members AUTO_INCREMENT=' . $autoincrementvalue);  
-  $q->query("update settings set value='$secret' where name='secret_string');
+  $q->query("update settings set value='$secret' where name='secret_string'");
 
 }
 

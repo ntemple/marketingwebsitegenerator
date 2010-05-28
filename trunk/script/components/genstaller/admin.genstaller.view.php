@@ -48,11 +48,11 @@
   <div class="gt-form gt-content-box">
     <div class="gt-form-row gt-width-66">
       <label>Email:<img src="media/images/icons/help.png" title="Enter your MWG Username"></label>
-      <input class="gt-form-text" type="text" name="username">  
+      <input class="gt-form-text" type="text" name="username" value="<?php echo $username ?>">  
     </div>           
     <div class="gt-form-row gt-width-66">
       <label>Password:<img src="media/images/icons/help.png" title="Enter your MWG Password"></label>
-      <input class="gt-form-text" type="text" name="username">  
+      <input class="gt-form-text" type="password" name="password">  
       <input type="submit" class="gt-btn-brown-medium" value="Activate" /> <a href="http://marketingwebsitegenerator.com/club/signup.php">Create An Account</a>
     </div>                                 
 
