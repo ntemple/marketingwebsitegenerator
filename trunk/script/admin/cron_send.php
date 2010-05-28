@@ -16,9 +16,11 @@
  	
 	set_time_limit(0);
 	include("inc.all.php");
+        $limit = MWG::getInstance()->get_setting('email_limit', 100);
+
 	$q2=new cdb;
 	$k=0;
-	$query="select * from pending where subject!='already sent' order by id asc limit 0,1500";
+	$query="select * from pending where subject!='already sent' order by id asc limit 0,$limit";
 	$q->query($query);
 				
 	if ($q->nf()==0) die();
