@@ -106,7 +106,7 @@ function dynamic_sidebar($which = 1) {
   
   $model = new modelGizmo();
   $gizmos = $model->getGizmosFor($name);
-  if (count($gizmos) == 0) return false;
+  if (count($gizmos) == 0) return true;
   
   $args = mwgWP::getInstance()->template_positions['Sidebar'.$which];
   

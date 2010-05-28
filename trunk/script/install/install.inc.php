@@ -31,7 +31,11 @@ function execute_sql($filename, $autoincrementvalue)
     $k++;
   }
 
+  $secret = substr(md5(uniqid(rand(), true)), 0, 28);
+
   $q->query('ALTER TABLE members AUTO_INCREMENT=' . $autoincrementvalue);  
+  $q->query("update settings set value='$secret' where name='secret_string');
+
 }
 
 function FFileRead($name/*filename*/, &$contents/*returned contents of file*/)

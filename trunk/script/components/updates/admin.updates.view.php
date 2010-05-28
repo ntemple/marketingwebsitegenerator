@@ -1,6 +1,3 @@
-
-
-
 Your Version: <?php echo $current ?><br>
 Latest Version: <?php echo $latest ?><br>
 <?php 

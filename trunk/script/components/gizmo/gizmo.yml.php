@@ -8,7 +8,7 @@ iscore:  1.1.0
 compatibility:
   - mwg
   - php5
-menu: Gizmos
+# menu: Gizmos
 type: component
 folder: gizmo
 meta:

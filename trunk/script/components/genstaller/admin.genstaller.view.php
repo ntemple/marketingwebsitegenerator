@@ -44,13 +44,18 @@
 <form method="post">
   <input type="hidden" name="c" value="genstaller">
   <input type="hidden" name="t" value="activate">
-  <h3 class="gt-form-head">Activate Network Id</h3>       
+  <h3 class="gt-form-head">Activate Network</h3>       
   <div class="gt-form gt-content-box">
-    <div class="gt-form-row gt-width-100">
-      <label>Network ID:<img src="media/images/icons/help.png" title="Enter your Intellispire Network Id (ISNID)"></label>
-      <input class="gt-form-text" type="text" name="package">  
-      <input type="submit" class="gt-btn-brown-medium" value="Activate" />
-    </div>                    
+    <div class="gt-form-row gt-width-66">
+      <label>Email:<img src="media/images/icons/help.png" title="Enter your MWG Username"></label>
+      <input class="gt-form-text" type="text" name="username">  
+    </div>           
+    <div class="gt-form-row gt-width-66">
+      <label>Password:<img src="media/images/icons/help.png" title="Enter your MWG Password"></label>
+      <input class="gt-form-text" type="text" name="username">  
+      <input type="submit" class="gt-btn-brown-medium" value="Activate" /> <a href="http://marketingwebsitegenerator.com/club/signup.php">Create An Account</a>
+    </div>                                 
+
   </div>        
 </form>
 

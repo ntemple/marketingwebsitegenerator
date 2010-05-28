@@ -841,8 +841,8 @@ INSERT INTO `settings` VALUES (15,'enable_oto_1','','checkbox','Enable one time 
 INSERT INTO `settings` VALUES (13,'paypal_email','paypalexample.com','input','<b><font color=\"#003366\">PAYPAL: </font></b> Enter your paypal address where you would like to receive payments','Payment',14);
 INSERT INTO `settings` VALUES (10,'free_signup','1','checkbox','Check this box if you want members to sign up for free at the site. Uncheck this box if you want people to pay to become a member. (NOTE: The new One-Click OTO upsell function using Authorize.net requires that this box NOT be checked so the user must make a purchase to get into the site.)','Sign Up',10);
 INSERT INTO `settings` VALUES (14,'accept_paypal','','checkbox','<b><font color=\"#003366\">PAYPAL: </font> Accept payments via paypal ?</b>','Payment',13);
-INSERT INTO `settings` VALUES (9,'emailing_from_email','owner@example.com','input','The Email Address that will appear in the From: field of the emails sent (welcome emails, lost password emails, ...)','Email Address',9);
-INSERT INTO `settings` VALUES (8,'emailing_from_name','Site Owner','input','The Name that will appear in the From: field of the emails sent (welcome emails, lost password emails, ...)','Email Address',8);
+INSERT INTO `settings` VALUES (9,'emailing_from_email','owner@example.com','hidden','The Email Address that will appear in the From: field of the emails sent (welcome emails, lost password emails, ...)','Email Address',9);
+INSERT INTO `settings` VALUES (8,'emailing_from_name','Site Owner','hidden','The Name that will appear in the From: field of the emails sent (welcome emails, lost password emails, ...)','Email Address',8);
 INSERT INTO `settings` VALUES (7,'send_welcome_emails','1','checkbox','Send welcome emails to new members ?','',3);
 INSERT INTO `settings` VALUES (6,'lostpass_email_body','Hi [firstname],\r\n\r\nyour password: [password]\r\n\r\nThank you,\r\n\r\n[sitename]\r\nAdmin.','textbox','Lost password email body','',6);
 INSERT INTO `settings` VALUES (5,'lostpass_email_subject','[firstname], your password for [sitename]!','input','Lost password email subject.','',5);
@@ -854,9 +854,9 @@ INSERT INTO `settings` VALUES (20,'txn_id','','input','<b><font color=\"#003366\
 INSERT INTO `settings` VALUES (1,'site_name','Generator 1.0','input','Your Site Name','General Site Settings',1);
 INSERT INTO `settings` VALUES (16,'enable_oto_2','','checkbox','Check this box if you want an one time offer upsell(2nd one time offer) after member paid for one time offer.','OTO (One Time Offer)',16);
 INSERT INTO `settings` VALUES (17,'affiliate_variable','thankyou-page','input','This is the affiliate variable used by the site... For example: <b>http://yoursite.com/?<font color=red>affiliate</font>=id</b>','General Site Settings',17);
-INSERT INTO `settings` VALUES (18,'secret_string','changeme','input','A unique string that you only know. It will be used to protect the session ID of all logged users. (Changing the default setting for this is very important!)','Security',18);
+INSERT INTO `settings` VALUES (18,'secret_string','changeme','hidden','A unique string that you only know. It will be used to protect the session ID of all logged users. (Changing the default setting for this is very important!)','Security',18);
 INSERT INTO `settings` VALUES (21,'bm_aff_link','','input','Your MWG Affiliate link','MWG Affiliate',21);
-INSERT INTO `settings` VALUES (22,'enable_bm_aff_link','1','select','Enable your MWG Affiliate Link at the bottom of your site. If you do not have a MWG Affiliate Link please <a href=\"http://marketingwebsitegenerator.com/go/affiliate\" target=_blank>click here</a> to get one.','MWG Affiliate',22);
+INSERT INTO `settings` VALUES (22,'enable_bm_aff_link','1','select','Enable your MWG Affiliate Link at the bottom of your site. If you do not have your MWG Affiliate link please <a href=\"http://marketingwebsitegenerator.com/\" target=_blank>click here</a> to get one.','MWG Affiliate',22);
 INSERT INTO `settings` VALUES (31,'enable_arp','','hidden','Enable subscription to 3rd Party autoresponders for new members','3rd Party Autoresponder',31);
 INSERT INTO `settings` VALUES (32,'arp_email','arp@example.com','hidden','The Email Address of the 3rd Party Autoresponder','3rd Party Autoresponder',32);
 INSERT INTO `settings` VALUES (33,'arp_message_subject','Subject for arp email','hidden','This is the subject of the mail that will be sent to the autoresponder for subscription','3rd Party Autoresponder',33);

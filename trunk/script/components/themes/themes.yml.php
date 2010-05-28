@@ -4,7 +4,7 @@ name: Intellispire Software Installer for Butterfly Marketing
 title: Intellispire Software Installer for Butterfly Marketing
 updatecheck: themes 
 serial: 1
-version: 1.0.0
+version: 1.2.0
 compatibility:
   - mwg
   - php5
@@ -12,4 +12,4 @@ license: GPLv2
 credits: 0
 iversion: 1
 support: NONE
-menu: Themes
+# menu: Themes

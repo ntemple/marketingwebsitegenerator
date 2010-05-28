@@ -2,13 +2,13 @@
 identity: mwg.component.updates
 name:  MWG Core Updater
 title: MWG Core Updater
-version: 1.0.2
-api:     1.0.2
-iscore:  1.0.2
+version: 1.2
+api:     1.2
+iscore:  1.2
 compatibility:
   - mwg
   - php5
-menu: Check For Updates
+# menu: Check For Updates
 type: component
 folder: updates
 meta:

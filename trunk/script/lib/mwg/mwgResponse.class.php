@@ -27,7 +27,8 @@ class mwgResponse extends Context {
   var $layout_body_class  = 'gt-fixed';
   var $layout_menu_class  = 'sf-navbar';
   var $layout_menu_size   = '75px';
-//  var $layout_gt_cols     = 'gt-cols';
+  var $sf_navbar = 1;
+  var $layout_gt_cols     = '';
   
  
   
@@ -150,7 +151,7 @@ class mwgDispatcher {
     if (! method_exists($instance, $method) ) $method = 'doView';
     
     try {
-      call_user_func(array($instance, $method), $request, $response);
+      call_user_func(array($instance, $method), $request, $response);      
     } catch (Exception $e) {
       throw $e;
     } 

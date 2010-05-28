@@ -2,13 +2,13 @@
 identity: mwg.components.genstaller
 name:  MWG Core Installer
 title: MWG Core Installer
-version: 1.0.2
-api:     1.0.2
-iscore:  1.0.2
+version: 1.2
+api:     1.2
+iscore:  1.2
 compatibility:
   - mwg
   - php5
-menu: Extensions
+# menu: Extensions
 type: component
 folder: genstaller
 meta:
