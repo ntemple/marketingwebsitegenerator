@@ -32,6 +32,7 @@ class mwgWP {
   function runCallback($class, $name, $out) {
     // 'wpAction', 'wp_list_pages', $menu
     $events = $this->callbacks[$class][$name];
+    if (! $events) return $out;
     //@todo sort by priority
     foreach ($events as $callback){
       $out = $callback->execute($out);

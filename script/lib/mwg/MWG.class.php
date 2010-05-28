@@ -167,6 +167,10 @@ class MWG {
 
   function start() {
     $this->runEvent('afterStart', array($this->request, $this->response));
+
+    $this->document->setDescription($this->get_setting('site_description'));
+    $this->document->setTitle(trim($this->get_setting('site_title')));
+
   }
 
   function end(Template $tpl) {

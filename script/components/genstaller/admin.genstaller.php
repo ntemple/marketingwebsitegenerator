@@ -209,9 +209,9 @@ class comGenstaller {
       $model = new modelGenstaller();
       $manifest = $model->getManifest();    
       $request = MWG::getInstance()->request;
-
-      // Find the  package URL
-      $url = $request->get('url');
+ 
+     // Find the  package URL
+      $url = $request->get('package');
       $id = $request->get('id');
       if ($id) {
         $url = $model->retrievedownloadlink($id);  

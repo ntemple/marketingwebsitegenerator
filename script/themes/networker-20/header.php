@@ -38,7 +38,7 @@
 
 <div id="top-menu">
 	<ul>
-<!--		<li><a <?php if (is_home()) echo('class="current" '); ?>href="<?php bloginfo('url'); ?>">Home</a></li> -->
+		<li><a <?php if (is_home()) echo('class="current" '); ?>href="<?php bloginfo('url'); ?>">Home</a></li> 
 		<?php wp_list_pages('depth=1&title_li='); ?>
 		
 	</ul>
