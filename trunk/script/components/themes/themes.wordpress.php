@@ -255,8 +255,8 @@ function get_bloginfo($var = 'name') {
     case 'html_type':            $out = ''; break;
     case 'charset':              $out = ''; break;
     case 'body_class':           $out = 'blog'; break;
-    case 'name':                 $out = $mwg->site_name; break;
-    case 'description':          $out = ''; break; // Just Another Marketing Website Generator Site'; break;
+    case 'name':                 $out = $mwg->get_setting('site_name'); break;
+    case 'description':          $out = $mwg->get_setting('theme_subtitle');  break;
     case 'stylesheet_url':       $out = "$assets/style.css"; break;
     case 'stylesheet_directory': $out = $assets; break;
 
