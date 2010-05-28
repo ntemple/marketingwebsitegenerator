@@ -18,6 +18,14 @@
   {
     $q=new Cdb;
 
+    /* First check mwg settings */
+    $query="select value from mwg_setting where name='$setting_name'";
+    $q->query($query);
+    if ($q->nf() !=0) return $default; // cannot find the setting in table
+    $q->next_record();
+    return $q->f('value');
+
+    /* not found, search legacy settings */
     $query="select value from settings where name='$setting_name'";
     $q->query($query);
     if ($q->nf()==0) return $default; // cannot find the setting in table
@@ -253,7 +261,6 @@
     $member_membership_id_gt=$q->f("membership_id");
     updateHistory($member_id_gt, $member_membership_id_gt, true);
     updateHistory($member_id_gt, get_setting("default_free"), true);	
-
   }
   //end of functions for member area
   // function to determine how many unread messages are in the inbox

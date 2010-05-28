@@ -107,8 +107,8 @@ function mwg_mailer() {
     $mailer = new PHPMailer(true); // defaults to using php "mail()". Throw exceptions!
 
     $mailer->setFrom(
-    get_setting("emailing_from_email"), 
-    get_setting("emailing_from_name")
+    get_setting("email_from_address"), 
+    get_setting("email_from_name")
     );
 
     $mailer_type = get_setting('email_mailer', 'mail'); 

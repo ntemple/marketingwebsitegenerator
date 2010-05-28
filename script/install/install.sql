@@ -675,7 +675,9 @@ INSERT INTO `mwg_setting` VALUES (7,'Email Settings',NULL,'email_smtp_port',NULL
 INSERT INTO `mwg_setting` VALUES (8,'Email Settings',NULL,'email_smtp_username',NULL,'','input','SMTP Username','','',0);
 INSERT INTO `mwg_setting` VALUES (9,'Email Settings',NULL,'email_smtp_password',NULL,'','input','SMTP Password','','',0);
 INSERT INTO `mwg_setting` VALUES (10,'Global Site Settings',NULL,'site_dbversion','1.3','1.1','hidden','','','',0);
-INSERT INTO `mwg_setting` VALUES (11,'Global Site Settings',NULL,'theme_subtitle','Just Another Marketing Website Generator Site','','input','Site Subtitle','Some themes (wordpress) have the option to use a subtitle. Enter that here.','',0);
+INSERT INTO `mwg_setting` (`id`, `category`, `group`, `name`, `value`, `default_value`, `input_type`, `label`, `help_text`, `options`, `rank`) VALUES (11, 'Global Site Settings', NULL, 'theme_subtitle', 'Just Another Marketing Website Generator Site', '', 'input', 'Site Subtitle', 'Some themes (wordpress) have the option to use a subtitle. Enter that here.', '', 2);
+INSERT INTO `mwg_setting` (`id`, `category`, `group`, `name`, `value`, `default_value`, `input_type`, `label`, `help_text`, `options`, `rank`) VALUES (12, 'Global Site Settings', NULL, 'site_title', 'Online Marketing', '', 'input', 'Site Title', 'The title of your site. Appears on most themes and is the default title of all your pages.', '', 1);
+INSERT INTO `mwg_setting` (`id`, `category`, `group`, `name`, `value`, `default_value`, `input_type`, `label`, `help_text`, `options`, `rank`) VALUES (13, 'Global Site Settings', NULL, 'site_description', 'Visit our website to find out exactly what you need for online marketing.', '', 'input', 'Site Description', 'This is the text of your site-wide meta description tag. It should be 160 characters or less, and appears in search results.', '', 3);
 CREATE TABLE `payment_log` (
   `id` int(11) NOT NULL auto_increment,
   `process_type` varchar(30) NOT NULL default '',
