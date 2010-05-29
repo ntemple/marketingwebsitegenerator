@@ -64,8 +64,8 @@ if (!isset($_POST['username']) || !isset($_POST['host']) || !isset($_POST['dbnam
     <td><input name="admin_password" type="text" id="admin_password"></td>
   </tr>
   <tr>
-    <td>What ID number do you want to start members at. Default is 2. You may want to start at 500 or 5000 to make your site seem established. This is optional and has no affect on your site function.</td>
-    <td><input name="member_increment" type="text" id="member_increment" value=2></td>
+    <td>What ID number do you want to start members at. Default is 100. You may want to start at 500 or 5000 to make your site seem established. This is optional and has no affect on your site function.</td>
+    <td><input name="member_increment" type="text" id="member_increment" value=100></td>
   </tr>
 </table>
 <p align="center">&nbsp;</p>
@@ -91,7 +91,8 @@ else
 			FFileWrite("../config/constants.php", $content);
 			include("inc.all.php");
                         $member_increment = $_POST['member_increment'];
-			if ($member_increment<2) $member_increment=2;
+			if ($member_increment<100) $member_increment=100;
+
 			execute_sql("install.sql", $member_increment);
 			?>
 <center>
