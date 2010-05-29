@@ -3,7 +3,9 @@
 class menuActions extends mwgActions {
 
   function doMainmenuView(mwgRequest $request, mwgResponse $response)   {    
-    $active_menu = $request->get('menu');
+    $active_menu = $request->get('menu', $_SESSION['menu']);
+    $_SESSION['menu'] = $active_menu;
+    
     $menu  = 'menu_' . $active_menu .'_active';
     $response->$menu = 'gt-active';
 

@@ -16,24 +16,28 @@
 
   function get_setting($setting_name, $default = null)
   {
-    $q=new Cdb;
+    return MWG::getInstance()->get_setting($setting_name, $default);
+//    
+//    $db = MWG::getDb();
+//    $q=new Cdb;
+//    
+//    /* First check mwg settings */
+//    $query="select value from mwg_setting where name='$setting_name'";
+//    $q->query($query);
+//    if ($q->nf() !=0)  {
+//      $q->next_record();
+//      return $value;
+//    }
 
-    /* First check mwg settings */
-    $query="select value from mwg_setting where name='$setting_name'";
-    $q->query($query);
-    if ($q->nf() !=0) return $default; // cannot find the setting in table
-    $q->next_record();
-    return $q->f('value');
+//    /* not found, search legacy settings */
+//    $query="select value from settings where name='$setting_name'";
+//    $q->query($query);
+//    if ($q->nf()==0) return $default; // cannot find the setting in table
 
-    /* not found, search legacy settings */
-    $query="select value from settings where name='$setting_name'";
-    $q->query($query);
-    if ($q->nf()==0) return $default; // cannot find the setting in table
+//    $q->next_record();
 
-    $q->next_record();
-
-    $value = stripslashes($q->f('value')); // Why is stripslashes needed?
-    return $value;
+//    $value = stripslashes($q->f('value')); // Why is stripslashes needed?
+//    return $value;
   }
 
   function get_signup_setting($setting_name)
@@ -789,4 +793,3 @@
       $q4->query($query);			
     }
   }
-?>
