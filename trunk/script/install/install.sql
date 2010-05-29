@@ -855,7 +855,7 @@ INSERT INTO `settings` VALUES (4,'welcome_email_body','Hi [firstname],\r\n\r\nwe
 INSERT INTO `settings` VALUES (3,'welcome_email_subject','[firstname], welcome to [sitename] !','input','New member welcome email subject.','',3);
 INSERT INTO `settings` VALUES (19,'site_full_url','','input','The full URL to your site including folder if necessary(Example: <b>http://www.minigolf.com/</b> or <b>http://www.minigolf.com/ball/</b>)','General Site Settings',19);
 INSERT INTO `settings` VALUES (2,'webmaster_contact_email','email@example.com','input','Email address where the contact form should send the messages','General Site Settings',2);
-INSERT INTO `settings` VALUES (20,'hidden','','input','<b><font color=\"#003366\">PAYPAL: </font></b> Paypal TXN_ID setting, this is used for paypal instant payment notification and it\'s a temporary payment session ID, do not modify','Payment',20);
+INSERT INTO `settings` VALUES (20,'txn_id','','hidden','<b><font color=\"#003366\">PAYPAL: </font></b> Paypal TXN_ID setting, this is used for paypal instant payment notification and it\'s a temporary payment session ID, do not modify','Payment',20);
 INSERT INTO `settings` VALUES (1,'site_name','Online Marketing','input','Your Site Name','General Site Settings',1);
 INSERT INTO `settings` VALUES (16,'enable_oto_2','','checkbox','Check this box if you want an one time offer upsell(2nd one time offer) after member paid for one time offer.','OTO (One Time Offer)',16);
 INSERT INTO `settings` VALUES (17,'affiliate_variable','affiliate','input','This is the affiliate variable used by the site... For example: <b>http://yoursite.com/?<font color=red>affiliate</font>=id</b>','General Site Settings',17);
