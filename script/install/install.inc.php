@@ -17,7 +17,6 @@
 $perm_file="-rwxrwxrwx";
 $perm_folder="drwxrwxrwx";
 
-
 function execute_sql($filename, $autoincrementvalue)
 {
   $q=new Cdb;
@@ -32,10 +31,22 @@ function execute_sql($filename, $autoincrementvalue)
   }
 
   $secret = substr(md5(uniqid(rand(), true)), 0, 28);
+  $siteurl = siteurl();
 
   $q->query('ALTER TABLE members AUTO_INCREMENT=' . $autoincrementvalue);  
   $q->query("update settings set value='$secret' where name='secret_string'");
+  $q->query("update settings set value='$siteurl' where name='site_full_url'");
 
+}
+
+function siteurl() {
+  $parts = split('/', $_SERVER['SCRIPT_NAME']);
+
+  $self = array_pop($parts);
+  $install = array_pop($parts);
+  $href = implode('/', $parts);
+
+  return trim('http://' . $_SERVER["HTTP_HOST"] . $href, '/') . '/';
 }
 
 function FFileRead($name/*filename*/, &$contents/*returned contents of file*/)

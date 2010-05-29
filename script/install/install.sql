@@ -582,14 +582,14 @@ CREATE TABLE `membership` (
   KEY `active` (`active`)
 ) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1 PACK_KEYS=1;
 INSERT INTO `membership` VALUES (1,'FREE',53,1,'NONE',54,1,0,'');
-INSERT INTO `membership` VALUES (2,'PAID',55,4,'NONE',56,1,0,'');
-INSERT INTO `membership` VALUES (3,'PRO1 - One Time Offer',57,2,'NONE',25,1,0,'');
-INSERT INTO `membership` VALUES (4,'PRO2 - One Time Offer',59,3,'NONE',40,1,0,'');
-INSERT INTO `membership` VALUES (5,'SILVER',61,5,'NONE',62,1,0,'');
-INSERT INTO `membership` VALUES (6,'GOLD',63,6,'NONE',64,1,0,'');
-INSERT INTO `membership` VALUES (7,'PLATINUM',65,7,'NONE',66,1,0,'');
-INSERT INTO `membership` VALUES (8,'DIAMOND',67,8,'NONE',68,1,0,'');
-INSERT INTO `membership` VALUES (9,'ELITE',69,9,'NONE',70,1,0,'');
+INSERT INTO `membership` VALUES (2,'PAID',55,2,'NONE',56,1,0,'');
+INSERT INTO `membership` VALUES (3,'PRO1 - One Time Offer',57,3,'NONE',25,0,0,'');
+INSERT INTO `membership` VALUES (4,'PRO2 - One Time Offer',59,4,'NONE',40,0,0,'');
+INSERT INTO `membership` VALUES (5,'SILVER',61,5,'NONE',62,0,0,'');
+INSERT INTO `membership` VALUES (6,'GOLD',63,6,'NONE',64,0,0,'');
+INSERT INTO `membership` VALUES (7,'PLATINUM',65,7,'NONE',66,0,0,'');
+INSERT INTO `membership` VALUES (8,'DIAMOND',67,8,'NONE',68,0,0,'');
+INSERT INTO `membership` VALUES (9,'ELITE',69,9,'NONE',70,0,0,'');
 CREATE TABLE `menu_permissions` (
   `id` int(11) NOT NULL auto_increment,
   `menu_item` tinyint(4) NOT NULL default '0',
@@ -843,24 +843,24 @@ CREATE TABLE `settings` (
   KEY `cat` (`cat`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3361 DEFAULT CHARSET=latin1 COMMENT='Settings table';
 INSERT INTO `settings` VALUES (15,'enable_oto_1','','checkbox','Enable one time offer after sign up ? If you leave this checked the new members will get the one time offer page after they sign up. If you uncheck it then they will be driven directly to members area.','OTO (One Time Offer)',15);
-INSERT INTO `settings` VALUES (13,'paypal_email','paypalexample.com','input','<b><font color=\"#003366\">PAYPAL: </font></b> Enter your paypal address where you would like to receive payments','Payment',14);
+INSERT INTO `settings` VALUES (13,'paypal_email','','input','<b><font color=\"#003366\">PAYPAL: </font></b> Enter your paypal address where you would like to receive payments','Payment',14);
 INSERT INTO `settings` VALUES (10,'free_signup','1','checkbox','Check this box if you want members to sign up for free at the site. Uncheck this box if you want people to pay to become a member. (NOTE: The new One-Click OTO upsell function using Authorize.net requires that this box NOT be checked so the user must make a purchase to get into the site.)','Sign Up',10);
 INSERT INTO `settings` VALUES (14,'accept_paypal','','checkbox','<b><font color=\"#003366\">PAYPAL: </font> Accept payments via paypal ?</b>','Payment',13);
-INSERT INTO `settings` VALUES (9,'emailing_from_email','owner@example.com','hidden','The Email Address that will appear in the From: field of the emails sent (welcome emails, lost password emails, ...)','Email Address',9);
-INSERT INTO `settings` VALUES (8,'emailing_from_name','Site Owner','hidden','The Name that will appear in the From: field of the emails sent (welcome emails, lost password emails, ...)','Email Address',8);
+INSERT INTO `settings` VALUES (9,'emailing_from_email','','hidden','The Email Address that will appear in the From: field of the emails sent (welcome emails, lost password emails, ...)','General Site Settings',100);
+INSERT INTO `settings` VALUES (8,'emailing_from_name','','hidden','The Name that will appear in the From: field of the emails sent (welcome emails, lost password emails, ...)','General Site Settings',101);
 INSERT INTO `settings` VALUES (7,'send_welcome_emails','1','checkbox','Send welcome emails to new members ?','',3);
 INSERT INTO `settings` VALUES (6,'lostpass_email_body','Hi [firstname],\r\n\r\nyour password: [password]\r\n\r\nThank you,\r\n\r\n[sitename]\r\nAdmin.','textbox','Lost password email body','',6);
 INSERT INTO `settings` VALUES (5,'lostpass_email_subject','[firstname], your password for [sitename]!','input','Lost password email subject.','',5);
 INSERT INTO `settings` VALUES (4,'welcome_email_body','Hi [firstname],\r\n\r\nwelcome to [sitename], \r\n\r\nyour login info is:\r\n\r\nemail: [email]\r\npassword: [password]\r\n\r\nThank you,\r\n\r\n[sitename]\r\nAdmin.','textbox','New member welcome email body.','',4);
 INSERT INTO `settings` VALUES (3,'welcome_email_subject','[firstname], welcome to [sitename] !','input','New member welcome email subject.','',3);
-INSERT INTO `settings` VALUES (19,'site_full_url','http://www.intelliforge.net/mwg/script/','input','The full URL to your site including folder if necessary(Example: <b>http://www.minigolf.com/</b> or <b>http://www.minigolf.com/ball/</b>)','General Site Settings',19);
+INSERT INTO `settings` VALUES (19,'site_full_url','','input','The full URL to your site including folder if necessary(Example: <b>http://www.minigolf.com/</b> or <b>http://www.minigolf.com/ball/</b>)','General Site Settings',19);
 INSERT INTO `settings` VALUES (2,'webmaster_contact_email','email@example.com','input','Email address where the contact form should send the messages','General Site Settings',2);
 INSERT INTO `settings` VALUES (20,'txn_id','','input','<b><font color=\"#003366\">PAYPAL: </font></b> Paypal TXN_ID setting, this is used for paypal instant payment notification and it\'s a temporary payment session ID, do not modify','Payment',20);
-INSERT INTO `settings` VALUES (1,'site_name','Generator 1.0','input','Your Site Name','General Site Settings',1);
+INSERT INTO `settings` VALUES (1,'site_name','Online Marketing','input','Your Site Name','General Site Settings',1);
 INSERT INTO `settings` VALUES (16,'enable_oto_2','','checkbox','Check this box if you want an one time offer upsell(2nd one time offer) after member paid for one time offer.','OTO (One Time Offer)',16);
-INSERT INTO `settings` VALUES (17,'affiliate_variable','thankyou-page','input','This is the affiliate variable used by the site... For example: <b>http://yoursite.com/?<font color=red>affiliate</font>=id</b>','General Site Settings',17);
+INSERT INTO `settings` VALUES (17,'affiliate_variable','affiliate','input','This is the affiliate variable used by the site... For example: <b>http://yoursite.com/?<font color=red>affiliate</font>=id</b>','General Site Settings',17);
 INSERT INTO `settings` VALUES (18,'secret_string','c82f98d71095aac45897cdd0a6f9','hidden','A unique string that you only know. It will be used to protect the session ID of all logged users. (Changing the default setting for this is very important!)','Security',18);
-INSERT INTO `settings` VALUES (21,'bm_aff_link','','input','Your MWG Affiliate link','MWG Affiliate',21);
+INSERT INTO `settings` VALUES (21,'bm_aff_link','http://marketingwebsitegenerator.com/','input','Your MWG Affiliate link','MWG Affiliate',21);
 INSERT INTO `settings` VALUES (22,'enable_bm_aff_link','1','select','Enable your MWG Affiliate Link at the bottom of your site. If you do not have your MWG Affiliate link please <a href=\"http://marketingwebsitegenerator.com/\" target=_blank>click here</a> to get one.','MWG Affiliate',22);
 INSERT INTO `settings` VALUES (31,'enable_arp','','hidden','Enable subscription to 3rd Party autoresponders for new members','3rd Party Autoresponder',31);
 INSERT INTO `settings` VALUES (32,'arp_email','arp@example.com','hidden','The Email Address of the 3rd Party Autoresponder','3rd Party Autoresponder',32);
@@ -889,12 +889,12 @@ INSERT INTO `settings` VALUES (67,'site_overview','1,2,3,4,5,6,7,8,9','hidden','
 INSERT INTO `settings` VALUES (68,'enable_credit','','hidden','','General Site Settings',68);
 INSERT INTO `settings` VALUES (69,'nr_credit','0','hidden','','General Site Settings',69);
 INSERT INTO `settings` VALUES (70,'delete_user','','checkbox','If a payment is refunded or cancelated should the member be deleted? (check if yes)','Payment',70);
-INSERT INTO `settings` VALUES (71,'suspend_user','','checkbox','If a payment is refunded or cancelated should the member be suspended? (check if yes)','Payment',71);
+INSERT INTO `settings` VALUES (71,'suspend_user','1','checkbox','If a payment is refunded or cancelated should the member be suspended? (check if yes)','Payment',71);
 INSERT INTO `settings` VALUES (137,'shipping_email_body','Please ship {ship_quantity}*{ship_product}\r\n\r\nTo: {ship_to_first_name} {ship_to_last_name}\r\nAddress: {ship_to_address_street}, {ship_to_address_city}, {ship_to_address_zip}, \r\n{ship_to_address_state}, {ship_to_address_country} ({ship_to_address_country_code})\r\n\r\nThanks,\r\n{ship_ask_company}','textbox','This is the body of the email which goes to your shipping company<br>Tags to use: {ship_to_first_name}, {ship_to_last_name}, {ship_to_address_street}, {ship_to_address_city}, {ship_to_address_zip}, {ship_to_address_country}, {ship_to_address_country_code}, {ship_to_address_state}, {ship_ask_company}.','General Site Settings',145);
 INSERT INTO `settings` VALUES (72,'change_membership','Chose membership','select','<b><font color=\"#003366\">PAYPAL: </font></b> If a payment is refunded change membership of member to:','Payment',72);
 INSERT INTO `settings` VALUES (57,'meta-description','','hidden','','General Site Settings',57);
 INSERT INTO `settings` VALUES (53,'keywords','','hidden','','General Site Settings',53);
-INSERT INTO `settings` VALUES (54,'delete_acount','1','checkbox','Do you want to allow members to delete their account ?','General Site Settings',54);
+INSERT INTO `settings` VALUES (54,'delete_acount','','checkbox','Do you want to allow members to delete their account ?','General Site Settings',54);
 INSERT INTO `settings` VALUES (73,'default_free','1','select','Choose default membership for new users, if they don\'t make any payment.In case of paid signup this is the default membership on signup.','Sign Up',73);
 INSERT INTO `settings` VALUES (74,'enable_jv','','checkbox','Use JV special signup. Send this url {url}signup_jv.php to your JV partner','JV Partner',74);
 INSERT INTO `settings` VALUES (75,'jv_membership','Chose membership','select','What membership should a JV have at signup','JV Partner',75);
@@ -912,7 +912,7 @@ INSERT INTO `settings` VALUES (96,'sales_email_body','Hi {first_name},\r\n\r\nYo
 INSERT INTO `settings` VALUES (103,'arp_in_use_type','1','hidden','','General Site Settings',0);
 INSERT INTO `settings` VALUES (102,'arp_in_use','4','hidden','','3rd Party Autoresponder',0);
 INSERT INTO `settings` VALUES (101,'enable_oto_paid_signup','0','radio','Choose Flow:','Sign Up',11);
-INSERT INTO `settings` VALUES (100,'view_stats_chk','1,3,2','checkbox','','Stats',67);
+INSERT INTO `settings` VALUES (100,'view_stats_chk','1,2,3','checkbox','','Stats',67);
 INSERT INTO `settings` VALUES (99,'allow_private_messages','','checkbox','Allow members to choose wether they email or send a private message to their downline ?','Downline Settings',99);
 INSERT INTO `settings` VALUES (98,'downline_em','','checkbox','Allow members to view the emails addresses for members in their downline ?','Downline Settings',98);
 INSERT INTO `settings` VALUES (105,'vendor_id','','input','<font color=\"#990000\"><b>CLICKBANK: </b></font> Product Clickbank Vendor ID','Payment',105);
@@ -926,9 +926,9 @@ INSERT INTO `settings` VALUES (112,'signup_code_redirect','','input','Enter what
 INSERT INTO `settings` VALUES (113,'logout_redirect_url','','input','Insert the page you want the user to be redirected after logout (If empty it will redirect to homepage).','General Site Settings',0);
 INSERT INTO `settings` VALUES (114,'oto_backup','','checkbox','Check this if you want people to receive a down sell (lower price OTO1) if they did not buy the first OTO','OTO (One Time Offer)',15);
 INSERT INTO `settings` VALUES (115,'cut_signup','','checkbox','Check this box if you do not want to collect the password on the signup page. This can increase conversion. The new user will not have to create a password until after he/she joins the site and views your OTO sequence (if you have one.) The user will be asked to create a unique and personal password after this process and before accessing the members area.','General Site Settings',0);
-INSERT INTO `settings` VALUES (116,'index_signup','','checkbox','Check this if you want the signup form to appear on the index page. For this you need to put in the homepage.html the tag {signup_form} where you want the form to appear.','General Site Settings',0);
+INSERT INTO `settings` VALUES (116,'index_signup','1','checkbox','Check this if you want the signup form to appear on the index page. For this you need to put in the homepage.html the tag {signup_form} where you want the form to appear.','General Site Settings',0);
 INSERT INTO `settings` VALUES (117,'choose_aff','2','radio','If you want to choose another affiliate variable name you can do that and the previous one will still be available. You can switch back any time, both of them remaining active. However only the current one will be displayed in member area.','General Site Settings',18);
-INSERT INTO `settings` VALUES (118,'old_aff','','hidden','','General Site Settings',17);
+INSERT INTO `settings` VALUES (118,'old_aff','thankyou-page','hidden','','General Site Settings',17);
 INSERT INTO `settings` VALUES (119,'accept_auth','','checkbox','<font color=\'#FF6600\'><b>AUTHORIZE.NET:</b></font> <b>Accept payments via Authorize.net</b>?','Payment',112);
 INSERT INTO `settings` VALUES (120,'oto_bck_2','','checkbox','Check this if you want people to receive a down-sell (lower price OTO2) if they did not buy the second OTO','OTO (One Time Offer)',16);
 INSERT INTO `settings` VALUES (121,'auth_key','','input','<font color=\'#FF6600\'><b>AUTHORIZE.NET:</b></font> Insert the Authorize.net <b>Transaction Key</b> for single-payment purchases.</p><p>*This is the second part of the information required in order to be able to accept single payments through Authorize.net<b></b></p>','Payment',113);
@@ -943,7 +943,7 @@ INSERT INTO `settings` VALUES (129,'activate_cycler','','hidden','','General Sit
 INSERT INTO `settings` VALUES (130,'ban_active','0','hidden','','General Site Settings',0);
 INSERT INTO `settings` VALUES (131,'ban_kind','0','hidden','','General Site Settings',0);
 INSERT INTO `settings` VALUES (132,'ipblocker','','checkbox','Block same IP from joining ','Sign Up',132);
-INSERT INTO `settings` VALUES (133,'blockfor','Chose what to do with members that pay by echeck','select','','Sign Up',133);
+INSERT INTO `settings` VALUES (133,'blockfor','1','select','','Sign Up',133);
 INSERT INTO `settings` VALUES (135,'sales_email_cc','','checkbox','Check this if you want a second person to receive an email for a sale.','General Site Settings',0);
 INSERT INTO `settings` VALUES (136,'sales_email_cc_adr','','input','Insert the second person\'s email which receives the sales email.','General Site Settings',0);
 INSERT INTO `settings` VALUES (3329,'otobckem','1','hidden','','General Site Settings',0);
@@ -957,7 +957,7 @@ INSERT INTO `settings` VALUES (3336,'auth_test','','checkbox','<p><font color=\'
 INSERT INTO `settings` VALUES (138,'shipping_email_subject','Shipping details','input','This is the subject of the email which goes to your shipping company','General Site Settings',144);
 INSERT INTO `settings` VALUES (3337,'send_shipping_email','','checkbox','Send email to your shipping company?','General Site Settings',141);
 INSERT INTO `settings` VALUES (3338,'shipping_email','','input','Shipping company email address','General Site Settings',142);
-INSERT INTO `settings` VALUES (3339,'ask_country_on_product','1','checkbox','Ask user to choose country for physical products (under each buy button will be a dropdown list with countries)','General Site Settings',140);
+INSERT INTO `settings` VALUES (3339,'ask_country_on_product','','checkbox','Ask user to choose country for physical products (under each buy button will be a dropdown list with countries)','General Site Settings',140);
 INSERT INTO `settings` VALUES (3340,'shipping_email_from','','input','Company email that ask for delivery','General Site Settings',143);
 INSERT INTO `settings` VALUES (3341,'no_shipping','Sorry - we currently are not setup to ship to your country of residence. Please visit our support department for further information','textbox','Message for members from countries where you don\'t make shppings','General Site Settings',3);
 INSERT INTO `settings` VALUES (3342,'enable_captcha','','checkbox','Use captcha (a code made of 5 characters that are shown in a picture and is required to be entered when signing up)','Sign Up',134);
@@ -965,16 +965,16 @@ INSERT INTO `settings` VALUES (3343,'make_winner','','hidden','','General Site S
 INSERT INTO `settings` VALUES (3344,'admin_sale_email','Hi {first_name},\r\n\r\nYou have just made a sale at [sitename].\r\n\r\nYou sold {product}.\r\n\r\nThank you,\r\n\r\n[sitename] Admin','hidden','This is the body of the email that goes out to admin when a sale is made','General Site Settings',0);
 INSERT INTO `settings` VALUES (3345,'give_oto_jv_new','1','checkbox','Check this to show to JV partners OTO offers','JV Partner',75);
 INSERT INTO `settings` VALUES (3346,'paypal_currency','USD','select','<b><font color=\"#003366\">PAYPAL: </font></b> Currency for PayPal transactions','Payment',15);
-INSERT INTO `settings` VALUES (3347,'cancel_new_system','1','checkbox','<b><font color=\"#003366\">PAYPAL: </font></b> If a payment is refunded or canceled just remove access to the product? (check if yes).','Payment',71);
+INSERT INTO `settings` VALUES (3347,'cancel_new_system','','checkbox','<b><font color=\"#003366\">PAYPAL: </font></b> If a payment is refunded or canceled just remove access to the product? (check if yes).','Payment',71);
 INSERT INTO `settings` VALUES (3354,'auth_test2','','checkbox','<font color=\"#FF6600\"><b>AUTHORIZE.NET:</b></font> Check this if you want to enable Authorize.net payment <b>TEST mode</b> with <b><font color=\"#993300\">AIM</font></b> purchases ','Payment',123);
 INSERT INTO `settings` VALUES (3353,'auth_one_click','','checkbox','<p><font color=\"#FF6600\"><b>AUTHORIZE.NET:</b></font> Enable <b>One Click OTO \r\n  Payments</b> </p>\r\n<p><i>*REQUIREMENTS:</i><br>\r\n  1. the <b><font color=\"#993300\">AIM</font></b> system must be used<br>\r\n  2. <b>SSL Certificate</b> (and the order form must use an https:// secure page url on your site)<br>\r\n  3. Paid signup system. Will not work with free signup sites.</p>\r\n','Payment',121);
-INSERT INTO `settings` VALUES (3352,'use_aim','0','checkbox','<p><font color=\'#FF6600\'><b>AUTHORIZE.NET:</b></font> Use <b>Credit Card capture</b> \r\n  (<b><font color=\"#993300\">AIM</font></b>) with Authorize.net. <i>If this is not checked, you will be using the Authorize.net order form that is hosted by authnet, which requires a live authnet account instead of a test acct</i>.<br>\r\n</p>\r\n<p><i>*REQUIREMENTS:</i><br>\r\n  - <b>SSL Certificate</b> (and the order form must use an https:// secure page url on your site ... because your order form is hosted on your own site.) \r\n  <br>\r\n</p>','Payment',120);
+INSERT INTO `settings` VALUES (3352,'use_aim','','checkbox','<p><font color=\'#FF6600\'><b>AUTHORIZE.NET:</b></font> Use <b>Credit Card capture</b> \r\n  (<b><font color=\"#993300\">AIM</font></b>) with Authorize.net. <i>If this is not checked, you will be using the Authorize.net order form that is hosted by authnet, which requires a live authnet account instead of a test acct</i>.<br>\r\n</p>\r\n<p><i>*REQUIREMENTS:</i><br>\r\n  - <b>SSL Certificate</b> (and the order form must use an https:// secure page url on your site ... because your order form is hosted on your own site.) \r\n  <br>\r\n</p>','Payment',120);
 INSERT INTO `settings` VALUES (3350,'auth_key_arb','','input',' \r\n<p><font color=\"#FF6600\"><b>AUTHORIZE.NET:</b></font> Insert the Authorize.net \r\n  <b>Transaction Key</b> for <font color=\"#330066\"><b>SUBSCRIPTIONS</b></font> \r\n  (multiple payment purchases). </p>\r\n<p>*This is the second part of the information required in order to be able to accept multiple payments through Authorize.net<b></b></p>\r\n','Payment',131);
 INSERT INTO `settings` VALUES (3349,'auth_login_arb','','input','<p><font color=\"#FF6600\"><b>AUTHORIZE.NET:</b></font> Insert the Authorize.net \r\n  <b>API Login ID</b> for <font color=\"#330066\"><b>SUBSCRIPTIONS</b></font> (multiple \r\n  payment purchases). </p>\r\n<p>*REQUIREMENTS:<br>\r\n  1. <b>SSL Certificate</b> (and the order form must use an https:// secure page url on your site)<br>\r\n  2. <font color=\"#660033\"><b>ARB</b></font> (Automatic Recurring Billing) must be enabled in Authorize.net (<b><i>Tools > Recurring Billing</i></b>) ... costs $10 per month<br>\r\n  3. the <b><i>Account>Settings>Silent Post URL</i></b> in Authorize.net \r\n  must be set to <font color=\"#990000\"><b>https://{your installed url}/auth.ipn.php</b></font></p>\r\n','Payment',130);
 INSERT INTO `settings` VALUES (3355,'enable_captcha_taf','1','checkbox','Use captcha (a code made of 5 characters that are shown in a picture and is required to be entered when submitting the Tell-A-Friend promo tool)','General Site Settings',135);
-INSERT INTO `settings` VALUES (3356,'jv_custom','0','checkbox','Give members ability to add custom bonuses to sales page.Put {jv_customsales} on the page you want the bonus to display and inside members area {jv_customdownload} for the dowlnoad link from jv','General Site Settings',0);
+INSERT INTO `settings` VALUES (3356,'jv_custom','','checkbox','Give members ability to add custom bonuses to sales page.Put {jv_customsales} on the page you want the bonus to display and inside members area {jv_customdownload} for the dowlnoad link from jv','General Site Settings',0);
 INSERT INTO `settings` VALUES (3357,'jv_custom_memberships','','checkbox','','General Site Settings',0);
-INSERT INTO `settings` VALUES (3358,'twitter','0','checkbox','Use twitter promoting tool','General Site Settings',0);
+INSERT INTO `settings` VALUES (3358,'twitter','','checkbox','Use twitter promoting tool','General Site Settings',0);
 INSERT INTO `settings` VALUES (3359,'twitter_html','','hidden','','General Site Settings',0);
 INSERT INTO `settings` VALUES (3360,'lock','1','hidden','','General Site Settings',0);
 CREATE TABLE `signup_settings` (
