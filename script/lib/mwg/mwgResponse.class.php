@@ -54,7 +54,12 @@ class mwgResponse extends Context {
   }
   
   function initEditor() {
-    $this->includeHeaderFile('editor_tinymce.js');
+    $editor = MWG::getInstance()->get_setting('admin_editor', 'none');
+    switch ($editor) {
+      case 'none': break;
+      case 'tinymce': $this->includeHeaderFile('editor_tinymce.js'); break;
+      case 'editarea': break;
+    }
   }
   
   function includeHeaderFile($file) {
