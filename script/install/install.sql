@@ -680,6 +680,7 @@ INSERT INTO `mwg_setting` VALUES (11,'Global Site Settings',NULL,'theme_subtitle
 INSERT INTO `mwg_setting` VALUES (12,'Global Site Settings',NULL,'site_title','Online Marketing','','input','Site Title','The title of your site. Appears on most themes and is the default title of all your pages.','',1);
 INSERT INTO `mwg_setting` VALUES (13,'Global Site Settings',NULL,'site_description','Visit our website to find out exactly what you need for online marketing.','','input','Site Description','This is the text of your site-wide meta description tag. It should be 160 characters or less, and appears in search results.','',3);
 INSERT INTO `mwg_setting` VALUES (14,'Email Settings',NULL,'email_limit','100','100','input','Send Limit','The maximum number of emails to send every cron run. The default of 100 stays under most ISPs limits if you set the cron_send to run every 10-15 minutes.','',0);
+INSERT INTO `mwg_setting` VALUES (15,'Admin Settings',NULL,'admin_editor','tinymce','none','select','Text Editor','Which editor would you like to use?','a:3:{s:4:\"none\";s:14:\"Disable Editor\";s:7:\"tinymce\";s:8:\"Tiny MCE\";s:8:\"editarea\";s:9:\"Edit Area\";}',0);
 CREATE TABLE `payment_log` (
   `id` int(11) NOT NULL auto_increment,
   `process_type` varchar(30) NOT NULL default '',
