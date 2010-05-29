@@ -167,10 +167,6 @@ class MWG {
 
   function start() {
     $this->runEvent('afterStart', array($this->request, $this->response));
-
-    $this->document->setDescription($this->get_setting('site_description'));
-    $this->document->setTitle(trim($this->get_setting('site_title')));
-
   }
 
   function end(Template $tpl) {
@@ -282,7 +278,26 @@ class MWG {
   * @param mixed $setting_name
   * @param mixed $default
   */
-  function get_setting($setting_name, $default = null)
+  function get_setting($setting_name, $default = null) {
+    static $settings = array();
+    static $nsettings = array();
+    
+    if (isset($settings[$setting_name])) return $settings[$setting_name];
+    if (isset($nsettings[$setting_name])) return $default;
+    
+    // Can't find it!
+    $value = $this->_get_setting($setting_name);
+    if ($value == null) {
+      $nsettings[$setting_name] = true;
+      $value = $default;
+    } else {
+      $settings[$setting_name] = $value;
+    }    
+    
+    return $value;
+  }
+  
+  function _get_setting($setting_name, $default = null)
   {
     /* check MWG settings, first */
     $value = $this->getDb()->get_value('select value from mwg_setting where name=?', $setting_name);  

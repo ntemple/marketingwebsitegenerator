@@ -16,28 +16,6 @@
     </ul>
   </li>
 
-  {set(#menu#,#members#)}
-  <li class="{menu_members_active}">
-    <a href="members.php?menu={menu}" class="{menu_members_active}">Members</a>
-    <ul>
-      <li><a href="members.php?menu={menu}">Manage Members</a></li>
-      <li><a href="add.member.php?menu={menu}">Add Member</a></li>
-      <li><a href="import.csv.php?menu={menu}">Import</a></li>
-      <li><a href="ban.php?menu={menu}">Ban</a></li>
-    </ul>
-  </li>
-
-  {set(#menu#,#site#)}
-  <li class="{menu_site_active}">
-    <a href="servlet.php?m=editor&menu={menu}" class="{menu_site_active}">Site</a>
-    <ul>
-      <li><a href="servlet.php?m=editor&menu={menu}">Edit Templates</a></li>
-      <li><a href="menu.php?menu={menu}">Manage Menus</a></li>
-      <li><a href="generate.item.php?menu={menu}">New Page</a></li>
-      <!--<li><a href="templates.php?menu=site">Site Templates</a></li>  -->
-    </ul>
-  </li>
-
   {set(#menu#,#membership#)}  
   <li class="{menu_membership_active}">
     <a href="membership.php?menu={menu}" class="{menu_membership_active}">Products</a>
@@ -54,6 +32,30 @@
     </ul>
   </li>
 
+  
+  {set(#menu#,#site#)}
+  <li class="{menu_site_active}">
+    <a href="servlet.php?m=editor&menu={menu}" class="{menu_site_active}">Site</a>
+    <ul>
+      <li><a href="servlet.php?m=editor&menu={menu}">Edit Templates</a></li>
+      <li><a href="menu.php?menu={menu}">Manage Menus</a></li>
+      <li><a href="generate.item.php?menu={menu}">New Page</a></li>
+      <!--<li><a href="templates.php?menu=site">Site Templates</a></li>  -->
+    </ul>
+  </li>
+
+  {set(#menu#,#members#)}
+  <li class="{menu_members_active}">
+    <a href="members.php?menu={menu}" class="{menu_members_active}">Members</a>
+    <ul>
+      <li><a href="members.php?menu={menu}">Manage Members</a></li>
+      <li><a href="add.member.php?menu={menu}">Add Member</a></li>
+      <li><a href="import.csv.php?menu={menu}">Import</a></li>
+      <li><a href="ban.php?menu={menu}">Ban</a></li>
+    </ul>
+  </li>
+
+  
   {set(#menu#,#reports#)}  
   <li class="{menu_reports_active}">
     <a href="siteoverview.php?menu={menu}" class="{menu_reports_active}">Reports</a>
