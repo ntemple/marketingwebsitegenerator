@@ -37,7 +37,9 @@ function _get_button_image($type, $id, $product_id) {
     case '2co':  $button = 'images/2checkout_logo.gif'; break;
     case 'an': $button = 'images/auth.gif'; break;
     default: die('Could not find button for:' . $type);
-  }    
+  }  
+
+  return $button;  
 }
 
 function _get_country_list($_product, $button_id) {
@@ -187,7 +189,8 @@ function get_pay_buttons($member_id, $product_id, $aff_id, $session, $step2, $bu
     if ($step2) die("FATAL ERROR: Attempt to go directly to 2nd step payment");
 
     //this is a new session that must be inserted into the database    
-    $db->query("insert into session (session_id, product_id, member_id, paid, paid_step2, affiliate_id, stamp, secret_pay_id,ip) values (?,?,?,?,?,?,?,?.?)",
+    $db->query("insert into session (session_id, product_id, member_id, paid, paid_step2, affiliate_id, stamp, secret_pay_id,ip) 
+                values (?,?,?,?,?,?,?,?,?)",
     $session,
     $product_id,
     $member_id,
@@ -197,7 +200,7 @@ function get_pay_buttons($member_id, $product_id, $aff_id, $session, $step2, $bu
     time(),
     md5(get_setting('secret_string').getenv('REMOTE_ADDR')), // This is not random. Where else is it used?
     getenv('REMOTE_ADDR')
-    );      
+    );     
   }
 
   // block for variables init
