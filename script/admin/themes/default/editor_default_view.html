@@ -12,6 +12,12 @@
       <p>{description}</p>
     </div><!-- /form row -->
 {end:}    
+{if:noeditor}
+    <div class="gt-form-row gt-width-66 clearfix">
+      <label>Editor Not Available</label>
+      <p>In order to preserve the integrity of your template, the WYSIWYG editor has been disabled while you edit this page. The editor will be re-enabled when editing any page that does not contain "head" or "body" tags.</p>
+    </div><!-- /form row -->
+{end:}
 
     
     <!-- form row -->

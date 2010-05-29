@@ -112,6 +112,13 @@ class mwgDocument {
     global $unread_inbox; // @todo make this a gizmo
     $content = $this->content;
 
+    // Add head and body tags
+    if (stripos($content, '</head>') === false) {
+      $skel = file_get_contents(MWG_BASE . '/templates/skeleton.html');
+      $content = str_ireplace('{body}', $content, $skel);
+    }
+ 
+
     $newbody = implode("\n", $this->before_body_end ) . "</body>";
     $content = str_ireplace('</body>', $newbody, $content);
 
