@@ -5,6 +5,7 @@
                 $('textarea.tinymce').tinymce({
                         // Location of TinyMCE script
                         script_url : mwg_basehref + '/gizmos/tiny_mce/tiny_mce.js',
+                        document_base_url : mwg_basehref + '/',
 
                         // General options
                         theme : "advanced",
