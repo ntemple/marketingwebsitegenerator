@@ -23,8 +23,10 @@ class editorActions extends mwgActions {
 //    $response->editor = 'editarea';
 //    $response->includeHeaderFile('editor_editarea.js');      
 
-    $response->editor = 'tinymce';
-    $response->includeHeaderFile('editor_tinymce.js');  
+//    $response->editor = 'tinymce';
+//    $response->includeHeaderFile('editor_tinymce.js');  
+
+    $response->noeditor = true;
     
     $mwg = MWG::getInstance();
     $files = $mwg->listFiles(MWG_BASE . '/templates');
@@ -53,12 +55,20 @@ class editorActions extends mwgActions {
  
     $filename = $request->get('filename'); 
     if ($filename) {
-      $response->set('filecontent', file_get_contents(MWG_BASE . '/templates/' . $filename));
+      $contents =  file_get_contents(MWG_BASE . '/templates/' . $filename);
+      $response->set('filecontent', $contents);
       $response->set('filename', $filename);
       $description = $db->get_value('select description from templates where filename=?', $filename);
       if (! $description) $description = 'None Available';
       $response->set('description',  $description);
+
+      if (stripos($contents, '</head>') === false) {
+        $response->initEditor();
+        $response->noeditor = false;
+      }
+
     }
+
   }
 
   function doDefaultStore(mwgRequest $request, mwgResponse $response) {
