@@ -37,8 +37,11 @@ class comUpdates {
 
   function upgrade() {
     $e = null;
-    $url = 'http://network.intellispire.com/mwg/latest-update.zip';
 
+    $model = new modelGenstaller();
+    $manifest = $model->getManifest();
+    $url = trim($manifest->manifest['mwglatesturl']);
+    
     try {
       $path = GENSTALL_BASEPATH . "/tmp/upgrade";
       $ppath = "$path/package.zip";

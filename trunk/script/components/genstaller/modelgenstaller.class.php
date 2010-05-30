@@ -37,8 +37,10 @@ class simpleClient {
     $x = urlencode($p);
     $u = urlencode($username);
     $p = urlencode($password);
+    
+    $v = trim(file_get_contents(GENSTALL_BFPATH . '/config/version')); 
 
-    $url = "http://marketingwebsitegenerator.com/club/isn.php?t=$t&p=$p&u=$u&x=$x";
+    $url = "http://marketingwebsitegenerator.com/club/isn.php?t=$t&p=$p&u=$u&x=$x&v=$v";
     $r = MWGHelper::url_retrieve($url);
     if (!$r) throw new Exception('Could not connect to server.');
     $r = unserialize(base64_decode($r));
