@@ -213,6 +213,7 @@ class comGenstaller {
      // Find the  package URL
       $url = $request->get('package');
       $id = $request->get('id');
+      
       if ($id) {
         $url = $model->retrievedownloadlink($id);  
       }
@@ -285,11 +286,8 @@ class comGenstaller {
   function activate() {
     $registry = mwgDataRegistry::getInstance();
     $request = MWG::getInstance()->request;
-    $u = urlencode($_POST['username']);
-    $p = urlencode(md5($_POST['password']));
-    
-    $model = new modelGenstaller;
 
+    $model = new modelGenstaller;
     try {
       $status = $model->checkAuth($_POST['username'], md5($_POST['password']));
     } catch(Exception $e) {
