@@ -45,6 +45,10 @@ Spyc
    * @package Spyc
    */
 
+Eco Template
+------------
+Kindly povided by http://gooeytemplates.com
+
 
 PHPMailer
 --------
