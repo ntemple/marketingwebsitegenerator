@@ -13,9 +13,7 @@
 * See COPYRIGHT.php for copyright notices and details.
 */
 
-
 defined('_MWG') or die ('Restricted Access');
-
 
 /**
 * base class for gizmos.
@@ -34,7 +32,6 @@ class mwgBaseGizmo {
   var $data;
   var $active;
 
-  
   /**
   * Constructor called with serialized
   * paramaters
@@ -45,45 +42,72 @@ class mwgBaseGizmo {
   function __construct($identity)  {
     $this->identity = $identity;
     $this->id = '';
-    if ($gizmo_mf) {
-      $this->gizmo_mf = $gizmo_mf;
-    }    
   }
-  
-  
-  // Override the below methods to add functionality
-  
-  function getAdminForm($params) {   }
 
-  function extractAdminFormData($request) { }
+  // Override the below methods to add functionality
+
+  /* Modify these functions */
+
+  function getFields() {
+    return array(
+    );
+  }
+
+  /**
+  * display the form to get the parameters
+  *
+  * @param array $atts associative array of attributes from the database
+  * @return string
+  */
+
+  function getAdminForm($atts = array()) {
+    
+    $fields = $this->getFields();
+    $params = shortcode_atts($fields, $atts);
+
+    $out = $this->generateAdminForm($fields, $params, false);
+
+    return "<div>\n$out</div>\n";
+  }
+
 
   /**
   * The main routine to display the gizmo.
-  * 
+  *
   * In addition to the atts,
   * $this->params contans the params from the admin form
-  * 
-  * You can use 
-  *   $this->saveLocalData to serialize an array for later retrieval
-  * and 
-  *   $this->getLocalData to get it back later.
-  * 
+  *
+  * You can use $this->saveLocalData to serialize an array for later retrieval
+  * and $this->getLocalData to get it back later.
+  *
   * @param mixed $atts shortcode style attributes if called via [gizmo id="x"]
   */
 
-  function render($atts) {  }
-  
-  /*
-  $defaults = array(
-  'name'          => sprintf(__('Sidebar %d'), $i ),
-  'id'            => 'sidebar-$i',
-  'before_widget' => '<li id="%1$s" class="widget %2$s">',
-  'after_widget'  => '</li>',
-  'before_title'  => '<h2 class="widgettitle">',
-  'after_title'   => '</h2>' 
-  ); 
- */
-  
+  function render($atts) {
+    $data = shortcode_atts($this->params, $atts);
+    extract($data);
+    
+    $out = '';
+
+    return $out;
+  }
+
+
+  /**
+  * Render a Gizmo similiar to to a wordpress widget
+  * 
+  *   $defaults = array(
+  *    'name'          => sprintf(__('Sidebar %d'), $i ),
+  *    'id'            => 'sidebar-$i',
+  *    'before_widget' => '<li id="%1$s" class="widget %2$s">',
+  *    'after_widget'  => '</li>',
+  *    'before_title'  => '<h2 class="widgettitle">',
+  *    'after_title'   => '</h2>' 
+  *  ); 
+  *
+  * 
+  * @param mixed $atts
+  */
   function render_as_widget($atts) {
     if (isset($atts['before_title'])) echo $atts['before_title'];
     echo $this->title;
@@ -93,22 +117,117 @@ class mwgBaseGizmo {
     if (isset($atts['after_widget'])) echo $atts['after_widget'];
   }
 
+
+  /* 
+  * Events model.  override to hook into appropriate events
+  * Events are added occasionally, so check documentation in
+  * lib/mwg/mwgBaseGizmo.php.
+  */
+
+  /**
+  * Called after a signup has been completed
+  * 
+  * @param mixed $member_id
+  * @param mixed $password
+  */
+  //function afterSignup($member_id, $password) { print "afterSignup($member_id, $password)\n"); }
+
+  /**
+  * Called before a signup. Allows you to modify the POST data if necessary
+  * 
+  */
+  //function beforeSignup() { print "beforeSignup()\n"); }
+
+
+  /**
+  * Called after the template has been processed, but before
+  * shortcodes are run. Used to forcefully add or remove existing
+  * shortcodes from pages.
+  * 
+  * For example, use:
+  * $this->add_shortcode($shortcode, $method);
+  *
+  * @param mixed $document
+  * @param mixed $content
+  */
+  // function beforeDoShortcode(mwgDocument $document, &$content) {  print "beforeDoShortcode {$this->id}\n"; }
+
+  /**
+  * Called just before the page is put together with the
+  * head, body and other components.  Great place to
+  * add javascript, analytics, etc to the document.
+  *
+  * @param mixed $document
+  * @param mixed $content
+  */
+  // function beforeDocumentRender(mwgDocument $document, &$content) {  print "beforeDocumentRender {$this->id}\n"; }
+
+  /**
+  * Last call before the page is displayed.
+  *
+  * @param mixed $page
+  */
+  // function afterDocumentRender(&$page) {  print "afterDocumentRender {$this->id}\n"; }
+    
   
-  // Events to overide
-  // Commented out for performance
-//  function beforeDoShortcode($document, &$content) {  
-//    print "beforeDoShortcode ({$this->id})\n";    
-//  }
-
-//  function beforeDocumentRender($document, &$content) {  
-//    print "beforeDocumentRender ({$this->id})\n";
-//  }
-
-//  function afterDocumentRender(&$page) {  
-//    print "afterDocumentRender({$this->id})\n";
-//  }
-
   
+  /**
+  * Not necessary to override
+  * 
+  */
+  
+  function add_shortcode($shortcode, $method) {
+    return add_shortcode($shortcode, array($this, $method));
+  }
+  
+  
+  function getName() { return 'example';  
+    $i = $this->identity;
+    $i = str_replace('mwg.gizmos.', '', $i);
+    $i = str_replace('Gizmo', '', $i);
+    return $i;
+  }
+
+
+  function generateAdminForm($fields, $params, $generator = true) {
+    $out = '';
+    $name = $this->getName();
+    foreach ($fields as $field => $default) {
+      $id = $name . "gizmo-$field";
+      if ($generator) {
+        $value = '< ?php echo $params['. $field .']; ?>';
+      } else {
+        $value = $params[$field];
+      }
+      $out .= "  <label for='$id' style='line-height:35px;display:block;'>$id: <input type='text' id='$id' name='$id' value='$value' /></label>\n";
+    }
+    $id = $name . "gizmo-submit";
+    $out .= "  <input type='hidden' name='$id' id='$id' value='1' />\n";
+    if ($generator) $out = "<pre>\n" . htmlentities($out) . "\n</pre>\n";
+    return  "<hr>\n$out\n<hr>";
+  }
+
+  /**
+  * Given a request, extract the data into a format you can use.
+  * Assume someone submitted your AdminForm
+  * The return will then be serialized and
+  *
+  * @param mwgRequest $request
+  */
+
+  function extractAdminFormData(mwgRequest $request) {
+    $name = $this->getName();
+    $id = $name . "gizmo-submit";
+    if ($request->get($id) != 1) return null;
+    $params = array();
+    $fields = $this->getFields();
+    foreach ($fields as $field => $default) {
+      $id = $name . "gizmo-$field";
+      $params[$field] = $request->get($id);
+    }
+    return $params;
+  }
+
   
   // Implementation. You should not need to override
   // the following methods.
@@ -145,7 +264,7 @@ class mwgBaseGizmo {
       $this->title  = $gizmo_mf['title'];
       $this->active = 0;
     }
-    
+
     return $this;
   }
 
@@ -165,25 +284,30 @@ class mwgBaseGizmo {
     $this->id = $db->store('mwg_gizmo', $row);
     return $this;
   }
-  
+
   function getDocumentation() {
     $mf = $this->getManifest();
-    return $mf['documentation'];    
+    
+    if (method_exists($this, 'documentation')) {
+      return $this->documentation($mf['documentation']);
+    } else {
+      return $mf['documentation'];    
+    }
+    
   }
-  
+
   function getLocalData() { 
-     return $this->data; 
+    return $this->data; 
   }
-  
+
   function saveLocalData($data) {
     $this->data = $data;
     $row = array (
-      'id' => $this->id,
-      'data' => serialize($data)
+    'id' => $this->id,
+    'data' => serialize($data)
     );
     MWG::getInstance()->getDb()->update('mwg_gizmos', $row);
   }
-
 }
 
 

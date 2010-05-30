@@ -38,7 +38,7 @@ $q2 = new CDb();
 		else $t->set_var("mchecked", "");
 		
 		$t->set_var("field_position", $q->f("position"));
-		if ($q->f("field") == "email" || $q->f("field") == "password"){
+		if ($q->f("field") == "email" || $q->f("field") == "XpasswordX"){
 			$t->set_var("disabled", "disabled");
 		}else{
 			$t->set_var("disabled", "");
