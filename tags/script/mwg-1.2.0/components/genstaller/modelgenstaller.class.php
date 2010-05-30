@@ -34,7 +34,7 @@ class simpleClient {
       $password = $registry->get('password');    
     }
     $t = urlencode($t);
-    $x = urlencode($p);
+    $x = urlencode($x);
     $u = urlencode($username);
     $p = urlencode($password);
     
@@ -98,7 +98,7 @@ class modelGenstaller {
     return $link;
   }
 
-  function checkAuth($username, $passwrd) {
+  function checkAuth($username, $password) {
     $client = $this->getClient();
     try {
       $client->check($username, $password);      
