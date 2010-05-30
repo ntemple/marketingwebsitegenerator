@@ -1,0 +1,47 @@
+<form id="form1" name="form1" method="post" action="do.send.message.php">
+  <p><strong>Reply :</strong></p>
+  <table width="550" border="0">
+    <tr>
+      <td width="63" align="right" valign="top">To:</td>
+      <td width="477">{from}
+        <input name="to_member_id" type="hidden" id="to_member_id" value="{to_member_id}" /></td>
+    </tr>
+    <tr>
+      <td align="right" valign="top">Date:</td>
+      <td width="477">{date}</td>
+    </tr>
+    <tr>
+      <td align="right" valign="top">Subject:</td>
+      <td width="477"><input name="subject" type="text" id="subject" value="Re:{subject}" size="60" /></td>
+    </tr>
+    <tr>
+      <td align="right" valign="top">Body:</td>
+      <td width="477"><textarea name="body" cols="60" rows="15" id="body" >---------------------------------
+Original message:
+From: {from}
+Date: {date}
+Subject: {subject}
+---------------------------------
+{body}
+---------------------------------
+</textarea></td>
+    </tr>
+    <tr>
+      <td valign="top">Send Using: </td>
+      <td width="477"><p>
+          <input name="radiobutton" type="radio" value="1" checked>
+          Messaging System Only<br>
+          <input name="radiobutton" type="radio" value="2">
+          Email Only<br>
+          <input name="radiobutton" type="radio" value="3">
+          Email &amp; Messaging System </p></td>
+    </tr>
+    <tr>
+      <td colspan="2"><p>
+          <input type="button" name="Button" value="&lt;&lt; Back" onclick="history.back(1);"/>
+          <input type="submit" name="Submit" value="Send message" />
+        </p></td>
+    </tr>
+  </table>
+  <p>&nbsp;</p>
+</form>

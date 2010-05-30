@@ -1,0 +1,7 @@
+delete from settings where id = 134 limit 1;
+ALTER TABLE `settings` CHANGE `cat` `cat` ENUM( 'General Site Settings', 'Email Address', 'Sign Up', 'Payment', 'OTO (One Time Offer)', 'Security', 'MWG Affiliate', '3rd Party Autoresponder', 'Stats', 'Downline Settings', 'JV Partner' ) NOT NULL DEFAULT 'General Site Settings';
+ 
+UPDATE `settings` SET `cat` = 'OTO (One Time Offer)' WHERE `settings`.`id` in(15,16,114,120) ;
+UPDATE `settings` SET `cat` = 'Email Address' WHERE `settings`.`id` =8 LIMIT 1 ;
+UPDATE `settings` SET `cat` = 'Email Address' WHERE `settings`.`id` =9 LIMIT 1 ;
+
