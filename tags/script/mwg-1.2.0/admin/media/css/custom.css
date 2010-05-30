@@ -1,0 +1,22 @@
+/*
+Template:	GT-500
+File:		custom.css - Use this file to add any custom styles you need
+
+If you add styles to this template, be sure to include it in your template files.
+*/
+
+.gt-error .error {
+  background-color: #cc0000;
+  padding: .5em 1em;
+  color: #fff;
+}
+.gt-notice-box .warn {
+  border: 3px solid #aaa;
+  padding: 1em;
+  background-color: #fff;
+}
+.gt-success .info {
+  background-color: #47790a;
+  padding: .5em 1em;
+  color: #fff;
+}

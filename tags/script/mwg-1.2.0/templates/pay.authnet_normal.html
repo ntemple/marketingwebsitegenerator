@@ -1,0 +1,103 @@
+<form action="auth_capture.php" method="post" name="form{button_id}">
+  <table border="0" cellspacing="0" bordercolor="#999999" width="99%"
+	cellpadding="5" bgcolor="#FFFFFF" align="center">
+    <tr>
+      <td valign="top"><table width="100%" border="0" cellpadding="0" align="center"
+			cellspacing="0">
+          <tr>
+            <td colspan="2"><p><img src="images/SecureCheckout.GIF"
+					alt="Authorize.Net Secure Checkout" align="right"></p></td>
+          </tr>
+          <tr>
+            <input type="hidden" value="{custom}" name="custom" />
+            <input type="hidden" value="{member_id}" name="member_id" />
+            <input type="hidden" value="{product_id}" name="product_id" />
+            <td width="45%"><div align="right"><br>
+                <font face="Arial, Helvetica, sans-serif" size="2">* Required Fields</font></div></td>
+          </tr>
+          <tr>
+            <td colspan="2"><hr size="1" noshade></td>
+          </tr>
+          <tr>
+            <td colspan="2"><font face="Arial, Helvetica, sans-serif"><b><font
+					size="2">Payment Information</font></b></font></td>
+          </tr>
+          <tr>
+            <td colspan="2"><hr size="1" noshade></td>
+          </tr>
+          <tr valign="top">
+            <td colspan="2"><div id="divPaymentMethod" width="100%" align="left"></div>
+              <div id="divCreditCardInformation" width="100%" align="left">
+                <table id="tableCreditCardInformation" align="center">
+                  <tbody>
+                    <tr>
+                      <td class="SpacerRow2" colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr style="display: none;" id="trCCInfoBold">
+                      <td class="LabelColCC">&nbsp;</td>
+                      <td class="DataColCC" style="font-weight: bold;">Credit Card
+                        Information</td>
+                    </tr>
+                    <tr id="trAcceptedCardImgs">
+                      <td class="LabelColCC">&nbsp;</td>
+                      <td class="DataColCC"><a href="http://usa.visa.com/"
+								target="_blank"><img src="images/V.gif" title="Visa" alt="Visa"
+								border="0"></a> <a href="http://www.mastercard.com/"
+								target="_blank"><img src="images/MC.gif" title="MasterCard"
+								alt="MasterCard" border="0"></a> <img src="images/Amex.gif"
+								title="American Express" alt="American Express" border="0"> <img
+								src="images/Disc.gif" title="Discover" alt="Discover" border="0"></td>
+                    </tr>
+                    <tr>
+                      <td class="LabelColCC">Card Number:</td>
+                      <td class="DataColCC"><input size="27" type="text"
+								id="cardNumber" name="cardNumber" />
+                        *&nbsp;<span
+								class="Comment">(enter number without spaces or dashes)</span></td>
+                    </tr>
+                    <tr>
+                      <td class="LabelColCC">Expiration Date:</td>
+                      <td class="DataColCC"><select name="month">
+                          <option value="01">01</option>
+                          <option value="02">02</option>
+                          <option value="03">03</option>
+                          <option value="04">04</option>
+                          <option value="05">05</option>
+                          <option value="06">06</option>
+                          <option value="07">07</option>
+                          <option value="08">08</option>
+                          <option value="09">09</option>
+                          <option value="10">10</option>
+                          <option value="11">11</option>
+                          <option value="12">12</option>
+                        </select>
+                        <select name="year">
+                          <option value=""></option>
+                          <option value="2008">2008</option>
+                          <option value="2009">2009</option>
+                          <option value="2010">2010</option>
+                          <option value="2010">2011</option>
+                          <option value="2010">2012</option>
+                          <option value="2010">2013</option>
+                          <option value="2010">2014</option>
+                          <option value="2010">2015</option>
+                          <option value="2010">2016</option>
+                          <option value="2010">2017</option>
+                          <option value="2010">2018</option>
+                          <option value="2010">2019</option>
+                        </select>
+                        *&nbsp;<span class="Comment">(select month &amp; year)</span></td>
+                    </tr>
+                    <tr>
+                      <td><input type="submit" value="Submit" /></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div></td>
+          </tr>
+        </table>
+  </table>
+  </td>
+  </tr>
+  </table>
+</form>

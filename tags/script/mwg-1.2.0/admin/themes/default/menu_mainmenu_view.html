@@ -1,0 +1,114 @@
+<ulx>
+  {set(#menu#,#settings#)}
+  <li class="{menu_settings_active}">
+    <a href="index.php?menu=settings" class="{menu_settings_active}">Settings</a>
+    <ul>
+      <li><a href="index.php?menu={menu}">Main Settings</a></li>
+      <li><a href="advanced.php?menu={menu}">Site Settings</a></li>
+      <li><a href="sysemails.php?menu={menu}">System Emails</a></li>
+      <li><a href="signup.settings.php?menu={menu}">User Fields</a>
+        <ul>
+          <li><a href="signup.settings.php?menu={menu}">Signup Settings</a></li>
+          <li><a href="add.db.field.php?menu={menu}">Add New Fields</a></li>
+          <li><a href="tags.php?menu={menu}">Manage Tags</a>
+        </ul>
+      </li>
+    </ul>
+  </li>
+
+  {set(#menu#,#membership#)}  
+  <li class="{menu_membership_active}">
+    <a href="membership.php?menu={menu}" class="{menu_membership_active}">Products</a>
+    <ul>
+      <li><a href="membership.php?menu={menu}">Memberships</a></li>
+      <li><a href="products.php?menu={menu}">Prices</a></li>
+      <li><a href="oto.php?menu={menu}">OTOs</a></li>
+      <li><a href="levels.php?menu={menu}">Commissions</a>
+        <ul>
+          <li><a href="levels.php?menu={menu}">Structure</a></li>
+          <li><a href="a.adm.main.php?menu={menu}">Pay Commissions</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+
+  
+  {set(#menu#,#site#)}
+  <li class="{menu_site_active}">
+    <a href="servlet.php?m=editor&menu={menu}" class="{menu_site_active}">Site</a>
+    <ul>
+      <li><a href="servlet.php?m=editor&menu={menu}">Edit Templates</a></li>
+      <li><a href="menu.php?menu={menu}">Manage Menus</a></li>
+      <li><a href="generate.item.php?menu={menu}">New Page</a></li>
+      <!--<li><a href="templates.php?menu=site">Site Templates</a></li>  -->
+    </ul>
+  </li>
+
+  {set(#menu#,#members#)}
+  <li class="{menu_members_active}">
+    <a href="members.php?menu={menu}" class="{menu_members_active}">Members</a>
+    <ul>
+      <li><a href="members.php?menu={menu}">Manage Members</a></li>
+      <li><a href="add.member.php?menu={menu}">Add Member</a></li>
+      <li><a href="import.csv.php?menu={menu}">Import</a></li>
+      <li><a href="ban.php?menu={menu}">Ban</a></li>
+    </ul>
+  </li>
+
+  
+  {set(#menu#,#reports#)}  
+  <li class="{menu_reports_active}">
+    <a href="siteoverview.php?menu={menu}" class="{menu_reports_active}">Reports</a>
+    <ul>
+      <a href="siteoverview.php?menu={menu}">Site Overview</a>
+      <li><a href="payment_log.php?menu={menu}">Payment log</a></li>
+      <li><a href="subscr.list.php?menu={menu}">Subscribers&nbsp;List&nbsp;</a></li>
+      <li><a href="sellers.member.php?menu={menu}">Top sellers</a></li>      
+      <li><a href="activity.php?menu={menu}">Site Activity</a></li>
+    </ul>    
+  </li>                
+
+  {set(#menu#,#components#)}  
+  <li class="{menu_components_active}" >
+    <a href="controller.php?c=genstaller&menu={menu}" class="{menu_components_active}">Components</a>
+    <ul>
+      {components_menu:h}
+    </ul>
+  </li>                
+
+  {set(#menu#,#extensions#)}  
+  <li class="{menu_extensions_active}">
+    <a href="controller.php?c=gizmo&t=view&menu={menu}" class="{menu_extensions_active}">Extensions</a>
+    <ul>
+      <li><a href="controller.php?c=gizmo&t=view&menu={menu}">Manage Gizmos</a></li>
+      <li><a href="controller.php?c=gizmo&t=shownew&menu={menu}">Activate Gizmo</a></li>
+      <li><a href="controller.php?c=themes&menu={menu}">Manage Themes</a></li>    
+      <li><a href="controller.php?c=genstaller&menu={menu}">Add Software</a>
+    </ul>
+  </li> 
+
+  {set(#menu#,#tools#)}  
+  <li class="{menu_tools_active}">
+    <a href="autoresponder.php?menu={menu}" class="{menu_tools_active}">Tools</a>
+    <ul>
+      <li><a href="autoresponder.php?menu={menu}">Autoresponder</a></li>
+      <li><a href="faq.php?menu={menu}">F.A.Q.</a></li>
+      <li><a href="promo.tools.php?menu={menu}">Promo</a></li>
+      <li><a href="twitter.php?menu={menu}">Twitter</a></li>
+      <li><a href="cycler.php?menu={menu}">Split Test</a>
+        <ul>
+          <li><a href="cycler.php?menu={menu}">MV Split Tester</a></li>
+          <li><a href="cycler_stats.php?menu={menu}">Split Test Statistics</a></li>
+        </ul>
+      </li>
+      <li><a href="downloadprotect.php?menu={menu}">More ...</a>
+      <ul>
+        <li><a href="race.php?menu={menu}">Contest Manager</a></li>
+        <li><a href="downloadprotect.php?menu={menu}">Download Protect</a></li>
+        <li><a href="otobckemail.php?menu={menu}">2nd Chance Email</a></li>
+        <li><a href="login_msg.php?menu={menu}">Login Messages</a></li>
+      </ul>
+    </ul>
+  </li>
+</ulx>
+
