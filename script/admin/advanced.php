@@ -51,7 +51,8 @@
 
 
     switch($ff['input_type']) {
-      case 'input': echo "<input class='gt-form-text' type='text' name='$ff[name]' value='$value' >\n"; break;
+      case 'input':    echo "<input class='gt-form-text' type='text' name='$ff[name]' value='$value' >\n"; break;
+      case 'password': echo "<input class='gt-form-text' type='password' name='$ff[name]' value='$value' >\n"; break;
       case 'hidden'; break;
       case 'select':
         $options = unserialize($ff['options']);
