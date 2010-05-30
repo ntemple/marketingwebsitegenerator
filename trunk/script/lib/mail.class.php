@@ -32,14 +32,14 @@
 * @return bool
 */
 function mwg_nmail($subject, $message, $to, $from = null,  $bcc = null) {
-
+  
   $mail = mwg_mailer();
   $mail->Subject = $subject;
   $mail->Body = $message;
   $mail->AddAddress($to[0], $to[1]);
   if ($from) $mail->setFrom($from[0], $from[1]);
   if ($bcc) $mail->addBCC($bcc[0], $bcc[1]);    
-
+  
   $return  = $mail->Send();  
 }
 
@@ -114,13 +114,13 @@ function mwg_mailer() {
     $mailer_type = get_setting('email_mailer', 'mail'); 
     if ($mailer_type == 'smtp') {
       $mailer->IsSMTP();
-      $mailer->Host    = get_setting('mail_host', 'localhost');     
+      $mailer->Host    = get_setting('email_smtp_host', 'localhost');     
       
-      if (get_setting('mail_secure', 'none') == 'ssl') $mailer->SMTPSecure = "ssl";            
+      if (get_setting('email_smtp_connection', 'none') == 'ssl') $mailer->SMTPSecure = "ssl";            
           
-      $mailer->Port       = get_setting('mail_port', 25);
-      $mailer->Username   = get_setting('mail_username', '');
-      $mailer->Password   = get_setting('mail_password', '');
+      $mailer->Port       = get_setting('email_smtp_port', 25);
+      $mailer->Username   = get_setting('email_smtp_username', '');
+      $mailer->Password   = get_setting('email_smtp_password', '');
 
       if ($mailer->Password) {
         $mailer->SMTPAuth = true;
