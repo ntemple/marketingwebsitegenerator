@@ -122,7 +122,7 @@ class exampleGizmo extends mwgBaseGizmo {
   * Called before a signup. Allows you to modify the POST data if necessary
   * 
   */
-  //function beforeSignup($member_id, $password) { print "beforeSignup($member_id, $password)\n"); }
+  //function beforeSignup() { print "beforeSignup()\n"); }
 
 
   /**
