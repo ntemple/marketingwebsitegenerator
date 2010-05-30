@@ -12,8 +12,17 @@
  * other free or open source software licenses.
  * See COPYRIGHT.php for copyright notices and details.
  */
-
-
+/*
+ $db = MWG::getDb();
+ $no_password = 
+ $email_required  =  $db->get_value('select required from signup_settings where field=?', 'email');
+ $password_required  =   $db->get_value('select required from signup_settings where field=?', 'password');
+*/ 
+ 
+ 
+ 
+ 
+ 
 $query="SELECT * FROM products WHERE physical='1'";
 $q2->query($query);
 $q2->next_record();
@@ -66,7 +75,7 @@ if (get_setting("enable_captcha")==1)	{
             'secretposition' => 24,      // integer: [1-32]
             'debug'          => FALSE,
 	);
-	$captcha =& new hn_captcha_X1($CAPTCHA_INIT);
+	$captcha = new hn_captcha_X1($CAPTCHA_INIT);
 	$t->set_var("captcha",$captcha->display_form());
 }
 if (get_setting("enable_arp")==1 && get_setting("arp_in_use_type")==1){
@@ -83,6 +92,7 @@ if (get_setting("enable_arp")==1 && get_setting("arp_in_use_type")==1){
 			$first_name_awb = $q->f("value");
 	}
 }
+
 $validation_string = "
 err = 'The following fields are not correct filled:\\n';
 ".(get_setting('cut_signup') && !$switch ? "
@@ -93,10 +103,12 @@ if (document.form1.$first_name_awb.value == ''){
 	err += 'No First Name.\\n';
 }" 
 		:"
+    if (document.form1.password) {
 if (document.form1.password.value == ''){
 	err += 'No password.\\n';
 }else if (document.form1.cpass.value != document.form1.password.value){
 	err += 'Passwords do not match.\\n';
+}
 }
 		"));
 		if (get_setting("show_promo_signup")==1)

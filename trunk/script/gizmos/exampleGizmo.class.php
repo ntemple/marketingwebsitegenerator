@@ -1,81 +1,60 @@
 <?php
-  /**
-  * @version    $Id$
-  * @package    MWG
-  * @copyright  Copyright (C) 2010 Intellispire, LLC. All rights reserved.
-  * @license    GNU/GPL v2.0, see LICENSE.txt
-  *
-  * Marketing Website Generator is free software. 
-  * This version may have been modified pursuant
-  * to the GNU General Public License, and as distributed it includes or
-  * is derivative of works licensed under the GNU General Public License or
-  * other free or open source software licenses.
-  * See COPYRIGHT.php for copyright notices and details.
-  */
+/**
+* @version    $Id$
+* @package    MWG
+* @copyright  Copyright (C) 2010 Intellispire, LLC. All rights reserved.
+* @license    GNU/GPL v2.0, see LICENSE.txt
+*
+* Marketing Website Generator is free software. 
+* This version may have been modified pursuant
+* to the GNU General Public License, and as distributed it includes or
+* is derivative of works licensed under the GNU General Public License or
+* other free or open source software licenses.
+* See COPYRIGHT.php for copyright notices and details.
+*/
 
-  defined('_MWG') or die ('Restricted Access');
-
-
-  /**
-  * Example Gizmo
-  */
-  class exampleGizmo extends mwgBaseGizmo {
-
-    /**
-    * Constructor called with the ident of
-    * this class.
-    * 
-    * @param mixed $identity
-    * @return mwgGizmoBase
-    */
-    function __construct($identity) {
-      parent::__construct($identity);
-    }
-
-    /**
-    * display the form to get the parameters
-    * 
-    * @param array $atts associative array of attributes from the database
-    * @return string
-    */
-
-    function getAdminForm($atts = array()) {
-
-      $params = shortcode_atts(array(
-        'title' => '',
-        'text' => '',           
-      ), $atts);
+defined('_MWG') or die ('Restricted Access');
 
 
-      // The HTML below is the control form for editing options.
-      ob_start();
-    ?>
-    <div>
-      <label for="mywidget-title" style="line-height:35px;display:block;">Widget title: <input type="text" id="mywidget-title" name="mywidget-title" value="<?php echo $params['title']; ?>" /></label>
-      <label for="mywidget-text" style="line-height:35px;display:block;">Widget text: <input type="text" id="mywidget-text" name="mywidget-text" value="<?php echo $params['text']; ?>" /></label>
-      <input type="hidden" name="mywidget-submit" id="mywidget-submit" value="1" />
-    </div>
-    <?php
-    return ob_get_clean();
-  }
+/**
+* example Gizmo
+*/
+class exampleGizmo extends mwgBaseGizmo {
 
-  /**
-  * Given a request, extract the data into a format you can use.
-  * Assume someone submitted your AdminForm
-  * The return will then be serialized and 
-  * 
-  * @param mwgRequest $request
-  */
+  /* Modify these functions */
 
-  function extractAdminFormData(mwgRequest $request) {
-    if ($request->get('mywidget-submit') != 1) return null;
-
-    $params = array(
-    'title' => $request->get('mywidget-title', ''),
-    'text' =>  $request->get('mywidget-text', ''),      
+  function getFields() {
+    return array(
     );
-    return $params;
   }
+  
+  function getName() { return 'example'; }
+
+
+  /**
+  * display the form to get the parameters
+  * 
+  * @param array $atts associative array of attributes from the database
+  * @return string
+  */
+
+  function getAdminForm($atts = array()) {
+
+    $fields = $this->getFields();
+    $params = shortcode_atts($fields, $atts);
+
+    $out = $this->generateAdminForm($fields, $params, false);
+    // The HTML below is the control form for editing options.
+    /*      
+    ob_start();
+    ?>
+    <?php
+    $out = ob_get_clean();
+    */    
+
+    return "<div>\n$out</div>\n";
+  }
+
 
   /**
   * The main routine to display the gizmo.
@@ -90,37 +69,80 @@
   */
 
   function render($atts) {  
-    // Allow attributes to override parameters
-    extract(shortcode_atts(array(
-    'title' => $this->params['title'],
-    'text' =>  $this->params['text'],           
-    ), $this->atts));
+    $data = shortcode_atts($this->params, $atts);
+    extract($data);
 
-    return  "<h1>$title</h1>\n<h2>$text</h2>\n";
+    $out = '';
 
+    return $out;
   }
 
 
-  /* Events model.  override to hook into appropriate events 
-  * Events are added occasionally, so check documentation.
+
+  /**
+  * Render a Gizmo similiar to to a wordpress widget
+  * 
+  *   $defaults = array(
+  *    'name'          => sprintf(__('Sidebar %d'), $i ),
+  *    'id'            => 'sidebar-$i',
+  *    'before_widget' => '<li id="%1$s" class="widget %2$s">',
+  *    'after_widget'  => '</li>',
+  *    'before_title'  => '<h2 class="widgettitle">',
+  *    'after_title'   => '</h2>' 
+  *  ); 
+  *
+  * 
+  * @param mixed $atts
+  */
+  function render_as_widget($atts) {
+    if (isset($atts['before_title'])) echo $atts['before_title'];
+    echo $this->title;
+    if (isset($atts['after_title'])) echo $atts['after_title'];
+    if (isset($atts['before_widget'])) echo $atts['before_widget'];
+    echo $this->render($atts);
+    if (isset($atts['after_widget'])) echo $atts['after_widget'];
+  }
+
+
+  /* 
+  * Events model.  override to hook into appropriate events
+  * Events are added occasionally, so check documentation in
+  * lib/mwg/mwgBaseGizmo.php.
   */
 
-  // Events to overide
+  /**
+  * Called after a signup has been completed
+  * 
+  * @param mixed $member_id
+  * @param mixed $password
+  */
+  //function afterSignup($member_id, $password) { print "afterSignup($member_id, $password)\n"); }
+
+  /**
+  * Called before a signup. Allows you to modify the POST data if necessary
+  * 
+  */
+  //function beforeSignup($member_id, $password) { print "beforeSignup($member_id, $password)\n"); }
+
+
   /**
   * Called after the template has been processed, but before
   * shortcodes are run. Used to forcefully add or remove existing
   * shortcodes from pages.
   * 
+  * For example, use:
+  * $this->add_shortcode($shortcode, $method);
+  *
   * @param mixed $document
   * @param mixed $content
   */
   // function beforeDoShortcode(mwgDocument $document, &$content) {  print "beforeDoShortcode {$this->id}\n"; }
 
   /**
-  * Called just before the page is put together with the 
-  * head, body and other components.  Great place to 
+  * Called just before the page is put together with the
+  * head, body and other components.  Great place to
   * add javascript, analytics, etc to the document.
-  * 
+  *
   * @param mixed $document
   * @param mixed $content
   */
@@ -128,7 +150,7 @@
 
   /**
   * Last call before the page is displayed.
-  * 
+  *
   * @param mixed $page
   */
   // function afterDocumentRender(&$page) {  print "afterDocumentRender {$this->id}\n"; }

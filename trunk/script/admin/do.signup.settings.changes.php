@@ -28,12 +28,14 @@
 			$atsignup[$q->f("id")] = 1;
 			$membersarea[$q->f("id")] = 1;
 		}
-		if (($q->f("field") == "email") || ($q->f("field") == "password")){
+		if (($q->f("field") == "email") || ($q->f("field") == "XpasswordX")){
 			$atsignup[$q->f("id")] = 1;
 			$membersarea[$q->f("id")] = 1;
 			$required[$q->f("id")] = 1;
 		}
+
 		$query="update signup_settings set description='".$_POST[$q->f("field")]."', atsignup='".$atsignup[$q->f("id")]."', required='".$required[$q->f("id")]."', membersarea='".$membersarea[$q->f("id")]."' where id='".$q->f("id")."'";
+
 		$q2->query($query);
 		
 	}
