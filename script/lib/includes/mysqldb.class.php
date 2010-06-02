@@ -266,14 +266,11 @@ function update($table, $data, $pkey = 'id') {
   /**
    *
    * resolve_query assumes that the $_qs has already been setup
-   *
-   *
-   *
    */
    function _resolve_query($link) {
 
      // PHP4 chokes on empty queries
-     if ($this->_qs == "") return 0;
+     if (trim($this->_qs) == "") return 0;
 
      // Connect if needed
      if (!$this->connect()) return 0;
@@ -285,9 +282,10 @@ function update($table, $data, $pkey = 'id') {
      $this->writelog($this->_qs);
 
      if ($this->rs) $this->free();
-
+     
      $this->queries++;
      $this->rs = mysql_query($this->_qs, $link);
+     
      $this->row   = 0;
      if (!$this->rs) return $this->halt("ERR:" . $this->_qs);
      return $this->rs;
@@ -342,6 +340,7 @@ function update($table, $data, $pkey = 'id') {
 
   function get_value() {
     $rs = $this->query_ro(func_get_args());
+    if (!$rs) return false;
     $row = mysql_fetch_row($rs);
     $this->free();
     return $row[0];
@@ -432,8 +431,8 @@ function update($table, $data, $pkey = 'id') {
    * Logging - does nothing by default
    */
 
-  function writelog($mixed, $level=0) {
-    // do nothing by default
+  function writelog($msg, $level=0) {
+#    print "$msg\n";
   }
 
   /**

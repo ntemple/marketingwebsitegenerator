@@ -20,12 +20,23 @@
 
 define('MWG_DB_VERSION', '1.4');
 
+// upgrade_test();
+
 $db = MWG::getDb();
 ob_start();
 upgrade($db);
 $debug = ob_get_clean();
-print "<pre>\n$debug\n"; print_r($db); exit();
 
+function upgrade_test() {
+  ob_end_clean();
+  print "<pre>";
+  print "START UPGRADE\n";
+
+  $db = MWG::getDb();
+  upgrade($db);
+  print_r($db); 
+  exit();
+}
 
 function upgrade(mysqldb $db) {
 
@@ -38,18 +49,17 @@ function upgrade(mysqldb $db) {
   }
 
   if ($db_version >= MWG_DB_VERSION) return;
- 
+
   # perform upgrade
   include('upgrade13.php');
 
- 
   $lock = $db->get_value('select value from settings where name=?', 'lock');
   if ($lock > 1) return $db_version;
 
   if ($lock == 1) {
     $db->query('update settings set value=2 where name=?', 'lock');
   } else {
-     $db->query("insert into settings (box_type, name, value) values ('hidden', 'lock', 2)");
+    $db->query("insert into settings (box_type, name, value) values ('hidden', 'lock', 2)");
   }
 
   upgrade_tables($db);
