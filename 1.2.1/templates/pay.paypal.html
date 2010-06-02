@@ -1,0 +1,32 @@
+<FORM name="paypal_form{button_id}" action="https://www.paypal.com/cgi-bin/webscr" method=post target=_top>
+  <INPUT id=cmd type=hidden value="_xclick{subtype}" name=cmd>
+  <INPUT id=business type=hidden value="{paypal_email}" name=business>
+  <INPUT id=item_name type=hidden value="{name}" name=item_name>
+  <INPUT id=item_number type=hidden value="{id}" name=item_number>
+  <INPUT id=return type=hidden value="{paypal_return_url}" name=return>
+  <INPUT id=notify_url type=hidden value="{paypal_notify_url}" name=notify_url>
+  {amount}
+  <INPUT id=cancel_return type=hidden value="{cancel_return}" name=cancel_return>
+  <INPUT type=image {on_click_paypal} alt="Make payments with PayPal - it\'s fast, free and secure!" src="{pp_button}" border=0 name=I13>
+  <INPUT id=no_shipping type=hidden value="{ask_shipping_adress}" name=no_shipping>
+  <INPUT id=undefined_quantity type=hidden value=0 name=undefined_quantity>
+  <INPUT id=src type=hidden value={src} name=src>
+  <INPUT id=sra type=hidden value=1 name=sra>
+  <INPUT id=currency_code type=hidden value={mc_currency} name=currency_code>
+  <INPUT id=custom type=hidden value="{custom}{country_code}" style="width: 80em;" name=custom>
+  <INPUT type=hidden value=2 name=rm>
+  <INPUT type=hidden value="CLICK HERE to complete your order!" name=cbt>
+  {trial}
+  
+  
+  
+  {recurring_paypal}
+  
+  
+  
+  {show_shipping_paypal}
+  
+  
+  
+  {shiping_country_list_paypal}
+</FORM>
