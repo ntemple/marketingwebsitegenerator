@@ -1,8 +1,0 @@
-ALTER TABLE `mwg_gizmo` ADD `position` VARCHAR( 255 ) NOT NULL AFTER `title` , ADD `ordre` INT NOT NULL AFTER `position`;
-ALTER TABLE `mwg_setting` ADD UNIQUE ( `name`);
-ALTER TABLE `products` CHANGE `price` `price` DECIMAL( 8, 2 ) NOT NULL DEFAULT '0.00', CHANGE `trial_amount` `trial_amount` DECIMAL( 6, 2 ) NOT NULL DEFAULT '0.00', CHANGE `trial_auth_amount` `trial_auth_amount` DECIMAL( 8, 2 ) NOT NULL;
-ALTER TABLE `a_tr` CHANGE `amount` `amount` DECIMAL( 10, 4 ) NOT NULL DEFAULT '0.0000';
-ALTER TABLE `levels` CHANGE `value` `value` DECIMAL( 8, 2 ) NOT NULL DEFAULT '0.00', CHANGE `jv1` `jv1` DECIMAL( 8, 2 ) NOT NULL DEFAULT '0.00', CHANGE `jv2` `jv2` DECIMAL( 8, 2 ) NOT NULL DEFAULT '0.00';
-INSERT INTO `mwg_setting` VALUES (NULL,'Email Settings',NULL,'email_limit','100','100','input','Send Limit','The maximum number of emails to send every cron run. The default of 100 stays under most ISPs limits if you set the cron_send to run every 10-15 minutes.','',0);
-INSERT INTO `mwg_setting` VALUES (NULL,'Admin Settings',NULL,'admin_editor','tinymce','none','select','Text Editor','Which editor would you like to use?','a:3:{s:4:\"none\";s:14:\"Disable Editor\";s:7:\"tinymce\";s:8:\"Tiny MCE\";s:8:\"editarea\";s:9:\"Edit Area\";}',0);
-
