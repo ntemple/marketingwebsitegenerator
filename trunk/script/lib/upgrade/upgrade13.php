@@ -42,7 +42,6 @@ function upgrade_tables($db) {
   # We now have to upgrade the gizmo table
   if (!isset($table['position'])) $db->query("ALTER TABLE `mwg_gizmo` ADD `position` VARCHAR( 255 ) 
                                               NOT NULL AFTER `title` , ADD `ordre` INT NOT NULL AFTER `position`");
-  $db->query("UPDATE mwg_setting SET value='1.3' WHERE name = 'site_dbversion'");
 }
 
 function upgrade_check_fields($db, $table) {
@@ -67,10 +66,9 @@ function run_upgrade($db, $file, $extra = '') {
     if (! $q) continue;
     $q .= ' ' . $extra;
     print ".$q.\n";
-   #  $db->query($q);
+    $db->query($q);
     print $db->_error;
   }
-
   return $db->get_value('select value from mwg_setting where name=?', 'site_dbversion');
 }
 
