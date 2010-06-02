@@ -53,6 +53,7 @@ function upgrade(mysqldb $db) {
   # perform upgrade
   include('upgrade13.php');
 
+  /* The upgrade process is now idempotent 
   $lock = $db->get_value('select value from settings where name=?', 'lock');
   if ($lock > 1) return $db_version;
 
@@ -61,13 +62,15 @@ function upgrade(mysqldb $db) {
   } else {
     $db->query("insert into settings (box_type, name, value) values ('hidden', 'lock', 2)");
   }
+  */
 
   upgrade_tables($db);
   run_upgrade($db, 'settings.txt', 'on duplicate key update id=id');
   run_upgrade($db, 'upgrade.txt'); 
 
   $db->query("UPDATE mwg_setting SET value=? WHERE name = 'site_dbversion'", MWG_DB_VERSION);
-  $db->query('update settings set value=1 where name=?', 'lock');
+
+  //  $db->query('update settings set value=1 where name=?', 'lock');
 
   return $db->get_value('select value from mwg_setting where name=?', 'site_dbversion');
 

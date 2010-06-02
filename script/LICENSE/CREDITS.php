@@ -21,6 +21,7 @@ defined('_MWG') or die('Restricted access');
 Code contributers:
 ------------------
 Nick Temple (commercemeister)
+John Trayhorn  
 
 Documentation Contributers:
 ---------------------------
