@@ -21,7 +21,13 @@ defined('_MWG') or die('Restricted access');
 Code contributers:
 ------------------
 Nick Temple (commercemeister)
+
+
+Testers / Bug Fixers
+---------------------
+Florante
 John Trayhorn  
+Bev 
 
 Documentation Contributers:
 ---------------------------
@@ -32,6 +38,21 @@ The original copyright notices have been preserved within the respective files a
 packages. Please refer to the specific files and/or packages for more detailed information
 about the authors, copyright notices, and licenses.
 ---------------------------------------------------------------------------------------------
+
+FamFamFam Silk icon Set
+-----------------------
+Mark James
+http://creativecommons.org/licenses/by/3.0/
+http://www.famfamfam.com/lab/icons/silk/
+
+Eco Theme
+=========================
+The THEME is copyrighted, and elements my not be
+used outside of MWG without permission of the author
+Gooey Templates
+http://www.gooeytemplates.com/
+Used with Permission
+
 
 Spyc
 ----------
