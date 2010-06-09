@@ -71,7 +71,7 @@
   <table class="gt-table" border="0">
     <thead>
       <tr>
-        <th class="gt-table-col-checkbox"><a href=""><img src="media/images/famfamfam/icons/tick.png" alt="check"></a></th>
+        <th class="gt-table-col-checkbox"><a href=""><img src="media/images/icons/tick.png" alt="check"></a></th>
         <th>Name</th>
         <th>Type</th>
         <th>Version</th>
