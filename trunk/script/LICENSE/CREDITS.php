@@ -27,7 +27,7 @@ Testers / Bug Fixers
 ---------------------
 Florante
 John Trayhorn  
-Bev 
+Bev Gable
 
 Documentation Contributers:
 ---------------------------
