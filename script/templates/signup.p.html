@@ -1,22 +1,3 @@
-<script language=JavaScript src='js/functions.js'></script>
-<script type="text/JavaScript">
-function validate_form(){
-{validation_text}
-else{
-		return true;
-	}
-}
-var str_vars = '';
-function all_fields(){
-	str_vars = '';
-	el = document.form1;
-	for (var i = 0; i < el.elements.length; i++) {
-		if (el.elements[i].value != '')
-	  	str_vars += el.elements[i].name+'='+el.elements[i].value+'&';
-	}
-	str_vars = str_vars.substr(0,str_vars.length-15);;
-}
-</script>
 <div id="div_form" name="div_form">
   <table border="0" width="100%" style="border-collapse: collapse" bordercolor="#111111" cellpadding="0" cellspacing="0" align="center">
     <tr>
@@ -51,7 +32,7 @@ function all_fields(){
             <tr>
               <td><div align="right">
                   <input name="custom" value="{session_id}" type="hidden" >
-                  <input name="Submit" value="Submit" type="button" onclick="{request}{request_email}{form2items}">
+                  <input name="Submit" value="Submit" type="Submit">
                 </div></td>
               <td><br></td>
             </tr>
@@ -60,10 +41,3 @@ function all_fields(){
     </tr>
   </table>
 </div>
-<div align="center" id="div_wait" name="div_wait" style="display:none"> <strong>Please wait while your information is being processed ...</strong><br />
-  <br />
-  <br />
-  <img src="images/wait.gif" /><br />
-  <br />
-</div>
-{form2}
