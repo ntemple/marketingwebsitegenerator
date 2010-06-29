@@ -4,7 +4,6 @@ require_once('../lib/init.inc.php');
 require_once('admin/mwgadmin.class.php');
 $mwg = MWG::getInstance();
 
-@session_start();
 mwg_check_admin_login(true);
 
 $request  = $mwg->request;
