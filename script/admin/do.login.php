@@ -14,7 +14,6 @@
  */
 
  
-session_start();
 	include "inc.all.php";
 	if ($password==ADMIN_PASSWORD)
 	{

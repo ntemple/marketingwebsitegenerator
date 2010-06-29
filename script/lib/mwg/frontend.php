@@ -55,7 +55,7 @@ function plugin_basename($file) {
 
 
 function mwg_check_admin_login($redirect = false) {
-@session_start();
+mwg_session_start();
 if (! $_SESSION['admin_sess_id']) {
   if ($redirect) 
   {

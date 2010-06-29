@@ -16,10 +16,12 @@
 define('_MWG', true);
 define('_SB_VALID_', true);
 
+require_once('session.inc.php');
+
 // Session timeout 1 hour. 
 // This should be a setting or in constants
 ini_set('session.gc_maxlifetime', 60*60);
-@session_start();
+mwg_session_start();
 
 define('MWG_BASE',   dirname(dirname(__FILE__)));
 define('MWG_ADMIN',  MWG_BASE . '/admin');

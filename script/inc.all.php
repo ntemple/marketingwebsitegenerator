@@ -13,11 +13,9 @@
 * See COPYRIGHT.php for copyright notices and details.
 */
 
-require_once('lib/init.inc.php');      // MWG
 $valid_sess_ref = array("/index.php");
-if (!in_array($_SERVER['PHP_SELF'],$valid_sess_ref)) {
-   @session_start();
-}
+
+require_once('lib/init.inc.php');      // MWG
 require_once("lib/inc.db_mysql.php");
 require_once("lib/inc.template.php");
 require_once("lib/inc.payment.functions.php");

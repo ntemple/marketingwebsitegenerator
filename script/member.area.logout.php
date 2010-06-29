@@ -14,9 +14,9 @@
  */
 
  
-	session_start();
-	session_destroy();
 include("inc.all.php");	
+mwg_session_destroy();
+
 	if (get_setting('logout_redirect_url') != ''){
 		header("Location: ".get_setting('logout_redirect_url'));
 		exit();

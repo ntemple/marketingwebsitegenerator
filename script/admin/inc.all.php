@@ -15,11 +15,9 @@
 
 define('_MWG', true);
 require_once('../lib/init.inc.php');
- 
-@session_start();
-require_once("../lib/inc.db_mysql.php");
-require_once("../lib/inc.template.php");
-require_once("../lib/admin/mwgadmin.class.php");
+require_once("inc.db_mysql.php");
+require_once("inc.template.php");
+require_once("admin/mwgadmin.class.php");
 
 foreach($_SESSION as $key_ses_1=>$value_ses_1){
 	$var_ses_1 = $key_ses_1;

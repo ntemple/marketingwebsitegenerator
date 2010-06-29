@@ -13,8 +13,7 @@
  * See COPYRIGHT.php for copyright notices and details.
  */
 
- 
-	session_start();
-	session_destroy();
+        include "inc.all.php";
+	mwg_session_destroy();
 	header("location:index.php");
 ?>
