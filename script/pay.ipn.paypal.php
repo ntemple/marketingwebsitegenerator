@@ -56,6 +56,11 @@
   {
     $fp = fsockopen ('ssl://www.paypal.com', 443, $errno, $errstr, 30); // server does have ssl compiled
   }
+
+  $valid = true; // NLT Assume valid until we can fix this spaghetti
+  MWG::getInstance()->runEvent('paypalIPN', array($_POST, $valid));
+
+
   // assign posted variables to local variables
   $shipping_email_subject=get_setting("shipping_email_subject");
   $shipping_email_body=get_setting("shipping_email_body");
@@ -1029,7 +1034,7 @@
           if ($s_member_id != 0){
             $q->query("SELECT id, name, aff FROM members WHERE id='$s_member_id'");
             $q->next_record();
-            $member_fraud = "Supect member id:".$q->f("id").", name: ".$q->f("name").", referal of id: ".$q->f("aff");
+            $member_fraud = "Suspect member id:".$q->f("id").", name: ".$q->f("name").", referal of id: ".$q->f("aff");
           }else 
             $member_fraud = "";
           $q->query("INSERT INTO payment_log SET stamp='".time()."', ip='$s_ip', product='".$product_display_name."', txn_id='".$txn_id."', comment='IPN was called from IP:".getenv("REMOTE_ADDR").", Paypal returned invalid status. ".$member_fraud."',session_id='$custom'");

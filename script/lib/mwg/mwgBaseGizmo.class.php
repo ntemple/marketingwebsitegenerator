@@ -124,6 +124,10 @@ class mwgBaseGizmo {
   * lib/mwg/mwgBaseGizmo.php.
   */
 
+  /* Payment Functions */
+  // function paypalIPN($ipn, $valid) {  }
+
+
   /**
   * Called after a signup has been completed
   * 
