@@ -15,7 +15,7 @@
 
 defined('_MWG') or die ('Restricted Access');
 
-class mwgUser {
+class mwgMember {
   
 
 }
