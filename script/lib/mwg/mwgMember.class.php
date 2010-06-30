@@ -49,11 +49,7 @@ class mwgMember {
   function getLevels() {
     if (!$this->record) return array(); // Guest is member of nothing
     if (! $this->levels) {
-
-      $raw_levels = explode($this->record['history']);
-
-      $current_levels = array();
-      $raw_levels=explode(",",$history);
+      $raw_levels = explode(",", $this->record['history']);
       $this->levels = $this->dedupe($raw_levels);
     }
     return $this->levels;
@@ -64,7 +60,7 @@ class mwgMember {
 
     $levels = $this->getLevels();
     $levels[] = $membership_id;
-    $this->storeLevels();       
+    $this->storeLevels($levels);       
     return $this->getLevels();    
   }
 
@@ -74,7 +70,7 @@ class mwgMember {
 
     $raw_levels = $this->getLevels();
     $levels = $this->dedupe($raw_levels, $membership_id);
-    $this->storeLevels();
+    $this->storeLevels($levels);
     return $this->getLevels();
   }
   
@@ -141,8 +137,9 @@ class mwgMember {
       $levels[] = $id;
       $membership_id = $id;
     }
-    $this->record['history'] =   implode($levels) . ","; // Extra comma added for backward compatibility until we fix the other data handling routines.
-    MWG::getDb()->query('update members set membership_id=?, history=? where id=?', $membership_id, $levels, $this->id);
+    $this->record['history'] =   implode(',', $levels) . ","; // Extra comma added for backward compatibility until we fix the other data handling routines.
+    $this->record['membership_id'] = $membership_id;
+    MWG::getDb()->query('update members set membership_id=?, history=? where id=?', $this->record['membership_id'], $this->record['history'], $this->id);
     $this->levels = ''; // Remove levels cache
 
   }
