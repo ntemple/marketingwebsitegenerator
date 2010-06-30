@@ -7,7 +7,7 @@ require_once('../lib/init.inc.php');
 $test = &new GroupTest('All Tests');
 
 
-$files = `find .  | grep \\\\.test\\\\.php`;
+$files = `find .  | grep \\\\.test\\\\.php | grep -v svn`;
 $files = explode("\n", $files);
 foreach ($files as $file) {
  if($file) $test->addTestFile($file);
