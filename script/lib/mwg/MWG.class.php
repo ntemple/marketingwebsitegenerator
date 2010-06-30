@@ -33,7 +33,7 @@ class MWG {
   /** @var mwgResponse */
   var $response;
 
-  /** @var mwgSettings */
+  /** @var mwgSetting */
   var $settings;
 
   // $this->BASEHREF =  MWG_BASEHREF;
@@ -57,7 +57,7 @@ class MWG {
 
     $this->document = new mwgDocument();
 
-    //    $this->settings = new mwgSettings();
+    //    $this->settings = new mwgSetting();
 
     /* Switcher needs to be in a plugin */
     if (isset($_GET['theme'])) {
