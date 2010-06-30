@@ -15,7 +15,7 @@
 
 defined('_MWG') or die ('Restricted Access');
 
-class mwgSettings {
+class mwgSetting {
   
 
   function get_setting($name, $default = null) {
