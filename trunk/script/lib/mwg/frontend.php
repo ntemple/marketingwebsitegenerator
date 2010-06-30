@@ -27,7 +27,7 @@ require_once('mwgRequest.class.php');
 require_once('mwgResponse.class.php');
 require_once('mwgActions.class.php');
 require_once('mwgBaseGizmo.class.php');
-require_once('mwgUser.class.php');
+require_once('mwgMember.class.php');
 require_once(MWG_BASE . '/components/themes/modelthemes.class.php');
 
 // Plugins - we need a plugin manager

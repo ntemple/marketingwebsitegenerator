@@ -39,6 +39,13 @@ packages. Please refer to the specific files and/or packages for more detailed i
 about the authors, copyright notices, and licenses.
 ---------------------------------------------------------------------------------------------
 
+SimpleTest (not part of main distro)
+-----------------------
+Marcus Baker 
+http://www.lastcraft.com/about.php
+GNU/GPL
+
+
 FamFamFam Silk icon Set
 -----------------------
 Mark James

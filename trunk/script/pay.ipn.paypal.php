@@ -199,11 +199,14 @@
                   $q4->next_record();
                   $history=$q4->f('history');
                   $history_exp=explode(",", $history);
+                  // BUG?? Assumes that membership rank is ordered by id.  False if these have been reordered.
                   $max_rank=max($history_exp);
+// selecting everything based on id ...
                   $query="SELECT * FROM membership WHERE id='$max_rank'";
                   $q4->query($query);
                   $q4->next_record();
                   $new_membership=$q4->f("id");
+// then setting new_membership to id. Null action.
                   $query="update members set membership_id='".$new_membership."' where id='$s_member_id'";
                   $q->query($query);		
                 }
