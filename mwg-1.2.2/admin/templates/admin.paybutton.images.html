@@ -1,0 +1,115 @@
+<style type="text/css">
+<!--
+.style5 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 10px;
+}
+.style12 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+}
+-->
+</style>
+<table width="550" height="520" border="0" align="center" cellpadding="0" cellspacing="2">
+  <tr>
+    <td height="20" colspan="2" bgcolor="#CCCCCC"><span class="style5">Add a custom image as a buy button for product: {product_name} </span></td>
+  </tr>
+  <tr bgcolor="#ECE9D8">
+    <td width="192" height="20"><span class="style5">Existing Custom Images </span></td>
+    <td width="355"><span class="style5">Currently set images | <a href="#" onclick="document.getElementById('firstform').style.display=''; document.getElementById('hiddenform').style.display='none'">Show Current Images </a></span></td>
+  </tr>
+  <tr>
+    <td rowspan="4" valign="top"><iframe name="cucu" width="190" height="480" src="imagelist.php?id={product_id}"></iframe></td>
+    <td width="355" height="227"><div id="firstform">
+        <table width="100%" border="0">
+          <tr class="style5"  bgcolor="#ECE9D8">
+            <td>Image</td>
+            <td>Use for </td>
+          </tr>
+          {current_list}
+        </table>
+      </div>
+      <div id="hiddenform" style="display:none">
+        <form id="form2" name="form2" method="post" action="useimage.php?id={product_id}">
+          <input name="img_id" type="hidden" id="img_id"/>
+          <table width="100%" border="0">
+            <tr>
+              <td><div align="center"><img src="" name="swapimage" id="swapimage" /></div></td>
+            </tr>
+            <tr>
+              <td><div align="center"><span class="style12">Payment Processor:</span>
+                  <select name="processor" id="processor" class="style5"">
+                    <option value="1">ClickBank</option>
+                    <option value="2">2Checkout</option>
+                    <option value="3">PayPal</option>
+                    <option value="4">Auth.net</option>
+                  </select>
+                </div></td>
+            </tr>
+            <tr>
+              <td><div align="center">
+                  <input type="submit" name="Submit" value="Use this image for the payment processor" class="style5" style="width:250"/>
+                </div></td>
+            </tr>
+          </table>
+        </form>
+        <form id="form3" name="form3" method="post" action="deleteimage.php?id={product_id}">
+          <table width="100%" border="0">
+            <tr>
+              <td><input name="img_id2" type="hidden" id="img_id2"/>
+                <label>
+                <div align="center">
+                  <input name="Submit2" type="submit" class="style5" value="Delete This Image" />
+                </div>
+                </label></td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+            </tr>
+          </table>
+        </form>
+      </div></td>
+  </tr>
+  <tr>
+    <td height="4"><hr height="1" /></td>
+  </tr>
+  <tr>
+    <td height="21" bgcolor="#CCCCCC"><span class="style5">Upload new image: </span></td>
+  </tr>
+  <tr>
+    <td height="206"><form action="do.upload.php?id={product_id}" method="post" enctype="multipart/form-data" name="form1" id="form1">
+        <table width="98%" border="0" align="center">
+          <tr>
+            <td bgcolor="#ECE9D8"><span class="style5">Local File (a file on your computer) </span></td>
+          </tr>
+          <tr>
+            <td><span class="style12">File:
+              <input type="file" name="file" class="style5"/>
+              </span></td>
+          </tr>
+          <tr>
+            <td><span class="style12">Payment Processor:
+              <select name="processor" id="processor" class="style5">
+                <option value="1">ClickBank</option>
+                <option value="2">2Checkout</option>
+                <option value="3">PayPal</option>
+                <option value="4">Auth.net</option>
+              </select>
+              </span></td>
+          </tr>
+          <tr>
+            <td bgcolor="#ECE9D8"><span class="style5">Remote File (a file that is uploaded on a server) </span></td>
+          </tr>
+          <tr>
+            <td><span class="style12">URL to Image:
+              <input name="img" type="text" id="img" size="35" />
+              </span></td>
+          </tr>
+          <tr>
+            <td><input name="Upload" type="submit" id="Upload" value="Submit" /></td>
+          </tr>
+        </table>
+      </form></td>
+  </tr>
+</table>
