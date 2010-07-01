@@ -37,17 +37,36 @@ class mwgMember {
       // This is a guest user, we need to special case.
     }    
   }
+  
+  function __get($name) {
+    if (!$this->record) return null;
+    
+    if (isset($this->record[$name])) {
+      return $this->record($name);
+    } else {
+      return null;
+    }
+  }
 
   protected function _load() {
     $this->record = MWG::getDb()->get_row('select * from members where id=?', $this->id);    
   }
 
+  /*** Membership Levels ***/
+  
+  
   /**
   * Return current member level
   */
-
-  function getLevels() {
+  function getRankingLevel() {
+    if (!$this->record) return 0; // Guest is member of nothing
+    return ($this->record['membership_id']);    
+  }
+      
+  function getLevels($force = false) {
     if (!$this->record) return array(); // Guest is member of nothing
+    if ($force) unset($this->levels);
+    
     if (! $this->levels) {
       $raw_levels = explode(",", $this->record['history']);
       $this->levels = $this->dedupe($raw_levels);
@@ -63,7 +82,6 @@ class mwgMember {
     $this->storeLevels($levels);       
     return $this->getLevels();    
   }
-
 
   function removeLevel($membership_id) {
     if (!$this->record) return array(); // Guest is member of nothing
@@ -88,7 +106,88 @@ class mwgMember {
     $this->addLevel($membership_id);
     return $this->getLevels();    
   }
+  
+  /**
+  * Promote member to the next level.
+  * By default, you keep access to the current level.
+  * 
+  * @param mixed $ignore array of levels to ignore during calculations.
+  * @param mixed $keep  default, keep access to current level. Pass false to remove access
+  */
+  
+  function promoteLevel($ignore = array(), $keep = true) {
+    list($prev, $next) = $this->getBoundingLevels($ignore);
 
+    if ($keep) {
+      $levels = $this->addLevel($next);
+    } else {
+      $levels = $this->changeLevel($next);
+    }        
+    return $levels;
+  }
+  
+  /**
+  * Demote level, removing access to the current ranking level.
+  * 
+  * @param mixed $ignore
+  */
+  
+  function demoteLevel($ignore = array()) {
+    list($prev, $next) = $this->getBoundingLevels($ignore);
+    return $this->changeLevel($prev);   
+  }
+
+  /**
+  * returns the previous and next levels for the given member,
+  * ignoring ignored and inactive ranks
+  * 
+  * NOTE: if the current level itself is inactive or ignored, 
+  * then the "promotions" will be to the next ACTIVE level
+  * 
+  * If there is no previous or next, the current membership_id is returned
+  * 
+  * @param array $ignore
+  * @param mixed $membership_id
+  * @return mixed
+  */
+  
+  function getBoundingLevels($ignore = array(), $membership_id = 0 ) {
+    $db = MWG::getDb();
+
+    if (! $membership_id) {
+      $membership_id = $this->record['membership_id'];    
+    }
+    
+    $inactive = $db->get_column("select id from membership where active=0");
+    $ignore = array_merge($inactive, $ignore);
+
+    $ranks = $db->get_select("select rank,id from membership order by rank asc");
+    $current_rank = $db->get_value("select rank from membership where id=?", $membership_id);
+    
+    $next  = false;
+    $prev  = $membership_id;
+    $prev_id = $membership_id;
+    $next_id = $membership_id;
+       
+    foreach ($ranks as $rank => $id) {
+      if ($id != $membership_id) // Don't ignore self
+        if ( in_array($id, $ignore)  ) continue; // Skip ignored ranks, UNLESS this rank is included
+      
+      if ($next) {
+        $next = false;
+        $next_id = $id; // next valid membership id
+      }                 
+
+      if ($current_rank == $rank) {
+        $prev_id = $prev; // previous valid membership id
+        $next = true;
+      }      
+      $prev = $id;
+    }
+    return array($prev_id, $next_id);
+  }
+  
+  
   /**
   * Deduplicate a numeric array
   * optional remove remove a specific level from the array 
@@ -137,64 +236,15 @@ class mwgMember {
       $levels[] = $id;
       $membership_id = $id;
     }
-    $this->record['history'] =   implode(',', $levels) . ","; // Extra comma added for backward compatibility until we fix the other data handling routines.
+    $this->record['history'] =   implode(',', $levels) . ","; // Extra comma added for backward compatibility until we fix the legacy data handling routines.
     $this->record['membership_id'] = $membership_id;
     MWG::getDb()->query('update members set membership_id=?, history=? where id=?', $this->record['membership_id'], $this->record['history'], $this->id);
     $this->levels = ''; // Remove levels cache
-
+    return $this->getLevels(true);
   }
 
   function dump() {
     print_r($this);
     print_r($SESSION);
   }
-
-
 }
-/*
-
-function updateHistory($member_h_id, $membership_h_id, $append = false) {
-$db = MWG::getDb();
-$history = $db->get_value('select history from members where id=?', $member_h_id);
-
-if ($append) {
-$history.=$membership_h_id.",";
-
-$current_levels = array();
-$history_explode=explode(",",$history);
-foreach ($history_explode as $level) {
-if ($level)
-$current_levels[$level] = true;
-}
-$levels = array_keys($current_levels);
-}
-$res2 = array_keys($res2); 
-}
-
-$history_explode=array_unique($history_explode);
-
-$ihi=0;
-$history="";
-while ($ihi<count($history_explode)) {
-if ($history_explode[$ihi]!="") {
-$history.=$history_explode[$ihi].",";
-}
-$ihi++;
-}
-$query="UPDATE members SET history="."'$history"."' WHERE id='".$member_h_id."'";
-$q4->query($query);      
-} else {
-$history_exp=explode(",", $history);
-$ihi=0;
-$history="";
-while ($ihi<count($history_exp)) {
-if ($history_exp[$ihi]!=$membership_h_id && $history_exp[$ihi]!="") {
-$history.=$history_exp[$ihi].",";
-}
-$ihi++;
-}
-$query="UPDATE members SET history="."'$history"."' WHERE id='".$member_h_id."'";
-$q4->query($query);      
-}
-}
-*/
