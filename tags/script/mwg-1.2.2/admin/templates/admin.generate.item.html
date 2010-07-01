@@ -1,0 +1,77 @@
+<h1>New Page</h1>
+  <p>Use this section to add new pages to your site - you will then be able to edit the templates from the <a href="templates.php">Site Templates</a>. The system works
+  by generating two files: the template file, which you can edit, and a PHP file, which you should not.
+  <p>Menu options can be tweaked under <a href="menu.php">Manage Menus</a> after generating the page.</p>
+  <form id="form1" name="form1" method="post" action="do.add.item.php">
+  <table width="550" border="0">
+    <tr>
+      <td>Menu item name</td>
+      <td><input name="title" type="text" id="title" size="35" /></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td><input type="radio" value="1" name="menug" checked>
+        Main Only<br>
+        <input type="radio" value="2" name="menug">
+        Members Area Only<br>
+        <input type="radio" value="3" name="menug">
+        Display On Both Menus</td>
+    </tr>
+    <tr>
+      <td colspan="2">&nbsp;</td>
+    </tr>
+    <tr>
+      <td valign="top" colspan="2">File Name: (only letters and numbers, no spaces.)</td>
+    </tr>
+    <tr>
+         <td valign="top" colspan="2"><p><?php echo MWG_BASEHREF ?>/templates/
+          <input name="filename" type="text" id="filename" size="26" onblur="fname.value=this.value;"/>
+          .ag.html
+        </p></td>
+    </tr>        
+    <tr style="visibility: hidden;">
+         <td valign="top" colspan="2">Script: <?php echo MWG_BASEHREF ?>/
+          <input type="text" id="fname" size="12" readonly/>
+          .ag.php<br />
+          (autocreated)
+        </td>
+    </tr>
+
+    <tr>
+      <td colspan="2">&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan="2"><textarea id="contentb" name="contentb" rows=16 cols=70 class="tinymce"></textarea></td>
+    </tr>
+    <tr>
+      <td colspan="2"><input type="submit" name="Submit" value="Generate Page" />
+      </td>
+    </tr>
+  </table>
+</form>
+
+
+<?php ob_start(); ?>
+<p><strong>Tags to be used in templates:</strong></p>
+<p>{tag_list}</p>
+<h2><font size="4">To add payment buttons for your products 
+  these below:<br>
+  </font> <span style="font-weight: 400"><font size="2">On any page that you want 
+  to add a payment button for any product, simply paste this code where you want 
+  the order button to appear to a live visitor.</font></span></h2>
+<div align="center">
+  <center>
+    <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" bordercolor="#076C9F" width="90%">
+      <tr>
+        <td width="100%">{product_list}</td>
+      </tr>
+    </table>
+  </center>
+</div>
+<p>Note: The page will be added to main menu or the member area menu if it is a member area page. <span style="font-weight: 400">The page will also show on your menu if you like. 
+  If you do not want it to display, or only want it to display to certain members, 
+  just go to | <a href="menu.php">Menu</a> | option on the main admin menu above 
+  when finished.</span></p>
+<?php
+  MWG::getInstance()->response->activateSidebar(ob_get_clean()); 
+?>
