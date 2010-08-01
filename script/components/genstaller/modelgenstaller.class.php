@@ -7,7 +7,6 @@ define('UPDATER_VERSION', 22);
 define('UPDATER_MANIFEST', MWGHelper::path(GENSTALL_BASEPATH . '/config/manifest.yml.php'));
 
 require_once ('isnclient/utils.inc.php');
-require_once ('isnclient/intellispireNetworkClient.class.php');
 require_once ('isnclient/manifest.class.php');
 
 class simpleClient {
@@ -63,19 +62,6 @@ class modelGenstaller {
   var $manifest;
 
   function getClient() {
-    /*
-    $registry = mwgDataRegistry::getInstance();
-
-    if ($this->client) return $client;
-
-    $repository = UPDATER_SERVER;
-    $channels   = 'bfm'; // $registry->get('channels'); //'bfm';
-    $isnid      = '257-dw8ws-N1-rn2r9bzv'; // '5-ruzqq-N1-fgtwg6gm'; // $registry->get('isnid');
-    $machnineid = 0; // $registry->get('machineid');
-
-    $client = new intellispireNetworkClient($repository, $channels, $isnid, $machineid);
-    */    
-
     $client = new simpleClient();
     return $client;
   }
