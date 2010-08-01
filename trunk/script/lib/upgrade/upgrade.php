@@ -18,7 +18,7 @@
 * Needs to be very fast as it will be run on every call
 */
 
-define('MWG_DB_VERSION', '1.4');
+define('MWG_DB_VERSION', '1.5');
 
 // upgrade_test();
 
@@ -52,17 +52,6 @@ function upgrade(mysqldb $db) {
 
   # perform upgrade
   include('upgrade13.php');
-
-  /* The upgrade process is now idempotent 
-  $lock = $db->get_value('select value from settings where name=?', 'lock');
-  if ($lock > 1) return $db_version;
-
-  if ($lock == 1) {
-    $db->query('update settings set value=2 where name=?', 'lock');
-  } else {
-    $db->query("insert into settings (box_type, name, value) values ('hidden', 'lock', 2)");
-  }
-  */
 
   upgrade_tables($db);
   run_upgrade($db, 'settings.txt', 'on duplicate key update id=id');

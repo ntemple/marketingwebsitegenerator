@@ -75,6 +75,12 @@ class modelGizmo {
     return self::$gizmos;
   }
 
+  /**
+  * put your comment there...
+  * 
+  * @param mixed $position
+  * @return mwgBaseGizmo
+  */
   function getGizmosFor($position) {
     $db = MWG::getInstance()->getDb();
     $gizmos = array();

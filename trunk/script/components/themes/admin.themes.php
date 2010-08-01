@@ -17,7 +17,7 @@
 defined('_MWG') or die ('Restricted Access');
 
 $c     = new comThemes;
-$t->set_var('submenu', $c->submenu);
+$t->set_var('submenu', $c->submenu());
 
 $task = BMGHelper::_req('t', 'view');
 $func = array($c, $task);
@@ -29,9 +29,8 @@ if (is_callable($func)) {
 }
 
 class comThemes {
-
+  
   function submenu() {
-   return 'submenu';
   }
 
   function view($class = '', $msg = '') {

@@ -26,10 +26,17 @@
           $count++;
           $gizmo = $item;
           $edit = "?c={$this->controller_name}&t=details&id=" . $item['id'];
-                  if ($gizmo['active']) 
-          $active = "<font color='green'>Active</font>";
-        else 
-          $active = "<font color='red'>Inactive</font>";                   
+          if ($gizmo['active']) 
+            $active = "<font color='green'>Active</font>";
+          else 
+            $active = "<font color='red'>Inactive</font>"; 
+
+          if ($item['position'] = 'None') {
+            $invocation = '';
+          } else {  
+            $invocation = "[gizmo id='" . $gizmo['id'] . "']";
+          }
+
         ?>        
         <tr>
           <td><?php echo $item['id'] ?></td>
@@ -37,7 +44,7 @@
           <td><?php echo $item['position'] ?></td>
           <td><?php echo $item['ordre'] ?></td>
           <td><?php echo $active ?></td>                
-          <td>[gizmo id='<?php echo $gizmo[id] ?>']</td>
+          <td><?php echo $invocation ?></td>
           <td><a href="<?php echo $edit ?>" class="gt-btn-brown-small gt-btn-left">Edit</a></td>
         </tr>
         <?php        

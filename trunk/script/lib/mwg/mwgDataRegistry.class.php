@@ -44,7 +44,7 @@ class mwgDataRegistry {
 
   // Can we do some sort of locking?
   function write($force = false) {
-    if (!$dirty && !$force) return;
+    if (!$this->dirty && !$force) return;
     $data = array();
     $data['mwg'] = $this->data;
     $this->writeYML($this->path, $data);

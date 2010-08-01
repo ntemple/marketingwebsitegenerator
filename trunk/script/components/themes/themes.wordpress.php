@@ -8,8 +8,7 @@ class mwgWP {
   
   private function __construct() {
     $this->callbacks = array();
-    $this->template_positions = array();
-    
+    $this->template_positions = array();    
   }
   
   static function getInstance() {
@@ -31,7 +30,10 @@ class mwgWP {
   
   function runCallback($class, $name, $out) {
     // 'wpAction', 'wp_list_pages', $menu
+    if (! isset($callback[$class])) return $out;
+    if (! isset($callback[$class][$name])) return $out;
     $events = $this->callbacks[$class][$name];
+
     if (! $events) return $out;
     //@todo sort by priority
     foreach ($events as $callback){
@@ -105,6 +107,15 @@ function dynamic_sidebar($which = 1) {
   sbutil::trace();
   $name = 'Sidebar' . $which;
   
+  $args = mwgWP::getInstance()->template_positions['Sidebar'.$which];
+  return MWG::getTheme()->renderGizmos($name, $args);
+//  return true;
+}
+
+function Xdynamic_sidebar($which = 1) {
+  sbutil::trace();
+  $name = 'Sidebar' . $which;
+  
   $model = new modelGizmo();
   $gizmos = $model->getGizmosFor($name);
   if (count($gizmos) == 0) return true;
@@ -116,6 +127,8 @@ function dynamic_sidebar($which = 1) {
   }
   return true;
 }
+
+
 
 
 /** sidebars, menu positions */
@@ -563,7 +576,7 @@ function wp_meta() {
 
 function get_sidebar() {
   sbutil::trace();
-  mwg_wp_find_template('sidebar', $name);
+  mwg_wp_find_template('sidebar');
 }
 
 function get_header($name = null) {

@@ -19,7 +19,7 @@ class mwgDocument {
 
   var $head;            // array of extra headers
   var $title;           // current title
-  var $meta_descripton; // current description
+  var $meta_description; // current description
   var $meta_keywords;   // keywords
   var $before_body_end; // code to add before the body end
 

@@ -9,3 +9,4 @@ ALTER TABLE levels MODIFY value decimal(8,2) NOT NULL DEFAULT '0.00';
 ALTER TABLE levels MODIFY jv1 decimal(8,2) NOT NULL DEFAULT '0.00';
 ALTER TABLE levels MODIFY jv2 decimal(8,2) NOT NULL DEFAULT '0.00';
 ALTER TABLE mwg_setting DROP INDEX name_2;
+ALTER TABLE `mwg_gizmo` ADD `display_title` INT NOT NULL AFTER `title` , ADD`display_group` VARCHAR( 255 ) NOT NULL  AFTER `display_title` , ADD `display_hidden` INT NOT NULL AFTER `display_group`;

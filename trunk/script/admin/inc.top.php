@@ -13,8 +13,15 @@
  * See COPYRIGHT.php for copyright notices and details.
  */
 
- 
 require_once("inc.all.php");
+$session = MWG::getSession();
+if (! $session->isAdmin()) {
+  header("location: login.php");
+  exit();  
+}
+
+
+/*
 if (!$admin_sess_id)
 {
 	header("location:login.php");
@@ -25,10 +32,11 @@ if (isset($admin_sess_id))
 	if ($admin_sess_id!=md5(get_setting("secret_string")."-".ADMIN_PASSWORD))
 	{
 		session_destroy();
-		header("location:login.php");
+		header("location: login.php");
 		die();
 	}
 }
+*/
 
 // Some scripts are calling this from the
 // front-end without proper initialization

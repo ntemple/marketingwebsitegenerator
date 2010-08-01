@@ -51,7 +51,7 @@ class basicClass /* extends Object */ {
      $response->_template = $template;
   }
 
-
+/*
   function _buildtemplate($tpl) {
        sabrayla_log("_buildtemplate($tpl)");
        $outfile  = THEME_DIR . '/default/' . $this->_template;
@@ -63,7 +63,7 @@ class basicClass /* extends Object */ {
          }
     }
 
-
+*/
 }
 
 class defaultClass extends basicClass {
@@ -77,7 +77,7 @@ class defaultClass extends basicClass {
   # Here are our default SQL templates
   var $_sql_list = 'select * from {table}';
 
-  function doView(&$request, &$response) {
+  function doView(mwgRequest $request, mwgResponse $response) {
      $this->doListView($request, $response);
   }
 
@@ -96,7 +96,7 @@ class defaultClass extends basicClass {
     return true;  # success
   }
 
-  function doListView(&$request, &$response) {
+  function doListView(mwgRequest $request, mwgResponse $response) {
         $response->_template = $this->_class . '_list.tpl.html';
         $this->_buildtemplate($request, $response, 'list.tpl.html');
 
@@ -106,7 +106,7 @@ class defaultClass extends basicClass {
 
   }
 
-  function _buildtemplate(&$request, &$response, $tpl) {
+  function _buildtemplate(mwgRequest $request, mwgResponse $response, $tpl) {
 
      if (! file_exists('templates/' . $response->_template) && AUTOBUILD) {
   	  	$ctx = new Context('templates/default', CACHE);
@@ -125,7 +125,7 @@ class defaultClass extends basicClass {
 
   }
 
-  function doReadView(&$request, &$response) {
+  function doReadView(mwgRequest $request, mwgResponse $response) {
   	  $response->_template = $this->_class . '_read.tpl.html';
   	  $this->_buildtemplate($request, $response, 'read.tpl.html');
 
@@ -135,7 +135,7 @@ class defaultClass extends basicClass {
       }
   }
 
-  function doCreateView(&$request, &$response) {
+  function doCreateView(mwgRequest $request, mwgResponse $response) {
   	  $response->_template = $this->_class . '_create.tpl.html';
   	  $this->_buildtemplate($request, $response, 'create.tpl.html');
 
@@ -145,7 +145,7 @@ class defaultClass extends basicClass {
       }
   }
 
-  function doCreateStore(&$request, &$response) {
+  function doCreateStore(mwgRequest $request, mwgResponse $response) {
     // TODO: Sanity checks
     $id = $request->db->store($this->_table, $request->req, $this->_pkey);
     $response->id = $id;
@@ -153,7 +153,7 @@ class defaultClass extends basicClass {
     return true;
   }
 
-  function doDeleteView(&$request, &$response) {
+  function doDeleteView(mwgRequest $request, mwgResponse $response) {
   	  $response->_template = $this->_class . '_delete.tpl.html';
   	  $this->_buildtemplate($request, $response, 'delete.tpl.html');
 
@@ -163,7 +163,7 @@ class defaultClass extends basicClass {
       }
   }
 
-  function doDeleteStore(&$request, &$response) {
+  function doDeleteStore(mwgRequest $request, mwgResponse $response) {
     if ($request->req['id'] != '') {
         $request->db->query_rw('delete from ' . $this->_table . ' where id=? limit 1', $request->req['id']);
     }

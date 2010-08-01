@@ -8,9 +8,9 @@
     <tbody>
       <?php foreach($items as $item) { 
           if (! isset($item->preview)) {
-//            $item->preview = 'media/images/gt/avatar.gif';
             $item->preview = 'media/images/icons/blank.png';
           }  
+          if (!isset($item->descrption)) $item->description = '';
         ?>
        <tr>
         <td class="gt-avatar"><a href="<?php echo $item->preview ?>" class="lightbox"><img src="<?php echo $item->preview ?>"  width="53" height="53"></a></td>

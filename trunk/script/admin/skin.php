@@ -21,7 +21,7 @@ $t->set_file("main", "content.html");
 $t->set_var("sitename", SITENAME);
 $t->set_var("year", date("Y"));
 $ocontent=$t->parse("page", "content");
-if ($notemplate)
+if (isset($notemplate) && $notemplate)
 {
   if ($from) 
   {

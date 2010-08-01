@@ -203,7 +203,7 @@
 	$q->next_record();
 	$cmember=str_replace("{total}",number_format($q->f("n"),2),$cmember);
 	$cmember=str_replace("{currency}",get_setting('paypal_currency'),$cmember);
-	$cmember=str_replace("{id}",$sess_id,$cmember);
+//	$cmember=str_replace("{id}",$sess _ id,$cmember);  sess.id is undefined here
 	$cmember=str_replace("{rows}",$rows,$cmember);
 	$cmember=str_replace("{action}",$action,$cmember);
 	$cmember=str_replace("{sitename}",$sitename,$cmember);

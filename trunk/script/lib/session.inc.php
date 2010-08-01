@@ -25,3 +25,22 @@ function mwg_session_destroy() {
   @session_destroy();
 }
 
+class mwgSession {
+  
+  static function isAdmin() {
+    if (!isset($_SESSION['admin_sess_id'])) return false;
+    
+    if ($_SESSION['admin_sess_id'] == md5(get_setting("secret_string")."-".ADMIN_PASSWORD)) {
+      return true; // We're logged in
+    } else {
+      // We've been spoofed
+      mwg_session_destroy();
+      return false();
+    } 
+  }
+  
+  static function isLoggedIn() {
+    if (isset($_SESSION['sess_id'])) return true;
+  }
+     
+} 

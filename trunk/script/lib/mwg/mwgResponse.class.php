@@ -23,6 +23,7 @@ class mwgResponse extends Context {
 
   var $_head;
   var $_success = null;
+  var $message = ''; 
   
   var $layout_body_class  = 'gt-fixed';
   var $layout_menu_class  = 'sf-navbar';
@@ -216,6 +217,8 @@ function decorate($response) {
   }
   $response->getFlash();
   }
+  
+  
   // $submenu = $t->get_var('submenu');
 
   $gs = BMGenStaller::getInstance();
@@ -234,11 +237,12 @@ function decorate($response) {
   $response->menu = $gs->getStandardMenuItems($select_menu);
   $response->li_menu = $gs->getMainMenu($select_menu);
 
-
+/*
   if (!$submenu) {
     $path = MWG_BASE . '/admin/templates/submenu/admin.main.'. $select_menu . ".html";
     if (file_exists($path)) $response->submenu = file_get_contents($path);
   }
+*/
 
   $response->newmessages = MWG::getDb()->get_value('select count(*) from messages where member_id=1 and read_flag=0');
   $response->sitename = MWG::getInstance()->get_setting("site_name");

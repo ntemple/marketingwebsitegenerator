@@ -12,6 +12,7 @@
  * other free or open source software licenses.
  * See COPYRIGHT.php for copyright notices and details.
  */
+    
     if (file_exists('install')) {
       if (!file_exists('install/.svn')) {
         header('Location: install/index.php');
@@ -33,6 +34,15 @@
     }
     $q3 = new CDb();
     $q2 = new CDb();
+ 
+    /* @todo: test getAffiliate */   
+    $aff = getAffiliate();
+    if ($aff) {
+      header("Location: index.php");
+      exit();
+    }
+
+ /*    
     $affiliate_var = get_setting("affiliate_variable");
     $affiliate_var2 = get_setting("old_aff");
     $ar_host = parse_url(get_setting("site_full_url"));
@@ -45,7 +55,8 @@
     if ($_GET[$affiliate_var] != "" || $_GET[$affiliate_var2] != "") {
         header("Location: index.php");
     }
- 
+*/
+
     $t->set_file("content", "homepage.html");
     if (get_setting("index_signup")) {
         if (get_setting("free_signup") == 1) {

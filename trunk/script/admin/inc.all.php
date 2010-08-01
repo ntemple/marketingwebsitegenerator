@@ -13,7 +13,6 @@
  * See COPYRIGHT.php for copyright notices and details.
  */
 
-define('_MWG', true);
 require_once('../lib/init.inc.php');
 require_once("inc.db_mysql.php");
 require_once("inc.template.php");
