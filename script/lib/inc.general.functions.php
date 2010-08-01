@@ -152,7 +152,7 @@
     if ($item['open_new_window'] == 1) {
       $target = "target='_blank'";
     }            
-    return "<a href='{$item[link]}' $target>{$item['name']}</a>";
+    return "<a href='{$item['link']}' $target>{$item['name']}</a>";
   }
 
   /**********************************
@@ -793,3 +793,21 @@
       $q4->query($query);			
     }
   }
+  
+  function getAffiliate() {
+    $req = MWG::getRequest();
+    
+    $affiliate_var = get_setting("affiliate_variable");
+    $affiliate_var2 = get_setting("old_aff");
+    $ar_host = parse_url(get_setting("site_full_url"));
+    $host = $ar_host["host"];
+    $path = $ar_host["path"];
+    $host = str_replace("www", "", $host);
+    $aff = $req->get($affiliate_var) ? $req->get($affiliate_var) : $req->get($affiliate_var2);
+    if ($aff) {
+        setcookie("aff", $aff, time()+9999999, $path, $host);
+    }
+    return $aff;
+  }
+  
+  

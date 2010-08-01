@@ -29,7 +29,7 @@
  * 
  */
 
-require_once('nusoap/nusoap.php');
+# require_once('nusoap/nusoap.php');
 require_once('utilSignature.class.php');
 require_once('isnid.class.php');
 require_once('utils.inc.php');

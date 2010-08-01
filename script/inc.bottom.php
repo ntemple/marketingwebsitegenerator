@@ -70,15 +70,15 @@ if (isset($sess_id)) {
 		$t->set_var("menu", stripslashes(generate_main_menu()));
 	}
 }
+
+
 if (get_setting("enable_bm_aff_link") != 0) {
-	if (get_setting("enable_bm_aff_link") == 1)
 	$t->set_var("bm_aff_link", "Site powered by <a href='".get_setting("bm_aff_link")."' target=_blank>MarketingWebsiteGenerator.com</a>");
-	if (get_setting("enable_bm_aff_link") == 1 && $sess_id)
-	$t->set_var("bm_aff_link", "Site powered by <a href='".get_setting("bm_aff_link")."' target=_blank>MarketingWebsiteGenerator.com</a>");
-	if (get_setting("enable_bm_aff_link") == 1 && !$sess_id)
-	$t->set_var("bm_aff_link", "Site powered by <a href='".get_setting("bm_aff_link")."' target=_blank>MarketingWebsiteGenerator.com</a>");
-}else
-$t->set_var("bm_aff_link", "");
+} else {
+  $t->set_var("bm_aff_link", "");  
+}
+
+
 $ocontent = $t->parse("page", "content");
 if (isset($sess_id)) {
 	$q3->query("SELECT aff FROM members WHERE id='".$member_id."'");

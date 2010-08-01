@@ -1,17 +1,17 @@
 <?php
 /**
- * @version    $Id$
- * @package    MWG
- * @copyright  Copyright (C) 2010 Intellispire, LLC. All rights reserved.
- * @license    GNU/GPL v2.0, see LICENSE.txt
- *
- * Marketing Website Generator is free software. 
- * This version may have been modified pursuant
- * to the GNU General Public License, and as distributed it includes or
- * is derivative of works licensed under the GNU General Public License or
- * other free or open source software licenses.
- * See COPYRIGHT.php for copyright notices and details.
- */
+* @version    $Id$
+* @package    MWG
+* @copyright  Copyright (C) 2010 Intellispire, LLC. All rights reserved.
+* @license    GNU/GPL v2.0, see LICENSE.txt
+*
+* Marketing Website Generator is free software. 
+* This version may have been modified pursuant
+* to the GNU General Public License, and as distributed it includes or
+* is derivative of works licensed under the GNU General Public License or
+* other free or open source software licenses.
+* See COPYRIGHT.php for copyright notices and details.
+*/
 
 class modelThemes {
   var $themes     = null;
@@ -26,7 +26,7 @@ class modelThemes {
     $this->theme = $default;
     $this->listThemes();   
   }
-    
+
   function switchThemes($theme) {
     if (isset($this->themes[$theme])) {
       $this->theme = $theme;
@@ -34,7 +34,7 @@ class modelThemes {
     } else {      
       setcookie('theme', '', -1);
     }
-  
+
   }
 
   function listDir($base) {
@@ -51,13 +51,13 @@ class modelThemes {
     return $dirs;
   }
 
-    
+
   function listThemes() {
     if ($this->themes) return $this->themes;
-    
+
     $this->themes = array ('bfm' => 'bfm');
     $base = MWG_BASE . '/themes/';
-    
+
     $dirs = $this->listDir($base);
     sort($dirs);
     foreach ($dirs as $file) {
@@ -65,10 +65,10 @@ class modelThemes {
       if (file_exists("$base/$file/screenshot.png"))      $this->themes[$file] = 'wordpress';      
       if (file_exists("$base/$file/main.html"))           $this->themes[$file] = 'mwg';
     }
-    
+
     return $this->themes;    
   }
-  
+
   function getThemes() {
     $base = MWG_BASE . '/themes';
     $themes = array();    
@@ -83,13 +83,13 @@ class modelThemes {
     }
     return $themes;
   }
-  
+
   function process(Template $tpl, $theme = '') {    
-          
+
     if (! $theme) {
       $theme = $this->theme;
     } 
-    
+
     if (isset($this->themes[$theme])) {
       $theme_type = $this->themes[$theme];
     } else {
@@ -104,7 +104,7 @@ class modelThemes {
     $this->current_theme_href = MWG_BASEHREF . '/themes/' . $theme;;
     $this->current_theme_path = $this->themedir;
     $this->current_theme_type = $theme_type;
-        
+
     switch($theme_type) {
       case 'wordpress': $out = $this->processWordpress(); break;
       case 'joomla':    $out = $this->processJoomla(); break;
@@ -113,13 +113,13 @@ class modelThemes {
     }    
     return $out;
   }
-  
+
   function processDefault(Template $tpl, mwgDocument $document) {
     $mwg = MWG::getInstance();
-    
+
     $tpl->set_var('document_title', $document->getTitle());
-//    $tpl->set_var('document_head',  $document->getHead());
-    
+    //    $tpl->set_var('document_head',  $document->getHead());
+
     ob_start();
     $tpl->pparse("out", "main"); 
     $out = ob_get_clean();
@@ -127,9 +127,9 @@ class modelThemes {
   }
 
   function processWordpress() {    
-    define(TEMPLATEPATH, $this->themedir);
+    define('TEMPLATEPATH', $this->themedir);
     ob_start();
-    
+
     // handle the theme
     require_once("themes.wordpress.php");
     if (file_exists("{$this->themedir}/functions.php")) {
@@ -155,17 +155,36 @@ class modelThemes {
 
   function processMWG(Template $tpl, mwgDocument $document) {
     $mwg = MWG::getInstance();
-// Too late to do this
-//    $tpl->addpath($this->themedir . '/templates');  
+    // Too late to do this
+    //    $tpl->addpath($this->themedir . '/templates');  
     $tpl->set_var('document_title', $document->getTitle());
 
     ob_start();
     $tpl->pparse("out", "main");
     $out = ob_get_clean();
     return $out;
-
+  }
+  
+  function countGizmos($name) {
+    sbutil::trace();
+    $model = new modelGizmo();
+    $gizmos = $model->getGizmosFor($name);    
+    return count($gizmos);        
   }
 
+  function renderGizmos($name, $args) {
+    sbutil::trace();
+    $model = new modelGizmo();
+    $gizmos = $model->getGizmosFor($name);    
+
+    $out = '';
+    
+    foreach ($gizmos as $gizmo) {
+      if ($gizmo->hasRenderAsWidget()) 
+        $out .= $gizmo->render_as_widget($args);
+    }
+    return $out;
+  }
 
 }
 

@@ -31,6 +31,12 @@ class mwgBaseGizmo {
   var $params; 
   var $data;
   var $active;
+  
+  var $ordre;
+  var $position;
+  var $display_title;
+  var $display_group;
+  var $display_hidden;
 
   /**
   * Constructor called with serialized
@@ -43,7 +49,19 @@ class mwgBaseGizmo {
     $this->identity = $identity;
     $this->id = '';
   }
-
+  
+  function hasAdminDisplay() {
+    return method_exists($this, 'getAdminForm');
+  }
+  
+  function hasRender() {
+    return method_exists($this, 'render');
+  }
+  
+  function hasRenderAsWidget() {
+    return $this->hasRender();
+  }  
+  
   // Override the below methods to add functionality
 
   /* Modify these functions */
@@ -59,7 +77,7 @@ class mwgBaseGizmo {
   * @param array $atts associative array of attributes from the database
   * @return string
   */
-
+/*
   function getAdminForm($atts = array()) {
     
     $fields = $this->getFields();
@@ -69,7 +87,7 @@ class mwgBaseGizmo {
 
     return "<div>\n$out</div>\n";
   }
-
+*/
 
   /**
   * The main routine to display the gizmo.
@@ -82,7 +100,7 @@ class mwgBaseGizmo {
   *
   * @param mixed $atts shortcode style attributes if called via [gizmo id="x"]
   */
-
+/*
   function render($atts) {
     $data = shortcode_atts($this->params, $atts);
     extract($data);
@@ -91,7 +109,7 @@ class mwgBaseGizmo {
 
     return $out;
   }
-
+*/
 
   /**
   * Render a Gizmo similiar to to a wordpress widget
@@ -108,15 +126,20 @@ class mwgBaseGizmo {
   * 
   * @param mixed $atts
   */
+  
   function render_as_widget($atts) {
+    // No title to display
+    if (!$this->display_title) return $this->render($atts);
+    
+    ob_start();
     if (isset($atts['before_title'])) echo $atts['before_title'];
     echo $this->title;
     if (isset($atts['after_title'])) echo $atts['after_title'];
     if (isset($atts['before_widget'])) echo $atts['before_widget'];
     echo $this->render($atts);
     if (isset($atts['after_widget'])) echo $atts['after_widget'];
+    return ob_get_clean();
   }
-
 
   /* 
   * Events model.  override to hook into appropriate events
@@ -268,7 +291,6 @@ class mwgBaseGizmo {
       $this->title  = $gizmo_mf['title'];
       $this->active = 0;
     }
-
     return $this;
   }
 

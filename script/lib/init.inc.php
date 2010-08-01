@@ -13,11 +13,11 @@
 * See COPYRIGHT.php for copyright notices and details.
 */
 
-define('_MWG', true);
-define('_SB_VALID_', true);
+if (!defined('_MWG')) define('_MWG', true);
+define('_SB_VALID_', true);                                
 
 require_once('session.inc.php');
-
+                    
 // Session timeout 1 hour. 
 // This should be a setting or in constants
 ini_set('session.gc_maxlifetime', 60*60);
@@ -29,11 +29,8 @@ define('MWG_LIB',    MWG_BASE . '/lib');
 define('GENSTALL_BASEPATH', MWG_BASE);
 define('GENSTALL_BFPATH', MWG_BASE);
 
-
-// @todo remove all references to the genstaller patch (code now in core)
-
 // Find basehref for self-referencing URL's
-$parts = split('/', $_SERVER['SCRIPT_NAME']);
+$parts = explode('/', $_SERVER['SCRIPT_NAME']);
 
 $self = array_pop($parts);
 $admin = array_pop($parts);
@@ -49,7 +46,6 @@ if ($admin == 'admin') {
 $href = implode('/', $parts);
 
 define('MWG_BASEHREF', 'http://' . $_SERVER["HTTP_HOST"] . $href);
-define('GENSTALL_URLROOT', MWG_BASEHREF);
 define('WP_PLUGIN_DIR', MWG_BASE . '/plugins');
 define('WP_PLUGIN_URL', MWG_BASEHREF . '/plugins');
 
@@ -80,7 +76,7 @@ ini_set('include_path', $path);
 * Dump magic_quotes
 */
 
-set_magic_quotes_runtime(0);
+if (0) set_magic_quotes_runtime(0);
 if( get_magic_quotes_gpc() ) {
   stripslashes_deep($_GET);
   stripslashes_deep($_POST);
@@ -103,27 +99,6 @@ require_once('mail.class.php');       // Provide Mail
 require_once('isnclient/spyc.php');   // Provide core YML parsing
 require_once('upgrade/upgrade.php');
 
+$notemplate = false; // define here until we can completely rebuild legacy template system
 MWG::getInstance();
-
-/**
-* We really need to get the register globals taken care of 
-*/
-function unregister_globals()
-{
-  $register_globals = @ini_get('register_globals');
-  if ($register_globals === "" || $register_globals === "0" || strtolower($register_globals) === "off"){return;}
-
-  if (isset($_REQUEST['GLOBALS']) || isset($_FILES['GLOBALS'])) die(); // {die() /* exit('It\'s not going to be so easy hacker!!'); */}
-  $no_unset = array('GLOBALS', '_GET', '_POST', '_COOKIE', '_REQUEST', '_SERVER', '_ENV', '_FILES');
-
-  $input = array_merge($_GET, $_POST, $_COOKIE, $_SERVER, $_ENV, $_FILES, isset($_SESSION) && is_array($_SESSION) ? $_SESSION : array());
-  foreach ($input as $k => $v)
-  {
-    if (!in_array($k, $no_unset) && isset($GLOBALS[$k]))
-    {
-      unset($GLOBALS[$k]);
-      unset($GLOBALS[$k]);    // Double unset to circumvent the zend_hash_del_key_or_index hole in PHP <4.4.3 and <5.1.4
-    }
-  }
-}
 

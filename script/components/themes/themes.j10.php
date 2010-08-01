@@ -6,13 +6,18 @@ define( '_VALID_MOS', true );
 $mwg = MWG::getInstance();
 
 global $mainframe;
+global $my;
 global $mosConfig_live_site;
 global $cur_template;
 global $sitename; // Todo: lookup
+global $mosConfig_sitename;
 
 $mosConfig_live_site = MWG_BASEHREF;
 $cur_template        = $mwg->theme->current_theme;
 $sitename            = $mwg->site_name;
+$mosConfig_sitename  = $sitename;
+
+if (!defined('_ISO')) DEFINE('_ISO','charset=iso-8859-1');
 
 function mosShowHead() {
   $mwg = MWG::getInstance(); 
@@ -24,13 +29,12 @@ function mosShowHead() {
 function mosPathWay() {
 }
 
-function mosLoadModules() {
-
+function mosLoadModules($position, $display_type = '') {  
+  print MWG::getTheme()->renderGizmos($position, array()) ;
 }
 
-function mosCountModules() {
-  return 0;
-
+function mosCountModules($position) {
+  return MWG::getTheme()->countGizmos($position);
 }
 
 function mosMainBody() {
@@ -45,11 +49,13 @@ function mosMainMenu() {
 
 
 class MOS {
+  function getCfg($var) {    
+    return (isset($GLOBALS[$var])) ?$GLOBALS[$var] : '';
+  }  
+}
 
-  function getCfg($var) {
-    return $GLOBALS[$var];
-  }
-  
+class mwgMOSUser {
+  var $id = 0;
 }
 
 function mosCurrentDate() {
@@ -58,6 +64,6 @@ function mosCurrentDate() {
 function mosLoadComponent() {
 }
 
-
+$my = new mwgMOSUser();
 $mainframe = new MOS();
 

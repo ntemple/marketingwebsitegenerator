@@ -78,9 +78,10 @@
     }
 
     function view(mwgRequest $request, mwgResponse $response) {
-      if ($msg) {
-        MWGHelper::setFlash($class, $msg);
-      }
+// @todo: fix, $msg is out of scope
+//      if ($msg) {
+//        MWGHelper::setFlash($class, $msg);
+//      }
       $db = MWG::getInstance()->getDb();
       $gizmos = $db->get_results('select * from mwg_gizmo');
       
@@ -105,11 +106,26 @@
       $gizmo = $this->model->gizmoFactory($identity);    
       $gizmo->hydrate($row);
 
+      $check_active_1 = '';
+      $check_active_0 = '';
+      
       if ($gizmo->active) {    
         $check_active_1 = 'checked';
       } else {
         $check_active_0 = 'checked';
       }
+      
+      
+      if ($gizmo->display_title) {    
+        $check_display_title_1 = 'checked';
+        $check_display_title_0 = '';
+      } else {
+        $check_display_title_1 = '';
+        $check_display_title_0 = 'checked';
+      }
+      
+      
+      
       $select_position = array( $gizmo->position => 'selected');
       
       include('admin.gizmo.details.php');
@@ -129,6 +145,9 @@
     $gizmo->active   = $request->get('active', 0);
     $gizmo->position = $request->get('position', 'Invocation');
     $gizmo->ordre    = $request->get('ordre', 0);
+    $gizmo->display_title  = $request->get('display_title', 0);
+    $gizmo->display_group  = $request->get('display_group', '');
+    $gizmo->display_hidden = $request->get('display_hidden', 0);
 
         
     if ($id) $gizmo->id = $id;

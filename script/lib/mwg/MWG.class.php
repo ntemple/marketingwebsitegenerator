@@ -21,7 +21,7 @@ class MWG {
   /** @var Template */
   var $template;  // BFM's template system
 
-  /** @var modleTheme */
+  /** @var modelTheme */
   var $theme;
 
   /** @var WMGDataRegistry */
@@ -36,6 +36,9 @@ class MWG {
   /** @var mwgSetting */
   var $settings;
 
+  /** @var mwgSession */
+  var $session;
+
   // $this->BASEHREF =  MWG_BASEHREF;
 
   #  var $theme      = 'computer1';  // The name of the theme
@@ -45,6 +48,7 @@ class MWG {
   private function __construct() {
     $this->request  = new mwgRequest();
     $this->response = new mwgResponse();
+    $this->session  = new mwgSession(); // Could be a factory
 
     $this->registry = mwgDataRegistry::getInstance();    
 
@@ -68,15 +72,64 @@ class MWG {
 
     $this->loadPlugins();
   }
+  
+  /**
+  * @returns MWG $mwg
+  */
 
   static function getInstance() {
     static $instance;
+    
+    if (!$instance) {
+      $instance = new MWG();
+    }
 
-    if ($instance) return $instance;
-
-    $instance = new MWG();
     return $instance;
   }
+
+  /**
+  * @returns mysqldb $db
+  */
+  static function getDb() {
+    static $db;
+
+    if (!$db) {
+      $db = new mysqldb();
+      $db->connect(DB_HOST, DB_NAME, DB_USER, DB_PASSWORD);
+      $db->connect();
+    }
+
+    return $db;
+  }
+
+  /**
+  * @returns mwgSession $session 
+  */
+  static function getSession() {
+    return MWG::getInstance()->session;
+  }
+
+  /**
+  * @returns mwgRequest 
+  */
+  static function getRequest() {
+    return MWG::GetInstance()->request;    
+  }
+  /**
+  * @returns mwgResponse
+  */
+
+  static function getResponse() {
+    return MWG::GetInstance()->response;
+  }
+  
+  /**
+  * @returns modelThemes
+  */
+  static function getTheme() {
+    return MWG::getInstance()->theme;
+  }
+
 
   function loadPlugins() {
     // Load ALL the plugins.  
@@ -97,22 +150,6 @@ class MWG {
         if ($ext == 'php') include(MWG_BASE . "/plugins/$ptype/$plugin/$file");
       }
     }
-  }
-
-  /**
-  * put your comment there...
-  * @returns mysqldb $db
-  */
-  function getDb() {
-    static $db;
-
-    if ($db) return $db;
-
-    $db = new mysqldb();
-    $db->connect(DB_HOST, DB_NAME, DB_USER, DB_PASSWORD);
-    $db->connect();
-
-    return $db;
   }
 
   function listFiles($base) {
@@ -180,12 +217,12 @@ class MWG {
 
     $content = $this->theme->process($tpl);
 
-    $this->runEvent('beforeDoShortcode', array($this->document, $content));
+    $this->runEvent('beforeDoShortcode', array($this->document, &$content));
 
     // Apply shortcode filter
     $content = do_shortcode($content); 
 
-    $this->runEvent('beforeDocumentRender', array($this->document, $content));
+    $this->runEvent('beforeDocumentRender', array($this->document, &$content));
     // Set the code in the document, and render
     $this->document->setContent($content);
     $page = $this->document->renderDocument();
@@ -272,6 +309,7 @@ class MWG {
   function getTitle() {
     return $this->document->getTitle();
   }         
+
   /**
   * @todo Optimize by loading all settings, once
   * 
@@ -281,10 +319,10 @@ class MWG {
   function get_setting($setting_name, $default = null) {
     static $settings = array();
     static $nsettings = array();
-    
+
     if (isset($settings[$setting_name])) return $settings[$setting_name];
     if (isset($nsettings[$setting_name])) return $default;
-    
+
     // Can't find it!
     $value = $this->_get_setting($setting_name);
     if ($value == null) {
@@ -293,10 +331,10 @@ class MWG {
     } else {
       $settings[$setting_name] = $value;
     }    
-    
+
     return $value;
   }
-  
+
   function _get_setting($setting_name, $default = null)
   {
     /* check MWG settings, first */
@@ -314,18 +352,18 @@ class MWG {
   }
 
   static function is_logged_in() {
-/*
+    /*
     $admin_logged_in = false;
     if (isset($_SESSION['admin_sess_id']) && $_SESSION['admin_sess_id'] == md5($mwg->get_setting("secret_string")."-".ADMIN_PASSWORD))
     {
-      $admin_logged_in = true;
+    $admin_logged_in = true;
     } else {
-      session_destroy();
-      header("location:login.php");
-      die();
+    session_destroy();
+    header("location:login.php");
+    die();
     }
     return $admin_logged_in();
-*/    
+    */    
 
     if (isset($_SESSION['sess_id'])) {
       return true;
@@ -351,4 +389,21 @@ function mwg_shortcode_gizmo($atts) {
     return $gizmo->render($atts);
   }
 }
+
+/**
+* Displays a group of modules
+* 
+* @todo Refactor to themeing engine
+* 
+* @param mixed $atts
+*/
+function mwg_shortcode_gposition($atts) {
+   $position = $atts['name'];
+   if (!$position) return;
+   return MWG::getTheme()->renderGizmos($position, $atts);
+}
+
 add_shortcode('gizmo', 'mwg_shortcode_gizmo');
+add_shortcode('gposition', 'mwg_shortcode_gposition');
+
+

@@ -1,10 +1,25 @@
-<h2 class="gt-form-head">Gizmo Params</h2>
+<?php 
+  /** @var mwgBaseGizmo */
+  $gizmo = $gizmo; // For IDE autocompletion
+?>
 <form method="post" action="controller.php?">
   <input type="hidden" name="c" value="<?php echo $this->controller_name ?>">
   <input type="hidden" name="t" value="gizmo_store">
   <input type="hidden" name="identity" value="<?php echo $gizmo->identity ?>">
   <input type="hidden" name="id" value="<?php echo $gizmo->id ?>">
 
+  <input type="submit" name= "cmd_save"  class="gt-btn-green-small gt-btn-left" value="Save">
+  <input type="submit" name= "cmd_apply" class="gt-btn-green-small gt-btn-left" value="Apply">
+
+<br>
+<br>  
+<br>
+<br>
+  
+  
+
+<h2 class="gt-form-head">Gizmo Params</h2>
+  
   <div class="gt-form gt-content-box">
 
     <div class="clearfix">
@@ -31,13 +46,28 @@
       <div class="gt-right-col">
         <!-- form row -->
         <div class="gt-form-row gt-width-66 clearfix">
-          <label>Position</label>
+<?php if ($gizmo->hasRenderAsWidget())  { ?>         
+          <!-- form row -->
+          <div class="gt-form-row gt-width-66">
+            <label>Display Title</label>
+            <label class="gt-form-element-label"><input type="radio" name="display_title" class="gt-form-radio" value="1" <?php echo $check_display_title_1 ?>> Yes</label>
+            <label class="gt-form-element-label"><input type="radio" name="display_title" class="gt-form-radio" value="0" <?php echo $check_display_title_0 ?>> No</label>            
+          </div><!-- /form row -->      
+
+
+          <label>Display Position</label>
           <select name="position">
             <option <?php if (isset($select_position['Invocation'])) echo 'selected'; ?>>Invocation</option>
             <option <?php if (isset($select_position['Sidebar1']))   echo 'selected'; ?>>Sidebar1</option>
             <option <?php if (isset($select_position['Sidebar2']))   echo 'selected'; ?>>Sidebar2</option>
+            <option <?php if (isset($select_position['right']))      echo 'selected'; ?>>right</option>
+            <option <?php if (isset($select_position['left']))       echo 'selected'; ?>>left</option>
           </select>
-
+          
+          
+<?php }  else { ?>
+          <input type="hidden" name="position" value="None" />
+<? } ?>
           <!-- form row -->
           <div class="gt-form-row gt-width-66">
             <label>Order</label>
@@ -48,14 +78,14 @@
     </div>
   </div>  
 
-
+<?php if ($gizmo->hasAdminDisplay()) { ?>
   <h2 class="gt-form-head">Details</h2>
   <div class="gt-form gt-content-box">
     <div class="clearfix">
       <?php echo $gizmo->getAdminForm($gizmo->params) ?>
     </div>
   </div>
-
+<?php } ?>
 
   <input type="submit" name= "cmd_save"  class="gt-btn-green-small gt-btn-left" value="Save">
   <input type="submit" name= "cmd_apply" class="gt-btn-green-small gt-btn-left" value="Apply">

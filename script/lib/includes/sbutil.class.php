@@ -129,7 +129,7 @@ class sbutil {
         $file     = $place['file'];
         $function = $place['function'];
         $line     = $here['line'];
-        $class    = $place['class'];
+        $class    = isset($place['class']) ? $place['class'] : '' ;
         $args     = serialize($place['args']);
         
         $out .= $file . " - ";

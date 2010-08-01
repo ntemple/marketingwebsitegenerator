@@ -157,5 +157,3 @@ class exampleGizmo extends mwgBaseGizmo {
 
 }
 
-
-

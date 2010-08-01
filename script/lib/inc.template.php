@@ -13,7 +13,6 @@
  * See COPYRIGHT.php for copyright notices and details.
  */
 
-
 /*
  * Session Management for PHP3
  *
@@ -471,6 +470,8 @@ class Template
       }
     }
   }
+
+
  /******************************************************************************
   * This function fills in all the variables contained within the variable named
   * $varname. The resulting value is returned as the function result and the
@@ -498,12 +499,20 @@ class Template
     // quote the replacement strings to prevent bogus stripping of special chars
     reset($this->varvals);
     while(list($k, $v) = each($this->varvals)) {
+      if (is_array($v)) {
+        $v = implode(' ', $v); // NLT to fix submenu
+      }
       $varvals_quoted[$k] = preg_replace(array('/\\\\/', '/\$/'), array('\\\\\\\\', '\\\\$'), $v);
     }
     $str = $this->get_var($varname);
+
+//    print_r($str);
+
     $str = preg_replace($this->varkeys, $varvals_quoted, $str);
     return $str;
   }
+  
+  
  /******************************************************************************
   * This is shorthand for print $this->subst($varname). See subst for further
   * details.
