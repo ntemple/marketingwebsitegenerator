@@ -18,7 +18,7 @@ defined('_MWG') or die ('Restricted Access');
 /**
 * base class for gizmos.
 */
-class mwgBaseGizmo {
+abstract class mwgBaseGizmo {
 
   /** @var MWG */
   var $mwg;  
@@ -65,6 +65,9 @@ class mwgBaseGizmo {
   // Override the below methods to add functionality
 
   /* Modify these functions */
+  abstract function getName();
+
+  
 
   function getFields() {
     return array(
@@ -207,15 +210,6 @@ class mwgBaseGizmo {
     return add_shortcode($shortcode, array($this, $method));
   }
   
-  
-  function getName() { return 'example';  
-    $i = $this->identity;
-    $i = str_replace('mwg.gizmos.', '', $i);
-    $i = str_replace('Gizmo', '', $i);
-    return $i;
-  }
-
-
   function generateAdminForm($fields, $params, $generator = true) {
     $out = '';
     $name = $this->getName();
