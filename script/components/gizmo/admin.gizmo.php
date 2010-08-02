@@ -69,9 +69,6 @@
     }
 
     function shownew(mwgRequest $request, mwgResponse $response) {
-      if ($msg) {
-        MWGHelper::setFlash($class, $msg);
-      }
       $gizmos_mf = $this->model->listGizmos();    
       
       require_once('admin.gizmo.shownew.php');
