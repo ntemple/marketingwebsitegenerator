@@ -16,12 +16,11 @@
 
 defined('_MWG') or die ('Restricted Access');
 
-define('UPDATER_SERVER',  'http://www.intellispire.com/network/server51/soap.php');
-define('UPDATER_VERSION', 22);
-define('UPDATER_MANIFEST', MWGHelper::path(GENSTALL_BASEPATH . '/config/manifest.yml.php'));
+# define('UPDATER_SERVER',  'http://www.intellispire.com/network/server51/soap.php');
+# define('UPDATER_VERSION', 22);
+# define('UPDATER_MANIFEST', MWGHelper::path(GENSTALL_BASEPATH . '/config/manifest.yml.php'));
 
 require_once (MWGHelper::path(GENSTALL_BASEPATH . '/lib/isnclient/utils.inc.php'));
-require_once (MWGHelper::path(GENSTALL_BASEPATH . '/lib/isnclient/intellispireNetworkClient.class.php'));
 require_once (MWGHelper::path(GENSTALL_BASEPATH . '/lib/isnclient/manifest.class.php'));
 require_once ('modelgenstaller.class.php');
 
