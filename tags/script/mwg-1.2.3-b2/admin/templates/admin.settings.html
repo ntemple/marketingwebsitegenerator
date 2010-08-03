@@ -1,0 +1,148 @@
+<body onLoad="{chck_funtions}">
+<script>
+function view_stats_fct(id1,id2){
+	if (document.getElementById('view_stats').checked){
+		document.getElementById('view_stats_chk_tr').style.display='';
+	}else{
+		document.getElementById('view_stats_chk_tr').style.display='none';
+	}
+}
+function jv_custom_fct(id1,id2){
+	if (document.getElementById('jv_custom').checked){
+		document.getElementById('jv_custom_memberships_tr').style.display='';
+	}else{
+		document.getElementById('jv_custom_memberships_tr').style.display='none';
+	}
+}
+function email_downline_fct(id1,id2){
+	if (document.getElementById('send_mail').checked){
+		document.getElementById('tb_'+id1).style.display='';
+		document.getElementById('tb_'+id2).style.display='';
+	}else{
+		document.getElementById('tb_'+id1).style.display='none';
+		document.getElementById('tb_'+id2).style.display='none';
+	}
+}
+function view_downline_fct(id){
+	if (document.getElementById('view_downline').checked){
+		document.getElementById('tb_'+id).style.display='';
+	}else{
+		document.getElementById('tb_'+id).style.display='none';
+	}
+}
+function free_signup_fct(id){
+	if (document.getElementById('free_signup').checked){
+		document.getElementById('tb_'+id).style.display='none';
+	}else{
+		document.getElementById('tb_'+id).style.display='';
+	}
+}
+function ipblocker_fct(id){
+	if (document.getElementById('ipblocker').checked){
+		document.getElementById('tb_'+id).style.display='';
+	}else{
+		document.getElementById('tb_'+id).style.display='none';
+	}
+}
+function accept_paypal_fct(id1,id2,id3){
+	if (document.getElementById('accept_paypal').checked){
+		document.getElementById('tb_'+id1).style.display='';
+		document.getElementById('tb_'+id2).style.display='';
+		document.getElementById('tb_'+id3).style.display='';
+	}else{
+		document.getElementById('tb_'+id1).style.display='none';
+		document.getElementById('tb_'+id2).style.display='none';
+		document.getElementById('tb_'+id3).style.display='none';
+	}
+}
+function accept_clickbank_fct(id1,id2,id3,id4){
+	if (document.getElementById('accept_clickbank').checked){
+		document.getElementById('tb_'+id1).style.display='';
+		document.getElementById('tb_'+id2).style.display='';
+		document.getElementById('tb_'+id3).style.display='';
+		document.getElementById('tb_'+id4).style.display='';
+	}else{
+		document.getElementById('tb_'+id1).style.display='none';
+		document.getElementById('tb_'+id2).style.display='none';
+		document.getElementById('tb_'+id3).style.display='none';
+		document.getElementById('tb_'+id4).style.display='none';
+	}
+}
+function accept_2co_fct(id1,id2,id3){
+	if (document.getElementById('accept_2co').checked){
+		document.getElementById('tb_'+id1).style.display='';
+		document.getElementById('tb_'+id2).style.display='';
+		document.getElementById('tb_'+id3).style.display='';
+	}else{
+		document.getElementById('tb_'+id1).style.display='none';
+		document.getElementById('tb_'+id2).style.display='none';
+		document.getElementById('tb_'+id3).style.display='none';
+	}
+}
+function accept_auth_fct(id1,id2,id3,id4,id5,id6,id7,id8,id9){
+	if (document.getElementById('accept_auth').checked){
+		document.getElementById('tb_'+id1).style.display='';
+		document.getElementById('tb_'+id2).style.display='';
+		document.getElementById('tb_'+id3).style.display='';
+		document.getElementById('tb_'+id4).style.display='';
+		document.getElementById('tb_'+id5).style.display='';
+		document.getElementById('tb_'+id6).style.display='';
+		document.getElementById('tb_'+id7).style.display='';
+		document.getElementById('tb_'+id8).style.display='';
+		document.getElementById('tb_'+id9).style.display='';
+	}else{
+		document.getElementById('tb_'+id1).style.display='none';
+		document.getElementById('tb_'+id2).style.display='none';
+		document.getElementById('tb_'+id3).style.display='none';
+		document.getElementById('tb_'+id4).style.display='none';
+		document.getElementById('tb_'+id5).style.display='none';
+		document.getElementById('tb_'+id6).style.display='none';
+		document.getElementById('tb_'+id7).style.display='none';
+		document.getElementById('tb_'+id8).style.display='none';
+		document.getElementById('tb_'+id9).style.display='none';
+	}
+}
+function jv_custom_fct(id1){
+	if (document.getElementById('jv_custom').checked){
+		document.getElementById('jv_custom_memberships_tr').style.display='';
+	}else{
+		document.getElementById('jv_custom_memberships_tr').style.display='none';
+	}
+}
+</script>
+<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th scope="row" colspan="3"><div align="left">
+        <h2><font color="#076C9F">Main Settings<br>
+          </font><span style="font-weight: 400"><strong style="font-weight: 400"> <font size="2">Use this section to manage the main setup functions of your 
+          site.</font></strong></span></h2>
+        <p><font size="1"><a target="_self" href="#Password">Password</a></font></p>
+        <form name="form1" method="post" action="do.setting.changes.php">
+          <table width="100%"  border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td><p align="center">
+                  <input name="save1" type="submit" id="save0" value="Save Changes">
+                  <br>
+                  <a href="index.php"><font size="1">Cancel all changes</font></a></p>
+                <p>{settings_list}{table_close}</p></td>
+            </tr>
+          </table>
+          <p align="center">
+            <input name="save" type="submit" id="save" value="Save Changes">
+            <br>
+            <span style="font-weight: 400"><a href="index.php"><font size="1"> Cancel all changes</font></a></span></p>
+          <p> <font size="1"><font color="#FFFFFF"><a name="Password"> <span style="background-color: #FF0000">Password</span></a><span style="background-color: #FF0000"> -</span></font><span style="font-weight: 400"> Your password was 
+            created by you when you installed the script or you gave it to your 
+            installer for him to install for you. </span>If you have forgotten 
+            your password<span style="font-weight: 400"> here is what you need to 
+            do to retrieve it. Use a FTP Client to connect to the server and 
+            folder (/public_html/site_name) where you have the script installed. 
+            Go to Folder config. There you will find a file named constants.php. 
+            Look for the line that looks like this: define(&quot;ADMIN_PASSWORD&quot;, 
+            &quot;password&quot;); // database password. If you change that password in that 
+            file, this will be the new password you need to login in the future.</span></font></p>
+        </form>
+      </div></th>
+  </tr>
+</table>
+</body>
