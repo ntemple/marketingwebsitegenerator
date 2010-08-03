@@ -1,0 +1,22 @@
+<form name="form1" method="post" action="do.menu.advanced.settings.changes.php?id={item_id}">
+  <table width="400" border="0" cellspacing="0" cellpadding="0">
+    <tr bgcolor="#EFEFEF">
+      <td width="400"><strong>Activate Menu Live</strong></td>
+    </tr>
+    <tr>
+      <td><input name="active" type="checkbox" id="active" value="1" {activechecked}>
+        Check to Activate - Uncheck to Deactivate</td>
+    </tr>
+    <tr bgcolor="#EFEFEF">
+      <td><strong>Open in new window: </strong></td>
+    </tr>
+    <tr>
+      <td><input name="open_new_window" type="checkbox" id="open_new_window" value="1" {openchecked}>
+        Check to open in new window</td>
+    </tr>
+    <tr>
+      <td><input type="submit" name="Submit" value="Change Settings">
+        <input type="button" name="Submit2" value="Close window" onClick="window.self.close()"></td>
+    </tr>
+  </table>
+</form>

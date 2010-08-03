@@ -1,0 +1,10 @@
+{table_close}
+<input type='checkbox' name='cat_{name}' id='cat_{name}' style='display:none'>
+<tr>
+  <td name="tr_cat_{name}" id="tr_cat_{name}" valign="middle"><h3>
+      <label for="tr_cat_{name}" style='cursor:pointer;' onClick="if (document.getElementById('cat_{name}').checked==true) {document.getElementById('cat_{name}').checked=false;document.getElementById('expand_{name}').src='../images/plus.gif'} else{document.getElementById('cat_{name}').checked=true;document.getElementById('expand_{name}').src='../images/minus.gif'}display_tr(document.getElementById('cat_{name}'))"><img src="../images/plus.gif" id='expand_{name}' align="middle"/>&nbsp;</label>
+      <label for="tr_cat_{name}" style='cursor:pointer; text-decoration:underline;color:#0000FF;' onClick="if (document.getElementById('cat_{name}').checked==true) {document.getElementById('cat_{name}').checked=false;document.getElementById('expand_{name}').src='../images/plus.gif'} else{document.getElementById('cat_{name}').checked=true;document.getElementById('expand_{name}').src='../images/minus.gif'}display_tr(document.getElementById('cat_{name}'))">{setting_category}</label>
+    </h3></td>
+</tr>
+<tr name='cat_{name}_td' id='cat_{name}_td'>
+  <td colspan="3">

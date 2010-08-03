@@ -1,0 +1,37 @@
+<form name="form1" method="post" action="do.menu.advanced.settings.changes.php?id={item_id}">
+  <table width="400" border="0" cellspacing="0" cellpadding="0">
+    <tr bgcolor="#EFEFEF">
+      <td colspan="2"><strong>Show to: </strong></td>
+    </tr>
+    <tr>
+      <td width="21"><input name="radiobutton" type="radio" value="all" {allchecked} onclick="document.getElementById('membership').checked ? document.getElementById('membership').style.display='' : document.getElementById('membership').style.display='none'"></td>
+      <td width="379">All Members </td>
+    </tr>
+    <tr>
+      <td><input name="radiobutton" type="radio" value="just" {justchecked} onclick="document.getElementById('membership').checked ? document.getElementById('membership').style.display='none' : document.getElementById('membership').style.display=''"></td>
+      <td>Just these:</td>
+    </tr>
+    <tr>
+      <td height="19">&nbsp;</td>
+      <td id="membership" style="display:{visibility}">{membership_list}</td>
+    </tr>
+    <tr bgcolor="#EFEFEF">
+      <td colspan="2"><strong>Activate Menu Live</strong></td>
+    </tr>
+    <tr>
+      <td colspan="2"><input name="active" type="checkbox" id="active" value="1" {activechecked}>
+        Check to Activate - Uncheck to Deactivate</td>
+    </tr>
+    <tr bgcolor="#EFEFEF">
+      <td colspan="2"><strong>Open in new window: </strong></td>
+    </tr>
+    <tr>
+      <td colspan="2"><input name="open_new_window" type="checkbox" id="open_new_window" value="1" {openchecked}>
+        Check to open in new window</td>
+    </tr>
+    <tr>
+      <td colspan="2"><input type="submit" name="Submit" value="Change Settings">
+        <input type="button" name="Submit2" value="Close window" onClick="window.self.close()"></td>
+    </tr>
+  </table>
+</form>

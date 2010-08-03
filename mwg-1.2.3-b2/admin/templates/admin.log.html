@@ -1,0 +1,219 @@
+<script>
+function dif_date(){
+	var one_day=1000*60*60*24;
+		  	start = new Date(document.form1.year_start.options[document.form1.year_start.selectedIndex].value, document.form1.month_start.options[document.form1.month_start.selectedIndex].value, document.form1.day_start.options[document.form1.day_start.selectedIndex].value);
+		end = new Date(document.form1.year_end.options[document.form1.year_end.selectedIndex].value, document.form1.month_end.options[document.form1.month_end.selectedIndex].value, document.form1.day_end.options[document.form1.day_end.selectedIndex].value);
+	return Math.ceil((end.getTime()-start.getTime())/(one_day));
+}
+function checkedAll_members (checked) {
+	var el = document.form2;
+	for (var i = 0; i < el.elements.length; i++) {
+		  		el.elements[i].checked = checked;
+	}
+}
+	</script>
+<div align="center">
+  <center>
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" bordercolor="#111111" style="border-collapse: collapse">
+      <tr>
+        <td valign="top"><form method="post" enctype="multipart/form-data" name="form1">
+            <p><font size="5" color="#076C9F"><b>Payment Log</b></font></p>
+            <table width="98%" border="0" align="center" cellpadding="2" cellspacing="0">
+              <tr>
+                <td><input type="checkbox" value='1' name="date" />
+                  Search from date </td>
+                <td><select name="month_start" id="month_start" onchange="if (dif_date()<0)alert('the end date is prior to the start date by '+dif_date()+' days')">
+                    <option value='01' name='0' >01</option>
+                    <option value='02' name='1' >02</option>
+                    <option value='03' name='2' selected>03</option>
+                    <option value='04' name='3' >04</option>
+                    <option value='05' name='4' >05</option>
+                    <option value='06' name='5' >06</option>
+                    <option value='07' name='6' >07</option>
+                    <option value='08' name='7' >08</option>
+                    <option value='09' name='8' >09</option>
+                    <option value='10' name='9' >10</option>
+                    <option value='11' name='10' >11</option>
+                    <option value='12' name='11' >12</option>
+                  </select>
+                  /
+                  <select name="day_start" id="day_start" onchange="if (dif_date()<0)alert('the end date is prior to the start date by '+dif_date()+' days')">
+                    <option value='01' name='0' >01</option>
+                    <option value='02' name='1' >02</option>
+                    <option value='03' name='2' >03</option>
+                    <option value='04' name='3' >04</option>
+                    <option value='05' name='4' >05</option>
+                    <option value='06' name='5' >06</option>
+                    <option value='07' name='6' >07</option>
+                    <option value='08' name='7' >08</option>
+                    <option value='09' name='8' >09</option>
+                    <option value='10' name='9' >10</option>
+                    <option value='11' name='10' >11</option>
+                    <option value='12' name='11' >12</option>
+                    <option value='13' name='12' >13</option>
+                    <option value='14' name='13' >14</option>
+                    <option value='15' name='14' >15</option>
+                    <option value='16' name='15' >16</option>
+                    <option value='17' name='16' >17</option>
+                    <option value='18' name='17' >18</option>
+                    <option value='19' name='18'>19</option>
+                    <option value='20' name='19' >20</option>
+                    <option value='21' name='20' >21</option>
+                    <option value='22' name='21' >22</option>
+                    <option value='23' name='22' >23</option>
+                    <option value='24' name='23' >24</option>
+                    <option value='25' name='24' >25</option>
+                    <option value='26' name='25' >26</option>
+                    <option value='27' name='26' >27</option>
+                    <option value='28' name='27' >28</option>
+                    <option value='29' name='28' >29</option>
+                    <option value='30' name='29' >30</option>
+                    <option value='31' name='30' >31</option>
+                  </select>
+                  /
+                  <select name="year_start" id="year_start" onchange="if (dif_date()<0)alert('the end date is prior to the start date by '+dif_date()+' days')">
+                    <option value='2006' name='0' >2006</option>
+                    <option value='2007' name='1' >2007</option>
+                    <option value='2008' name='2' >2008</option>
+                    <option value='2009' name='3' >2009</option>
+                    <option value='2010' name='4' >2010</option>
+                    <option value='2011' name='5' >2011</option>
+                    <option value='2012' name='6' >2012</option>
+                    <option value='2013' name='7' >2013</option>
+                    <option value='2014' name='8' >2014</option>
+                    <option value='2015' name='9' >2015</option>
+                    <option value='2016' name='10' >2016</option>
+                    <option value='2017' name='11' >2017</option>
+                    <option value='2018' name='12' >2018</option>
+                    <option value='2019' name='13' >2019</option>
+                    <option value='2020' name='14' >2020</option>
+                  </select></td>
+                <td>to</td>
+                <td colspan="2"><select name="month_end" id="month_end" onchange="if (dif_date()<0)alert('the end date is prior to the start date by '+dif_date()+' days')">
+                    <option value='01' name='0' >01</option>
+                    <option value='02' name='1' >02</option>
+                    <option value='03' name='2' >03</option>
+                    <option value='04' name='3' >04</option>
+                    <option value='05' name='4' >05</option>
+                    <option value='06' name='5' >06</option>
+                    <option value='07' name='6' >07</option>
+                    <option value='08' name='7' >08</option>
+                    <option value='09' name='8' >09</option>
+                    <option value='10' name='9' >10</option>
+                    <option value='11' name='10' >11</option>
+                    <option value='12' name='11' >12</option>
+                  </select>
+                  /
+                  <select name="day_end" id="day_end" onchange="if (dif_date()<0)alert('the end date is prior to the start date by '+dif_date()+' days')">
+                    <option value='01' name='0' >01</option>
+                    <option value='02' name='1' >02</option>
+                    <option value='03' name='2' >03</option>
+                    <option value='04' name='3' >04</option>
+                    <option value='05' name='4' >05</option>
+                    <option value='06' name='5' >06</option>
+                    <option value='07' name='6' >07</option>
+                    <option value='08' name='7' >08</option>
+                    <option value='09' name='8' >09</option>
+                    <option value='10' name='9' >10</option>
+                    <option value='11' name='10' >11</option>
+                    <option value='12' name='11' >12</option>
+                    <option value='13' name='12' >13</option>
+                    <option value='14' name='13' >14</option>
+                    <option value='15' name='14' >15</option>
+                    <option value='16' name='15' >16</option>
+                    <option value='17' name='16' >17</option>
+                    <option value='18' name='17' >18</option>
+                    <option value='19' name='18' >19</option>
+                    <option value='20' name='19' >20</option>
+                    <option value='21' name='20' >21</option>
+                    <option value='22' name='21' >22</option>
+                    <option value='23' name='22' >23</option>
+                    <option value='24' name='23' >24</option>
+                    <option value='25' name='24' >25</option>
+                    <option value='26' name='25' >26</option>
+                    <option value='27' name='26' >27</option>
+                    <option value='28' name='27' >28</option>
+                    <option value='29' name='28' >29</option>
+                    <option value='30' name='29' >30</option>
+                    <option value='31' name='30' >31</option>
+                  </select>
+                  /
+                  <select name="year_end" id="year_end" onchange="if (dif_date()<0)alert('the end date is prior to the start date by '+dif_date()+' days')">
+                    <option value='2006' name='0' >2006</option>
+                    <option value='2007' name='1' >2007</option>
+                    <option value='2008' name='2' >2008</option>
+                    <option value='2009' name='3' >2009</option>
+                    <option value='2010' name='4' >2010</option>
+                    <option value='2011' name='5' >2011</option>
+                    <option value='2012' name='6' >2012</option>
+                    <option value='2013' name='7' >2013</option>
+                    <option value='2014' name='8' >2014</option>
+                    <option value='2015' name='9' >2015</option>
+                    <option value='2016' name='10' >2016</option>
+                    <option value='2017' name='11' >2017</option>
+                    <option value='2018' name='12' >2018</option>
+                    <option value='2019' name='13' >2019</option>
+                    <option value='2020' name='14' >2020</option>
+                  </select></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" value='1' name="product_chk" />
+                  Search for product </td>
+                <td colspan="3"><select id="product" name="product">
+                    
+						{product_names}
+					
+                  </select></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" value='1' name="txn_chk" />
+                  Search for transaction id </td>
+                <td colspan="3"><input type="text" name="txn"/></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" value='1' name="member_chk" />
+                  Search for Member id </td>
+                <td colspan="3"><input type="text" name="member_id_log"/></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" value='1' name="fraud_chk" />
+                  Search for Fraud Attempt </td>
+              </tr>
+              <tr>
+                <td colspan="4"><br /></td>
+              </tr>
+              <td colspan="4"><input type="submit" value="Search"></td>
+            </table>
+          </form></td>
+      </tr>
+    </table>
+  </center>
+</div>
+<form action="do.delete.log.php" name="form2" method="post">
+  <table width="585" border="0" align="center">
+    <tr>
+      <td bgcolor="#CCCCCC"><b>Id</b></td>
+      <td bgcolor="#CCCCCC"><b>
+        <center>
+          Transaction id
+        </center>
+        </b></td>
+      <td bgcolor="#CCCCCC"><b>Date</b></td>
+      <td bgcolor="#CCCCCC"><b>Product</b></td>
+      <td bgcolor="#CCCCCC" align="center"><strong>Message</strong></td>
+      <td bgcolor="#CCCCCC" align="center"><strong>Member Id</strong></td>
+      <td bgcolor="#CCCCCC" align="center"><strong>IP</strong></td>
+      <td bgcolor="#CCCCCC" align="center"><strong>Fraud Attempt</strong></td>
+      <td bgcolor="#CCCCCC" align="center"><strong>Select</strong></td>
+    </tr>
+    {messages_rows}
+    <tr>
+      <td colspan="5"><input name="select_members" type="button" id="select_members" value="Select All Logs" onclick="checkedAll_members(true);"/>
+        <input name="unselect_members" type="button" id="unselect_members" value="Unselect All Logs" onclick="checkedAll_members(false);"/></td>
+    </tr>
+    <tr>
+      <td colspan="5"><input type="submit" value="Delete Selected" /></td>
+    </tr>
+    <tr> </tr>
+  </table>
+</form>

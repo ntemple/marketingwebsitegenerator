@@ -1,0 +1,63 @@
+<h2><font color="#076C9F">Twitter Tools</font></h2>
+<p> Use this section for adding dynamic Twitter API that allows your affiliates to tweet random 1 time messages that you pre write to look natural on twitter while pulling their affiliate link and placing it in a TinyUrl.com. (You have to check the &quot;Use twitter promoting tool&quot; setting, under general settings menu)</p>
+<script>
+ function makeRequest(url,div) {
+        var http_request = false;
+        if (window.XMLHttpRequest) { // Mozilla, Safari,...
+            http_request = new XMLHttpRequest();
+            if (http_request.overrideMimeType) {
+                http_request.overrideMimeType('text/xml');
+                // See note below about this line
+            }
+        } else if (window.ActiveXObject) { // IE
+            try {
+                http_request = new ActiveXObject("Msxml2.XMLHTTP");
+            } catch (e) {
+                try {
+                    http_request = new ActiveXObject("Microsoft.XMLHTTP");
+                } catch (e) { }
+            }
+        }
+        if (!http_request) {
+            alert('Giving up :( Cannot create an XMLHTTP instance');
+            return false;
+        }
+        http_request.onreadystatechange = function() { alertContents(http_request,div); };
+        http_request.open('GET', url, true);
+		http_request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        http_request.send(null);
+		document.getElementById(div).innerHTML='Searching...';
+    }
+    function alertContents(http_request,div) {
+        if (http_request.readyState == 4) {
+            if (http_request.status == 200) {
+			  document.getElementById(div).innerHTML = http_request.responseText;
+            } else {
+                alert('There was a problem with the request.');
+            }
+        }
+    }
+</script>
+<form action="do.add.twitter.html.php">
+  <p> Add here the HTML code that users see inside members area which will be the front end of the twitter link: </p>
+  <p>This will replace the {aff_twitter_link} tag, so you need to put it in the html where you want this to be displayed.</p>
+  <p><br />
+    <textarea id="twitter_html" name="twitter_html" rows=9 cols=70 class="tinymce">{twitter_html}</textarea></td>
+    <input type="submit" value="Submit" />
+  </p>
+</form>
+<table>
+  <p>Current tweets You've Made : </p>
+  {twitter_rows}
+</table>
+<div id="loading" style="display:"></div>
+<p><br />
+  <br />
+  Add tweet
+  
+  (a maximum of 50 tweets are allowed). Use {aff_tiny_url} tag to be replaced with the member generated TinyUrl affiliate link inside the tweet.</p>
+<form action="do.add.tweet.php">
+  <input type="text" name="tweet" size="85"/>
+  <br />
+  <input type="submit" value="Submit"/>
+</form>

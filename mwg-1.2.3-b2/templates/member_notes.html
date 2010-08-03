@@ -1,0 +1,158 @@
+<script>
+var notes_arr = new Array({notes_arr});
+var curr_day={curr_day_tag};
+var set_day={set_day_tag};
+function mouse_over(id,nr){
+element = document.getElementById(id);
+	if(element.style.backgroundColor!='rgb(0, 51, 255)' && element.style.backgroundColor!='rgb(204, 255, 0)' && document.getElementById('link'+nr).text!='' && nr != curr_day && nr != set_day){
+		element.style.backgroundColor='#00FFFF';
+		element.style.cursor='pointer';
+	}
+		element.style.cursor='pointer';
+}
+function mouse_out(id,nr){
+element = document.getElementById(id);
+	if(element.style.backgroundColor!='rgb(0, 51, 255)' && element.style.backgroundColor!='rgb(204, 255, 0)' && nr != curr_day && nr != set_day){
+		element.style.backgroundColor='#FFFFFF';
+		element.style.color='#000000';
+	}
+}
+var IE = document.all?true:false;
+if (!IE) document.captureEvents(Event.MOUSEMOVE)
+document.onmousemove = getMouseXY;
+var tempX = 0;
+var tempY = 0;
+function getMouseXY(e) {
+if (IE) { // grab the x-y pos.s if browser is IE
+tempX = event.clientX + document.body.scrollLeft;
+tempY = event.clientY + document.body.scrollTop;
+}
+else {  // grab the x-y pos.s if browser is NS
+tempX = e.pageX;
+tempY = e.pageY;
+}  
+if (tempX < 0){tempX = 0;}
+if (tempY < 0){tempY = 0;}  
+document.getElementById('MouseX').value = (tempX+10);
+document.getElementById('MouseY').value = tempY;
+return true;
+}
+ function DivSetVisible(state,nr)
+  {
+   var DivRef = document.getElementById('PopupDiv'+nr);
+   if(state)
+   {
+    DivRef.style.display = "block";
+	DivRef.style.left = document.getElementById('MouseX').value;
+	DivRef.style.top = document.getElementById('MouseY').value;
+   }
+   else
+   {
+    DivRef.style.display = "none";
+   }
+  }
+</script>
+{div}
+<table>
+  <tr>
+    <td valign="top" width="200"><table width="100%">
+        <tr>
+          <input type="hidden" name="MouseX" id="MouseX" value="0" size="4">
+          <input type="hidden" name="MouseY" id="MouseY" value="0" size="4">
+          <td colspan="7"><table border="1" width="100%">
+              <tr>
+                <td align="left" valign="middle"><select name="month" id="month" size="1" onchange="var month = document.getElementById('month').value;window.location='member.area.notes.php?year={year}&day={day}&month='+month;">
+                    
+		{month_select}
+	
+                  </select></td>
+                <td align="right" valign="middle"><select name="year" id="year" size="1" onchange="var year = document.getElementById('year').value;window.location='member.area.notes.php?month={month}&day={day}&year='+year;">
+                    
+		{year_select}
+	
+                  </select></td>
+              </tr>
+              <tr>
+                <td colspan="2" align="center"><strong>{curr_month}&nbsp;{curr_year}</strong></td>
+              </tr>
+              <tr>
+                <td align="left"> {prev_month}</td>
+                <td align="right">&nbsp;{next_month}</td>
+              </tr>
+            </table>
+        <tr>
+          <td align="center" width="14%">Su</td>
+          <td align="center" width="14%">Mo</td>
+          <td align="center" width="14%">Tu</td>
+          <td align="center" width="14%">We</td>
+          <td align="center" width="14%">Th</td>
+          <td align="center" width="14%">Fr</td>
+          <td align="center" width="14%">Sa</td>
+        </tr>
+        <tr>
+          <td id="td1" align="center" style='{bckg_color1}' onmouseover="mouse_over('td1','1');{true1}" onmouseout="mouse_out('td1','1');{false1}" onclick="if (document.getElementById('link1').text!='') window.location='member.area.notes.php?year={year}&month={month}&day={z2}'"><a id='link1' style="{font1}{link_color1}" href="member.area.notes.php?year={year}&month={month}&day={z1}">{z1}</a></td>
+          <td id="td2" align="center" style='{bckg_color2}' onmouseover="mouse_over('td2','2');{true2}" onmouseout="mouse_out('td2','2');{false2}" onclick="if (document.getElementById('link2').text!='')window.location='member.area.notes.php?year={year}&month={month}&day={z2}'"><a id='link2' style="{font2}{link_color2}" href="member.area.notes.php?year={year}&month={month}&day={z2}">{z2}</a></td>
+          <td id="td3" align="center" style='{bckg_color3}' onmouseover="mouse_over('td3','3');{true3}" onmouseout="mouse_out('td3','3');{false3}" onclick="if (document.getElementById('link3').text!='')window.location='member.area.notes.php?year={year}&month={month}&day={z3}'"><a id='link3' style="{font3}{link_color3}" href="member.area.notes.php?year={year}&month={month}&day={z3}">{z3}</a></td>
+          <td id="td4" align="center" style='{bckg_color4}' onmouseover="mouse_over('td4','4');{true4}" onmouseout="mouse_out('td4','4');{false4}" onclick="if (document.getElementById('link4').text!='')window.location='member.area.notes.php?year={year}&month={month}&day={z4}'"><a id='link4' style="{font4}{link_color4}" href="member.area.notes.php?year={year}&month={month}&day={z4}">{z4}</a></td>
+          <td id="td5" align="center" style='{bckg_color5}' onmouseover="mouse_over('td5','5');{true5}" onmouseout="mouse_out('td5','5');{false5}" onclick="if (document.getElementById('link5').text!='')window.location='member.area.notes.php?year={year}&month={month}&day={z5}'"><a id='link5' style="{font5}{link_color5}" href="member.area.notes.php?year={year}&month={month}&day={z5}">{z5}</a></td>
+          <td id="td6" align="center" style='{bckg_color6}' onmouseover="mouse_over('td6','6');{true6}" onmouseout="mouse_out('td6','6');{false6}" onclick="if (document.getElementById('link6').text!='')window.location='member.area.notes.php?year={year}&month={month}&day={z6}'"><a id='link6' style="{font6}{link_color6}" href="member.area.notes.php?year={year}&month={month}&day={z6}">{z6}</a></td>
+          <td id="td7" align="center" style='{bckg_color7}' onmouseover="mouse_over('td7','7');{true7}" onmouseout="mouse_out('td7','7');{false7}" onclick="if (document.getElementById('link7').text!='')window.location='member.area.notes.php?year={year}&month={month}&day={z7}'"><a id='link7' style="{font7}{link_color7}" href="member.area.notes.php?year={year}&month={month}&day={z7}">{z7}</a></td>
+        </tr>
+        <tr>
+          <td id="td8" align="center" style='{bckg_color8}' onmouseover="mouse_over('td8','8');{true8}" onmouseout="mouse_out('td8','8');{false8}" onclick="window.location='member.area.notes.php?year={year}&month={month}&day={z8}'"><a id='link8' style="{font8}{link_color8}" href="member.area.notes.php?year={year}&month={month}&day={z8}">{z8}</a></td>
+          <td id="td9" align="center" style='{bckg_color9}' onmouseover="mouse_over('td9','9');{true9}" onmouseout="mouse_out('td9','9');{false9}" onclick="window.location='member.area.notes.php?year={year}&month={month}&day={z9}'"><a id='link9' style="{font9}{link_color9}" href="member.area.notes.php?year={year}&month={month}&day={z9}">{z9}</a></td>
+          <td id="td10" align="center" style='{bckg_color10}' onmouseover="mouse_over('td10','10');{true10}" onmouseout="mouse_out('td10','10');{false10}" onclick="window.location='member.area.notes.php?year={year}&month={month}&day={z10}'"><a id='link10' style="{font10}{link_color10}" href="member.area.notes.php?year={year}&month={month}&day={z10}">{z10}</a></td>
+          <td id="td11" align="center" style='{bckg_color11}' onmouseover="mouse_over('td11','11');{true11}" onmouseout="mouse_out('td11','11');{false11}" onclick="window.location='member.area.notes.php?year={year}&month={month}&day={z11}'"><a id='link11' style="{font11}{link_color11}" href="member.area.notes.php?year={year}&month={month}&day={z11}">{z11}</a></td>
+          <td id="td12" align="center" style='{bckg_color12}' onmouseover="mouse_over('td12','12');{true12}" onmouseout="mouse_out('td12','12');{false12}" onclick="window.location='member.area.notes.php?year={year}&month={month}&day={z12}'"><a id='link12' style="{font12}{link_color12}" href="member.area.notes.php?year={year}&month={month}&day={z12}">{z12}</a></td>
+          <td id="td13" align="center" style='{bckg_color13}' onmouseover="mouse_over('td13','13');{true13}" onmouseout="mouse_out('td13','13');{false13}" onclick="window.location='member.area.notes.php?year={year}&month={month}&day={z13}'"><a id='link13' style="{font13}{link_color13}" href="member.area.notes.php?year={year}&month={month}&day={z13}">{z13}</a></td>
+          <td id="td14" align="center" style='{bckg_color14}' onmouseover="mouse_over('td14','14');{true14}" onmouseout="mouse_out('td14','14');{false14}" onclick="window.location='member.area.notes.php?year={year}&month={month}&day={z14}'"><a id='link14' style="{font14}{link_color14}" href="member.area.notes.php?year={year}&month={month}&day={z14}">{z14}</a></td>
+        </tr>
+        <tr>
+          <td id="td15" align="center" style='{bckg_color15}' onmouseover="mouse_over('td15','15');{true15}" onmouseout="mouse_out('td15','15');{false15}" onclick="window.location='member.area.notes.php?year={year}&month={month}&day={z15}'"><a id='link15' style="{font15}{link_color15}" href="member.area.notes.php?year={year}&month={month}&day={z15}">{z15}</a></td>
+          <td id="td16" align="center" style='{bckg_color16}' onmouseover="mouse_over('td16','16');{true16}" onmouseout="mouse_out('td16','16');{false16}" onclick="window.location='member.area.notes.php?year={year}&month={month}&day={z16}'"><a id='link16' style="{font16}{link_color16}" href="member.area.notes.php?year={year}&month={month}&day={z16}">{z16}</a></td>
+          <td id="td17" align="center" style='{bckg_color17}' onmouseover="mouse_over('td17','17');{true17}" onmouseout="mouse_out('td17','17');{false17}" onclick="window.location='member.area.notes.php?year={year}&month={month}&day={z17}'"><a id='link17' style="{font17}{link_color17}" href="member.area.notes.php?year={year}&month={month}&day={z17}">{z17}</a></td>
+          <td id="td18" align="center" style='{bckg_color18}' onmouseover="mouse_over('td18','18');{true18}" onmouseout="mouse_out('td18','18');{false18}" onclick="window.location='member.area.notes.php?year={year}&month={month}&day={z18}'"><a id='link18' style="{font18}{link_color18}" href="member.area.notes.php?year={year}&month={month}&day={z18}">{z18}</a></td>
+          <td id="td19" align="center" style='{bckg_color19}' onmouseover="mouse_over('td19','19');{true19}" onmouseout="mouse_out('td19','19');{false19}" onclick="window.location='member.area.notes.php?year={year}&month={month}&day={z19}'"><a id='link19' style="{font19}{link_color19}" href="member.area.notes.php?year={year}&month={month}&day={z19}">{z19}</a></td>
+          <td id="td20" align="center" style='{bckg_color20}' onmouseover="mouse_over('td20','20');{true20}" onmouseout="mouse_out('td20','20');{false20}" onclick="window.location='member.area.notes.php?year={year}&month={month}&day={z20}'"><a id='link20' style="{font20}{link_color20}" href="member.area.notes.php?year={year}&month={month}&day={z20}">{z20}</a></td>
+          <td id="td21" align="center" style='{bckg_color21}' onmouseover="mouse_over('td21','21');{true21}" onmouseout="mouse_out('td21','21');{false21}" onclick="window.location='member.area.notes.php?year={year}&month={month}&day={z21}'"><a id='link21' style="{font21}{link_color21}" href="member.area.notes.php?year={year}&month={month}&day={z21}">{z21}</a></td>
+        </tr>
+        <tr>
+          <td id="td22" align="center" style='{bckg_color22}' onmouseover="mouse_over('td22','22');{true22}" onmouseout="mouse_out('td22','22');{false22}" onclick="window.location='member.area.notes.php?year={year}&month={month}&day={z22}'"><a id='link22' style="{font22}{link_color22}" href="member.area.notes.php?year={year}&month={month}&day={z22}">{z22}</a></td>
+          <td id="td23" align="center" style='{bckg_color23}' onmouseover="mouse_over('td23','23');{true23}" onmouseout="mouse_out('td23','23');{false23}" onclick="window.location='member.area.notes.php?year={year}&month={month}&day={z23}'"><a id='link23' style="{font23}{link_color23}" href="member.area.notes.php?year={year}&month={month}&day={z23}">{z23}</a></td>
+          <td id="td24" align="center" style='{bckg_color24}' onmouseover="mouse_over('td24','24');{true24}" onmouseout="mouse_out('td24','24');{false24}" onclick="window.location='member.area.notes.php?year={year}&month={month}&day={z24}'"><a id='link24' style="{font24}{link_color24}" href="member.area.notes.php?year={year}&month={month}&day={z24}">{z24}</a></td>
+          <td id="td25" align="center" style='{bckg_color25}' onmouseover="mouse_over('td25','25');{true25}" onmouseout="mouse_out('td25','25');{false25}" onclick="window.location='member.area.notes.php?year={year}&month={month}&day={z25}'"><a id='link25' style="{font25}{link_color25}" href="member.area.notes.php?year={year}&month={month}&day={z25}">{z25}</a></td>
+          <td id="td26" align="center" style='{bckg_color26}' onmouseover="mouse_over('td26','26');{true26}" onmouseout="mouse_out('td26','26');{false26}" onclick="window.location='member.area.notes.php?year={year}&month={month}&day={z26}'"><a id='link26' style="{font26}{link_color26}" href="member.area.notes.php?year={year}&month={month}&day={z26}">{z26}</a></td>
+          <td id="td27" align="center" style='{bckg_color27}' onmouseover="mouse_over('td27','27');{true27}" onmouseout="mouse_out('td27','27');{false27}" onclick="window.location='member.area.notes.php?year={year}&month={month}&day={z27}'"><a id='link27' style="{font27}{link_color27}" href="member.area.notes.php?year={year}&month={month}&day={z27}">{z27}</a></td>
+          <td id="td28" align="center" style='{bckg_color28}' onmouseover="mouse_over('td28','28');{true28}" onmouseout="mouse_out('td28','28');{false28}" onclick="window.location='member.area.notes.php?year={year}&month={month}&day={z28}'"><a id='link28' style="{font28}{link_color28}" href="member.area.notes.php?year={year}&month={month}&day={z28}">{z28}</a></td>
+        </tr>
+        <tr>
+          <td id="td29" align="center" style='{bckg_color29}' onmouseover="mouse_over('td29','29');{true29}" onmouseout="mouse_out('td29','29');{false29}" onclick="if (document.getElementById('link29').text!='') window.location='member.area.notes.php?year={year}&month={month}&day={z29}'"><a id='link29' style="{font29}{link_color29}" href="member.area.notes.php?year={year}&month={month}&day={z29}">{z29}</a></td>
+          <td id="td30" align="center" style='{bckg_color30}' onmouseover="mouse_over('td30','30');{true30}" onmouseout="mouse_out('td30','30');{false30}" onclick="if (document.getElementById('link30').text!='') window.location='member.area.notes.php?year={year}&month={month}&day={z30}'"><a id='link30' style="{font30}{link_color30}" href="member.area.notes.php?year={year}&month={month}&day={z30}">{z30}</a></td>
+          <td id="td31" align="center" style='{bckg_color31}' onmouseover="mouse_over('td31','31');{true31}" onmouseout="mouse_out('td31','31');{false31}" onclick="if (document.getElementById('link31').text!='') window.location='member.area.notes.php?year={year}&month={month}&day={z31}'"><a id='link31' style="{font31}{link_color31}" href="member.area.notes.php?year={year}&month={month}&day={z31}">{z31}</a></td>
+          <td id="td32" align="center" style='{bckg_color32}' onmouseover="mouse_over('td32','32');{true32}" onmouseout="mouse_out('td32','32');{false32}" onclick="if (document.getElementById('link32').text!='') window.location='member.area.notes.php?year={year}&month={month}&day={z32}'"><a id='link32' style="{font32}{link_color32}" href="member.area.notes.php?year={year}&month={month}&day={z32}">{z32}</a></td>
+          <td id="td33" align="center" style='{bckg_color33}' onmouseover="mouse_over('td33','33');{true33}" onmouseout="mouse_out('td33','33');{false33}" onclick="if (document.getElementById('link33').text!='') window.location='member.area.notes.php?year={year}&month={month}&day={z33}'"><a id='link33' style="{font33}{link_color33}" href="member.area.notes.php?year={year}&month={month}&day={z33}">{z33}</a></td>
+          <td id="td34" align="center" style='{bckg_color34}' onmouseover="mouse_over('td34','34');{true34}" onmouseout="mouse_out('td34','34');{false34}" onclick="if (document.getElementById('link34').text!='') window.location='member.area.notes.php?year={year}&month={month}&day={z34}'"><a id='link34' style="{font34}{link_color34}" href="member.area.notes.php?year={year}&month={month}&day={z34}">{z34}</a></td>
+          <td id="td35" align="center" style='{bckg_color35}' onmouseover="mouse_over('td35','35');{true35}" onmouseout="mouse_out('td35','35');{false35}" onclick="if (document.getElementById('link35').text!='') window.location='member.area.notes.php?year={year}&month={month}&day={z35}'"><a id='link35' style="{font35}{link_color35}" href="member.area.notes.php?year={year}&month={month}&day={z35}">{z35}</a></td>
+        </tr>
+        {last_days}
+        <tr>
+      </table></td>
+    <td><table width="52%"  border="0" cellspacing="0" cellpadding="0" align="center">
+        <form name="form1" method="post" action="add.note.php?{notes_add}">
+          <tr>
+            <td>Note Subject: </td>
+            <td><input name="subject" type="text" id="subject"></td>
+          </tr>
+          <tr>
+            <td valign="top">Note Body:</td>
+            <td><textarea name="body" cols="40" rows="7" id="body"></textarea></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td valign="top"><input type="submit" name="Submit" value="Add a note"></td>
+          </tr>
+        </form>
+      </table></td>
+  </tr>
+</table>
+<p> {notes} </p>
