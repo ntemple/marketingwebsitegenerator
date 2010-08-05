@@ -46,7 +46,7 @@ class mwgWP {
     $this->template_positions[$which] = $args;
   }
   
-   
+  
 }
 
 class wpCallback {
@@ -106,30 +106,12 @@ if (function_exists('register_sidebars')) {
 function dynamic_sidebar($which = 1) {
   sbutil::trace();
   $name = 'Sidebar' . $which;
-  
-  $args = mwgWP::getInstance()->template_positions['Sidebar'.$which];
-  return MWG::getTheme()->renderGizmos($name, $args);
-//  return true;
-}
 
-function Xdynamic_sidebar($which = 1) {
-  sbutil::trace();
-  $name = 'Sidebar' . $which;
-  
-  $model = new modelGizmo();
-  $gizmos = $model->getGizmosFor($name);
-  if (count($gizmos) == 0) return true;
-  
   $args = mwgWP::getInstance()->template_positions['Sidebar'.$which];
-  
-  foreach ($gizmos as $gizmo) {
-    print $gizmo->render_as_widget($args);
-  }
+  $out = MWG::getTheme()->renderGizmos($name, $args);
+  print $out;
   return true;
 }
-
-
-
 
 /** sidebars, menu positions */
 
@@ -140,12 +122,14 @@ function Xdynamic_sidebar($which = 1) {
 * @param mixed $args
 */
 
-function register_sidebars($number, $args) {
-  
+function register_sidebars($number, $args = array()) {
+ 
+for ($i = 1; $i <= $number; $i++) {
+ 
 $defaults = array(
-  'name'          => sprintf(__('Sidebar %d'), $i ),
-  'id'            => 'sidebar-$i',
-  'before_widget' => '<li id="%1$s" class="widget %2$s">',
+  'name'          => "Sidebar $i",
+  'id'            => "sidebar-$i",
+  'before_widget' => "<li class='widget'>",
   'after_widget'  => '</li>',
   'before_title'  => '<h2 class="widgettitle">',
   'after_title'   => '</h2>' 
@@ -153,10 +137,9 @@ $defaults = array(
   
   $params = array_merge($defaults, $args);
     
-  for ($i = 0; $i < $number; $i++) {
     mwgWP::getInstance()->register_template_position("Sidebar$i", $params);        
   }
-  
+ 
 }
 
 /**
@@ -164,9 +147,11 @@ $defaults = array(
 * 
 * @param mixed $params
 */
-/*
 function register_sidebar($args) {
-  
+  register_sidebars(1, $args);
+}
+/*
+{  
   $defaults = array(
   'name'          => sprintf(__('Sidebar %d'), $i ),
   'id'            => 'sidebar-$i',
@@ -181,11 +166,23 @@ function register_sidebar($args) {
   mwgWP::getInstance()->register_template_position($params['name'], $params);  
 }
 */
-
   
 
+function add_custom_background(){
+  sbutil::trace();
+}
 
+function wp_tag_cloud() {
+  sbutil::trace();
+}
 
+function is_archive() {
+  sbutil::trace();
+}
+
+function get_the_excerpt() {
+  sbutil::trace();
+}
 
 
 function single_post_title() {
@@ -243,8 +240,21 @@ function get_option($name) {
 }
 
 
+function get_avatar() {
+   sbutil::trace();
+}
+
+function is_tag() {
+  sbutil::trace();
+}
+
 function bloginfo($var = 'name') {
   print get_bloginfo($var);
+}
+
+
+function get_settings($var) {
+  return get_bloginfo($var);
 }
 
 function get_bloginfo($var = 'name') {
@@ -345,6 +355,10 @@ function wp_footer() {
 }
 
 function get_search_form() {
+  sbutil::trace();
+}
+
+function get_posts() {
   sbutil::trace();
 }
 
@@ -622,4 +636,8 @@ function mwg_wp_load_template($path) {
 // print "<b>LOADING: $path</b><br>\n";
         require_once($path);
 }
+
+// @todo implement generic search features
+//  if (defined('MWG_HAS_SEARCH')) (show search form with "s" as query)
+//
 
