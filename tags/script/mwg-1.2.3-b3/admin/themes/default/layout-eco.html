@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Marketing Website Generator</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+    <meta http-equiv="Pragma" content="no-cache" />
+
+    <!-- Load jQuery -->
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("jquery", "1");
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="media/css/superfish.css" media="screen">
+    <script type="text/javascript" src="media/js/hoverIntent.js"></script>
+    <script type="text/javascript" src="media/js/superfish.js"></script>
+
+
+    <link rel="stylesheet" href="media/css/reset-fonts.css" type="text/css" media="screen, projection" />
+    <link rel="stylesheet" href="media/css/gt-styles.css" type="text/css" media="screen, projection" />
+    <link rel="stylesheet" href="media/css/override.css" type="text/css" media="screen, projection" />
+    <link rel="stylesheet" href="media/css/custom.css" type="text/css" media="screen, projection" />
+    <script src="media/js/functions.js" language="javascript" type="text/javascript"></script>
+
+    <script type="text/javascript">
+      // initialise plugins
+      jQuery(function(){
+        jQuery('ul.sf-menu').superfish(/*{ 
+        hoverClass:    'sfHover',          // the class applied to hovered list items 
+        pathClass:     'overideThisToUse', // the class you have applied to list items that lead to the current page 
+        pathLevels:    1,                  // the number of levels of submenus that remain open or are restored using pathClass 
+        delay:         800,                // the delay in milliseconds that the mouse can remain outside a submenu without it closing 
+        animation:     {opacity: 'show' },   // an object equivalent to first parameter of jQuery’s .animate() method animation:     {opacity:'show'},           
+        speed:         'fast',             // (normal) speed of the animation. Equivalent to second parameter of jQuery’s .animate() method 
+        autoArrows:    true,               // if true, arrow mark-up generated automatically = cleaner source code at expense of initialisation performance 
+        dropShadows:   true,               // completely disable drop shadows by setting this to false 
+        disableHI:     false,              // set to true to disable hoverIntent detection 
+        onInit:        function(){},       // callback function fires once Superfish is initialised – 'this' is the containing ul 
+        onBeforeShow:  function(){},       // callback function fires just before reveal animation begins – 'this' is the ul about to open 
+        onShow:        function(){},       // callback function fires once reveal animation completed – 'this' is the opened ul 
+        onHide:        function(){}        // callback function fires after a sub-menu has closed – 'this' is the ul that just closed 
+        } */ );
+      });
+    </script>                
+
+    {head:h}
+  </head>
+  <body class="gt-fixed">
+    <!-- head -->
+    <div class="gt-hd clearfix">
+      <!-- leaf watermark -->
+      <div class="gt-leaf-watermark clearfix">
+
+        <!-- head top -->
+        <div class="gt-hd-top clearfix">
+
+          <div class="gt-fixed-wrap clearfix">
+
+            <!-- logo -->
+            <div class="gt-logo">
+              Marketing Website Generator <img class="gt-leaf" src="media/images/leaf-logo-icon.png" alt="leaf-logo-icon" width="49" height="44"/>
+            </div>
+            <!-- / logo -->
+
+            <!-- utility box -->
+            <div class="gt-util-box">
+              <div class="gt-util-box-inner">
+                <p ><a href="controller.php?c=updates">MWG {version}</a> <span class="gt-util-separator">|</span> 
+                  <a href="helpdesk.php?menu=help">Help Desk({newmessages})</a> <span class="gt-util-separator">|</span>
+                  <a href="{MWG_BASEHREF:h}" target="_blank">Preview</a><span class="gt-util-separator">|</span>  
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <a href="logout.php">Logout</a> 
+                </p>                  
+
+              </div>
+            </div>
+            <!-- / utility box -->
+
+          </div>
+
+        </div><!-- /head top -->
+
+        <!-- navbar -->
+        <div class="gt-navbar clearfix">
+
+          <div class="gt-fixed-wrap clearfix">
+
+            <!-- navigation -->
+            <div class="gt-nav">
+              <ul>
+                {li_menu:h}
+              </ul>
+              <!--            
+              <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a class="gt-active" href="base.html">Base HTML</a></li>
+              <li><a href="tables.html">Tables</a></li>
+              <li><a href="forms.html">Forms</a></li>
+              <li><a href="text-styles.html">Text Styles</a></li>
+              <li><a href="buttons.html">Buttons</a></li>
+              <li><a href="login.html">Login</a></li>
+              </ul>
+              -->              
+
+              <ul class="sf-menu">
+                <li class="current">
+                  <a href="#a">menu item</a>
+                  <ul>
+                    <li>
+                      <a href="#aa">menu item that is quite long</a>
+                    </li>
+                    <li class="current">
+                      <a href="#ab">menu item</a>
+                      <ul>
+                        <li class="current"><a href="#">menu item</a></li>
+                        <li><a href="#aba">menu item</a></li>
+                        <li><a href="#abb">menu item</a></li>
+                        <li><a href="#abc">menu item</a></li>
+                        <li><a href="#abd">menu item</a></li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a href="#">menu item</a>
+                      <ul>
+                        <li><a href="#">menu item</a></li>
+                        <li><a href="#">menu item</a></li>
+                        <li><a href="#">menu item</a></li>
+                        <li><a href="#">menu item</a></li>
+                        <li><a href="#">menu item</a></li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a href="#">menu item</a>
+                      <ul>
+                        <li><a href="#">menu item</a></li>
+                        <li><a href="#">menu item</a></li>
+                        <li><a href="#">menu item</a></li>
+                        <li><a href="#">menu item</a></li>
+                        <li><a href="#">menu item</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="#">menu item</a>
+                </li>
+                <li>
+                  <a href="#">menu item</a>
+                  <ul>
+                    <li>
+                      <a href="#">menu item</a>
+                      <ul>
+                        <li><a href="#">short</a></li>
+                        <li><a href="#">short</a></li>
+                        <li><a href="#">short</a></li>
+                        <li><a href="#">short</a></li>
+                        <li><a href="#">short</a></li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a href="#">menu item</a>
+                      <ul>
+                        <li><a href="#">menu item</a></li>
+                        <li><a href="#">menu item</a></li>
+                        <li><a href="#">menu item</a></li>
+                        <li><a href="#">menu item</a></li>
+                        <li><a href="#">menu item</a></li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a href="#">menu item</a>
+                      <ul>
+                        <li><a href="#">menu item</a></li>
+                        <li><a href="#">menu item</a></li>
+                        <li><a href="#">menu item</a></li>
+                        <li><a href="#">menu item</a></li>
+                        <li><a href="#">menu item</a></li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a href="#">menu item</a>
+                      <ul>
+                        <li><a href="#">menu item</a></li>
+                        <li><a href="#">menu item</a></li>
+                        <li><a href="#">menu item</a></li>
+                        <li><a href="#">menu item</a></li>
+                        <li><a href="#">menu item</a></li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a href="#">menu item</a>
+                      <ul>
+                        <li><a href="#">menu item</a></li>
+                        <li><a href="#">menu item</a></li>
+                        <li><a href="#">menu item</a></li>
+                        <li><a href="#">menu item</a></li>
+                        <li><a href="#">menu item</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="#">menu item</a>
+                </li>  
+              </ul>
+
+            </div><!-- / navigation -->
+
+            <!-- search -->
+            <!--
+            <div class="gt-search"><div class="gt-search-inner">
+            <input type="text" class="gt-search-text" value="Search" onfocus="javascript:if(this.value=='Search')this.value='';" onblur="javascript:if(this.value=='')this.value='Search';" />
+            </div></div>
+            -->				
+          </div>
+
+        </div><!-- /navbar -->			
+      </div><!-- /leaf watermark -->
+    </div>
+    <!-- / head -->
+
+    <!-- body -->
+    <div class="gt-bd gt-cols clearfix">
+      <!-- main content -->
+      <div class="gt-content">
+        {content:h}        
+      </div>
+      <!-- / main content -->
+
+      <!-- sidebar -->
+      <div class="gt-sidebar">
+
+        <!-- SIDEBAR CONTENT GOES HERE -->
+        <!-- This sidebar is optional - to remove, just delete the gt-cols class from the gt-bd div tag. Then delete the 
+        gt-sidebar div -->
+        <p>Sidebar Content</p>
+
+      </div>
+      <!-- / sidebar -->
+
+    </div>
+    <!-- / body -->
+
+
+    <!-- footer -->
+    <div class="gt-footer"><div class="gt-footer-inner">
+        <p>Copyright &copy; 2010 Gooey Templates - <a href="http://www.gooeytemplates.com" target="_blank">GooeyTemplates.com</a></p>
+      </div></div>
+    <!-- /footer -->
+  </body>
+</html>
