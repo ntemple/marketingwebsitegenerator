@@ -15,7 +15,7 @@
 
 
   include("inc.top.php");
-  if ($nogd==1) {?> <script language="Javascript"> alert("GD library is not installed/enabled .Signup Setting using graphics cannot be enabled");</script> <?php }
+  if (isset($nogd) && $nogd==1) {?> <script language="Javascript"> alert("GD library is not installed/enabled .Signup Setting using graphics cannot be enabled");</script> <?php }
   $q2=new Cdb;
   $chck_funtions = '';
   $t->set_file("content", "admin.settings.html");
@@ -442,13 +442,17 @@
     if ($q->f("box_type")=="select" && $q->f("name") == "blockfor"){
       $id_blockfor = $q->f('id');
       if (!$ipblocker_chk) $t->set_var("disp_".$q->f('id'),'none');
+      for($i = 1; $i < 6; $i++) {
+        $varname = "sel$i";
+        $$varname = '';
+      }
       $a="sel".$q->f("value");	
       $$a="selected";
       $set = '<select name="'.$q->f("name").'" >';
-      $set .= '<option value="1" '.$sel1.'>With in 1 hour</option>';
-      $set .= '<option value="2" '.$sel2.'>With in 1 day</option>';
-      $set .= '<option value="3" '.$sel3.'>With in 2 days</option>';
-      $set .= '<option value="4" '.$sel4.'>With in 1 month</option>';
+      $set .= '<option value="1" '.$sel1.'>Within 1 hour</option>';
+      $set .= '<option value="2" '.$sel2.'>Within 1 day</option>';
+      $set .= '<option value="3" '.$sel3.'>Within 2 days</option>';
+      $set .= '<option value="4" '.$sel4.'>Within 1 month</option>';
       $set .= '<option value="5" '.$sel5.'>Ever</option>';
 
       $set .= '</select>';

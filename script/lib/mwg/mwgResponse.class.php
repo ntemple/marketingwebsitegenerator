@@ -35,7 +35,7 @@ class mwgResponse extends Context {
   
 
   function __construct() {
-    parent::__construct(MWG_ADMIN . '/themes/default/', MWG_BASE . '/tmp/tcache/');
+    parent::__construct(MWG_ADMIN . '/themes/default', MWG_BASE . '/tmp/tcache');
     $this->_head = '';
     
     $this->dispatcher = new mwgDispatcher();

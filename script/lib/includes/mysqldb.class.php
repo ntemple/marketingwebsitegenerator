@@ -452,9 +452,9 @@ function update($table, $data, $pkey = 'id') {
     $this->_error  = mysql_error();
     $backtrace = debug_backtrace();
 
-    ob_start();
-    print_r($backtrace);
-    $this->_trace = ob_get_clean(); 
+#    ob_start();
+#    print_r($backtrace);
+#    $this->_trace = ob_get_clean(); 
 
     $error_msg = "Database Error: $msg\n". $this->error . "(" . $this->errno . ")\n";
 

@@ -16,8 +16,8 @@ class simpleClient {
     return $r['payload'];    
   }
 
-  function retrievemanifest($channels, $version) {
-    $r = $this->isn_call('retrievemanifest', $package);
+  function retrievemanifest() {
+    $r = $this->isn_call('retrievemanifest');
     return $r;
   }
 
@@ -98,7 +98,7 @@ class modelGenstaller {
   function retrieveManifest() {
     $client = $this->getClient();
     try {
-      $result = $client->retrievemanifest($channels, UPDATER_VERSION);
+      $result = $client->retrievemanifest();
     } catch (Exception $e) {
       throw new Exception('Cannot retrieve manifest. Please check your account status and  try again.');
     }
