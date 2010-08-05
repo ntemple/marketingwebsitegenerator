@@ -133,10 +133,11 @@ abstract class mwgBaseGizmo {
   function render_as_widget($atts) {
     // No title to display
     if (!$this->display_title) return $this->render($atts);
-    
+
+ 
     ob_start();
     if (isset($atts['before_title'])) echo $atts['before_title'];
-    echo $this->title;
+    echo $this->title . "<br>\n";
     if (isset($atts['after_title'])) echo $atts['after_title'];
     if (isset($atts['before_widget'])) echo $atts['before_widget'];
     echo $this->render($atts);
