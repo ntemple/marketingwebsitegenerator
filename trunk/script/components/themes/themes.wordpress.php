@@ -2,51 +2,52 @@
 /* Wordpress Compatible Functions */
 
 class mwgWP {
-  
+
   var $callbacks;
   var $template_positions;
-  
+
   private function __construct() {
     $this->callbacks = array();
     $this->template_positions = array();    
   }
-  
+
   static function getInstance() {
     static $self = null;
-    
+
     if (!$self) 
       $self = new mwgWP();
     return $self;
   }
-  
+
   function add_callback(wpCallback $cb) {
     $class = get_class($cb);
-    
+
     if (!isset($this->callbacks[$class])) $this->callbacks[$class] = array();
     if (!isset($this->callbacks[$class][$cb->hook_name])) $this->callbacks[$class][$cb->hook_name] = array();      
-    
+
     $this->callbacks[$class][$cb->hook_name][] = $cb;
   }
-  
+
   function runCallback($class, $name, $out) {
     // 'wpAction', 'wp_list_pages', $menu
-    if (! isset($callback[$class])) return $out;
-    if (! isset($callback[$class][$name])) return $out;
+    if (! isset($this->callbacks[$class])) return $out;
+    if (! isset($this->callbacks[$class][$name])) return $out;
+
     $events = $this->callbacks[$class][$name];
 
     if (! $events) return $out;
     //@todo sort by priority
     foreach ($events as $callback){
-      $out = $callback->execute($out);
+      $out = $callback->execute($out);      
     }
     return $out;
   }
-  
+
   function register_template_position($which, $args) {
     $this->template_positions[$which] = $args;
   }
-  
-  
+
+
 }
 
 class wpCallback {
@@ -54,14 +55,14 @@ class wpCallback {
   var $callable;
   var $priority;
   var $args;
-  
+
   function __construct($hook_name, $callable, $priority, $args) {
     $this->hook_name = $hook_name;
     $this->callable  = $callable;
     $this->priority  = $priority;
     $this->args      = $args;
   }  
-  
+
   function  execute($params) {
     return call_user_func($this->callable, $params);    
   }
@@ -82,18 +83,18 @@ function add_action($hook_name, $callable, $priority = 10, $args = null) {
 }
 
 if (! function_exists('remove_action')) {
-function remove_action() {
-  sbutil::trace();
+  function remove_action() {
+    sbutil::trace();
 }}
 
 /*
 if (function_exists('register_sidebars')) {
-  register_sidebars(3, array(
-    'before_widget' => '<!--- BEGIN Widget --->',
-    'before_title' => '<!--- BEGIN WidgetTitle --->',
-    'after_title' => '<!--- END WidgetTitle --->',
-    'after_widget' => '<!--- END Widget --->'
-  ));
+register_sidebars(3, array(
+'before_widget' => '<!--- BEGIN Widget --->',
+'before_title' => '<!--- BEGIN WidgetTitle --->',
+'after_title' => '<!--- END WidgetTitle --->',
+'after_widget' => '<!--- END Widget --->'
+));
 }
 */
 
@@ -123,23 +124,23 @@ function dynamic_sidebar($which = 1) {
 */
 
 function register_sidebars($number, $args = array()) {
- 
-for ($i = 1; $i <= $number; $i++) {
- 
-$defaults = array(
-  'name'          => "Sidebar $i",
-  'id'            => "sidebar-$i",
-  'before_widget' => "<li class='widget'>",
-  'after_widget'  => '</li>',
-  'before_title'  => '<h2 class="widgettitle">',
-  'after_title'   => '</h2>' 
-  ); 
-  
-  $params = array_merge($defaults, $args);
-    
+
+  for ($i = 1; $i <= $number; $i++) {
+
+    $defaults = array(
+    'name'          => "Sidebar $i",
+    'id'            => "sidebar-$i",
+    'before_widget' => "<li class='widget'>",
+    'after_widget'  => '</li>',
+    'before_title'  => '<h2 class="widgettitle">',
+    'after_title'   => '</h2>' 
+    ); 
+
+    $params = array_merge($defaults, $args);
+
     mwgWP::getInstance()->register_template_position("Sidebar$i", $params);        
   }
- 
+
 }
 
 /**
@@ -150,23 +151,7 @@ $defaults = array(
 function register_sidebar($args) {
   register_sidebars(1, $args);
 }
-/*
-{  
-  $defaults = array(
-  'name'          => sprintf(__('Sidebar %d'), $i ),
-  'id'            => 'sidebar-$i',
-  'description'   => '',
-  'before_widget' => '<li id="%1$s" class="widget %2$s">',
-  'after_widget'  => '</li>',
-  'before_title'  => '<h2 class="widgettitle">',
-  'after_title'   => '</h2>' ); 
-  
-  $params = array_merge($defaults, $args);
-  
-  mwgWP::getInstance()->register_template_position($params['name'], $params);  
-}
-*/
-  
+
 
 function add_custom_background(){
   sbutil::trace();
@@ -230,7 +215,7 @@ function wp_enqueue_script() {
 
 function get_option($name) {  
   sbutil::trace();
-  
+
   if ($name == 'home') {  
     $homelink = null;
     $menu = MWG::getInstance()->getMenu('items');
@@ -241,7 +226,7 @@ function get_option($name) {
 
 
 function get_avatar() {
-   sbutil::trace();
+  sbutil::trace();
 }
 
 function is_tag() {
@@ -288,15 +273,15 @@ function get_bloginfo($var = 'name') {
     case 'siteurl':
     case 'home':                 $out = MWG_BASEHREF; break;
     case 'template_url':         $out = $assets; break;
-   
+
     case 'pingback_url': 
     case 'rss2_url': 
     case 'comments_rss2_url': 
     default: $out = '';
   }
-  
+
   $wp_info[$var] = $out;
-  
+
   return $out;
 }
 
@@ -335,8 +320,8 @@ function timer_stop() {
 }
 
 /**
- * Localization functions 
- */
+* Localization functions 
+*/
 function __($msg) {
   return $msg;
 }
@@ -427,13 +412,13 @@ function have_posts() {
   if (isset($mwg->posts)) {
     $posts = $mwg->posts;
   } else {
-   $posts = 2;
+    $posts = 2;
   }
 
 
   if ($posts > 0) {
     $mwg->posts = $posts -1;
-#    print $mwg->getContent();
+    #    print $mwg->getContent();
     return true;
   } else {
     return false;
@@ -442,8 +427,8 @@ function have_posts() {
 
 function the_post() {
   sbutil::trace();
-#  $mwg = MWG::getInstance();
-#  print $mwg->getContent();
+  #  $mwg = MWG::getInstance();
+  #  print $mwg->getContent();
 }
 
 function post_class() {
@@ -461,7 +446,7 @@ function the_permalink() {
 }
 
 function the_title($before = '', $after = '', $echo = true) {
- sbutil::trace();
+  sbutil::trace();
 }
 
 function the_title_attribute() {
@@ -538,23 +523,23 @@ function comments_template() {
 
 function wp_list_pages($args) {
   sbutil::trace();
-  
+
   $default =  array(
-    'depth'        => 0,
-    'show_date'    => '',
-    'date_format'  => get_option('date_format'),
-    'child_of'     => 0,
-    'exclude'      => '',
-    'include'      => '',
-    'title_li'     => '', //__('Pages'),
-    'echo'         => 1,
-    'authors'      => '',
-    'sort_column'  => 'menu_order, post_title',
-    'link_before'  => '',
-    'link_after'   => '',
-    'exclude_tree' => '',);
-  
-  
+  'depth'        => 0,
+  'show_date'    => '',
+  'date_format'  => get_option('date_format'),
+  'child_of'     => 0,
+  'exclude'      => '',
+  'include'      => '',
+  'title_li'     => '', //__('Pages'),
+  'echo'         => 1,
+  'authors'      => '',
+  'sort_column'  => 'menu_order, post_title',
+  'link_before'  => '',
+  'link_after'   => '',
+  'exclude_tree' => '',);
+
+
   $mwg = MWG::getInstance();
   $items = $mwg->getMenu('array'); // Forces removal of wp link
   array_shift($items); // Remove 'Home' link
@@ -605,36 +590,36 @@ function get_footer($name = null) {
 // Private Support functions. Better in a class?
 
 function mwg_wp_find_template($type, $name = null) {
-#  do_action('get_' . $type, $name );
+  #  do_action('get_' . $type, $name );
 
   $mwg = MWG::getInstance();
   $themedir = $mwg->theme->current_theme_path;
- 
-   $templates = array();
-   if (isset($name)) {
-     $templates[] = "$themedir/{$type}-{$name}.php";
-   }
-   $templates[]   = "$themedir/{$type}.php";
-   $templates[]   = dirname($themedir) . "/default/{$type}.php";
+
+  $templates = array();
+  if (isset($name)) {
+    $templates[] = "$themedir/{$type}-{$name}.php";
+  }
+  $templates[]   = "$themedir/{$type}.php";
+  $templates[]   = dirname($themedir) . "/default/{$type}.php";
 
 
-   foreach ($templates as $template) {
-     if (file_exists($template)) {
-       mwg_wp_load_template($template);       
-       break;
-     }
-   }
+  foreach ($templates as $template) {
+    if (file_exists($template)) {
+      mwg_wp_load_template($template);       
+      break;
+    }
+  }
 }
 
 
 
 function mwg_wp_load_template($path) {
-#        global $posts, $post, $wp_did_header, $wp_did_template_redirect, $wp_query, $wp_rewrite, $wpdb, $wp_version, $wp, $id, $comment, $user_ID;
+  #        global $posts, $post, $wp_did_header, $wp_did_template_redirect, $wp_query, $wp_rewrite, $wpdb, $wp_version, $wp, $id, $comment, $user_ID;
 
-#        if ( is_array($wp_query->query_vars) )
-#                extract($wp_query->query_vars, EXTR_SKIP);
-// print "<b>LOADING: $path</b><br>\n";
-        require_once($path);
+  #        if ( is_array($wp_query->query_vars) )
+  #                extract($wp_query->query_vars, EXTR_SKIP);
+  // print "<b>LOADING: $path</b><br>\n";
+  require_once($path);
 }
 
 // @todo implement generic search features
