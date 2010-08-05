@@ -1,0 +1,235 @@
+body {
+  /* For breathing room between content and viewport. */
+  /*  margin:10px; */
+}
+
+h1 {
+  /* 18px via YUI Fonts CSS foundation. */
+  font-size: 138.5%;
+}
+
+h2 {
+  /* 16px via YUI Fonts CSS foundation. */
+  font-size: 123.1%;
+}
+
+h3 {
+  /* 14px via YUI Fonts CSS foundation. */
+  font-size: 108%;
+}
+
+h1,h2,h3 {
+  /* Top & bottom margin based on font size. */
+  margin: 1em 0;
+}
+
+h1,h2,h3,h4,h5,h6,strong,dt {
+  /* Bringing boldness back to headers and the strong element. */
+  font-weight: bold;
+}
+optgroup {
+  font-weight:normal;
+}
+
+abbr,acronym {
+  /* Indicating to users that more info is available. */
+  border-bottom: 1px dotted #000;
+  cursor: help;
+}
+
+em {
+  /* Bringing italics back to the em element. */
+  font-style: italic;
+}
+
+del {
+  /* Striking deleted phrases. */
+  text-decoration: line-through;
+}
+
+blockquote,ul,ol,dl {
+  /* Giving blockquotes and lists room to breath. */
+  margin: 1em;
+}
+
+ol,ul,dl {
+  /* Bringing lists on to the page with breathing room. */
+  margin-left: 2em;
+}
+
+ol li {
+  /* Giving OL's LIs generated numbers. */
+  list-style: decimal outside;
+}
+
+ul li {
+  /* Giving UL's LIs generated disc markers. */
+  list-style: disc outside;
+}
+
+dl dd {
+  /* Giving UL's LIs generated numbers. */
+  margin-left: 1em;
+}
+
+th,td {
+  /* Borders and padding to make the table readable.  .5em */
+  border: 0px solid #000;
+  padding: .5em;
+}
+
+th {
+  /* Distinguishing table headers from data cells. */
+  font-weight: bold;
+  text-align: center;
+}
+
+caption {
+  /* Coordinated margin to match cell's padding. */
+  margin-bottom: .5em;
+  /* Centered so it doesn't blend in to other content. */
+  text-align: center;
+}
+
+sup {
+  /* to preserve line-height and selector appearance */
+  vertical-align: super;
+}
+
+sub {
+  /* to preserve line-height and selector appearance */
+  vertical-align: sub;
+}
+
+p,
+fieldset,
+table,
+pre {
+  /* So things don't run into each other. */
+  margin-bottom: 1em;
+}
+/* Opera requires 1px of passing to render with contemporary native chrome */
+button,
+input[type="checkbox"],
+input[type="radio"],
+input[type="reset"],
+input[type="submit"] {
+  padding:1px;
+}
+
+/* --------------------------------*/
+
+/* Extra Styles */
+p.warn {
+  background: #FBEEF1 url(../images/warn.png) center no-repeat;
+  background-position: 15px 50%; /* x-pos y-pos */
+  text-align: left;
+  padding: 5px 20px 5px 45px;
+  border-top: 2px solid #FEABB9;
+  border-bottom: 2px solid #FEABB9;
+}
+p.alert {
+  background: #FFF7C0 url(../images/exc.png) center no-repeat;
+  background-position: 15px 50%; /* x-pos y-pos */
+  text-align: left;
+  padding: 5px 20px 5px 45px;
+  border-top: 2px solid #F7D229;
+  border-bottom: 2px solid #F7D229;
+}
+p.info {
+  background: #F8FAFC url(../images/info.png) center no-repeat;
+  background-position: 15px 50%; /* x-pos y-pos */
+  text-align: left;
+  padding: 5px 20px 5px 45px;
+  border-top: 2px solid #B5D4FE;
+  border-bottom: 2px solid #B5D4FE;
+}
+
+/* @group Forms */
+/* Default Form */
+.gt-form {
+
+}
+.gt-form.gt-content-box {
+  padding: 15px 15px 5px 15px;
+  margin-bottom: 40px;
+}
+.gt-form .gt-form-text, .gt-form .gt-form-textarea {
+  border: 1px solid #ccc;
+  background-color: #fafcef;
+  padding: 5px 2px;
+  font-size: 108%;
+  width: 99%;
+}
+.gt-form .gt-form-text:focus, .gt-form .gt-form-textarea:focus {
+  background-color: #fff;
+}
+.gt-form label {
+  font-size: 100%;
+  color: #654926;
+  display: block;
+  margin-bottom: 3px;
+  font-weight: bold;
+}
+.gt-form option {
+  font-size: 108%;
+}
+.gt-form .gt-form-row {
+  margin-bottom: 10px;
+}
+
+/* Auto clear the form row */
+.gt-form .gt-form-row:after {
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+
+.gt-form-row {display: inline-block;}
+
+/* Hides from IE-mac \*/
+* html .gt-form-row {height: 1%;}
+.gt-form-row {display: block;}
+/* End hide from IE-mac */
+/* End auto clearing the form row */
+
+.gt-form .gt-form-row-inline {
+  clear: left;
+}
+.gt-form .gt-form-row-inline label {
+  width: 30%;
+  margin-right: 4%;
+  padding: 1% 0;
+  float: left;
+  display: inline;
+}
+.gt-form .gt-form-element-label {
+  font-size: 93%;
+  margin-bottom: 5px;
+  padding-left: 3px;
+  font-weight: normal;
+  color: #666666;
+}
+.gt-form .gt-form-note {
+  font-size: 93%;
+  margin: 0 0 5px 0;
+  font-style: italic;
+  color: #666666;
+}
+.gt-form .gt-form-row-inline .gt-form-text {
+  width: 63%;
+}
+.gt-form .gt-form-radio, .gt-form .gt-form-checkbox {
+  margin-right: 3px;
+}
+.gt-form .gt-submit-btn {
+  margin: 0 10px 0 0;
+  float: left;
+  display: inline;
+}
+.gt-form .gt-cancel {
+  line-height: 37px;
+  margin-bottom: 0;
+}
