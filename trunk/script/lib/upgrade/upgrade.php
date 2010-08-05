@@ -40,13 +40,12 @@ function upgrade_test() {
 
 function upgrade(mysqldb $db) {
 
+  $db_version = '1.0';
+
   $tables = $db->get_results("show tables like 'mwg%'");
   if (count($tables) > 0) {
     $db_version = $db->get_value('select value from mwg_setting where name=?', 'site_dbversion');
   } 
-  if (! $db_version) {
-    $db_version = '1.0';
-  }
 
   if ($db_version >= MWG_DB_VERSION) return;
 

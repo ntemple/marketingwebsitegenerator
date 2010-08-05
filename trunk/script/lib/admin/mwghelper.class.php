@@ -48,6 +48,8 @@ class MWGHelper {
 
   static function url_retrieve_curl($url, $timeout = 300)
   {
+      $e = null;
+      
       if (!function_exists('curl_version'))
       {
           throw new Exception('Curl not loaded, cannot retrieve file.');
@@ -136,12 +138,12 @@ class MWGHelper {
     $fail = 0;
     $sizetotal = 0;
     $fifail = '';
+    $ret = "0,0,0,0"; // Default return
+
     if(!is_dir($dstdir)) mkdir($dstdir);
     if($curdir = opendir($srcdir)) {
         while($file = readdir($curdir)) {
             if($file != '.' && $file != '..') {
-//                $srcfile = $srcdir . '\\' . $file;    # deleted by marajax
-//                $dstfile = $dstdir . '\\' . $file;    # deleted by marajax
                 $srcfile = $srcdir . '/' . $file;    # added by marajax
                 $dstfile = $dstdir . '/' . $file;    # added by marajax
                 if(is_file($srcfile)) {                    
@@ -164,7 +166,6 @@ class MWGHelper {
                 }
                 else if(is_dir($srcfile)) {
                     $res = explode(',',$ret);
-//                    $ret = dircopy($srcfile, $dstfile, $verbose); # deleted by patrick
                     $ret = self::dir_copy($srcfile, $dstfile, $verbose); # added by patrick
                     $mod = explode(',',$ret);
                     $imp = array($res[0] + $mod[0],$mod[1] + $res[1],$mod[2] + $res[2],$mod[3].$res[3]);

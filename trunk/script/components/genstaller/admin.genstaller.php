@@ -60,14 +60,12 @@ class comGenstaller {
       $extensions =  $registry->findExtensions();
       $username = $registry->get('username');
 
-
       include('admin.genstaller.view.php');
 
     } catch(Exception $e) {
       MWGHelper::setFlash('alert', $e);
       print "Please try again.";
     }
-
   }
 
   function details() {
@@ -91,7 +89,7 @@ class comGenstaller {
   */
   function findManifest($base, $recurse = true) {
     $dir = null;
-    $files[] = array();
+    $files = array();
     $result = array();
 
     if ($handle = opendir($base)) {
@@ -108,7 +106,7 @@ class comGenstaller {
       }
       closedir($handle);
     }
-
+    
     foreach ($files as $file) {
       $mf = Spyc::YAMLLoad($file);
       if (isset($mf['identity'])) {
@@ -118,19 +116,18 @@ class comGenstaller {
         return $result;            
       }
     }
+    
     // Still haven't found it? Try one level down ....
     if ($dir && $recurse) {
       return $this->findManifest($dir, false);
     }
     return false;
-
   }
 
   function package_install($package) {
     if (! file_exists($package)) {
       throw new Exception("Can't open package: $package");
     }
-
 
     $uid = substr(md5(time() . serialize($GLOBALS)), 1,8);
     $package_tmp_path = MWG_BASE . "/tmp/$uid";
@@ -148,7 +145,7 @@ class comGenstaller {
     }
 
     // At this point we have the package unzipped in $package_tmp_path
-    $result = $this->findManifest($package_tmp_path);
+    $result = $this->findManifest($package_tmp_path);    
     if (!$result) {
       MWGHelper::rmdir_recurse($package_tmp_path);
       throw new Exception("Invalid Package file, missing manifest");
@@ -200,7 +197,7 @@ class comGenstaller {
     }
     MWGHelper::dir_copy($srcdir, $installpath);
     MWGHelper::rmdir_recurse($package_tmp_path);
-    return true;
+    return $result;
   }
 
   function install() {
@@ -232,14 +229,14 @@ class comGenstaller {
       }
 
       try {
-        $this->package_install($package);
+        $result = $this->package_install($package);
       } catch(Exception $e) {
         @unlink($package);
         throw $e;
       }
       @unlink($package);
 
-
+      $identity = $result['mf']['identity'];
       return $this->view('info', "Package $identity installed.");
     } catch (Exception $e) {
       return $this->view('warn', $e->getMessage());

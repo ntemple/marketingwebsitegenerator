@@ -3,7 +3,6 @@
   //  MWG::getInstance()->response->contentbox('Extension Manager');
   ob_start();
 ?>
-
 <!-- Sidebar Navigation -->
 <div class="gt-sidebar-nav gt-sidebar-nav-brown">
   <h3>Quick Links</h3>
@@ -12,8 +11,6 @@
     <li><a href="controller.php?c=updates">Check for Updates</a></li>
   </ul>
 </div><!-- /Sidebar Navigation -->
-
-
 
 <form method="post" enctype="multipart/form-data">
   <input type="hidden" name="c" value="genstaller">
@@ -53,7 +50,7 @@
     <div class="gt-form-row gt-width-66">
       <label>Password:<img src="media/images/icons/help.png" title="Enter your MWG Password"></label>
       <input class="gt-form-text" type="password" name="password">  
-      <input type="submit" class="gt-btn-brown-medium" value="Activate" /> <a href="http://marketingwebsitegenerator.com/club/signup.php">Create An Account</a>
+      <input type="submit" class="gt-btn-brown-medium" value="Activate" /> <a href="http://marketingwebsitegenerator.com/club/signup.php" target="MWG">Create An Account</a>
     </div>                                 
 
   </div>        
@@ -66,6 +63,8 @@
 ?>
 <h1>Extension Manager</h1>
 <h2 class="gt-table-head">Available Extensions</h2>
+To see the available extensions you can install, please activate<br>
+your account using the <b>Activate Network</b> gizmo on the sidebar<br>
 <!-- content box -->
 <div class="gt-content-box">
   <table class="gt-table" border="0">
@@ -127,7 +126,12 @@
     <?php } ?>
         </tbody>
     </table>
-    </div><!-- /content box -->
+    </div>
+    For even more Extensions, visit the <a href="http://store.marketingwebsitegenerator.com" target="mwg">Extension Store</a> or
+    upgrade to a <a href="http://marketingwebsitegenerator.com/gold/" target="mwg">Gold Membership</a>.
+
+       
+    <!-- /content box -->
 
 
 
