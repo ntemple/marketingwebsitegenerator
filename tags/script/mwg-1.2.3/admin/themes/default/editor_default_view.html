@@ -1,0 +1,38 @@
+<h2 class="gt-form-head">Edit Templates</h2>
+<div class="gt-form gt-content-box">
+  <form id="form2" name="form2" method="post" action="servlet.php?m=editor&menu=design">
+    <!-- form row -->
+    <div class="gt-form-row gt-width-66 clearfix">
+      <label>Select File</label>
+      <select name="filename" id="filename" onChange="MM_jumpMenu('parent',this,0)"></select>   
+    </div><!-- /form row -->
+{if:description}
+    <div class="gt-form-row gt-width-66 clearfix">
+      <label>Description</label>
+      <p>{description}</p>
+    </div><!-- /form row -->
+{end:}    
+{if:noeditor}
+    <div class="gt-form-row gt-width-66 clearfix">
+      <label>Editor Not Available</label>
+      <p>In order to preserve the integrity of your template, the WYSIWYG editor has been disabled while you edit this page. The editor will be re-enabled when editing any page that does not contain "head" or "body" tags.</p>
+    </div><!-- /form row -->
+{end:}
+
+    
+    <!-- form row -->
+    <div class="gt-form-row gt-width-100">
+      <label>Content</label>
+      <textarea id="filecontent" name="filecontent" cols="66" rows="20" class="gt-form-textarea tinymce"></textarea>
+      <br>
+{if:false}      <a href="javascript:toggleEditor('filecontent');">Toggle Editor</a> {end:}
+    </div><!-- /form row -->
+
+    <!-- form row -->
+    <div class="gt-form-row">
+      <input type="submit" name="_cmd_default" value="Save" class="gt-btn-green-medium" />
+    </div>
+
+    <!-- /form row -->
+  </form>
+</div>
