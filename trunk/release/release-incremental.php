@@ -25,7 +25,7 @@ foreach ($lines as $line) {
 }
 `mv out/mwg-$version/templates/ out/mwg-$version/templates-$version`;
 `cd out/mwg-$version; zip -r ../../mwg-$version-1.2.0-update.zip *`;
-echo "s3cmd -P put mwg-$1-1.2.0-update.zip s3://network.intellispire.com/mwg/core/1.2/\n";
+
 
 
 
