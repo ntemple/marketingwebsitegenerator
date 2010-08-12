@@ -180,7 +180,8 @@ if (get_setting("enable_oto_paid_signup") == 1 && get_setting("free_signup")!=1 
 			}
 		}
 		$rez_button.=$occ_buttons[$i];
-		die ($rez_button);
+    print MWG::getInstance()->render($rez_button);
+    exit();    
 	}else{
 		header("Location: continue.php");
 	}
@@ -339,10 +340,10 @@ if (get_setting("enable_oto_paid_signup") == 1 && get_setting("free_signup")!=1 
 			}
 			$rez_button.=$occ_buttons[$i];
 		}else $rez_button.=$occ_buttons[0];
-		
-		die ($rez_button);
+    print MWG::getInstance()->render($rez_button);
+    exit();    
 	}else{
 		header("Location: continue.php");
 	}
 }
-?>
+

@@ -71,6 +71,7 @@ foreach ($membership_history as $value) {
 	$t->set_var("membership", $q->f("name"));
 	$query="select * from membership where active=1 order by rank DESC";
 	$q->query($query);
+        $upgrade = false;
 	while ($q->next_record())
 	{
 	
@@ -80,6 +81,7 @@ foreach ($membership_history as $value) {
 			$t->set_var("id", $q->f("id"));
 			$t->set_var("membershipn", $q->f("name"));
 			$t->parse("upgrades", "membership_row", true);
+                        $upgrade = true;
 		}
 		
 		if (array_search($q->f("rank"), $show_item)!==false)
@@ -91,8 +93,9 @@ foreach ($membership_history as $value) {
 		}
 		
 	}    
-	 replace_tags_t($member_id, $t);
-	 
+	replace_tags_t($member_id, $t);
+        if (! $upgrade) {
+	  $t->set_var('upgrades', ''); 
+        }
 	
 include("inc.bottom.php");
-?>

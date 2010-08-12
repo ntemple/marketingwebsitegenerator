@@ -58,10 +58,7 @@ class MWG {
     } 
 
     $this->theme = new modelThemes($default_theme);
-
     $this->document = new mwgDocument();
-
-    //    $this->settings = new mwgSetting();
 
     /* Switcher needs to be in a plugin */
     if (isset($_GET['theme'])) {
@@ -205,7 +202,33 @@ class MWG {
   function start() {
     $this->runEvent('afterStart', array($this->request, $this->response));
   }
+  
+  /**
+  * Render a completed page.
+  * Necessary because OTO's aren't currently using the theme section
+  * 
+  * @param mixed $content
+  */
+  
+  function render($content) {
+     /* @todo: If  this is a full page, we should parse out the meta fields and 
+     * Maybe this is only done if the document is empty?
+     * Specifically necessary for the front end OTO's
+     */
+     
+    $this->runEvent('beforeDoShortcode', array($this->document, &$content));
+    // Apply shortcode filter
+    $content = do_shortcode($content); 
 
+    $this->runEvent('beforeDocumentRender', array($this->document, &$content));
+
+    // Set the code in the document, and render
+    $this->document->setContent($content);
+    $page = $this->document->renderDocument();
+    $this->runEvent('afterDocumentRender', array($page));
+    return $page;    
+  }
+  
   function end(Template $tpl) {
     if (defined('SITENAME')) $this->site_name = SITENAME;
 
@@ -216,17 +239,7 @@ class MWG {
     $this->document->setTitle($this->site_name, false, true);
 
     $content = $this->theme->process($tpl);
-
-    $this->runEvent('beforeDoShortcode', array($this->document, &$content));
-
-    // Apply shortcode filter
-    $content = do_shortcode($content); 
-
-    $this->runEvent('beforeDocumentRender', array($this->document, &$content));
-    // Set the code in the document, and render
-    $this->document->setContent($content);
-    $page = $this->document->renderDocument();
-    $this->runEvent('afterDocumentRender', array($page));
+    $page = $this->render($content);
     print $page;
   }
 

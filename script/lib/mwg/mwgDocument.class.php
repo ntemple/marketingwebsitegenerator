@@ -110,6 +110,7 @@ class mwgDocument {
   */
   function renderDocument() {
     global $unread_inbox; // @todo make this a gizmo
+    
     $content = $this->content;
 
     // Add head and body tags
@@ -118,7 +119,6 @@ class mwgDocument {
       $content = str_ireplace('{body}', $content, $skel);
     }
  
-
     $newbody = implode("\n", $this->before_body_end ) . "</body>";
     $content = str_ireplace('</body>', $newbody, $content);
 
