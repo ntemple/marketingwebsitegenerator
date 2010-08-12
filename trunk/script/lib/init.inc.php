@@ -15,7 +15,7 @@
 
 if (!defined('_MWG')) define('_MWG', true);
 define('_SB_VALID_', true);                                
-
+error_reporting(0);
 require_once('session.inc.php');
                     
 // Session timeout 1 hour. 
